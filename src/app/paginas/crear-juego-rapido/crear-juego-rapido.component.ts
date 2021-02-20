@@ -38,7 +38,8 @@ export interface ChipColor {
 })
 export class CrearJuegoRapidoComponent implements OnInit {
   profesorId: number;
-
+  varSchool : string;
+  varTitulo: string;
 
   // tslint:disable-next-line:ban-types
   juegoCreado: Boolean = false;
@@ -134,7 +135,8 @@ export class CrearJuegoRapidoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.varSchool = 'ub';
+    this.varTitulo = 'titulo' + this.varSchool;
     this.profesorId = this.sesion.DameProfesor().id;
     this.myForm = this._formBuilder.group({
       NombreDelJuego: ['', Validators.required],

@@ -23,6 +23,9 @@ import * as URL from '../../URLs/urls';
 })
 export class MisAlumnosComponent implements OnInit {
 
+  varSchool : string;
+  varTitulo: string;
+
   misAlumnos: Alumno[];
   dataSource;
   profesor: Profesor;
@@ -45,7 +48,9 @@ export class MisAlumnosComponent implements OnInit {
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
     this.DameTodosMisAlumnos();
-
+    
+    this.varSchool = 'ub';
+    this.varTitulo = 'titulo' + this.varSchool;
   }
 
   DameTodosMisAlumnos() {

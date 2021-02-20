@@ -22,6 +22,9 @@ import * as URL from '../../URLs/urls';
 })
 export class GrupoComponent implements OnInit {
 
+  varSchool : string;
+  varTitulo: string;
+
   // PONEMOS LAS COLUMNAS DE LA TABLA Y LA LISTA QUE TENDRÁ LA INFORMACIÓN QUE QUEREMOS MOSTRAR
   displayedColumns: string[] = ['nombreAlumno', 'primerApellido', 'segundoApellido', 'alumnoId', 'imagen'];
   alumnosGrupoSeleccionado: Alumno[];
@@ -47,6 +50,9 @@ export class GrupoComponent implements OnInit {
 
   ngOnInit() {
 
+    this.varSchool = "ub";
+    this.varTitulo = "titulo" + this.varSchool;
+    
     // Recupero de la sesión el grupo y el id del profesor (que está en el grupo)
     this.grupo = this.sesion.DameGrupo();
     this.profesorId = this.grupo.profesorId;

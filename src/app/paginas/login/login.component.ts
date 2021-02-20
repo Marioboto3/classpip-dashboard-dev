@@ -22,7 +22,6 @@ import { Location } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
-
   profesor: Profesor;
   nombre: string;
   pass: string;

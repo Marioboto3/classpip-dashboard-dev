@@ -18,6 +18,9 @@ import { Grupo, Profesor } from '../../clases/index';
 
 export class MisGruposComponent implements OnInit {
 
+  varSchool : string;
+  varTitulo: string;
+
   // PONEMOS LAS COLUMNAS DE LA TABLA Y LA LISTA QUE TENDRÁ LA INFORMACIÓN QUE QUEREMOS MOSTRAR
   displayedColumns: string[] = ['nombre', 'descripcion'];
   listaGrupos: Grupo[];
@@ -40,6 +43,9 @@ export class MisGruposComponent implements OnInit {
               private peticionesAPI: PeticionesAPIService) { }
 
   ngOnInit() {
+
+    this.varSchool = 'ub';
+    this.varTitulo = 'titulo' + this.varSchool;
 
     // tslint:disable-next-line:no-string-literal
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/grupo';

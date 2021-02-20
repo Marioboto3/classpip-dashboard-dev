@@ -12,6 +12,10 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./mis-juegos-rapidos.component.scss']
 })
 export class MisJuegosRapidosComponent implements OnInit {
+ 
+  varSchool : string;
+  varTitulo: string;
+
   displayedColumns: string[] = ['nombre', 'tipo'];
   dataSource;
   juegosRapidos: any[] = [];
@@ -29,7 +33,8 @@ export class MisJuegosRapidosComponent implements OnInit {
 
     this.profesor = this.sesion.DameProfesor();
     this.ObtenJuegosRapidos();
-
+    this.varSchool = 'ub';
+    this.varTitulo = 'titulo' + this.varSchool;
   }
 
   ObtenJuegosRapidos() {

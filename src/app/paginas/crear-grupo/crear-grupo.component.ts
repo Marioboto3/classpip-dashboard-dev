@@ -18,16 +18,16 @@ import 'rxjs';
 import Swal from 'sweetalert2';
 import { DialogoConfirmacionComponent } from '../COMPARTIDO/dialogo-confirmacion/dialogo-confirmacion.component';
 
-
-
-
-
 @Component({
   selector: 'app-crear-grupo',
   templateUrl: './crear-grupo.component.html',
   styleUrls: ['./crear-grupo.component.scss']
 })
 export class CrearGrupoComponent implements OnInit {
+
+  varSchool : string;
+  varTitulo: string;
+  varPanel: string;
 
   // Identificador del profesor
   profesorId: number;
@@ -65,6 +65,10 @@ export class CrearGrupoComponent implements OnInit {
 
   ngOnInit() {
 
+    this.varSchool = "ub";
+    this.varTitulo = "titulo" + this.varSchool;
+    this.varPanel = "panel" + this.varSchool;
+    console.log(this.varPanel);
     // REALMENTE LA APP FUNCIONARÁ COGIENDO AL PROFESOR DEL SERVICIO, NO OBSTANTE AHORA LO RECOGEMOS DE LA URL
     // this.profesorId = this.profesorService.RecibirProfesorIdDelServicio();
     this.profesorId = this.sesion.DameProfesor().id;

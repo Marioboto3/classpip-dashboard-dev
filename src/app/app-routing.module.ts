@@ -151,6 +151,8 @@ import { DeactivateGuardVotacionRapida } from './guardas/canExitVotacionRapida.g
 import { ModificarPerfilComponent } from './paginas/modificar-perfil/modificar-perfil.component';
 import { GestionPreguntaKahootComponent } from './paginas/juego-seleccionado-activo/juego-de-cuestionario-kahoot-seleccionado-activo/gestion-pregunta-kahoot/gestion-pregunta-kahoot.component';
 import { MostrarCuestionarioComponent } from './paginas/mis-cuestionarios/mostrar-cuestionario/mostrar-cuestionario.component';
+import { MostrarCuestionarioSatisfaccionComponent } from './paginas/mis-cuestionarios-satisfaccion/mostrar-cuestionario-satisfaccion/mostrar-cuestionario-satisfaccion.component';
+import { PortadaComponent } from './paginas/portada/portada.component';
 
 const routes: Routes = [
 
@@ -159,7 +161,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 
-
+  //PORTADA
+  //{ path: 'portada', component: PortadaComponent },
   ////////////////////////////// RUTAS DESDE EL INICIO A LOS COMPONENTES PRINCIPALES DEL NAVBAR ////////////////////
 
 
@@ -294,7 +297,7 @@ const routes: Routes = [
   // CUESTIONARIOS
   { path: 'inicio/:id/crearCuestionario', component: CrearCuestionarioComponent, canDeactivate: [DeactivateGuardCrearCuestionario] },
   { path: 'inicio/:id/misCuestionarios', component: MisCuestionariosComponent},
-  { path: 'inicio/:id/misCuestionarios/mostrarCuestionario', component: MostrarCuestionarioComponent},
+  { path: 'inicio/:id/misCuestionarios/mostrarCuestionario', component: PortadaComponent},
   { path: 'inicio/:id/editarCuestionario', component: EditarCuestionarioComponent},
   
 
@@ -325,7 +328,7 @@ const routes: Routes = [
   { path: 'inicio/:id/crearCuestionarioDeSatisfaccion', component: CrearCuestionarioSatisfaccionComponent},
   { path: 'inicio/:id/misCuestionariosDeSatisfaccion', component: MisCuestionariosSatisfaccionComponent},
   { path: 'inicio/:id/editarCuestionarioDeSatisfaccion', component: EditarCuestionarioSatisfaccionComponent},
-
+  { path: 'inicio/:id/misCuestionariosDeSatisfaccion/mostrarCuestionarioDeSatisfaccion', component: MostrarCuestionarioSatisfaccionComponent},
 
 
 

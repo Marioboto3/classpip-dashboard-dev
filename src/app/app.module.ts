@@ -248,6 +248,8 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { JuegoDeCuestionarioKahootSeleccionadoActivoComponent } from './paginas/juego-seleccionado-activo/juego-de-cuestionario-kahoot-seleccionado-activo/juego-de-cuestionario-kahoot-seleccionado-activo.component';
 import { GestionPreguntaKahootComponent } from './paginas/juego-seleccionado-activo/juego-de-cuestionario-kahoot-seleccionado-activo/gestion-pregunta-kahoot/gestion-pregunta-kahoot.component';
 import { MostrarCuestionarioComponent } from './paginas/mis-cuestionarios/mostrar-cuestionario/mostrar-cuestionario.component';
+import { MostrarCuestionarioSatisfaccionComponent } from './paginas/mis-cuestionarios-satisfaccion/mostrar-cuestionario-satisfaccion/mostrar-cuestionario-satisfaccion.component';
+import { PortadaComponent } from './paginas/portada/portada.component';
 
 
 @NgModule({
@@ -392,7 +394,9 @@ import { MostrarCuestionarioComponent } from './paginas/mis-cuestionarios/mostra
     ModificarPerfilComponent,
     JuegoDeCuestionarioKahootSeleccionadoActivoComponent,
     GestionPreguntaKahootComponent,
-    MostrarCuestionarioComponent
+    MostrarCuestionarioComponent,
+    MostrarCuestionarioSatisfaccionComponent,
+    PortadaComponent
 
   ],
   imports: [

@@ -11,6 +11,8 @@ import { SesionService} from '../../servicios/index';
 export class MenuRecursosComponent implements OnInit {
 
   profesor;
+  varSchool : string;
+  varTitulo: string;
 
   constructor(
     private router: Router,
@@ -20,6 +22,8 @@ export class MenuRecursosComponent implements OnInit {
 
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
+    this.varSchool = 'ub';
+    this.varTitulo = 'titulo' + this.varSchool;
   }
 
   NavegarA(destino) {

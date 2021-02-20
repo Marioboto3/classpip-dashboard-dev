@@ -15,6 +15,9 @@ import { SesionService, PeticionesAPIService, ComServerService } from '../../ser
 })
 export class IntroducirAlumnosComponent implements OnInit {
 
+  varSchool : string;
+  varTitulo: string;
+
   displayedColumns: string[] = ['nombre', 'primerApellido', 'segundoApellido', ' '];
   nombreAlumno: string;
   apellido1Alumno: string;
@@ -41,6 +44,9 @@ export class IntroducirAlumnosComponent implements OnInit {
     // de ninguno de los nuevos.
     this.peticionesAPI.DameTodosLosAlumnos()
     .subscribe (alumnos => this.alumnosEnClasspip = alumnos);
+
+    this.varSchool = 'ub';
+    this.varTitulo = 'titulo' + this.varSchool;
   }
 
    // Los campos de nombre y descripción son obligatorios. Si son undefined o '' no podremos clicar en crear

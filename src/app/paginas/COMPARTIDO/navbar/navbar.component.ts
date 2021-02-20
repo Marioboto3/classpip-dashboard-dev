@@ -3,7 +3,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Clases
-import { Profesor } from '../../../clases/index';
+import { EnfrentamientoLiga, Profesor } from '../../../clases/index';
 
 // Servicios
 import {SesionService, ComServerService} from '../../../servicios/index';
@@ -18,8 +18,10 @@ export class NavbarComponent implements OnInit {
 
   @Output() public sidenavToggle = new EventEmitter();
 
+  navbarSchool: string;
   profesor: Profesor;
   id: number;
+  rutaLogo: string;
 
   URLInicio: string;
 
@@ -53,7 +55,8 @@ export class NavbarComponent implements OnInit {
                 private router: Router) { }
 
   ngOnInit() {
-
+    this.navbarSchool = 'ub';
+    this.rutaLogo ='./assets/logo_' + this.navbarSchool + '.png';
 
     this.URLInicio = this.router.url;
     this.URLMisGrupos = this.URLInicio + '/misGrupos';

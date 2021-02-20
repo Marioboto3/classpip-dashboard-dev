@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  varSchool: string;
+  varFooter: string;
   constructor() { }
 
   ngOnInit() {
+    this.varSchool = "ub";
+    this.varFooter = "contenedorFooter" + this.varSchool;
   }
 
 }
