@@ -24,6 +24,8 @@ export class MisCuestionariosSatisfaccionComponent implements OnInit {
   propietarios: string[];
   profesor: Profesor;
   displayedColumns: string[] = ['titulo', 'descripcion', 'iconos'];
+  varTituloColumnaTabla: string;
+  varTitulo: string;
 
 
   constructor(private sesion: SesionService,
@@ -35,6 +37,8 @@ export class MisCuestionariosSatisfaccionComponent implements OnInit {
 
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
     this.DameTodosMisCuestionariosDeSatisfaccion();
     this.DameTodosLosCuestionariosDeSatisfaccionPublicos();
   }

@@ -15,6 +15,9 @@ export class CrearCuestionarioSatisfaccionComponent implements OnInit {
   cuestionario: CuestionarioSatisfaccion;
   advertencia = true;
   profesorId: number;
+  profesor: import("c:/Users/mario/Desktop/TFG/classpip-dashboard-dev/src/app/clases/Profesor").Profesor;
+  varTitulo: string;
+  varTituloColumnaTabla: string;
 
   constructor(
     private router: Router,
@@ -23,7 +26,10 @@ export class CrearCuestionarioSatisfaccionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.profesor = this.sesion.DameProfesor();
     this.profesorId = this.sesion.DameProfesor().id;
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
   }
 
   // Activa la función SeleccionarFicheroPreguntas

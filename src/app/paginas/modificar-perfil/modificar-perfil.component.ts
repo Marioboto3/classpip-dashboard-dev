@@ -11,13 +11,14 @@ import Swal from 'sweetalert2';
 })
 export class ModificarPerfilComponent implements OnInit {
 
+  varTitulo: string;
   profesor: Profesor;
   nombre: string;
   primerApellido: string;
   segundoApellido: string;
   username: string;
   email: string;
-  contrasena: string;
+  contrasena: string; 
   contrasenaRepetida: string;
   cambio = false;
   cambioPass = false;
@@ -33,6 +34,7 @@ export class ModificarPerfilComponent implements OnInit {
 
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
+    this.varTitulo = 'titulo' + this.profesor.Estacion;
     this.nombre = this.profesor.Nombre;
     this.primerApellido = this.profesor.PrimerApellido;
     this.segundoApellido = this.profesor.SegundoApellido;
@@ -41,9 +43,6 @@ export class ModificarPerfilComponent implements OnInit {
     this.contrasena = this.profesor.Password;
     this.identificador = this.profesor.Identificador;
     this.imagenPerfil = this.profesor.ImagenPerfil;
-
-
-
   }
   Volver() {
     this.router.navigate(['/inicio/' + this.profesor.id]);

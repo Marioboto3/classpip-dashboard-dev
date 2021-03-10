@@ -9,7 +9,7 @@ import { MatDialog, MatTabGroup } from '@angular/material';
 import { SesionService, PeticionesAPIService, CalculosService } from '../../servicios/index';
 
 // Clases
-import { Grupo } from '../../clases/index';
+import { Grupo, Profesor } from '../../clases/index';
 import { Location } from '@angular/common';
 import { Observable} from 'rxjs';
 import { of } from 'rxjs';
@@ -31,7 +31,7 @@ export class CrearGrupoComponent implements OnInit {
 
   // Identificador del profesor
   profesorId: number;
-
+  profesor: Profesor;
   // Grupo que hemos creado
   grupo: Grupo;
 
@@ -64,15 +64,14 @@ export class CrearGrupoComponent implements OnInit {
 
 
   ngOnInit() {
-
-    this.varSchool = "ub";
-    this.varTitulo = "titulo" + this.varSchool;
-    this.varPanel = "panel" + this.varSchool;
-    console.log(this.varPanel);
+  
     // REALMENTE LA APP FUNCIONARÁ COGIENDO AL PROFESOR DEL SERVICIO, NO OBSTANTE AHORA LO RECOGEMOS DE LA URL
     // this.profesorId = this.profesorService.RecibirProfesorIdDelServicio();
     this.profesorId = this.sesion.DameProfesor().id;
-
+    this.profesor = this.sesion.DameProfesor();
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varPanel = "panel" + this.profesor.Estacion;
+    console.log(this.varPanel);
     // tslint:disable-next-line:no-string-literal
     this.URLVueltaInicio = this.route.snapshot.queryParams['URLVueltaInicio'] || '/inicio';
 

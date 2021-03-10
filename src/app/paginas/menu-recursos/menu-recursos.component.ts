@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { SesionService} from '../../servicios/index';
+import { Alumno, Profesor } from '../../clases/index';
 
 
 @Component({
@@ -10,8 +11,7 @@ import { SesionService} from '../../servicios/index';
 })
 export class MenuRecursosComponent implements OnInit {
 
-  profesor;
-  varSchool : string;
+  profesor: Profesor;
   varTitulo: string;
 
   constructor(
@@ -22,8 +22,7 @@ export class MenuRecursosComponent implements OnInit {
 
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
-    this.varSchool = 'ub';
-    this.varTitulo = 'titulo' + this.varSchool;
+    this.varTitulo = 'titulo' + this.profesor.Estacion;
   }
 
   NavegarA(destino) {

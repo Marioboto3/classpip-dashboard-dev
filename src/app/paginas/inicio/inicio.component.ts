@@ -34,6 +34,7 @@ export class InicioComponent implements OnInit {
   profesor: Profesor;
   tabla: any [] = [];
 
+  varTituloColumnaTabla: string;
   varSchool : string;
   varTitulo: string;
   date: Date = new Date();
@@ -54,12 +55,10 @@ export class InicioComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
-    this.varSchool = "ub";
-    this.varTitulo = "titulo" + this.varSchool;
-    console.log(this.varTitulo);
     this.profesor = this.sesion.DameProfesor();
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
     this.ObtenJuegosActivosDelProfesor();
-
   }
 
 

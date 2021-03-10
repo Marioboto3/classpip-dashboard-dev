@@ -18,7 +18,7 @@ import { Grupo, Profesor } from '../../clases/index';
 
 export class MisGruposComponent implements OnInit {
 
-  varSchool : string;
+ 
   varTitulo: string;
 
   // PONEMOS LAS COLUMNAS DE LA TABLA Y LA LISTA QUE TENDRÁ LA INFORMACIÓN QUE QUEREMOS MOSTRAR
@@ -44,12 +44,12 @@ export class MisGruposComponent implements OnInit {
 
   ngOnInit() {
 
-    this.varSchool = 'ub';
-    this.varTitulo = 'titulo' + this.varSchool;
+    
 
     // tslint:disable-next-line:no-string-literal
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/grupo';
     this.profesor = this.sesion.DameProfesor();
+    this.varTitulo = 'titulo' + this.profesor.Estacion;
     // CUANDO INICIEMOS EL COMPONENTE NOS LISTARÁ LOS GRUPOS DEL PROFESOR QUE RECUPERAMOS EL ID DE LA URL
     this.GruposDelProfesor();
   }

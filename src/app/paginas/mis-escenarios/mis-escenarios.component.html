@@ -1,4 +1,4 @@
-<div class="titulo">Mis escenarios</div>
+<div class="{{varTitulo}}">Mis escenarios</div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 
 
@@ -15,20 +15,20 @@
 
       <!-- Titulo Column -->
       <ng-container matColumnDef="mapa">
-        <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Mapa </th>
+        <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Mapa </th>
         <td mat-cell *matCellDef="let escenario"> {{escenario.Mapa}} </td>
 
       </ng-container>
 
       <!-- Pregunta Column -->
       <ng-container matColumnDef="descripcion">
-        <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Descripcion </th>
+        <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Descripcion </th>
         <td mat-cell *matCellDef="let escenario"> {{escenario.Descripcion}} </td>
 
       </ng-container>
 
       <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"></th>
+        <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"></th>
         <td mat-cell *matCellDef="let escenario">
           <button (click)= "GuardarEscenario(escenario)" routerLink= "editarEscenario" mat-icon-button matTooltip="Editar el escenario {{escenario.Mapa}}">
             <i class="material-icons green md-36">edit</i>
@@ -37,7 +37,7 @@
       </ng-container>
 
       <ng-container matColumnDef="delete">
-          <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"></th>
+          <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"></th>
           <td mat-cell *matCellDef="let escenario">
             <button (click) = "AbrirDialogoConfirmacionBorrarEscenario(escenario)" mat-icon-button matTooltip="Eliminar el escenario {{escenario.Mapa}}">
               <i class="material-icons red md-36">delete</i>
@@ -46,7 +46,7 @@
       </ng-container>
 
       <ng-container matColumnDef="copy">
-        <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"></th>
+        <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"></th>
         <td mat-cell *matCellDef="let escenario">
           <button (click) = "CrearCopia(escenario)" mat-icon-button matTooltip="Crea una copia del escenario {{escenario.Mapa}}">
             <i class="material-icons blue md-36">content_copy</i>

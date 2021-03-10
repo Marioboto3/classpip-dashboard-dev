@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 import { PeticionesAPIService, SesionService } from '../../servicios/index';
 
 // Clases
-import { Punto, Insignia } from '../../clases/index';
+import { Punto, Insignia, Profesor } from '../../clases/index';
 
 @Component({
   selector: 'app-mis-puntos',
@@ -22,8 +22,8 @@ import { Punto, Insignia } from '../../clases/index';
 export class MisPuntosComponent implements OnInit {
 
   profesorId: number;
-
-
+  varTitulo: string;
+  profesor: Profesor;
   tiposPuntos: Punto[];
   insignias: Insignia[];
 
@@ -46,7 +46,8 @@ export class MisPuntosComponent implements OnInit {
     // REALMENTE LA APP FUNCIONARÁ COGIENDO AL PROFESOR DEL SERVICIO, NO OBSTANTE AHORA LO RECOGEMOS DE LA URL
     // this.profesorId = this.profesorService.RecibirProfesorIdDelServicio();
     this.profesorId = Number (this.route.snapshot.paramMap.get('id'));
-
+    this.profesor = this.sesion.DameProfesor();
+    this.varTitulo = "titulo" + this.profesor.Estacion;
     console.log(this.profesorId);
 
     this.PuntosDelProfesor();

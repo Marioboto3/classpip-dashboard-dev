@@ -11,7 +11,7 @@ import { MatDialog, MatTabGroup } from '@angular/material';
 import { SesionService, PeticionesAPIService, CalculosService } from '../../servicios/index';
 
 // Clases
-import { Coleccion, Cromo } from '../../clases/index';
+import { Coleccion, Cromo, Profesor } from '../../clases/index';
 import { Location } from '@angular/common';
 import { of } from 'rxjs';
 import 'rxjs';
@@ -109,6 +109,8 @@ export class CrearColeccionComponent implements OnInit {
 
   ficherosRepetidos: string[];
   errorFicheros = false;
+  profesor: Profesor;
+  varTitulo: string;
 
   constructor(
     private router: Router,
@@ -124,8 +126,8 @@ export class CrearColeccionComponent implements OnInit {
     // REALMENTE LA APP FUNCIONARÁ COGIENDO AL PROFESOR DEL SERVICIO, NO OBSTANTE AHORA LO RECOGEMOS DE LA URL
     // this.profesorId = this.profesorService.RecibirProfesorIdDelServicio();
     this.profesorId = this.sesion.DameProfesor().id;
-
-
+    this.profesor = this.sesion.DameProfesor();
+    this.varTitulo = "titulo" + this.profesor.Estacion;
     // Constructor myForm
     this.myForm = this.formBuilder.group({
      nombreColeccion: ['', Validators.required]

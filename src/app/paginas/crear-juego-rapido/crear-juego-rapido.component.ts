@@ -10,7 +10,7 @@ import { MatDialog, MatTabGroup } from '@angular/material';
 
 // tslint:disable-next-line:max-line-length
 import { CuestionarioSatisfaccion, JuegoDeEncuestaRapida, TablaPuntosFormulaUno,
-          JuegoDeVotacionRapida, Cuestionario, JuegoDeCuestionarioRapido, JuegoDeCogerTurnoRapido } from '../../clases/index';
+          JuegoDeVotacionRapida, Cuestionario, JuegoDeCuestionarioRapido, JuegoDeCogerTurnoRapido, Profesor } from '../../clases/index';
 
 import Swal from 'sweetalert2';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -38,7 +38,7 @@ export interface ChipColor {
 })
 export class CrearJuegoRapidoComponent implements OnInit {
   profesorId: number;
-  varSchool : string;
+  profesor: Profesor;
   varTitulo: string;
 
   // tslint:disable-next-line:ban-types
@@ -135,8 +135,8 @@ export class CrearJuegoRapidoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.varSchool = 'ub';
-    this.varTitulo = 'titulo' + this.varSchool;
+    this.profesor = this.sesion.DameProfesor();
+    this.varTitulo = 'titulo' + this.profesor.Estacion;
     this.profesorId = this.sesion.DameProfesor().id;
     this.myForm = this._formBuilder.group({
       NombreDelJuego: ['', Validators.required],

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 
 
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
@@ -22,10 +22,13 @@ import { Location } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
+  @Output() public sidenavToggle = new EventEmitter();
+  //@ViewChild('childMenu') public childMenu: any;
+
   profesor: Profesor;
   nombre: string;
   pass: string;
-
+  universidad: string;
   primerApellido: string;
   segundoApellido: string;
   username: string;
@@ -64,9 +67,8 @@ export class LoginComponent implements OnInit {
     // envio un profesor undefined para que se notifique al componente navbar y desaparezca la barra
     // de navegación
     this.sesion.EnviaProfesor(this.profesor);
+    console.log(this.mostrarLogin);
   }
-
-
 
   Autentificar() {
     console.log ('a autentificar');
@@ -76,9 +78,10 @@ export class LoginComponent implements OnInit {
     .subscribe(
       (res) => {
         if (res[0] !== undefined) {
-          console.log ('autoenticicado correctamente');
+          console.log ('autenticado correctamente');
           this.profesor = res[0]; // Si es diferente de null, el profesor existe y lo meto dentro de profesor
           // Notifico el nuevo profesor al componente navbar
+          console.log(this.profesor);
           this.sesion.EnviaProfesor(this.profesor);
           this.comServer.Conectar(this.profesor.id);
 
@@ -124,6 +127,7 @@ export class LoginComponent implements OnInit {
           this.primerApellido,
           this.segundoApellido,
           this.username,
+          this.universidad,
           this.email,
           this.contrasena,
           null,
@@ -142,6 +146,9 @@ export class LoginComponent implements OnInit {
       }
 
     });
+  }
+  GuardarUniversidad(){
+    this.universidad = "eetac";
   }
   EnviarContrasena() {
     if (this.nombre === undefined) {

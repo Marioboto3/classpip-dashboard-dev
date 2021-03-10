@@ -48,6 +48,7 @@ export class NavbarComponent implements OnInit {
   URLRecursos: string;
   URLMisJuegosRapidos: string;
   URLCrearJuegoRapido: string;
+  URLCambiarEstacion: string;
 
 
   constructor(  private sesion: SesionService,
@@ -55,11 +56,11 @@ export class NavbarComponent implements OnInit {
                 private router: Router) { }
 
   ngOnInit() {
-    this.navbarSchool = 'ub';
-    this.rutaLogo ='./assets/logo_' + this.navbarSchool + '.png';
+    
 
     this.URLInicio = this.router.url;
     this.URLMisGrupos = this.URLInicio + '/misGrupos';
+    this.URLCambiarEstacion = this.URLInicio + '/cambiarEstacion';
     this.URLCrearGrupo = this.URLInicio + '/crearGrupo';
     this.URLMisPuntos = this.URLInicio + '/misPuntos';
     this.URLCrearPuntos = this.URLInicio + '/crearPuntos';
@@ -89,14 +90,15 @@ export class NavbarComponent implements OnInit {
     // desaparezca la barra de navegación hasta que se autentifique un nuevo profesor
     this.sesion.EnviameProfesor ()
     .subscribe ( profesor => this.profesor = profesor);
+    this.rutaLogo ='./assets/logo_estandar.png';
   }
 
   CerrarSesion() {
 
     this.comServer.Desonectar (this.profesor.id);
 
-    console.log ('voy a login');
-    this.router.navigate(['login']);
+    console.log ('voy a la portada');
+    this.router.navigate(['portada']);
   }
 
 }

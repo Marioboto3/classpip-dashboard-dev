@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SesionService, CalculosService, PeticionesAPIService } from '../../servicios';
-import { FamiliaAvatares } from 'src/app/clases';
+import { FamiliaAvatares, Profesor } from 'src/app/clases';
 import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
@@ -20,7 +20,9 @@ export class MisFamiliasAvataresComponent implements OnInit {
   familiaId: number;
   familiaCargada = false;
   familiaElegida: FamiliaAvatares;
-
+  varTitulo: string;
+  profesor: Profesor;
+  varTituloColumnaTabla: string;
   imagenSilueta: string;
   imagenesComplemento1: string[];
   imagenesComplemento2: string[];
@@ -60,7 +62,10 @@ export class MisFamiliasAvataresComponent implements OnInit {
       }
     });
     this.DameFamiliasDeAvataresPublicas();
-
+    this.profesor = this.sesion.DameProfesor();
+    console.log(this.profesorId);
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
   }
 
 

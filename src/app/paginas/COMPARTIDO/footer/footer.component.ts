@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+// Servicios
+import {SesionService, PeticionesAPIService, CalculosService} from '../../../servicios/index';
+import { Grupo, Profesor, Juego } from '../../../clases/index';
 
 @Component({
   selector: 'app-footer',
@@ -7,13 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+ 
   varSchool: string;
   varFooter: string;
-  constructor() { }
+  profesor: Profesor;
+
+  constructor(private sesion: SesionService) { }
 
   ngOnInit() {
-    this.varSchool = "ub";
-    this.varFooter = "contenedorFooter" + this.varSchool;
+    this.profesor = this.sesion.DameProfesor();
+    console.log("SOY FOOTER");  
+    this.varFooter = "contenedorFooter" + this.profesor.Estacion;
+    
   }
-
 }

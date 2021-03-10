@@ -6,7 +6,6 @@
 
         <mat-card class= "cardBorder">
           <mat-card-content *ngIf = "preguntaEditar.Tipo === 'Cuatro opciones'">
-
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Titulo</strong></mat-label>
               <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.Titulo">

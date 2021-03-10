@@ -9,7 +9,7 @@ import * as URL from '../../URLs/urls';
 import { SesionService, PeticionesAPIService, CalculosService } from 'src/app/servicios';
 
 //Clases
-import { Pregunta } from 'src/app/clases';
+import { Pregunta, Profesor } from 'src/app/clases';
 import { ChipColor } from '../juego/juego.component';
 //import { Console } from 'console';
 
@@ -22,7 +22,9 @@ export class PreguntaComponent implements OnInit {
 
   // Identificador del profesor
   profesorId: number;
-
+  varTituloColumnaTabla: string;
+  varSchool : string;
+  varTitulo: string;
   //Pregunta a crear
   nuevaPregunta: Pregunta
 
@@ -64,7 +66,7 @@ export class PreguntaComponent implements OnInit {
 
   tengoTipo = false;
 
-
+  profesor: Profesor;
   titulo: string;
   pregunta: string;
   tematica: string;
@@ -80,9 +82,6 @@ export class PreguntaComponent implements OnInit {
   nuevaParejaL: string;
   nuevaParejaR: string;
 
-
-
-
   constructor(private route: ActivatedRoute,
               private router: Router,
               public dialog: MatDialog,
@@ -94,10 +93,11 @@ export class PreguntaComponent implements OnInit {
   ngOnInit() {
 
     this.profesorId = this.sesion.DameProfesor().id;
-
+    this.profesor = this.sesion.DameProfesor();
     // tslint:disable-next-line:no-string-literal
     this.URLVueltaInicio = this.route.snapshot.queryParams['URLVueltaInicio'] || '/inicio';
-
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
 
   }
 

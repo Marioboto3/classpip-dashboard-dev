@@ -22,7 +22,9 @@ export class MisFamiliasImagenesPerfilComponent implements OnInit {
   propietarios: string[];
   displayedColumns: string[] = [ 'nombreFamilia', 'numeroImagenes', 'ejemplos', 'iconos'];
   displayedColumnsPublicas: string[] = [ 'nombreFamilia', 'numeroImagenes', 'ejemplos'];
-
+  varTituloColumnaTabla: string;
+  varSchool : string;
+  varTitulo: string;
   constructor(
                 private peticionesAPI: PeticionesAPIService,
                 private sesion: SesionService,
@@ -31,6 +33,8 @@ export class MisFamiliasImagenesPerfilComponent implements OnInit {
 
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
     this.peticionesAPI.DameFamiliasDeImagenesDePerfilProfesor (this.profesor.id)
     .subscribe (familias => {
       if (familias.length !== 0) {

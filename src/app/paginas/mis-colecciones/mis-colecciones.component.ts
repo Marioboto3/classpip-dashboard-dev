@@ -30,8 +30,9 @@ import { Subscriber } from 'rxjs';
 export class MisColeccionesComponent implements OnInit {
 
   profesorId: number;
-
-
+  varTitulo: string;
+  profesor: Profesor;
+  varTituloColumnaTabla: string;
   coleccionesProfesor: Coleccion[] = [];
   coleccionesPublicas: Coleccion[];
   cromosColeccion: Cromo[];
@@ -65,9 +66,10 @@ export class MisColeccionesComponent implements OnInit {
     // REALMENTE LA APP FUNCIONARÁ COGIENDO AL PROFESOR DEL SERVICIO, NO OBSTANTE AHORA LO RECOGEMOS DE LA URL
     // this.profesorId = this.profesorService.RecibirProfesorIdDelServicio();
     this.profesorId = this.sesion.DameProfesor().id;
-
+    this.profesor = this.sesion.DameProfesor();
     console.log(this.profesorId);
-
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
     this.TraeColeccionesDelProfesor();
     this.DameTodasLasColeccionesPublicas();
 

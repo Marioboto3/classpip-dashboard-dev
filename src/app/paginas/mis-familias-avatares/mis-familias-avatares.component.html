@@ -1,4 +1,4 @@
-<div class="titulo">Mis familias de avatares</div>
+<div class="{{varTitulo}}">Mis familias de avatares</div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 
 <div class="contenedor">
@@ -19,13 +19,13 @@
           <table style = "width: 80%" align= "center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
             <ng-container matColumnDef="nombre">
-              <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Nombre </th>
+              <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre </th>
               <td mat-cell *matCellDef="let familia"> {{familia.NombreFamilia}} </td>
 
             </ng-container>
 
             <ng-container matColumnDef="iconos">
-              <th  mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"></th>
+              <th  mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"></th>
               <td  mat-cell *matCellDef="let familia">
                 <div  style = "display: flex; align-items: right">
                   <button (click)= "Mostrar(familia)" mat-icon-button matTooltip="Ver imagenes de la familia">
@@ -73,13 +73,13 @@
           <table style = "width: 80%" align= "center" mat-table [dataSource]="dataSourcePublicas" class="mat-elevation-z8">
 
             <ng-container matColumnDef="nombre">
-              <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Nombre </th>
+              <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre </th>
               <td mat-cell *matCellDef="let familia; let i = index"> {{familia.NombreFamilia}} ({{propietarios[i]}}) </td>
 
             </ng-container>
 
             <ng-container matColumnDef="iconos">
-              <th  mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"></th>
+              <th  mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"></th>
               <td  mat-cell *matCellDef="let familia">
                 <div  style = "display: flex; align-items: right">
                   <button (click)= "Mostrar(familia)" mat-icon-button matTooltip="Ver imagenes de la familia">

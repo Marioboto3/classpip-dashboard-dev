@@ -1,7 +1,7 @@
-<form class={{navbarSchool}} *ngIf = "profesor">
+<form class={{profesor.Estacion}} *ngIf = "profesor">
 
     <img style="display: inline-block;" width="40" src={{rutaLogo}}>
-    <button routerLink = aboutClasspip mat-button [matMenuTriggerFor]="Classpip" class="btnNavbarAmarillo">Classpip</button>
+    <button routerLink = aboutClasspip mat-button [matMenuTriggerFor]="Classpip" class="btnNavbarNegro">Classpip</button>
     <mat-menu  #Classpip="matMenu">
     </mat-menu>
 
@@ -34,18 +34,19 @@
     </mat-menu>
 
 
-    <button routerLink = {{URLDesarrolladores}} mat-button [matMenuTriggerFor]="Desarrollo" class="btnNavbarAmarillo"> Para desarrolladores </button>
+    <button routerLink = {{URLDesarrolladores}} mat-button [matMenuTriggerFor]="Desarrollo" class="btnNavbarNegro"> Para desarrolladores </button>
     <mat-menu  #Desarrollo="matMenu">
     </mat-menu>
 
-    <button routerLink = {{URLEstilos}} mat-button [matMenuTriggerFor]="Estilos" class="btnNavbarAmarillo"> Estilos </button>
+    <button routerLink = {{URLEstilos}} mat-button [matMenuTriggerFor]="Estilos" class="btnNavbarNegro"> Estilos </button>
     <mat-menu  #Estilos="matMenu">
     </mat-menu>
 
 
     <button mat-button [matMenuTriggerFor]="NombreProfesor" class="btnNavbarName"> {{profesor.Nombre}} {{profesor.PrimerApellido}} </button>
     <mat-menu #NombreProfesor="matMenu">
-      <button mat-menu-item routerLink= "{{URLConfiguracion}}"> Configuración </button>
+      <button mat-menu-item routerLink= "{{URLConfiguracion}}"> Configuración del perfil</button>
+      <button mat-menu-item routerLink = "{{URLCambiarEstacion}}"> Configuración del dashboard</button>
       <button mat-menu-item (click) = "CerrarSesion()"> Cerrar sesión </button>
     </mat-menu>
 

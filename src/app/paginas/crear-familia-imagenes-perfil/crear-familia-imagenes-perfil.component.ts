@@ -19,6 +19,8 @@ export class CrearFamiliaImagenesPerfilComponent implements OnInit {
 
   imagenesCargadas = false;
   imagenFamilia: string;
+  varTitulo: string;
+  varTituloColumnaTabla: string;
 
   constructor(
         private peticionesAPI: PeticionesAPIService,
@@ -28,6 +30,8 @@ export class CrearFamiliaImagenesPerfilComponent implements OnInit {
 
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
   }
 
   CrearFamilia() {

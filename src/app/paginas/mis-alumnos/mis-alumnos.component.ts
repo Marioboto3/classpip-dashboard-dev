@@ -23,7 +23,6 @@ import * as URL from '../../URLs/urls';
 })
 export class MisAlumnosComponent implements OnInit {
 
-  varSchool : string;
   varTitulo: string;
 
   misAlumnos: Alumno[];
@@ -49,8 +48,7 @@ export class MisAlumnosComponent implements OnInit {
     this.profesor = this.sesion.DameProfesor();
     this.DameTodosMisAlumnos();
     
-    this.varSchool = 'ub';
-    this.varTitulo = 'titulo' + this.varSchool;
+    this.varTitulo = 'titulo' + this.profesor.Estacion;
   }
 
   DameTodosMisAlumnos() {

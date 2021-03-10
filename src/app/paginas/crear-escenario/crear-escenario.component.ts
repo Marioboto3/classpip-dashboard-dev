@@ -21,6 +21,7 @@ import { DialogoConfirmacionComponent } from '../COMPARTIDO/dialogo-confirmacion
 import { Observable} from 'rxjs';
 import { Escenario } from 'src/app/clases/Escenario';
 import { PuntoGeolocalizable } from 'src/app/clases/PuntoGeolocalizable';
+import { Profesor } from 'src/app/clases';
 
 
 
@@ -64,7 +65,9 @@ export class CrearEscenarioComponent implements OnInit {
 
   // displayedColumns: string[] = ['nombrePuntoGeolocalizable', 'latitudPuntoGeolocalizable', 'longitudPuntoGeolocalizable', 'pistafacilPuntoGeolocalizable','pistadificilPuntoGeolocalizable', ' '];
    displayedColumns: string[] = ['nombrePuntoGeolocalizable', 'latitudPuntoGeolocalizable', 'longitudPuntoGeolocalizable', ' '];
-
+  varTitulo: string;
+  profesor: Profesor;
+  
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -77,7 +80,8 @@ export class CrearEscenarioComponent implements OnInit {
 
     console.log(this.sesion.DameProfesor());
     this.profesorId = this.sesion.DameProfesor().id;
-
+    this.profesor = this.sesion.DameProfesor();
+    this.varTitulo = "titulo" + this.profesor.Estacion;
 
     this.myForm = this.formBuilder.group({
      descripcionEscenario: ['', Validators.required],

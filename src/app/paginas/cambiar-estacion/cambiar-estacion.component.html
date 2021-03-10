@@ -1,0 +1,18 @@
+<div class={{varTitulo}}>Cambiar tema del dashboard</div>
+<mat-divider class="lineaDivisoria"></mat-divider>
+<mat-card-content style="text-align: center; display: flex; align-items: center; flex-direction: column; ">
+  <br>
+  <h4>Escoja el tema que más le agrade.</h4>
+  <mat-card-actions>
+    <br>
+    <button  class="btn Winter" (click)= GuardarInvierno()>Invierno</button>
+    <br>
+    <button  class="btn Spring" (click)= GuardarPrimavera()>Primavera</button>
+    <br>
+    <button  class="btn Summer" (click)= GuardarVerano()>Verano</button>
+    <br>
+    <button  class="btn Autumn" (click)= GuardarOtono()>Otoño</button>
+    <br>
+    <button class="btn Back" (click)= Volver()>Volver</button>
+  </mat-card-actions>
+</mat-card-content>

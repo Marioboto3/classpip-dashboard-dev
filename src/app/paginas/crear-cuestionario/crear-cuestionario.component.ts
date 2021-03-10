@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { SesionService, PeticionesAPIService, CalculosService } from 'src/app/servicios';
-import { Cuestionario } from 'src/app/clases';
+import { Cuestionario, Profesor } from 'src/app/clases';
 import Swal from 'sweetalert2';
 import { AgregarPreguntasDialogComponent } from './agregar-preguntas-dialog/agregar-preguntas-dialog.component';
 import { DialogoConfirmacionComponent } from '../COMPARTIDO/dialogo-confirmacion/dialogo-confirmacion.component';
@@ -18,10 +18,10 @@ export class CrearCuestionarioComponent implements OnInit {
 
   // ID del Profesor
   profesorId: number;
-
+  varTitulo: string;
   // Cuestionario que hemos creado
   cuestionario: Cuestionario;
-
+  profesor: Profesor;
   // Para el stepper
   myForm: FormGroup;
 
@@ -48,8 +48,9 @@ export class CrearCuestionarioComponent implements OnInit {
   ngOnInit() {
 
     // Cogemos el ID del Profesor de la URL
+    this.profesor = this.sesion.DameProfesor();
     this.profesorId = this.sesion.DameProfesor().id;
-
+    this.varTitulo = "titulo" + this.profesor.Estacion;
     this.URLVueltaInicio = this.route.snapshot.queryParams.URLVueltaInicio || '/inicio';
 
     this.myForm = this._formBuilder.group({

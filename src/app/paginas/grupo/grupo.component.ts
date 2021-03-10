@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { MatTableDataSource } from '@angular/material/table';
 
 // Clases
-import { Grupo, Alumno } from '../../clases/index';
+import { Grupo, Alumno, Profesor } from '../../clases/index';
 
 // Servicios
 import { SesionService, PeticionesAPIService, CalculosService  } from '../../servicios/index';
@@ -22,7 +22,6 @@ import * as URL from '../../URLs/urls';
 })
 export class GrupoComponent implements OnInit {
 
-  varSchool : string;
   varTitulo: string;
 
   // PONEMOS LAS COLUMNAS DE LA TABLA Y LA LISTA QUE TENDRÁ LA INFORMACIÓN QUE QUEREMOS MOSTRAR
@@ -33,7 +32,7 @@ export class GrupoComponent implements OnInit {
   // Grupo en el que hemos entrado
   grupo: Grupo;
   profesorId: number;
-
+  profesor: Profesor;
 
 
   // Mensaje confirmación borrado
@@ -50,9 +49,9 @@ export class GrupoComponent implements OnInit {
 
   ngOnInit() {
 
-    this.varSchool = "ub";
-    this.varTitulo = "titulo" + this.varSchool;
-    
+
+    this.profesor=this.sesion.DameProfesor();
+    this.varTitulo = "titulo" + this.profesor.Estacion;
     // Recupero de la sesión el grupo y el id del profesor (que está en el grupo)
     this.grupo = this.sesion.DameGrupo();
     this.profesorId = this.grupo.profesorId;

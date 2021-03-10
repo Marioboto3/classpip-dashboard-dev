@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { FamiliaAvatares } from 'src/app/clases';
+import { FamiliaAvatares, Profesor } from 'src/app/clases';
 import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -18,7 +18,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class CrearFamiliaAvataresComponent implements OnInit {
 
-
+  varTitulo: string;
+  profesor: Profesor;
   nombreFormGroup: FormGroup;
   complemento1FormGroup: FormGroup;
   complemento2FormGroup: FormGroup;
@@ -65,6 +66,7 @@ export class CrearFamiliaAvataresComponent implements OnInit {
   advertencia = true;
   errorFicheros = false;
   ficherosRepetidos: string[];
+  varTituloColumnaTabla: string;
 
 
 
@@ -95,7 +97,9 @@ export class CrearFamiliaAvataresComponent implements OnInit {
     this.complemento4FormGroup = this.formBuilder.group({
       nombreComplemento4: ['', Validators.required]
     });
-
+    this.profesor = this.sesion.DameProfesor();
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
     this.fileComplemento = Array(4).fill([]);
     this.imagenComplemento = Array(4).fill(undefined);
     this.cont = Array(4).fill(0);

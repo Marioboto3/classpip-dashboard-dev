@@ -16,6 +16,7 @@ import { SesionService, PeticionesAPIService } from '../../servicios/index';
 
 import { Escenario } from 'src/app/clases/Escenario';
 import { PuntoGeolocalizable } from 'src/app/clases/PuntoGeolocalizable';
+import { Profesor } from 'src/app/clases';
 
 
 @Component({
@@ -26,12 +27,12 @@ import { PuntoGeolocalizable } from 'src/app/clases/PuntoGeolocalizable';
 export class MisEscenariosComponent implements OnInit {
 
   profesorId: number;
-
-
+  varTitulo: string;
+  profesor: Profesor;
   escenariosProfesor: Escenario[];
   puntosgeolocalizablesEscenario: PuntoGeolocalizable[];
   numeroDePuntosGeolocalizables: number;
-
+  varTituloColumnaTabla: string;
   file: File;
 
   dataSource;
@@ -52,9 +53,10 @@ export class MisEscenariosComponent implements OnInit {
   ngOnInit() {
 
     this.profesorId = this.sesion.DameProfesor().id;
-
+    this.profesor = this.sesion.DameProfesor();
     console.log(this.profesorId);
-
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
     this.TraeEscenariosDelProfesor();
     console.log(this.escenariosProfesor);
 

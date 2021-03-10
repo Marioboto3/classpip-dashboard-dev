@@ -14,6 +14,9 @@ import { Router } from '@angular/router';
 })
 export class MisCuestionariosComponent implements OnInit {
 
+  varTituloColumnaTabla: string;
+  varSchool : string;
+  varTitulo: string;
   misCuestionarios: Cuestionario[] = [];
   cuestionariosPublicos: Cuestionario[];
   dataSource;
@@ -39,6 +42,8 @@ export class MisCuestionariosComponent implements OnInit {
     this.profesor = this.sesion.DameProfesor();
     this.DameTodosMisCuestionarios();
     this.DameTodosLosCuestionariosPublicos();
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
   }
 
   //Dame todos los cuestionarios del profesor para rellenar la tabla

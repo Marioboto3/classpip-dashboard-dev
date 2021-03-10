@@ -1,4 +1,4 @@
-<div class="titulo">Familias disponibles</div>
+<div class={{varTitulo}}>Familias disponibles</div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 <br>
 <br>
@@ -11,18 +11,18 @@
           <table  align= "center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
               <ng-container style="width: 20%" matColumnDef="nombreFamilia">
-                <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Nombre </th>
+                <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre </th>
                 <td mat-cell *matCellDef="let elemento"> {{elemento.familia.NombreFamilia}} </td>
               </ng-container>
 
 
               <ng-container style="width: 10%" matColumnDef="numeroImagenes">
-                <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Número de imagenes </th>
+                <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Número de imagenes </th>
                 <td mat-cell *matCellDef="let elemento"> {{elemento.familia.NumeroImagenes}} </td>
               </ng-container>
 
               <ng-container style="width: 30%" matColumnDef="ejemplos">
-                <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Ejemplos </th>
+                <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Ejemplos </th>
 
                 <td mat-cell *matCellDef="let elemento">
                   <img  style = "width:50px; height: 50px; padding-right: 10px;" [src]="elemento.ejemplo1">
@@ -32,7 +32,7 @@
               </ng-container>
 
               <ng-container style="width: 70%" matColumnDef="iconos">
-                <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> </th>
+                <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> </th>
 
                 <td mat-cell *matCellDef="let elemento">
                   <button (click) = "AdvertenciaBorrar(elemento.familia)" mat-icon-button matTooltip="Eliminar la familia">
@@ -67,18 +67,18 @@
           <table align= "center" mat-table [dataSource]="dataSourcePublicas" class="mat-elevation-z8">
 
               <ng-container style="width: 20%" matColumnDef="nombreFamilia">
-                <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Nombre </th>
+                <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre </th>
                 <td mat-cell *matCellDef="let elemento; let i = index"> {{elemento.familia.NombreFamilia}} ({{propietarios[i]}}) </td>
               </ng-container>
 
 
               <ng-container style="width: 10%" matColumnDef="numeroImagenes">
-                <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Número de imagenes </th>
+                <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Número de imagenes </th>
                 <td mat-cell *matCellDef="let elemento"> {{elemento.familia.NumeroImagenes}} </td>
               </ng-container>
 
               <ng-container style="width: 30%" matColumnDef="ejemplos">
-                <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Ejemplos </th>
+                <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Ejemplos </th>
 
                 <td mat-cell *matCellDef="let elemento">
                   <img  style = "width:50px; height: 50px; padding-right: 10px;" [src]="elemento.ejemplo1">

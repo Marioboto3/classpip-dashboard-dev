@@ -4,10 +4,10 @@ import { MatDialog } from '@angular/material';
 import Swal from 'sweetalert2';
 
 // Servicios
-import { PeticionesAPIService } from '../../servicios/index';
+import { PeticionesAPIService, SesionService } from '../../servicios/index';
 
 // Clases
-import { Punto, Insignia } from '../../clases/index';
+import { Punto, Insignia, Profesor } from '../../clases/index';
 
 @Component({
   selector: 'app-crear-punto',
@@ -21,6 +21,9 @@ export class CrearPuntoComponent implements OnInit {
 
   // Identificador del profesor
   profesorId: number;
+  varTitulo: string;
+  profesor: Profesor;
+  varTituloColumnaTabla: string;
 
   // Habilitador para poder crear puntos
   // tslint:disable-next-line:ban-types
@@ -55,6 +58,7 @@ export class CrearPuntoComponent implements OnInit {
 
   constructor( private peticionesAPI: PeticionesAPIService,
                private route: ActivatedRoute,
+               public sesion: SesionService,
                public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -62,7 +66,9 @@ export class CrearPuntoComponent implements OnInit {
     // REALMENTE LA APP FUNCIONARÁ COGIENDO AL PROFESOR DEL SERVICIO, NO OBSTANTE AHORA LO RECOGEMOS DE LA URL
     // this.profesorId = this.profesorService.RecibirProfesorIdDelServicio();
     this.profesorId = Number (this.route.snapshot.paramMap.get('id'));
-
+    this.profesor = this.sesion.DameProfesor();
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
 
     // Primero me aseguro de que el tipo de puntos aleatorio está creado. Si no es asi, lo creo
     this.peticionesAPI.DameTiposDePuntos (this.profesorId)

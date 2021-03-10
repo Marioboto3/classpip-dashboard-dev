@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 //Servicios
 import { SesionService, PeticionesAPIService } from 'src/app/servicios';
-import { Rubrica } from 'src/app/clases';
+import { Profesor, Rubrica } from 'src/app/clases';
 import {FormGroup} from '@angular/forms';
 
 @Component({
@@ -17,7 +17,8 @@ export class CrearRubricaComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   isDisabled = true;
-
+  varTitulo: string;
+  profesor: Profesor;
   advertencia = true;
   rubrica: Rubrica;
   rubricaCargada = false;
@@ -33,7 +34,11 @@ export class CrearRubricaComponent implements OnInit {
 
   ngOnInit() {
     this.profesorId = this.sesion.DameProfesor().id;
+    this.profesor = this.sesion.DameProfesor();
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    
     console.log(this.firstFormGroup.value);
+   
   }
 
   // Habilita el botón del paso 1

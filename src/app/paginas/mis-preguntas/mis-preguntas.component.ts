@@ -14,7 +14,9 @@ import { EditarPreguntaDialogComponent } from './editar-pregunta-dialog/editar-p
 })
 export class MisPreguntasComponent implements OnInit {
 
-
+  varTituloColumnaTabla: string;
+  varSchool : string;
+  varTitulo: string;
   misPreguntas: Pregunta[];
   dataSource;
   profesor: Profesor;
@@ -31,6 +33,8 @@ export class MisPreguntasComponent implements OnInit {
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
     this.DameTodasMisPreguntas();
+    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
   }
 
   //Cogemos todas las preguntas del profesor para rellenar la tabla
