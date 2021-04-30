@@ -13,6 +13,7 @@ export class CambiarEstacionComponent implements OnInit {
 
   profesor: Profesor;
   varTitulo: string;
+  footer: string;
 
   constructor(
     private sesion: SesionService,
@@ -23,6 +24,7 @@ export class CambiarEstacionComponent implements OnInit {
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
     this.varTitulo = 'titulo' + this.profesor.Estacion;
+    
   }
 
   Volver() {
@@ -45,6 +47,8 @@ export class CambiarEstacionComponent implements OnInit {
                       (err) => {
                         Swal.fire('Error', 'Fallo en la conexion con la base de datos', 'error');
         });
+        this.router.navigate(['inicio']);
+        this.footer = "yes";
       }
     });
   }
@@ -64,6 +68,8 @@ export class CambiarEstacionComponent implements OnInit {
                       (err) => {
                         Swal.fire('Error', 'Fallo en la conexion con la base de datos', 'error');
         });
+        this.router.navigate(['inicio']);
+        this.footer = "yes";
       }
     });
   }
@@ -83,6 +89,8 @@ export class CambiarEstacionComponent implements OnInit {
                       (err) => {
                         Swal.fire('Error', 'Fallo en la conexion con la base de datos', 'error');
         });
+        this.router.navigate(['inicio']);
+        this.footer = "yes";
       }
     });
   }
@@ -102,6 +110,8 @@ export class CambiarEstacionComponent implements OnInit {
                       (err) => {
                         Swal.fire('Error', 'Fallo en la conexion con la base de datos', 'error');
         });
+        this.router.navigate(['inicio']);
+        this.footer = "yes";
       }
     });
   }

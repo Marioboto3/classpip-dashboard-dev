@@ -22,7 +22,7 @@ import * as URL from '../../URLs/urls';
   styleUrls: ['./mis-alumnos.component.scss']
 })
 export class MisAlumnosComponent implements OnInit {
-
+ 
   varTitulo: string;
 
   misAlumnos: Alumno[];
@@ -36,7 +36,6 @@ export class MisAlumnosComponent implements OnInit {
   mensaje = 'Confirma que quieres eliminar a: ';
 
   constructor(
-
     private sesion: SesionService,
     private peticionesAPI: PeticionesAPIService,
     private calculos: CalculosService,

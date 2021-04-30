@@ -16,3 +16,9 @@
     <button class="btn Back" (click)= Volver()>Volver</button>
   </mat-card-actions>
 </mat-card-content>
+
+<div>
+  <form *ngIf="footer !== undefined">
+      <app-footer></app-footer>
+  </form>
+</div>

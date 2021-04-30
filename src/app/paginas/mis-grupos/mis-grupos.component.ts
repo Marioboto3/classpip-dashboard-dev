@@ -34,6 +34,7 @@ export class MisGruposComponent implements OnInit {
 
 
   gruposObservable: any;
+  varTituloColumnaTabla: string;
 
 
   constructor(private route: ActivatedRoute,
@@ -50,6 +51,7 @@ export class MisGruposComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/grupo';
     this.profesor = this.sesion.DameProfesor();
     this.varTitulo = 'titulo' + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
     // CUANDO INICIEMOS EL COMPONENTE NOS LISTARÁ LOS GRUPOS DEL PROFESOR QUE RECUPERAMOS EL ID DE LA URL
     this.GruposDelProfesor();
   }

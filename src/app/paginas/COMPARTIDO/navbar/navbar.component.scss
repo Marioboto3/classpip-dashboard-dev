@@ -1,50 +1,82 @@
+//------------- Estilos del navbar
 
-// .contenedorNavbar{
-//   width: auto;
-//   height: 50px;
-//   padding: 10px;
-//   border: 10px solid rgb(63, 81, 181);
-//   background-color: rgb(63, 81, 181);
-
-//   display: flex;
-//   display: -webkit-flex;
-//   display: -ms-flexbox;
-
-//   justify-content: space-between;
-//   align-items: center;
-
-// }
-
-
-// h1{
-//   display: inline-block;
-// }
-
-// .class{
-//   color:#000;
-//   font-size:170%;
-// }
-
-// .pip{
-//   color:white;
-//   font-size:170%;
-// }
-
-// .btnNavbar{
-//   color:white;
-//   background-color: transparent;
-//   border: 5px solid transparent;
-// }
-// .btnNavbarAmarillo{
-//   color: rgb(225, 240, 14);
-//   background-color: transparent;
-//   font-weight: 900;
-//   border: 5px solid transparent;
-// }
-
-// .btnNavbar:hover {
-//   color: black !important;
-//   background-color: transparent;
-// }
-
-
+.btnNavbar{
+  color:white;
+  font-size: 30px;
+  background-color: transparent;
+  border: 5px solid transparent;
+}
+.btnNavbarNegro{
+  color: rgb(0, 0, 0);
+  background-color: transparent;
+  font-weight: 900;
+  border: 5px solid transparent;
+}
+.btnNavbarName{
+  color: rgba(22, 14, 14, 0.527);
+  background-color: transparent;
+  font-weight: 900;
+  border: 5px solid transparent;
+}
+.Navbar:hover {
+  color: black !important;
+  background-color: transparent;
+}
+.summer{
+    width: auto;
+    height: 50px;
+    padding: 10px;
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    border: 10px solid var(--main-color-summer);
+    background-color: var(--main-color-summer);
+    justify-content: space-between;
+    align-items: center;
+  }
+  .spring{
+    width: auto;
+    height: 50px;
+    padding: 10px;
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    border: 10px solid var(--main-color-spring);
+    background-color: var(--main-color-spring);
+    justify-content: space-between;
+    align-items: center;
+  }
+  .autumn{
+    width: auto;
+    height: 50px;
+    padding: 10px;
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    border: 10px solid var(--main-color-autumn);
+    background-color: var(--main-color-autumn);
+    justify-content: space-between;
+    align-items: center;
+  }
+  .winter{
+    width: auto;
+    height: 50px;
+    padding: 10px;
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    border: 10px solid var(--main-color-winter);
+    background-color: var(--main-color-winter);
+    justify-content: space-between;
+    align-items: center;
+  }
+h2{
+  color: black;
+}
+.logo {
+  margin-left: 25px;
+  width: 130px;
+  height: 130px;
+  max-width: 130px;
+  max-height: 130px;
+}

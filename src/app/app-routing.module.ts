@@ -153,16 +153,17 @@ import { GestionPreguntaKahootComponent } from './paginas/juego-seleccionado-act
 import { MostrarCuestionarioComponent } from './paginas/mis-cuestionarios/mostrar-cuestionario/mostrar-cuestionario.component';
 import { MostrarCuestionarioSatisfaccionComponent } from './paginas/mis-cuestionarios-satisfaccion/mostrar-cuestionario-satisfaccion/mostrar-cuestionario-satisfaccion.component';
 import { PortadaComponent } from './paginas/portada/portada.component';
+import { CambiarEstacionComponent } from './paginas/cambiar-estacion/cambiar-estacion.component';
 
 const routes: Routes = [
 
-
   // LOGIN
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  //{ path: '', redirectTo: '/login', pathMatch: 'full' },
 
   //PORTADA
-  //{ path: 'portada', component: PortadaComponent },
+  { path: 'portada', component: PortadaComponent },
+  { path: '', redirectTo: '/portada', pathMatch: 'full' },
   ////////////////////////////// RUTAS DESDE EL INICIO A LOS COMPONENTES PRINCIPALES DEL NAVBAR ////////////////////
 
 
@@ -289,6 +290,7 @@ const routes: Routes = [
 
   // CONFIGURACION
   { path: 'inicio/:id/configuracionProfesor', component: ConfiguracionProfesorComponent },
+  {path: 'inicio/:id/cambiarEstacion', component: CambiarEstacionComponent},
 
   // PREGUNTAS
   { path: 'inicio/:id/crearPregunta', component: PreguntaComponent},

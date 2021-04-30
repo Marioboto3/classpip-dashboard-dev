@@ -19,6 +19,8 @@ import { AlumnoJuegoDeCuestionario } from '../clases/AlumnoJuegoDeCuestionario';
 import { TablaAlumnoJuegoDeCuestionario } from '../clases/TablaAlumnoJuegoDeCuestionario';
 import { AlumnoJuegoDeGeocaching } from '../clases/AlumnoJuegoDeGeocaching';
 import { TablaAlumnoJuegoDeGeocaching } from '../clases/TablaAlumnoJuegoDeGeocaching';
+import { JuegoEscapeRoom } from '../clases/JuegoEscapeRoom';
+import { MaloJuegoEscapeRoom } from '../clases/MaloJuegoDeEscapeRoom';
 
 
 
@@ -44,6 +46,7 @@ export class CalculosService {
   AlumnoJuegoDeCompeticionLigaId: number;
   EquipoJuegoDeCompeticionLigaId: number;
   empateAsignado = 0;
+  juego: MaloJuegoEscapeRoom;
 
   constructor(
     private sesion: SesionService,
@@ -644,6 +647,23 @@ export class CalculosService {
                               juegosInactivos.push(juegosCuestionarioSatisfaccion[i]);
                             }
                           }
+                          console.log ('Vamos a por los juegos de Escape: ' + grupoID);
+                          this.peticionesAPI.DameJuegosDeEscapeRoom(grupoID)
+                            .subscribe(juegosEscapeRoom => {
+                            console.log('He recibido los juegos de Escape');
+                            console.log(juegosEscapeRoom);
+                            // tslint:disable-next-line:prefer-for-of
+                            for (let i = 0; i < juegosEscapeRoom.length; i++) {
+                              if (juegosEscapeRoom[i].juegoActivo === true) {
+                                //juegosEscapeRoom[i].Tipo = 'Juego De Votación Uno A Todos';
+                                this.pasarJuegoEscapeRoomToJuego(juegosEscapeRoom[i]);
+                                juegosActivos.push(this.juego);
+                              } else {
+                                //juegosVotacionUnoATodos[i].Tipo = 'Juego De Votación Uno A Todos';
+                                this.pasarJuegoEscapeRoomToJuego(juegosEscapeRoom[i]);
+                                juegosInactivos.push(this.juego);
+                              }
+                            }
                           const resultado = { activos: juegosActivos, inactivos: juegosInactivos, preparados: juegosPreparados};
                           obs.next (resultado);
 
@@ -670,6 +690,7 @@ export class CalculosService {
                     });
                   });
                 });
+               });
               });
             });
           });
@@ -3984,5 +4005,7 @@ public VerificarFicherosPreguntas(preguntas: any): any {
   });
   return listaFicherosObservable;
 }
-
+pasarJuegoEscapeRoomToJuego(juegoEscape: JuegoEscapeRoom) {
+  this.juego = new MaloJuegoEscapeRoom (juegoEscape.modo, juegoEscape.grupoId, juegoEscape.nombreJuego, juegoEscape.escenario, true,  juegoEscape.tipo,  );
+}
 }

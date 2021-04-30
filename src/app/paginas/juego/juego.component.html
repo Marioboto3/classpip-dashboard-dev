@@ -133,6 +133,7 @@
 
           </mat-step>
 
+         
           <!-- //////////////////////// SEGUNDO PASO: SELECCIÓN DEL MODO DE JUEGO ///////////////////////// -->
 
           <mat-step>
@@ -160,6 +161,40 @@
 
           </mat-step>
 
+           <!-- ////////////////////////////SI ESCOGEMOS ESCAPE ROOM////////////////////////////////-->
+
+           <div *ngIf="tipoDeJuegoSeleccionado === 'Juego De Escape Room' && tengoModo">
+
+            <mat-step>
+              <div class="row">
+                <div class="col-sm">
+                  <div class = "colorsChips">
+                      <ng-template matStepLabel><div>Escoger escenario</div></ng-template>
+                    <label class = "LabelStepper">Selecciona el escenario principal:</label>
+                    <mat-chip-list class="mat-chip-list-stacked">
+                        <mat-chip  style = 'width: 300px' *ngFor="let tipo of seleccionEscenario; let i = index" selected [color]="tipo.color"  selected="{{seleccionTipoJuego[i].selected}}"
+                        (click)="TipoDeEscenarioSeleccionado(seleccionEscenario[i])" [value]="tipo.nombre" [selectable]="true">
+                          {{tipo.nombre}}
+                          <i class="material-icons" style='margin-left: 10px; margin-bottom: 9px;' (click)="verEscenario(tipo.nombre)">
+                            visibility </i>
+                        </mat-chip>
+                    </mat-chip-list>
+                    
+                    <span style = "font-weight: bold;color:green;" color = "secundary">Has elegido ... {{tipoDeJuegoSeleccionado}} </span>
+                  </div>
+                </div>
+                <div class="col-sm" style="text-align: center;">
+                  <div>
+                    <button type="button" style="margin-top:30px;"  (click)="CrearJuegoDeEscapeRoom()">Peticion</button>
+                  </div>
+                </div>
+              </div>
+                <div class="btnCambiarStep">
+                  <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
+                  <button [disabled]="puntosDelJuego.length === 0" type="button" class="btn Next"  matStepperNext>Siguiente</button>
+                </div>
+            </mat-step>
+           </div>
           <!-- ////////////////////////////SI ESCOGEMOS EL JUEGO DE TIPO DE PUNTOS ////////////////////////////////-->
 
           <div *ngIf="tipoDeJuegoSeleccionado === 'Juego De Puntos' && tengoModo">

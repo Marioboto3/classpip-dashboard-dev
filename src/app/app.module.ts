@@ -250,6 +250,7 @@ import { GestionPreguntaKahootComponent } from './paginas/juego-seleccionado-act
 import { MostrarCuestionarioComponent } from './paginas/mis-cuestionarios/mostrar-cuestionario/mostrar-cuestionario.component';
 import { MostrarCuestionarioSatisfaccionComponent } from './paginas/mis-cuestionarios-satisfaccion/mostrar-cuestionario-satisfaccion/mostrar-cuestionario-satisfaccion.component';
 import { PortadaComponent } from './paginas/portada/portada.component';
+import { CambiarEstacionComponent } from './paginas/cambiar-estacion/cambiar-estacion.component';
 
 
 @NgModule({
@@ -396,8 +397,8 @@ import { PortadaComponent } from './paginas/portada/portada.component';
     GestionPreguntaKahootComponent,
     MostrarCuestionarioComponent,
     MostrarCuestionarioSatisfaccionComponent,
-    PortadaComponent
-
+    PortadaComponent,
+    CambiarEstacionComponent
   ],
   imports: [
     BrowserModule,

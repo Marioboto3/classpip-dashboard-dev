@@ -25,6 +25,8 @@ import {EquipoJuegoEvaluado} from '../clases/EquipoJuegoEvaluado';
 import {AlumnoJuegoEvaluado} from '../clases/AlumnoJuegoEvaluado';
 // import {host} from '../URLs/urls';
 import * as URL from '../URLs/urls';
+import { JuegoEscapeRoom } from '../clases/JuegoEscapeRoom';
+import { AlumnoJuegoEscapeRoom } from '../clases/AlumnoJuegoEscapeRoom';
 
 @Injectable({
   providedIn: 'root'
@@ -80,6 +82,7 @@ export class PeticionesAPIService {
 
   private APIUrlFamiliarAvatares = this.host + ':3000/api/familiasAvatares';
   private APIUrlAlumnoJuegoDeGeocaching = this.host + ':3000/api/AlumnosJuegoDeGeocaching';
+  private APIUrlAlumnoJuegoDeEscapeRoom = this.host + ':3000/api/AlumnoJuegoDeEscapeRooms';
 
 
   // Para cargar y descargar imagenes
@@ -669,7 +672,18 @@ export class PeticionesAPIService {
     return this.http.delete<HistorialPuntosEquipo[]>(this.APIUrlHistorialPuntosEquipo + '/' + historialPuntosEquipoId);
   }
 
+///////////////////////////////////////// ESCAPE ROOM ////////////////////////////////////////////////////////////////////
 
+  public CreaJuegoDeEscapeRoom(juego: JuegoEscapeRoom, grupoId: number): Observable<JuegoEscapeRoom> {
+    return this.http.post<JuegoEscapeRoom>(this.APIUrlGrupos + '/' + grupoId + '/juegoDeEscapeRooms', juego);
+  }
+  public InscribeAlumnoJuegoEscapeRoom(AlumnoJuegoEscapeRoom: AlumnoJuegoEscapeRoom) {
+    return this.http.post<AlumnoJuegoEscapeRoom>(this.APIUrlAlumnoJuegoDeEscapeRoom, AlumnoJuegoEscapeRoom);
+  }
+
+  public DameJuegosDeEscapeRoom(grupoId: number): Observable<JuegoEscapeRoom[]> {
+    return this.http.get<JuegoEscapeRoom[]>(this.APIUrlGrupos + '/' + grupoId + '/juegoDeEscapeRooms');
+  }
 ///////////////////////////////////////// GESTION DE JUEGO DE COLECCION //////////////////////////////////////////////////
 
   public CreaJuegoDeColeccion(juego: Juego, grupoId: number): Observable<Juego> {

@@ -61,6 +61,52 @@
 
           </mat-step>
 
+          <!--/////////////////////// SI ESCOGEMOS EL JUEGO DE TIPO ESCAPE ROOM//////////////////////////////////-->
+
+          <!-- escoger escenario-->
+
+        <div *ngIf="tipoDeJuegoSeleccionado === 'Juego De Escape Room'">
+          <mat-step>
+          <div class = "colorsChips">
+              <ng-template matStepLabel><div>Escoger escenario</div></ng-template>
+            <label class = "LabelStepper">Selecciona el escenario principal:</label>
+            <mat-chip-list class="mat-chip-list-stacked">
+                <mat-chip  style = 'width: 300px' *ngFor="let tipo of seleccionEscenario; let i = index" selected [color]="tipo.color"  selected="{{seleccionTipoJuego[i].selected}}"
+                (click)="TipoDeEscenarioSeleccionado(seleccionEscenario[i])" [value]="tipo.nombre" [selectable]="true">
+                  {{tipo.nombre}}
+                  <i class="material-icons" style='margin-left: 10px; margin-bottom: 9px;' (click)="verEscenario(tipo.nombre)">
+                    visibility </i>
+                </mat-chip>
+              
+            </mat-chip-list>
+            <span style = "font-weight: bold;color:green;" color = "secundary">Has elegido ... {{tipoDeJuegoSeleccionado}} </span>
+          </div>
+          <div class="btnCambiarStep">
+              <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
+              <button [disabled]="!tengoTipo" type="button" class="btn Next" matStepperNext>Siguiente</button>
+          </div>
+        </mat-step>
+
+         <!-- asignar alumno-->
+          
+        <mat-step>
+          <div class = "colorsChips">
+              <ng-template matStepLabel><div>Asignar alumno</div></ng-template>
+            <label class = "LabelStepper">Selecciona el alumno / la alumna:</label>
+            <mat-chip-list class="mat-chip-list-stacked">
+                <mat-chip  style = 'width: 300px' *ngFor="let tipo of seleccionEscenario; let i = index" selected [color]="tipo.color"  selected="{{seleccionTipoJuego[i].selected}}"
+                (click)="TipoDeEscenarioSeleccionado(seleccionEscenario[i])" [value]="tipo.nombre" [selectable]="true">
+                  {{tipo.nombre}}
+                </mat-chip>
+            </mat-chip-list>
+          </div>
+          
+          <div class="btnCambiarStep">
+              <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
+              <button [disabled]="!tengoTipo" type="button" class="btn Next" matStepperNext>Siguiente</button>
+          </div>
+        </mat-step>
+        </div>
           <!--/////////////////////// SI ESCOGEMOS EL JUEGO DE TIPO CUESTIONARIO RAPIDO//////////////////////////////////-->
           <div *ngIf="tipoDeJuegoSeleccionado === 'Juego De Cuestionario Rápido'">
 

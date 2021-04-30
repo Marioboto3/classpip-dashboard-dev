@@ -49,6 +49,7 @@ export class NavbarComponent implements OnInit {
   URLMisJuegosRapidos: string;
   URLCrearJuegoRapido: string;
   URLCambiarEstacion: string;
+  URLEscapeRoom: string;
 
 
   constructor(  private sesion: SesionService,
@@ -57,7 +58,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     
-
+   
     this.URLInicio = this.router.url;
     this.URLMisGrupos = this.URLInicio + '/misGrupos';
     this.URLCambiarEstacion = this.URLInicio + '/cambiarEstacion';
@@ -82,7 +83,7 @@ export class NavbarComponent implements OnInit {
     this.URLRecursos = this.URLInicio + '/recursos';
     this.URLMisJuegosRapidos = this.URLInicio + '/misJuegosRapidos';
     this.URLCrearJuegoRapido = this.URLInicio + '/crearJuegoRapido';
-
+    this.URLEscapeRoom = this.URLInicio + '/escapeRoom';
 
     console.log ('estoy en navbar');
     // Me subscribo para que cada vez que cambie el profesor pueda actualizar el navbar

@@ -55,20 +55,24 @@ export class CrearJuegoRapidoComponent implements OnInit {
   myForm: FormGroup;
   nombreDelJuego: string;
   tipoDeJuegoSeleccionado: string;
+  tipoDeEscenarioSeleccionado: string;
 
   tengoNombre = false;
   tengoTipo = false;
+
+  seleccionEscenario: ChipColor[] = [
+    {nombre: 'habitacion', color: 'primary'},
+    {nombre: 'Cocina', color: 'accent'},
+    {nombre: 'Baño', color: 'warn'},
+  ];
 
   seleccionTipoJuego: ChipColor[] = [
     {nombre: 'Juego De Encuesta Rápida', color: 'primary'},
     {nombre: 'Juego De Cuestionario Rápido', color: 'accent'},
     {nombre: 'Juego De Votación Rápida', color: 'warn'},
     {nombre: 'Juego De Coger Turno Rápido', color: 'primary'},
-
+    {nombre: 'Juego De Escape Room', color: 'warn'}
   ];
-
-
-
 
   // Información para el juego de cuestionario de satisfacción
   cuestionarioSatisfaccion: CuestionarioSatisfaccion;
@@ -168,6 +172,10 @@ export class CrearJuegoRapidoComponent implements OnInit {
     }
   }
 
+  TipoDeEscenarioSeleccionado(tipo: ChipColor) {
+    this.tipoDeJuegoSeleccionado = tipo.nombre;
+    this.tengoTipo = true;
+}
 
   TipoDeJuegoSeleccionado(tipo: ChipColor) {
       this.tipoDeJuegoSeleccionado = tipo.nombre;
@@ -360,6 +368,15 @@ CrearJuegoDeVotacionRapida() {
     });
   }
 
+  verEscenario(imagen){
+    console.log("imagen: ", imagen);
+    Swal.fire({
+      title: imagen,
+      imageUrl: 'https://unsplash.it/400/200',
+      imageWidth: 400,
+      imageHeight: 200,
+    });
+  }
 
   // Para habilitar el boton de guardar puntuaciones
   TengoPuntuaciones() {

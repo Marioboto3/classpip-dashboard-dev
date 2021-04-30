@@ -38,6 +38,7 @@ export class GrupoComponent implements OnInit {
   // Mensaje confirmación borrado
   // tslint:disable-next-line:no-inferrable-types
   mensaje: string = 'Estás seguro/a de que quieres eliminar el grupo llamado: ';
+  varTituloColumnaTabla: string;
 
 
   constructor(
@@ -55,6 +56,7 @@ export class GrupoComponent implements OnInit {
     // Recupero de la sesión el grupo y el id del profesor (que está en el grupo)
     this.grupo = this.sesion.DameGrupo();
     this.profesorId = this.grupo.profesorId;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
 
     // PEDIMOS LA LISTA DE ALUMNOS CUANDO INICIAMOS EL COMPONENTE
     this.AlumnosDelGrupo();

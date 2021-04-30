@@ -40,6 +40,8 @@ import {JuegoDeEvaluacion} from '../../clases/JuegoDeEvaluacion';
 import {log} from 'util';
 import {EquipoJuegoEvaluado} from '../../clases/EquipoJuegoEvaluado';
 import {AlumnoJuegoEvaluado} from '../../clases/AlumnoJuegoEvaluado';
+import { JuegoEscapeRoom } from 'src/app/clases/JuegoEscapeRoom';
+import { AlumnoJuegoEscapeRoom } from 'src/app/clases/AlumnoJuegoEscapeRoom';
 
 
 export interface OpcionSeleccionada {
@@ -88,6 +90,7 @@ export class JuegoComponent implements OnInit {
 
   // Informacion para todos los juegos
   myForm: FormGroup;
+  tipoDeEscenarioSeleccionado: string;
   nombreDelJuego: string;
   tipoDeJuegoSeleccionado: string;
   modoDeJuegoSeleccionado: string;
@@ -104,13 +107,18 @@ export class JuegoComponent implements OnInit {
     {nombre: 'Juego De Votación', color: 'primary'},
     {nombre: 'Juego De Cuestionario de Satisfacción', color: 'accent'},
     {nombre: 'Juego De Evaluación', color: 'accent'},
+    {nombre: 'Juego De Escape Room', color: 'warn'}
   ];
   seleccionModoJuego: ChipColor[] = [
     {nombre: 'Individual', color: 'primary'},
     {nombre: 'Equipos', color: 'accent'}
   ];
 
-
+  seleccionEscenario: ChipColor[] = [
+    {nombre: 'Habitación', color: 'primary'},
+    {nombre: 'Cocina', color: 'accent'},
+    {nombre: 'Baño', color: 'warn'},
+  ];
   // información para crear un juego de puntos
   puntosDelJuego: Punto[] = [];
   nivelesDelJuego: Nivel[] = [];
@@ -309,7 +317,7 @@ export class JuegoComponent implements OnInit {
     this.peticionesAPI.DameEquiposDelGrupo(this.grupo.id)
     .subscribe(equipos => {
       if (equipos[0] !== undefined) {
-        console.log('Hay equipos');
+        console.log('Hay equipos', equipos[0]);
         this.equiposGrupo = equipos;
         console.log(this.equiposGrupo);
         for (const equipo of equipos) {
@@ -395,6 +403,17 @@ export class JuegoComponent implements OnInit {
 
   }
 
+  //// ESCAPE ROOM
+
+  verEscenario(imagen){
+    console.log("imagen: ", imagen);
+    Swal.fire({
+      title: imagen,
+      imageUrl: 'https://unsplash.it/400/200',
+      imageWidth: 400,
+      imageHeight: 200,
+    });
+  }
   //////////////////////////////////////// FUNCIONES PARA LISTAR JUEGOS ///////////////////////////////////////////////
 
 
@@ -443,6 +462,9 @@ export class JuegoComponent implements OnInit {
     }
   }
 
+  TipoDeEscenarioSeleccionado(tipo: ChipColor) {
+    this.tipoDeEscenarioSeleccionado = tipo.nombre;
+  }
 
   TipoDeJuegoSeleccionado(tipo: ChipColor) {
     this.tipoDeJuegoSeleccionado = tipo.nombre;
@@ -452,7 +474,6 @@ export class JuegoComponent implements OnInit {
     //     this.NumeroDeVueltas();
     // }
   }
-
 
   // Recoge el modo de juego seleccionado y lo mete en la variable (modoDeJuegoSeleccionado), la cual se usará después
   // para el POST del juego
@@ -598,7 +619,7 @@ export class JuegoComponent implements OnInit {
     }
     return this.todosTienenEvaluador;
   }
-    ContarEvaluadores(idEvaluado: number): number {
+  ContarEvaluadores(idEvaluado: number): number {
     let suma = 0;
     this.relacionesMap.forEach((value, key) => {
       if (value.includes(idEvaluado)) {
@@ -607,7 +628,7 @@ export class JuegoComponent implements OnInit {
     });
     return suma;
   }
-    CriterioDeEvaluacionSeleccionado(criterioEvaluacion: ChipColor) {
+  CriterioDeEvaluacionSeleccionado(criterioEvaluacion: ChipColor) {
     this.criterioEvaluacionSeleccionado = criterioEvaluacion.nombre;
     this.tengoCriterioEvaluacion = true;
     if (this.criterioEvaluacionSeleccionado === 'Por pesos') {
@@ -637,20 +658,20 @@ export class JuegoComponent implements OnInit {
       console.log('penalizacion array', this.penalizacionArray);
     }
   }
-    EquipoDeEvaluacionSeleccionado(equipoEvaluacion: ChipColor) {
+  EquipoDeEvaluacionSeleccionado(equipoEvaluacion: ChipColor) {
     this.equiposEvaluacionSeleccionado = equipoEvaluacion.nombre;
     this.tengoEquipoEvaluacion = true;
   }
-    AutoevaluacionChange(isChecked: boolean) {
+  AutoevaluacionChange(isChecked: boolean) {
     this.autoevaluacion = isChecked;
   }
-    ProfesorEvaluaChange(isChecked: boolean) {
+  ProfesorEvaluaChange(isChecked: boolean) {
     this.profesorEvalua = isChecked;
   }
-    ProfesorEvaluaModoChange(value: string) {
+  ProfesorEvaluaModoChange(value: string) {
     this.profesorEvaluaModo = value;
   }
-    DameMaxSlider(): number {
+  DameMaxSlider(): number {
     if (this.modoDeJuegoSeleccionado === 'Individual') {
       return this.alumnosGrupo.length - 1;
     } else if (this.modoDeJuegoSeleccionado === 'Equipos') {
@@ -667,15 +688,14 @@ export class JuegoComponent implements OnInit {
       }
     }
   }
-
-    DameEvaluados(): any {
+  DameEvaluados(): any {
     if (this.modoDeJuegoSeleccionado === 'Individual') {
       return this.alumnosGrupo;
     } else {
       return this.equiposGrupo;
     }
   }
-    DameEvaluadores(): any {
+  DameEvaluadores(): any {
     if (this.equiposEvaluacionSeleccionado === 'Por Equipos') {
       return this.equiposGrupo;
     } else {
@@ -825,7 +845,6 @@ export class JuegoComponent implements OnInit {
     console.log ('ya tengo los puntos');
     console.log (this.puntosDelJuego);
   }
-
   RecibeNivel($event) {
     this.nivelesDelJuego.push ($event.n);
     if ($event.l !== undefined) {
@@ -836,9 +855,7 @@ export class JuegoComponent implements OnInit {
     console.log (this.logosNiveles);
   }
 
-
   // Función que usaremos para crear un juego de puntos.
-
   CrearJuegoDePuntos() {
     // primero creamos el juego
     this.peticionesAPI.CreaJuegoDePuntos(new Juego (this.tipoDeJuegoSeleccionado, this.modoDeJuegoSeleccionado,
@@ -907,7 +924,6 @@ export class JuegoComponent implements OnInit {
     this.coleccionSeleccionada = $event;
     this.tengoColeccion = true;
   }
-
   CrearJuegoDeColeccion() {
     this.peticionesAPI.CreaJuegoDeColeccion(new Juego (this.tipoDeJuegoSeleccionado, this.modoDeJuegoSeleccionado, this.modoAsignacion,
       this.coleccionSeleccionada.id, undefined, undefined, undefined, undefined, undefined, this.nombreDelJuego), this.grupo.id)
@@ -956,6 +972,59 @@ export class JuegoComponent implements OnInit {
 
     });
   }
+  pasarJuegoEscapeRoomToJuego(juegoEscape: JuegoEscapeRoom) {
+    this.juego = new Juego (juegoEscape.tipo, juegoEscape.modo, undefined, undefined, true, undefined, undefined, undefined, undefined, juegoEscape.nombreJuego, undefined, undefined, undefined, undefined, undefined, undefined, undefined, juegoEscape.escenario);
+  }
+  CrearJuegoDeEscapeRoom() {
+    this.peticionesAPI.CreaJuegoDeEscapeRoom(new JuegoEscapeRoom ( this.modoDeJuegoSeleccionado, this.grupo.id,
+     this.nombreDelJuego, new Escenario(this.tipoDeEscenarioSeleccionado, "test"),true,"JuegoDeEscapeRoom"), this.grupo.id)
+    .subscribe(juegoCreado => {
+      this.pasarJuegoEscapeRoomToJuego(juegoCreado);
+      console.log(juegoCreado);
+      console.log('Juego creado correctamente');
+      this.sesion.TomaJuego(this.juego);
+      this.juegoCreado = true;
+      // Asignamos a los participantes en el juego
+      if (this.modoDeJuegoSeleccionado === 'Individual') {
+        // tslint:disable-next-line:prefer-for-of
+        for (let i = 0; i < this.alumnosGrupo.length; i++) {
+          this.peticionesAPI.InscribeAlumnoJuegoEscapeRoom(new AlumnoJuegoEscapeRoom (this.alumnosGrupo[i].id, this.juego.id))
+          .subscribe();
+        }
+      } 
+      /*else {
+        // tslint:disable-next-line:prefer-for-of
+        for (let i = 0; i < this.equiposGrupo.length; i++) {
+          this.peticionesAPI.InscribeEquipoJuegoDeColeccion(new EquipoJuegoDeColeccion(this.equiposGrupo[i].id, this.juego.id))
+          .subscribe();
+        }
+      }*/
+      Swal.fire('Juego de escape room creado correctamente', ' ', 'success');
+      
+      // El juego se ha creado como activo. Lo añadimos a la lista correspondiente
+      if (this.juegosActivos === undefined) {
+        // Si la lista aun no se ha creado no podre hacer el push
+            this.juegosActivos = [];
+        }
+      this.juegosActivos.push (this.juego);
+      this.Limpiar();
+        // Regresamos a la lista de equipos (mat-tab con índice 0)
+      this.tabGroup.selectedIndex = 0;
+      // Notificación para los miembros del grupo
+      // console.log ('envio notificación los miembros del grupo');
+      // this.comService.EnviarNotificacionGrupo (
+      //      this.grupo.id,
+      //      'Nuevo juego de colección para el grupo ' + this.grupo.Nombre
+      // );
+      /*
+      console.log ('envio notificación los miembros del grupo');
+      this.comService.EnviarNotificacionGrupo (
+          this.grupo.id,
+          'Nuevo juego de colección para el grupo ' + this.grupo.Nombre
+      );
+      */
+    });
+  }
 
   //// FUNCIONES PARA LA CREACION DE JUEGO DE CUESTIONARIO
   AbrirDialogoAgregarCuestionario(): void {
@@ -985,7 +1054,6 @@ export class JuegoComponent implements OnInit {
       return true;
     }
   }
-
   GuardarPuntuacion() {
     this.puntuacionCorrecta = this.myForm.value.PuntuacionCorrecta;
     this.puntuacionIncorrecta = this.myForm.value.PuntuacionIncorrecta;
@@ -994,19 +1062,16 @@ export class JuegoComponent implements OnInit {
     this.modoPresentacion = modoPresentacion;
     this.tengoModoPresentacion = true;
   }
-
   GuardarTiempoLimite() {
     this.tiempoLimite = this.myForm.value.TiempoLimite;
     if (this.tiempoLimite === undefined) {
       this.tiempoLimite = 0;
     }
   }
-
   TipoDeJuegoDeCuestionarioSeleccionado(tipoJuegoCuestionario: ChipColor) {
     this.tipoDeJuegoDeCuestionarioSeleccionado = tipoJuegoCuestionario.nombre;
     this.tengoTipoJuegoCuestionario = true;
   }
-
   CrearJuegoDeCuestionario() {
 
     // Tengo que crear un juego de tipo JuegoDeCuestionario y no uno de tipo Juego, como en los casos
@@ -1047,8 +1112,6 @@ export class JuegoComponent implements OnInit {
     this.familiasElegidas = $event;
     this.tengoFamilias = true;
   }
-
-
   CrearJuegoDeAvatar( ) {
 
     const juego = new JuegoDeAvatar ( this.nombreDelJuego,
@@ -1101,7 +1164,6 @@ export class JuegoComponent implements OnInit {
     this.tipoDeCompeticionSeleccionado = tipoCompeticion.nombre;
     this.tengoTipoDeCompeticion = true;
   }
-
   GuardarNumeroDeJornadas() {
     this.numeroDeJornadas = this.myForm.value.NumeroDeJornadas;
     if (  this.numeroDeJornadas  === undefined || isNaN( this.numeroDeJornadas )) {
@@ -1112,14 +1174,11 @@ export class JuegoComponent implements OnInit {
       this.tengoNumeroDeJornadas = true;
     }
   }
-
   GuardarNuevaPuntuacion() {
     this.nuevaPuntuacion = this.myForm.value.NuevaPuntuacion;
     console.log ('tengo nueva puntuacion ' + this.nuevaPuntuacion );
     this.tengoNuevaPuntuacion = true;
-
   }
-
   Preparado() {
     if ((this.tengoNuevaPuntuacion) &&  (this.selection.selected.length > 0)) {
       return true;
@@ -1127,7 +1186,6 @@ export class JuegoComponent implements OnInit {
       return false;
     }
   }
-
   AnadirPuntos() {
     console.log ('nueva puntuiacion');
     console.log (this.nuevaPuntuacion);
@@ -1146,7 +1204,6 @@ export class JuegoComponent implements OnInit {
     this.selection.clear();
     this.tengoNuevaPuntuacion = false;
   }
-
   AnadirFila() {
 
     let i: number;
@@ -1171,7 +1228,6 @@ export class JuegoComponent implements OnInit {
     }
 
   }
-
   EliminarFila() {
 
     let i: number;
@@ -1190,8 +1246,6 @@ export class JuegoComponent implements OnInit {
     }
 
   }
-
-
   CrearJuegoDeCompeticionLiga() {
 
     // tslint:disable-next-line:max-line-lengtholean)
@@ -1246,8 +1300,6 @@ export class JuegoComponent implements OnInit {
       });
     });
   }
-
-
   CrearJuegoDeCompeticionFormulaUno() {
     // tslint:disable-next-line:max-line-length
     this.peticionesAPI.CreaJuegoDeCompeticionFormulaUno(new Juego (this.tipoDeJuegoSeleccionado + ' ' + this.tipoDeCompeticionSeleccionado,
@@ -1297,8 +1349,6 @@ export class JuegoComponent implements OnInit {
     });
   }
 
-
-
   /// Funciones para craar juego de Geocatching
   // Geocaching
   AbrirDialogoAgregarEscenario(): void {
@@ -1322,7 +1372,6 @@ export class JuegoComponent implements OnInit {
       console.log(this.puntosgeolocalizablesEscenario);
     });
   }
-
   DamePuntosGeolocalizablesDelEscenario(escenario: Escenario) {
 
     console.log('voy a mostrar los puntosgeolocalizables del escenario ' + escenario.id);
@@ -1341,7 +1390,6 @@ export class JuegoComponent implements OnInit {
       }
     });
   }
-
   AbrirDialogoAgregarPreguntas(): void {
     const dialogRef = this.dialog.open(AsignaPreguntasComponent, {
       width: '70%',
@@ -1367,7 +1415,6 @@ export class JuegoComponent implements OnInit {
     });
   }
 
-
   // Para habilitar el boton de guardar puntuaciones
   TengoPuntuacionesGeocatching() {
     if (this.myForm.value.PuntuacionCorrectaGeo === '' ||
@@ -1385,7 +1432,6 @@ export class JuegoComponent implements OnInit {
     this.puntuacionCorrectaGeoBonus = this.myForm.value.PuntuacionCorrectaGeoBonus;
     this.puntuacionIncorrectaGeoBonus = this.myForm.value.PuntuacionIncorrectaGeoBonus;
   }
-
   CrearJuegoDeGeocaching() {
     // tslint:disable-next-line:max-line-length
     this.peticionesAPI.CreaJuegoDeGeocaching(new JuegoDeGeocaching(this.nombreDelJuego, this.tipoDeJuegoSeleccionado, this.puntuacionCorrectaGeo, this.puntuacionIncorrectaGeo, this.puntuacionCorrectaGeoBonus, this.puntuacionIncorrectaGeoBonus, this.PreguntasBasicas, this.PreguntasBonus,
@@ -1424,7 +1470,6 @@ export class JuegoComponent implements OnInit {
     this.tipoDeVotacionSeleccionado = tipoVotacion.nombre;
     this.tengoTipoDeVotacion = true;
   }
-
   ModoDeRepartoSeleccionado(modoReparto: ChipColor) {
     this.modoDeRepartoSeleccionado = modoReparto.nombre;
     this.tengoModoReparto = true;
@@ -1439,11 +1484,10 @@ export class JuegoComponent implements OnInit {
   //   console.log ('bbb: ' + this.puntosARepartir);
   //   return value;
   // }
-  GuardaValor(event) {
+GuardaValor(event) {
     this.puntosARepartir = event.value;
     this.Puntuacion[0] = this.puntosARepartir;
   }
-
 CrearJuegoDeVotacionUnoATodos() {
     const juegoDeVotacion = new JuegoDeVotacionUnoATodos (
       this.tipoDeJuegoSeleccionado + ' ' + this.tipoDeVotacionSeleccionado ,
@@ -1473,7 +1517,7 @@ CrearJuegoDeVotacionUnoATodos() {
       }
 
       Swal.fire('Juego de votación tipo Uno A Todos creado correctamente', ' ', 'success');
-
+      
       // El juego se ha creado como activo. Lo añadimos a la lista correspondiente
       if (this.juegosActivos === undefined) {
       // Si la lista aun no se ha creado no podre hacer el push
@@ -1484,7 +1528,7 @@ CrearJuegoDeVotacionUnoATodos() {
       this.Limpiar();
       // Regresamos a la lista de equipos (mat-tab con índice 0)
       this.tabGroup.selectedIndex = 0;
-
+      
     });
 
   }
