@@ -977,10 +977,12 @@ export class JuegoComponent implements OnInit {
   }
   CrearJuegoDeEscapeRoom() {
     this.peticionesAPI.CreaJuegoDeEscapeRoom(new JuegoEscapeRoom ( this.modoDeJuegoSeleccionado, this.grupo.id,
-     this.nombreDelJuego, new Escenario(this.tipoDeEscenarioSeleccionado, "test"),true,"JuegoDeEscapeRoom"), this.grupo.id)
+     this.nombreDelJuego, new Escenario(this.tipoDeEscenarioSeleccionado, "test"),true,"Juego De Escape Room"), this.grupo.id)
     .subscribe(juegoCreado => {
       this.pasarJuegoEscapeRoomToJuego(juegoCreado);
-      console.log(juegoCreado);
+      console.log("MIRAR AQUI: ", this.juego);
+      console.log("MIRAR AQUI 2 : ", juegoCreado);
+
       console.log('Juego creado correctamente');
       this.sesion.TomaJuego(this.juego);
       this.juegoCreado = true;
@@ -988,7 +990,8 @@ export class JuegoComponent implements OnInit {
       if (this.modoDeJuegoSeleccionado === 'Individual') {
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < this.alumnosGrupo.length; i++) {
-          this.peticionesAPI.InscribeAlumnoJuegoEscapeRoom(new AlumnoJuegoEscapeRoom (this.alumnosGrupo[i].id, this.juego.id))
+          console.log("Alumno id, personaje y juegoId: ", this.alumnosGrupo[i].id, "moreno", this.juego.id); 
+          this.peticionesAPI.InscribeAlumnoJuegoEscapeRoom(new AlumnoJuegoEscapeRoom (this.alumnosGrupo[i].id, "moreno", juegoCreado.id))
           .subscribe();
         }
       } 
