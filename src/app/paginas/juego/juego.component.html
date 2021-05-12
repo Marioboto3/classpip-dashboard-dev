@@ -173,10 +173,9 @@
                     <label class = "LabelStepper">Selecciona el escenario principal:</label>
                     <mat-chip-list class="mat-chip-list-stacked">
                         <mat-chip  style = 'width: 300px' *ngFor="let tipo of seleccionEscenario; let i = index" selected [color]="tipo.color"  selected="{{seleccionTipoJuego[i].selected}}"
-                        (click)="TipoDeEscenarioSeleccionado(seleccionEscenario[i])" [value]="tipo.nombre" [selectable]="true">
+                        (click)="verEscenario(tipo.nombre)" [value]="tipo.nombre" [selectable]="true">
                           {{tipo.nombre}}
-                          <i class="material-icons" style='margin-left: 10px; margin-bottom: 9px;' (click)="verEscenario(tipo.nombre)">
-                            visibility </i>
+            
                         </mat-chip>
                     </mat-chip-list>
                     
@@ -184,14 +183,14 @@
                   </div>
                 </div>
                 <div class="col-sm" style="text-align: center;">
-                  <div>
-                    <button type="button" style="margin-top:30px;"  (click)="CrearJuegoDeEscapeRoom()">Peticion</button>
-                  </div>
+                <!-- <div class="btnCambiarStep">
+                    <button type="button" class="btn Peticion" style="margin-top:30px;"  (click)="CrearJuegoDeEscapeRoom()">Peticion</button>
+                  </div> !-->
                 </div>
               </div>
                 <div class="btnCambiarStep">
                   <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
-                  <button [disabled]="puntosDelJuego.length === 0" type="button" class="btn Next"  matStepperNext>Siguiente</button>
+                  <button type="button" [disabled]="tipoDeEscenarioSeleccionado === null" (click)="CrearJuegoDeEscapeRoom()" class="btn Peticion">Crear</button>
                 </div>
             </mat-step>
            </div>

@@ -42,6 +42,7 @@ import {EquipoJuegoEvaluado} from '../../clases/EquipoJuegoEvaluado';
 import {AlumnoJuegoEvaluado} from '../../clases/AlumnoJuegoEvaluado';
 import { JuegoEscapeRoom } from 'src/app/clases/JuegoEscapeRoom';
 import { AlumnoJuegoEscapeRoom } from 'src/app/clases/AlumnoJuegoEscapeRoom';
+import { stringify } from '@angular/core/src/util';
 
 
 export interface OpcionSeleccionada {
@@ -87,6 +88,8 @@ export class JuegoComponent implements OnInit {
   juegoDeCompeticion: JuegoDeCompeticion;
   juegoDeAvatar: JuegoDeAvatar;
   juegoDeGeocaching: JuegoDeGeocaching;
+
+  varHelper: string;
 
   // Informacion para todos los juegos
   myForm: FormGroup;
@@ -288,7 +291,7 @@ export class JuegoComponent implements OnInit {
   // tslint:disable-next-line:no-inferrable-types
   opcionSeleccionada: string = 'todosLosJuegos';
 
-
+  
   // criterioComplemento1: string;
 
   //////////////////////////////////// PARÁMETROS PARA PÁGINA DE CREAR JUEGO //////////////////////////////////////
@@ -401,18 +404,77 @@ export class JuegoComponent implements OnInit {
     this.listaConceptos = [];
     this.totalPesos = 0;
 
+      console.log("variable TipoDeEscenarioSeleccionado: ", this.tipoDeEscenarioSeleccionado);
+      this.tipoDeEscenarioSeleccionado = null;
   }
 
   //// ESCAPE ROOM
 
   verEscenario(imagen){
+    console.log("THIS.TIPO??? ", this.tipoDeEscenarioSeleccionado);
     console.log("imagen: ", imagen);
+    if (imagen == "Habitación"){
+      this.varHelper = "habitacion";
+    }
+    if (imagen == "Cocina"){  
+      this.varHelper = "cocina";
+    }
+    if (imagen == "Baño"){  
+      this.varHelper = "baño";
+    } 
     Swal.fire({
       title: imagen,
-      imageUrl: 'https://unsplash.it/400/200',
+      imageUrl: '../../../assets/'+ this.varHelper + '.jpg',
       imageWidth: 400,
       imageHeight: 200,
+      showCancelButton: true,
+      confirmButtonText: 'Asignar',
+      cancelButtonText: 'Volver'
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      
+      if (result.value == true) {
+        console.log("THIS.TIPO22222222222??? ", this.tipoDeEscenarioSeleccionado);
+
+        if(this.tipoDeEscenarioSeleccionado != null)
+        {
+          
+          if(this.tipoDeEscenarioSeleccionado == imagen){
+            Swal.fire({
+              title: 'Ya tiene seleccionado este escenario',
+              confirmButtonText: 'Volver'
+              })
+          }else{
+          Swal.fire({
+            title: 'Ya hay un escenario seleccionado, ¿Desea cambiarlo?',
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'Volver'}).then((result) => {
+              if (result.value == true){
+                this.TipoDeEscenarioSeleccionado2(imagen);
+                console.log("SELECCIONADO: ", this.tipoDeEscenarioSeleccionado);
+                Swal.fire('Guardado!', '', 'success');
+              } else if (result.value == undefined) {
+                Swal.fire('No se han guardado los cambios', '', 'info')
+              }
+            })
+          }
+        }
+        else if (this.tipoDeEscenarioSeleccionado == null) {
+          this.TipoDeEscenarioSeleccionado2(imagen);
+          console.log("SELECCIONADO: ", this.tipoDeEscenarioSeleccionado);
+          Swal.fire('Guardado!', '', 'success');
+        }
+      } else if (result.value == undefined) {
+        Swal.fire('No se han guardado los cambios', '', 'info')
+      }
     });
+  }
+  TipoDeEscenarioSeleccionado2(tipo: string) {
+    this.tipoDeEscenarioSeleccionado = tipo;
+  }
+  TipoDeEscenarioSeleccionado(tipo: ChipColor) {
+    this.tipoDeEscenarioSeleccionado = tipo.nombre;
   }
   //////////////////////////////////////// FUNCIONES PARA LISTAR JUEGOS ///////////////////////////////////////////////
 
@@ -462,9 +524,6 @@ export class JuegoComponent implements OnInit {
     }
   }
 
-  TipoDeEscenarioSeleccionado(tipo: ChipColor) {
-    this.tipoDeEscenarioSeleccionado = tipo.nombre;
-  }
 
   TipoDeJuegoSeleccionado(tipo: ChipColor) {
     this.tipoDeJuegoSeleccionado = tipo.nombre;
