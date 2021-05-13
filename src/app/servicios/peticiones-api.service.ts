@@ -268,7 +268,7 @@ export class PeticionesAPIService {
   public DameAlumnosGrupo(grupoId: number): Observable<Alumno[]> {
     return this.http.get<Alumno[]>(this.APIUrlGrupos + '/' + grupoId + '/alumnos');
   }
-
+  
   public DameMatriculasGrupo(grupoId: number): Observable<Matricula[]> {
     return this.http.get<Matricula[]>(this.APIUrlMatriculas + '?filter[where][grupoId]=' + grupoId);
   }

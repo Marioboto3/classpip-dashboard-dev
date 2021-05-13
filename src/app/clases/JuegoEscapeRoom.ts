@@ -8,6 +8,7 @@ export class JuegoEscapeRoom {
     modo: string;
     juegoActivo: boolean;
     tipo: string;
+    estado: boolean;
   
   
     constructor( modo?: string, grupoId?: number, nombreJuego?: string, escenario?: Escenario, juegoActivo?: boolean, tipo?: string) {
@@ -17,5 +18,6 @@ export class JuegoEscapeRoom {
       this.modo = modo;
       this.juegoActivo=juegoActivo;
       this.tipo = tipo;
+      this.estado = false;
     }
   }

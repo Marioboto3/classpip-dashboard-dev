@@ -411,7 +411,6 @@ export class JuegoComponent implements OnInit {
   //// ESCAPE ROOM
 
   verEscenario(imagen){
-    console.log("THIS.TIPO??? ", this.tipoDeEscenarioSeleccionado);
     console.log("imagen: ", imagen);
     if (imagen == "Habitación"){
       this.varHelper = "habitacion";
@@ -434,8 +433,7 @@ export class JuegoComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       
       if (result.value == true) {
-        console.log("THIS.TIPO22222222222??? ", this.tipoDeEscenarioSeleccionado);
-
+     
         if(this.tipoDeEscenarioSeleccionado != null)
         {
           
