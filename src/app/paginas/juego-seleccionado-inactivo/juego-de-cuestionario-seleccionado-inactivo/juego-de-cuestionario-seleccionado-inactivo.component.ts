@@ -66,11 +66,11 @@ export class JuegoDeCuestionarioSeleccionadoInactivoComponent implements OnInit 
       this.listaAlumnosOrdenadaPorNota = inscripciones;
       // tslint:disable-next-line:only-arrow-functions
       this.listaAlumnosOrdenadaPorNota = this.listaAlumnosOrdenadaPorNota.sort(function(a, b) {
-        if (b.Nota !== a.Nota) {
-          return b.Nota - a.Nota;
+        if (b.nota !== a.nota) {
+          return b.nota - a.nota;
         } else {
           // en caso de empate en la nota, gana el que empleó menos tiempo
-          return a.TiempoEmpleado - b.TiempoEmpleado;
+          return a.tiempoEmpleado - b.tiempoEmpleado;
         }
       });
       this.TablaClasificacionTotal();

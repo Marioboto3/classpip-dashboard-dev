@@ -1,5 +1,5 @@
 <div class="titulo">Pantalla para asignar el Ganador</div>
-<div class="subtitulo">{{juegoSeleccionado.NombreJuego}}: {{juegoSeleccionado.Tipo}}  {{juegoSeleccionado.Modo}}</div>
+<div class="subtitulo">{{juegoSeleccionado.nombreJuego}}: {{juegoSeleccionado.tipo}}  {{juegoSeleccionado.modo}}</div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 
 <div class="contenedor">
@@ -13,8 +13,8 @@
           <select matNativeControl [(ngModel)]="jornadaId"  (change) = "SeleccionaJornada()">
             <option *ngFor="let jornada of JornadasCompeticion" [value]="jornada.id">
 
-              <p *ngIf= "!Disputada (jornada.id)">{{jornada.NumeroDeJornada}}</p>
-              <p *ngIf= "Disputada (jornada.id)">{{jornada.NumeroDeJornada}} (completada)</p>
+              <p *ngIf= "!Disputada (jornada.id)">{{jornada.numeroDeJornada}}</p>
+              <p *ngIf= "Disputada (jornada.id)">{{jornada.numeroDeJornada}} (completada)</p>
             </option>
           </select>
         </mat-form-field>
@@ -42,7 +42,7 @@
           <mat-label>Juegos</mat-label>
           <select matNativeControl [(ngModel)]="juegoDisponibleSeleccionadoID" (change) = "TraerJuegoDisponibleSeleccionado()">
             <option *ngFor="let juego of juegosDisponibles" [value]="juego.id">
-              {{juego.NombreJuego}}
+              {{juego.nombreJuego}}
             </option>
           </select>
         </mat-form-field>
@@ -74,7 +74,7 @@
 
 
     <form style="width: 100%">
-      <table  style="width: 80%" align="center" *ngIf="juegoSeleccionado.Modo === 'Individual'" mat-table [dataSource]="dataSourceTablaGanadorIndividual" class="mat-elevation-z8">
+      <table  style="width: 80%" align="center" *ngIf="juegoSeleccionado.modo === 'Individual'" mat-table [dataSource]="dataSourceTablaGanadorIndividual" class="mat-elevation-z8">
 
         <!--    La primera columna será un checkbox -->
         <ng-container matColumnDef="select1">
@@ -139,7 +139,7 @@
 
       </table>
 
-      <table style="width: 80%" align="center" *ngIf="juegoSeleccionado.Modo != 'Individual'" mat-table [dataSource]="dataSourceTablaGanadorEquipo" class="mat-elevation-z8">
+      <table style="width: 80%" align="center" *ngIf="juegoSeleccionado.modo != 'Individual'" mat-table [dataSource]="dataSourceTablaGanadorEquipo" class="mat-elevation-z8">
 
         <!--    La primera columna será un checkbox -->
         <ng-container matColumnDef="select1">

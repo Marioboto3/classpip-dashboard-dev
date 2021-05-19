@@ -169,7 +169,7 @@ export class MostrarFamiliaComponent implements OnInit {
 
     this.familiaCargada = false;
       // Traigo la imagen de la silueta
-    this.peticionesAPI.DameImagenAvatar (this.familiaElegida.Silueta)
+    this.peticionesAPI.DameImagenAvatar (this.familiaElegida.silueta)
      .subscribe(response => {
        const blob = new Blob([response.blob()], { type: 'image/jpg'});
 
@@ -200,7 +200,7 @@ export class MostrarFamiliaComponent implements OnInit {
        }
      }
      let cont1 = 0;
-     this.familiaElegida.Complemento1.forEach (imagenComplemento => {
+     this.familiaElegida.complemento1.forEach (imagenComplemento => {
        this.peticionesAPI.DameImagenAvatar (imagenComplemento)
        .subscribe(response => {
          const blob = new Blob([response.blob()], { type: 'image/jpg'});
@@ -229,7 +229,7 @@ export class MostrarFamiliaComponent implements OnInit {
      }
 
      let cont2 = 0;
-     this.familiaElegida.Complemento2.forEach (imagenComplemento => {
+     this.familiaElegida.complemento2.forEach (imagenComplemento => {
         this.peticionesAPI.DameImagenAvatar (imagenComplemento)
         .subscribe(response => {
           const blob = new Blob([response.blob()], { type: 'image/jpg'});
@@ -255,7 +255,7 @@ export class MostrarFamiliaComponent implements OnInit {
         }
       }
      let cont3 = 0;
-     this.familiaElegida.Complemento3.forEach (imagenComplemento => {
+     this.familiaElegida.complemento3.forEach (imagenComplemento => {
          this.peticionesAPI.DameImagenAvatar (imagenComplemento)
          .subscribe(response => {
            const blob = new Blob([response.blob()], { type: 'image/jpg'});
@@ -280,7 +280,7 @@ export class MostrarFamiliaComponent implements OnInit {
        }
      }
      let cont4 = 0;
-     this.familiaElegida.Complemento4.forEach (imagenComplemento => {
+     this.familiaElegida.complemento4.forEach (imagenComplemento => {
           this.peticionesAPI.DameImagenAvatar (imagenComplemento)
           .subscribe(response => {
             const blob = new Blob([response.blob()], { type: 'image/jpg'});

@@ -49,13 +49,13 @@ export class InformacionJuegoDeCompeticionFormulaUnoInactivoComponent implements
   ngOnInit() {
     console.log('Estoy en ngOnInit de información formula uno');
     this.juegoSeleccionado = this.sesion.DameJuego();
-    this.numeroTotalJornadas = this.juegoSeleccionado.NumeroTotalJornadas;
+    this.numeroTotalJornadas = this.juegoSeleccionado.numeroTotalJornadas;
     console.log('Juego seleccionado: ');
     console.log(this.juegoSeleccionado);
     console.log('Número total de jornadas: ');
     console.log(this.numeroTotalJornadas);
     const datos = this.sesion.DameDatosJornadas();
-    this.JornadasCompeticion = datos.JornadasCompeticion;
+    this.JornadasCompeticion = datos.jornadasCompeticion;
     this.listaAlumnosClasificacion = this.sesion.DameTablaAlumnoJuegoDeCompeticion();
     console.log('tabla alumnos clasificación:');
     console.log(this.listaAlumnosClasificacion);
@@ -66,13 +66,13 @@ export class InformacionJuegoDeCompeticionFormulaUnoInactivoComponent implements
 
   ObtenerEnfrentamientosDeCadaJornada(jornadaSeleccionada: TablaJornadas) {
     console.log('El id de la jornada seleccionada es: ' + jornadaSeleccionada.id);
-    if (jornadaSeleccionada.GanadoresFormulaUno === undefined) {
+    if (jornadaSeleccionada.ganadoresFormulaUno === undefined) {
       this.datosClasificacionJornada = this.calculos.ClasificacionJornada(this.juegoSeleccionado, this.listaAlumnosClasificacion,
                                                      this.listaEquiposClasificacion, undefined, undefined);
     } else {
       this.datosClasificacionJornada = this.calculos.ClasificacionJornada(this.juegoSeleccionado, this.listaAlumnosClasificacion,
-                                                     this.listaEquiposClasificacion, jornadaSeleccionada.GanadoresFormulaUno.nombre,
-                                                     jornadaSeleccionada.GanadoresFormulaUno.id);
+                                                     this.listaEquiposClasificacion, jornadaSeleccionada.ganadoresFormulaUno.nombre,
+                                                     jornadaSeleccionada.ganadoresFormulaUno.id);
     }
     // console.log(this.datosClasificaciónJornada.participante);
     // console.log(this.datosClasificaciónJornada.puntos);

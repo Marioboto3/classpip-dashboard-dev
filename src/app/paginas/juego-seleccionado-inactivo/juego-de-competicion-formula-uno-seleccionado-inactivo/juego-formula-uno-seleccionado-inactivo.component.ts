@@ -104,7 +104,7 @@ export class JuegoDeCompeticionFormulaUnoSeleccionadoInactivoComponent implement
       // ordena la lista por puntos
       // tslint:disable-next-line:only-arrow-functions
       this.listaAlumnosOrdenadaPorPuntos = this.listaAlumnosOrdenadaPorPuntos.sort(function(obj1, obj2) {
-        return obj2.PuntosTotalesAlumno - obj1.PuntosTotalesAlumno;
+        return obj2.puntosTotalesAlumno - obj1.puntosTotalesAlumno;
       });
       console.log ('ya tengo las inscripciones: ');
       this.TablaClasificacionTotal();
@@ -121,7 +121,7 @@ export class JuegoDeCompeticionFormulaUnoSeleccionadoInactivoComponent implement
       // ordenamos por puntos
       // tslint:disable-next-line:only-arrow-functions
       this.listaEquiposOrdenadaPorPuntos = this.listaEquiposOrdenadaPorPuntos.sort(function(obj1, obj2) {
-        return obj2.PuntosTotalesEquipo - obj1.PuntosTotalesEquipo;
+        return obj2.puntosTotalesEquipo - obj1.puntosTotalesEquipo;
       });
       console.log ('ya tengo las inscripciones');
       this.TablaClasificacionTotal();

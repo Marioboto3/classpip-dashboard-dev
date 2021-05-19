@@ -6,7 +6,7 @@
     <mat-label>Puntos</mat-label>
     <select matNativeControl [(ngModel)]="puntoSeleccionadoId" name="punto" (change) = "MostrarRankingSeleccionado()">
       <option *ngFor="let punto of listaSeleccionable" [value]="punto.id">
-        {{punto.Nombre}}
+        {{punto.nombre}}
       </option>
     </select>
   </mat-form-field>
@@ -18,7 +18,7 @@
           <button type="button" class="btn Eliminar" (click) = "AbrirDialogoConfirmacionEliminar()"> Eliminar<i class="material-icons">delete</i></button>
       </div>
 
-  <form style="width: 70%" *ngIf="juegoSeleccionado.Modo === 'Individual'">
+  <form style="width: 70%" *ngIf="juegoSeleccionado.modo === 'Individual'">
 
 
       <mat-form-field style=" width: 60% !important;">
@@ -129,7 +129,7 @@
                 <mat-list>
                   <mat-list-item *ngFor="let alumno of alumnosEquipo">
                     <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
-                    <p class="md-body-1" mat-line>{{alumno.Nombre}} {{alumno.PrimerApellido}} {{alumno.SegundoApellido}}</p>
+                    <p class="md-body-1" mat-line>{{alumno.nombre}} {{alumno.primerApellido}} {{alumno.segundoApellido}}</p>
                   </mat-list-item>
                 </mat-list>
               </mat-card-content>

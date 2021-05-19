@@ -23,7 +23,7 @@ export class CambiarEstacionComponent implements OnInit {
 
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = 'titulo' + this.profesor.Estacion;
+    this.varTitulo = 'titulo' + this.profesor.estacion;
     
   }
 
@@ -41,7 +41,7 @@ export class CambiarEstacionComponent implements OnInit {
       confirmButtonText: 'Si, estoy seguro'
     }).then((result) => {
       if (result.value) {
-          this.profesor.Estacion = "winter";
+          this.profesor.estacion = "winter";
           this.peticionesAPI.ModificaProfesor (this.profesor)
           .subscribe (  (res) => Swal.fire('OK', 'Datos modificados', 'success'),
                       (err) => {
@@ -62,7 +62,7 @@ export class CambiarEstacionComponent implements OnInit {
       confirmButtonText: 'Si, estoy seguro'
     }).then((result) => {
       if (result.value) {
-          this.profesor.Estacion = "spring";
+          this.profesor.estacion = "spring";
           this.peticionesAPI.ModificaProfesor (this.profesor)
           .subscribe (  (res) => Swal.fire('OK', 'Datos modificados', 'success'),
                       (err) => {
@@ -83,7 +83,7 @@ export class CambiarEstacionComponent implements OnInit {
       confirmButtonText: 'Si, estoy seguro'
     }).then((result) => {
       if (result.value) {
-          this.profesor.Estacion = "summer";
+          this.profesor.estacion = "summer";
           this.peticionesAPI.ModificaProfesor (this.profesor)
           .subscribe (  (res) => Swal.fire('OK', 'Datos modificados', 'success'),
                       (err) => {
@@ -104,7 +104,7 @@ export class CambiarEstacionComponent implements OnInit {
       confirmButtonText: 'Si, estoy seguro'
     }).then((result) => {
       if (result.value) {
-          this.profesor.Estacion = "autumn";
+          this.profesor.estacion = "autumn";
           this.peticionesAPI.ModificaProfesor (this.profesor)
           .subscribe (  (res) => Swal.fire('OK', 'Datos modificados', 'success'),
                       (err) => {

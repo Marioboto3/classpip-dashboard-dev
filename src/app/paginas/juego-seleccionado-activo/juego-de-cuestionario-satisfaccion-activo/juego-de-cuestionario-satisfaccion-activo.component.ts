@@ -62,20 +62,20 @@ export class JuegoDeCuestionarioSatisfaccionActivoComponent implements OnInit {
 
   PreparaInformacion() {
     this.numeroRespuestas = 0;
-    this.respuestasAfirmaciones = Array(this.cuestionario.Afirmaciones.length).fill (0);
-    this.respuestasPreguntasAbiertas = Array(this.cuestionario.PreguntasAbiertas.length);
+    this.respuestasAfirmaciones = Array(this.cuestionario.afirmaciones.length).fill (0);
+    this.respuestasPreguntasAbiertas = Array(this.cuestionario.preguntasAbiertas.length);
     let i: number;
     for ( i = 0; i < this.respuestasPreguntasAbiertas.length; i++) {
       this.respuestasPreguntasAbiertas[i] = [];
     }
     this.inscripciones.forEach (inscripcion => {
-      if (inscripcion.Contestado) {
+      if (inscripcion.contestado) {
         this.numeroRespuestas++;
         for ( i = 0; i < this.respuestasAfirmaciones.length; i++) {
-          this.respuestasAfirmaciones[i] =  this.respuestasAfirmaciones[i]  + inscripcion.RespuestasAfirmaciones[i];
+          this.respuestasAfirmaciones[i] =  this.respuestasAfirmaciones[i]  + inscripcion.respuestasAfirmaciones[i];
         }
         for ( i = 0; i < this.respuestasPreguntasAbiertas.length; i++) {
-          this.respuestasPreguntasAbiertas[i].push (inscripcion.RespuestasPreguntasAbiertas[i]);
+          this.respuestasPreguntasAbiertas[i].push (inscripcion.respuestasPreguntasAbiertas[i]);
         }
       }
     });
@@ -86,10 +86,10 @@ export class JuegoDeCuestionarioSatisfaccionActivoComponent implements OnInit {
     for ( i = 0; i < this.respuestasAfirmaciones.length; i++) {
       const media =  this.respuestasAfirmaciones[i] / this.numeroRespuestas;
       this.afirmaciones.push ({
-        Texto: this.cuestionario.Afirmaciones[i],
+        Texto: this.cuestionario.afirmaciones[i],
         Media: media
       });
-      this.datosGrafico.push ( [this.cuestionario.Afirmaciones[i], media]);
+      this.datosGrafico.push ( [this.cuestionario.afirmaciones[i], media]);
     }
 
 
@@ -187,7 +187,7 @@ export class JuegoDeCuestionarioSatisfaccionActivoComponent implements OnInit {
       doc.addPage('a4', 'p');
       doc.setFontSize(18);
       doc.setTextColor('blue');
-      doc.text(this.cuestionario.PreguntasAbiertas [i], margenIzquierdo,  margenSuperior);
+      doc.text(this.cuestionario.preguntasAbiertas [i], margenIzquierdo,  margenSuperior);
       doc.line(margenIzquierdo, margenSuperior + 5, margenIzquierdo + 150, margenSuperior + 5);
       let cont = interlineado * 4;
       let j;

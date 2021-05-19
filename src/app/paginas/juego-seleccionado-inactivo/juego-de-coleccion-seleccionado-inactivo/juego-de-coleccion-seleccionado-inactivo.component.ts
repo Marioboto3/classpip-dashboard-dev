@@ -65,9 +65,9 @@ export class JuegoDeColeccionSeleccionadoInactivoComponent implements OnInit {
 
     this.ColeccionDelJuego();
 
-    if (this.juegoSeleccionado.Modo === 'Individual') {
+    if (this.juegoSeleccionado.modo === 'Individual') {
       this.PrepararInformacionJuegoIndividual();
-    } else if (this.juegoSeleccionado.Asignacion === 'Individual') {
+    } else if (this.juegoSeleccionado.asignacion === 'Individual') {
       this.PrepararInformacionJuegoEquipoAsignacionIndividual();
     } else {
       this.PrepararInformacionJuegoEquipoAsignacionEquipo();
@@ -87,11 +87,11 @@ export class JuegoDeColeccionSeleccionadoInactivoComponent implements OnInit {
 
   HayQueMostrarAlumnos(): boolean {
     // tslint:disable-next-line:max-line-length
-    const res = ((this.juegoSeleccionado.Modo === 'Individual') || (this.juegoSeleccionado.Asignacion === 'Individual')) && (this.alumnosDelJuego !== undefined);
+    const res = ((this.juegoSeleccionado.modo === 'Individual') || (this.juegoSeleccionado.asignacion === 'Individual')) && (this.alumnosDelJuego !== undefined);
     return res;
   }
   HayQueMostrarEquipos(): boolean {
-    const res = (this.juegoSeleccionado.Asignacion === 'Equipo') && this.equiposDelJuego !== undefined;
+    const res = (this.juegoSeleccionado.asignacion === 'Equipo') && this.equiposDelJuego !== undefined;
     return res;
   }
 
@@ -215,7 +215,7 @@ export class JuegoDeColeccionSeleccionadoInactivoComponent implements OnInit {
   }
 
   AccederAlumno(alumno: Alumno) {
-    if ((this.juegoSeleccionado.Modo === 'Equipos') && (this.juegoSeleccionado.Asignacion === 'Individual')) {
+    if ((this.juegoSeleccionado.modo === 'Equipos') && (this.juegoSeleccionado.asignacion === 'Individual')) {
       // Hay que mostrar el album del equipo al que pertenece el alumno
       // por tanto primero busco el equipo del alumno
       this.peticionesAPI.DameEquiposDelAlumno (alumno.id)
@@ -258,10 +258,10 @@ export class JuegoDeColeccionSeleccionadoInactivoComponent implements OnInit {
   ReactivarJuego() {
     console.log ('voy a reactivar');
     console.log(this.juegoSeleccionado);
-    this.peticionesAPI.CambiaEstadoJuegoDeColeccion(new Juego (this.juegoSeleccionado.Tipo, this.juegoSeleccionado.Modo,
-      this.juegoSeleccionado.Asignacion,
-      undefined, true, this.juegoSeleccionado.NumeroTotalJornadas, this.juegoSeleccionado.TipoJuegoCompeticion,
-      this.juegoSeleccionado.NumeroParticipantesPuntuan, this.juegoSeleccionado.Puntos, this.juegoSeleccionado.NombreJuego),
+    this.peticionesAPI.CambiaEstadoJuegoDeColeccion(new Juego (this.juegoSeleccionado.tipo, this.juegoSeleccionado.modo,
+      this.juegoSeleccionado.asignacion,
+      undefined, true, this.juegoSeleccionado.numeroTotalJornadas, this.juegoSeleccionado.tipoJuegoCompeticion,
+      this.juegoSeleccionado.numeroParticipantesPuntuan, this.juegoSeleccionado.puntos, this.juegoSeleccionado.nombreJuego),
       this.juegoSeleccionado.id, this.juegoSeleccionado.grupoId).subscribe(res => {
         if (res !== undefined) {
           console.log(res);
@@ -277,14 +277,14 @@ export class JuegoDeColeccionSeleccionadoInactivoComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: this.juegoSeleccionado.Tipo,
+        nombre: this.juegoSeleccionado.tipo,
       }
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.ReactivarJuego();
-        Swal.fire('Reactivado', this.juegoSeleccionado.Tipo + ' reactivado correctamente', 'success');
+        Swal.fire('Reactivado', this.juegoSeleccionado.tipo + ' reactivado correctamente', 'success');
       }
     });
   }
@@ -303,14 +303,14 @@ export class JuegoDeColeccionSeleccionadoInactivoComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensajeBorrar,
-        nombre: this.juegoSeleccionado.Tipo,
+        nombre: this.juegoSeleccionado.tipo,
       }
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.EliminarJuego();
-        Swal.fire('Eliminado', this.juegoSeleccionado.Tipo + ' eliminado correctamente', 'success');
+        Swal.fire('Eliminado', this.juegoSeleccionado.tipo + ' eliminado correctamente', 'success');
       }
     });
   }

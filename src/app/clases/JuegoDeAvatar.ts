@@ -1,23 +1,24 @@
 export class JuegoDeAvatar {
-  NombreJuego: string;
-  Tipo: string;
-  Modo: string;
-  JuegoActivo: boolean;
-  Familias: number[];
-  CriteriosPrivilegioComplemento1: string;
-  CriteriosPrivilegioComplemento2: string;
-  CriteriosPrivilegioComplemento3: string;
-  CriteriosPrivilegioComplemento4: string;
-  CriteriosPrivilegioVoz: string;
-  CriteriosPrivilegioVerTodos: string;
+
+  nombreJuego: string;
+  tipo: string;
+  modo: string;
+  juegoActivo: boolean;
+  familias: number[];
+  criteriosPrivilegioComplemento1: string;
+  criteriosPrivilegioComplemento2: string;
+  criteriosPrivilegioComplemento3: string;
+  criteriosPrivilegioComplemento4: string;
+  criteriosPrivilegioVoz: string;
+  criteriosPrivilegioVerTodos: string;
   id: number;
   grupoId: number;
 
   constructor( NombreJuego?: string, Tipo?: string, Modo?: string, JuegoActivo?: boolean) {
 
-    this.Tipo = Tipo;
-    this.Modo = Modo;
-    this.JuegoActivo = JuegoActivo;
-    this.NombreJuego = NombreJuego;
+    this.tipo = Tipo;
+    this.modo = Modo;
+    this.juegoActivo = JuegoActivo;
+    this.nombreJuego = NombreJuego;
   }
 }

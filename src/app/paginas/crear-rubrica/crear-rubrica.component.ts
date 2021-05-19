@@ -35,7 +35,7 @@ export class CrearRubricaComponent implements OnInit {
   ngOnInit() {
     this.profesorId = this.sesion.DameProfesor().id;
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
     
     console.log(this.firstFormGroup.value);
    

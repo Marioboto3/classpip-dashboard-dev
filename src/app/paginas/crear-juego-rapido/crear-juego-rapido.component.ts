@@ -140,7 +140,7 @@ export class CrearJuegoRapidoComponent implements OnInit {
 
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = 'titulo' + this.profesor.Estacion;
+    this.varTitulo = 'titulo' + this.profesor.estacion;
     this.profesorId = this.sesion.DameProfesor().id;
     this.myForm = this._formBuilder.group({
       NombreDelJuego: ['', Validators.required],
@@ -256,7 +256,7 @@ AnadirPuntos() {
       // Buscamos los alumnos que hemos seleccionado
       if (this.selection.isSelected(this.dataSource.data[i]))  {
         this.Puntuacion[i] = this.nuevaPuntuacion;
-        this.TablaPuntuacion[i].Puntuacion = this.nuevaPuntuacion;
+        this.TablaPuntuacion[i].puntuacion = this.nuevaPuntuacion;
       }
     }
   } else {
@@ -273,7 +273,7 @@ AnadirFila() {
   i = this.Puntuacion.length;
 
   this.TablaPuntuacion[i] = new TablaPuntosFormulaUno(i + 1, 1);
-  this.Puntuacion[i] = this.TablaPuntuacion[i].Puntuacion;
+  this.Puntuacion[i] = this.TablaPuntuacion[i].puntuacion;
   this.dataSource = new MatTableDataSource (this.TablaPuntuacion);
 }
 

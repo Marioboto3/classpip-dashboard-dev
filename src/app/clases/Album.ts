@@ -1,7 +1,7 @@
 export class Album {
   alumnoJuegoDeColeccionId: number;
   cromoId: number;
-  Fecha: string;
+  fecha: string;
   id: number;
 
 
@@ -9,6 +9,6 @@ export class Album {
 
     this.alumnoJuegoDeColeccionId = alumnoJuegoDeColeccionId;
     this.cromoId = cromoId;
-    this.Fecha = Fecha;
+    this.fecha = Fecha;
   }
 }

@@ -14,12 +14,12 @@
         con la información sobre la rúbrica debe tener el formato mostrado en el siguiente ejemplo.
 
         {{'{'}}
-          "Nombre": "Presentacion oral",
-          "Descripcion": "Para evaluar presentaciones orales",
-          "Criterios": [
+          "nombre": "Presentacion oral",
+          "descripcion": "Para evaluar presentaciones orales",
+          "criterios": [
                           {{'{'}}
-                            "Nombre": "Lenguaje corporal",
-                            "Elementos": [  "Mira a toda la audiencia",
+                            "nombre": "Lenguaje corporal",
+                            "elementos": [  "Mira a toda la audiencia",
                                             "No permanece inmóvil"
                                           ]
                           {{'}'}},
@@ -48,9 +48,9 @@
           <h3>Datos de la rúbrica</h3>
           <div class = "enFila" style = "width: 90%">
             <div>
-              <p> Nombre: <strong>{{rubrica.Nombre}}</strong></p>
-              <p> Descripción: <strong>{{rubrica.Descripcion}}</strong></p>
-              <p> Número de criterios: <strong>{{rubrica.Criterios.length}}</strong></p>
+              <p> Nombre: <strong>{{rubrica.nombre}}</strong></p>
+              <p> Descripción: <strong>{{rubrica.descripcion}}</strong></p>
+              <p> Número de criterios: <strong>{{rubrica.criterios.length}}</strong></p>
               <br>
             </div>
           </div>

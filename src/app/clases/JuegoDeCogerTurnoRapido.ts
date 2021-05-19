@@ -1,22 +1,22 @@
 export class JuegoDeCogerTurnoRapido {
 
-    NombreJuego: string;
-    Tipo: string;
-    Presentacion: string;
-    Clave: string;
+    nombreJuego: string;
+    tipo: string;
+    presentacion: string;
+    clave: string;
     id: number;
     profesorId: number;
-    Turnos: any[];
+    turnos: any[];
 
 
     // tslint:disable-next-line:max-line-length
     constructor(NombreJuego?: string, Tipo?: string, Clave?: string,
                 profesorId?: number,  Presentacion?: string, Turnos?: any[]) {
-        this.NombreJuego = NombreJuego;
-        this.Tipo = Tipo;
+        this.nombreJuego = NombreJuego;
+        this.tipo = Tipo;
         this.profesorId = profesorId;
-        this.Clave = Clave;
-        this.Presentacion = Presentacion;
-        this.Turnos = Turnos;
+        this.clave = Clave;
+        this.presentacion = Presentacion;
+        this.turnos = Turnos;
     }
 }

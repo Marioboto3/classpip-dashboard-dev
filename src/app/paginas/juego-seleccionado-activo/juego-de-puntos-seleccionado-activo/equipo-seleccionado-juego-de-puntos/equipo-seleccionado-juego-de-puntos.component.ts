@@ -111,8 +111,8 @@ export class EquipoSeleccionadoJuegoDePuntosComponent implements OnInit {
   // Busca el logo que tiene el nombre del equipo.FotoEquipo y lo carga en imagenLogo
   GET_ImagenPerfil() {
 
-    if (this.equipoSeleccionado.FotoEquipo !== undefined ) {
-      this.peticionesAPI.DameLogoEquipo (this.equipoSeleccionado.FotoEquipo)
+    if (this.equipoSeleccionado.fotoEquipo !== undefined ) {
+      this.peticionesAPI.DameLogoEquipo (this.equipoSeleccionado.fotoEquipo)
       .subscribe(response => {
 
         const blob = new Blob([response.blob()], { type: 'image/jpg'});
@@ -193,7 +193,7 @@ export class EquipoSeleccionadoJuegoDePuntosComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: this.equipoSeleccionado.Nombre,
+        nombre: this.equipoSeleccionado.nombre,
       }
     });
 

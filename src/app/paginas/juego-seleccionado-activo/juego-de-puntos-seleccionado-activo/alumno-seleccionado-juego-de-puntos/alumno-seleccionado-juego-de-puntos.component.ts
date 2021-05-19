@@ -71,7 +71,7 @@ export class AlumnoSeleccionadoJuegoDePuntosComponent implements OnInit {
     this.alumnoJuegoDePuntos = datos.inscripcionAlumnoJuego;
     console.log ('Alumno ' + this.alumnoSeleccionado.id);
     console.log ('Alumno juego' + this.alumnoJuegoDePuntos.alumnoId);
-    console.log ('Puntos totales juego' + this.alumnoJuegoDePuntos.PuntosTotalesAlumno);
+    console.log ('Puntos totales juego' + this.alumnoJuegoDePuntos.puntosTotalesAlumno);
 
     this.juegoSeleccionado = this.sesion.DameJuego();
     this.listaSeleccionable[0] =  new Punto('Totales');
@@ -103,8 +103,8 @@ export class AlumnoSeleccionadoJuegoDePuntosComponent implements OnInit {
   // Busca el logo que tiene el nombre del equipo.FotoEquipo y lo carga en imagenLogo
   GET_ImagenPerfil() {
 
-    if (this.alumnoSeleccionado.ImagenPerfil !== undefined ) {
-      this.peticionesAPI.DameImagenAlumno (this.alumnoSeleccionado.ImagenPerfil)
+    if (this.alumnoSeleccionado.imagenPerfil !== undefined ) {
+      this.peticionesAPI.DameImagenAlumno (this.alumnoSeleccionado.imagenPerfil)
       .subscribe(response => {
 
         const blob = new Blob([response.blob()], { type: 'image/jpg'});
@@ -158,8 +158,8 @@ export class AlumnoSeleccionadoJuegoDePuntosComponent implements OnInit {
           let punto: Punto;
           punto = this.puntosDelJuego.filter(res => res.id === historial[i].puntoId)[0];
 
-          this.historial[i] = new TablaHistorialPuntosAlumno (punto.Nombre,
-          punto.Descripcion, historial[i].ValorPunto, historial[i].fecha,
+          this.historial[i] = new TablaHistorialPuntosAlumno (punto.nombre,
+          punto.descripcion, historial[i].valorPunto, historial[i].fecha,
           historial[i].alumnoJuegoDePuntosId, historial[i].id, historial[i].puntoId);
         }
       } else {
@@ -199,7 +199,7 @@ export class AlumnoSeleccionadoJuegoDePuntosComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: this.alumnoSeleccionado.Nombre,
+        nombre: this.alumnoSeleccionado.nombre,
       }
     });
 

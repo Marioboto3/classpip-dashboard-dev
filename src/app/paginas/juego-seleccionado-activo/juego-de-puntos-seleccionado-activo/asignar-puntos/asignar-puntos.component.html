@@ -11,7 +11,7 @@
         <mat-label>Tipo de punto</mat-label>
         <select matNativeControl [(ngModel)]="puntoSeleccionadoId" (change) = "ActualizarBoton()">
           <option *ngFor="let punto of tiposPuntosDelJuego" [value]="punto.id">
-            {{punto.Nombre}}
+            {{punto.nombre}}
           </option>
         </select>
       </mat-form-field>
@@ -213,7 +213,7 @@
             <mat-card-content>
               <mat-list>
                 <mat-list-item *ngFor="let alumno of alumnosEquipo">
-                  <p class="md-body-1" mat-line>{{alumno.Nombre}} {{alumno.PrimerApellido}} {{alumno.SegundoApellido}}</p>
+                  <p class="md-body-1" mat-line>{{alumno.nombre}} {{alumno.primerApellido}} {{alumno.segundoApellido}}</p>
                 </mat-list-item>
               </mat-list>
             </mat-card-content>

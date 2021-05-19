@@ -1,13 +1,13 @@
 export class Punto {
-  Nombre: string;
-  Descripcion: string;
+  nombre: string;
+  descripcion: string;
   id: number;
   profesorId: number;
 
   constructor(nombre?: string, descripcion?: string) {
 
-    this.Nombre = nombre;
-    this.Descripcion = descripcion;
+    this.nombre = nombre;
+    this.descripcion = descripcion;
   }
 
 }

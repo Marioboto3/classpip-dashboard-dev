@@ -1,4 +1,4 @@
-<div class="titulo">{{juegoSeleccionado.Tipo}}</div>
+<div class="titulo">{{juegoSeleccionado.tipo}}</div>
 <div class="subtitulo">Información Del Jugador</div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 
@@ -11,7 +11,7 @@
 
         <p style="font-size: 110%">
           <span style="font-weight: bold;">Cromos de: </span>
-          {{alumno.Nombre}} {{alumno.PrimerApellido}} {{alumno.SegundoApellido}}
+          {{alumno.nombre}} {{alumno.primerApellido}} {{alumno.segundoApellido}}
         </p>
         <button  type="button"  class="btn Info" routerLink = "Album">Álbum Alumno</button>
     </div>
@@ -26,17 +26,17 @@
       [rowspan]="4"
       [style.background]="white">
       <mat-card class="cromo" [ngClass]="{
-        'Diamante' : elem.cromo.Nivel === 'Diamante',
-        'Platino' : elem.cromo.Nivel === 'Platino',
-        'Oro' : elem.cromo.Nivel === 'Oro',
-        'Plata' : elem.cromo.Nivel === 'Plata',
-        'Bronce' : elem.cromo.Nivel === 'Bronce'}">
+        'Diamante' : elem.cromo.nivel === 'Diamante',
+        'Platino' : elem.cromo.nivel === 'Platino',
+        'Oro' : elem.cromo.nivel === 'Oro',
+        'Plata' : elem.cromo.nivel === 'Plata',
+        'Bronce' : elem.cromo.nivel === 'Bronce'}">
 
         <div class= "enColumna">
           <mat-card-header style = "margin-top: 20%;">
             <!-- <div style="display: flex; justify-content:space-between; width: 250px "> -->
-              <mat-card-title align = "center">{{elem.cromo.Nombre}}</mat-card-title>
-              <mat-card-subtitle align = "center">{{elem.cromo.Probabilidad}}</mat-card-subtitle>
+              <mat-card-title align = "center">{{elem.cromo.nombre}}</mat-card-title>
+              <mat-card-subtitle align = "center">{{elem.cromo.probabilidad}}</mat-card-subtitle>
 
           </mat-card-header>
           <!-- <mat-card-content style="display: flex; align-items: center;justify-content: center;"> -->
@@ -52,7 +52,7 @@
                 <img class ="imagenCromo" *ngIf="imagenCromoDelante[i]"  mat-card-image [src]="imagenCromoDelante[i]" >
               </div>
 
-              <div  *ngIf = "coleccion.DosCaras"  class="flip-box">
+              <div  *ngIf = "coleccion.dosCaras"  class="flip-box">
                   <div class="flip-box-inner">
                     <div class="flip-box-front">
                       <div class="posicionImagen" >

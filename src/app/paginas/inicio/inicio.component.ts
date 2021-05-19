@@ -56,8 +56,8 @@ export class InicioComponent implements OnInit {
 
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
     this.ObtenJuegosActivosDelProfesor();
   }
 
@@ -87,7 +87,7 @@ PreparaTabla() {
   this.juegosActivos.forEach ( juego => {
     this.tabla.push ({
                               nombre : juego.NombreJuego,
-                              grupo : this.listaGrupos.filter (g => g.id === juego.grupoId)[0].Nombre,
+                              grupo : this.listaGrupos.filter (g => g.id === juego.grupoId)[0].nombre,
                               tipo : juego.Tipo,
                               modo : juego.Modo,
                               todoElJuego: juego

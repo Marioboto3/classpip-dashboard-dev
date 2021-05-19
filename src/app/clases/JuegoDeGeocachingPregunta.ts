@@ -1,11 +1,11 @@
 export class JuegoDeGeocachingPregunta {
   id: number;
-  JuegoDeGeocachingId: number;
+  juegoDeGeocachingId: number;
   preguntaId: number;
 
   constructor(JuegoDeGeocachingId?: number, preguntaId?: number) {
 
-    this.JuegoDeGeocachingId = JuegoDeGeocachingId;
+    this.juegoDeGeocachingId = JuegoDeGeocachingId;
     this.preguntaId = preguntaId;
   }
 }

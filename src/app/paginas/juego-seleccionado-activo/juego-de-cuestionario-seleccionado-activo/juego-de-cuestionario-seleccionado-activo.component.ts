@@ -70,7 +70,7 @@ export class JuegoDeCuestionarioSeleccionadoActivoComponent implements OnInit {
       src: ['/assets/got-it-done.mp3']
     });
     this.juegoSeleccionado = this.sesion.DameJuego();
-    console.log(this.juegoSeleccionado.Modalidad);
+    console.log(this.juegoSeleccionado.modalidad);
     this.AlumnosDelJuego();
 
     //Nos suscribimos al método para que actualice el estado de la conexión al juego cuando un alumno entra
@@ -156,11 +156,11 @@ export class JuegoDeCuestionarioSeleccionadoActivoComponent implements OnInit {
       this.listaAlumnosOrdenadaPorNota = inscripciones;
       // tslint:disable-next-line:only-arrow-functions
       this.listaAlumnosOrdenadaPorNota = this.listaAlumnosOrdenadaPorNota.sort(function(a, b) {
-        if (b.Nota !== a.Nota) {
-          return b.Nota - a.Nota;
+        if (b.nota !== a.nota) {
+          return b.nota - a.nota;
         } else {
           // en caso de empate en la nota, gana el que empleó menos tiempo
-          return a.TiempoEmpleado - b.TiempoEmpleado;
+          return a.tiempoEmpleado - b.tiempoEmpleado;
         }
       });
       console.log ('inscripciones');
@@ -177,8 +177,8 @@ export class JuegoDeCuestionarioSeleccionadoActivoComponent implements OnInit {
 
   DesactivarJuego() {
     // tslint:disable-next-line:max-line-length
-    this.peticionesAPI.ModificaJuegoDeCuestionario(new JuegoDeCuestionario(this.juegoSeleccionado.NombreJuego, this.juegoSeleccionado.Tipo, this.juegoSeleccionado.Modalidad, this.juegoSeleccionado.PuntuacionCorrecta,
-      this.juegoSeleccionado.PuntuacionIncorrecta, this.juegoSeleccionado.Presentacion, false, this.juegoSeleccionado.JuegoTerminado,
+    this.peticionesAPI.ModificaJuegoDeCuestionario(new JuegoDeCuestionario(this.juegoSeleccionado.nombreJuego, this.juegoSeleccionado.tipo, this.juegoSeleccionado.modalidad, this.juegoSeleccionado.puntuacionCorrecta,
+      this.juegoSeleccionado.puntuacionIncorrecta, this.juegoSeleccionado.presentacion, false, this.juegoSeleccionado.juegoTerminado,
       // tslint:disable-next-line:max-line-length
       this.juegoSeleccionado.profesorId, this.juegoSeleccionado.grupoId, this.juegoSeleccionado.cuestionarioId), this.juegoSeleccionado.id, this.juegoSeleccionado.grupoId)
       .subscribe(res => {
@@ -192,22 +192,22 @@ export class JuegoDeCuestionarioSeleccionadoActivoComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: this.juegoSeleccionado.Tipo,
+        nombre: this.juegoSeleccionado.tipo,
       }
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.DesactivarJuego();
-        Swal.fire('Desactivado', this.juegoSeleccionado.Tipo + ' Desactivado correctamente', 'success');
+        Swal.fire('Desactivado', this.juegoSeleccionado.tipo + ' Desactivado correctamente', 'success');
       }
     });
   }
 
   FinalizarJuego() {
     // tslint:disable-next-line:max-line-length
-    this.peticionesAPI.ModificaJuegoDeCuestionario(new JuegoDeCuestionario(this.juegoSeleccionado.NombreJuego, this.juegoSeleccionado.Tipo, this.juegoSeleccionado.Modalidad, this.juegoSeleccionado.PuntuacionCorrecta,
-      this.juegoSeleccionado.PuntuacionIncorrecta, this.juegoSeleccionado.Presentacion, false, true,
+    this.peticionesAPI.ModificaJuegoDeCuestionario(new JuegoDeCuestionario(this.juegoSeleccionado.nombreJuego, this.juegoSeleccionado.tipo, this.juegoSeleccionado.modalidad, this.juegoSeleccionado.puntuacionCorrecta,
+      this.juegoSeleccionado.puntuacionIncorrecta, this.juegoSeleccionado.presentacion, false, true,
       // tslint:disable-next-line:max-line-length
       this.juegoSeleccionado.profesorId, this.juegoSeleccionado.grupoId, this.juegoSeleccionado.cuestionarioId), this.juegoSeleccionado.id, this.juegoSeleccionado.grupoId)
       .subscribe(res => {
@@ -228,7 +228,7 @@ export class JuegoDeCuestionarioSeleccionadoActivoComponent implements OnInit {
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.FinalizarJuego();
-        Swal.fire('Finalizado', this.juegoSeleccionado.Tipo + ' Finalizado correctamente', 'success');
+        Swal.fire('Finalizado', this.juegoSeleccionado.tipo + ' Finalizado correctamente', 'success');
       }
     });
   }

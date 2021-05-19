@@ -150,7 +150,7 @@ export class EditarJornadasJuegoDeCompeticionComponent implements OnInit {
         console.log(this.jornadas[i]);
         console.log(this.NuevaFecha, NuevoCriterio, this.jornadas[i].id);
         this.IDJornada = this.jornadas[i].id;
-        this.jornadas[i] = new Jornada (this.NuevaFecha, NuevoCriterio, this.jornadas[i].JuegoDeCompeticionLigaId);
+        this.jornadas[i] = new Jornada (this.NuevaFecha, NuevoCriterio, this.jornadas[i].juegoDeCompeticionLigaId);
         console.log('Nueva Jornada ' + this.IDJornada);
         console.log(this.jornadas[i]);
         this.peticionesAPI.ModificarJornada (this.jornadas[i], this.IDJornada)
@@ -158,9 +158,9 @@ export class EditarJornadasJuegoDeCompeticionComponent implements OnInit {
           this.jornadas[i] = JornadaCreada;
         });
         console.log('Jornada Modificada');
-        this.JornadasCompeticion[i].CriterioGanador = this.jornadas[i].CriterioGanador;
-        this.JornadasCompeticion[i].Fecha = this.jornadas[i].Fecha;
-        this.JornadasCompeticion[i].NumeroDeJornada = i + 1;
+        this.JornadasCompeticion[i].criterioGanador = this.jornadas[i].criterioGanador;
+        this.JornadasCompeticion[i].fecha = this.jornadas[i].fecha;
+        this.JornadasCompeticion[i].numeroDeJornada = i + 1;
         console.log(this.JornadasCompeticion[i]);
 
 

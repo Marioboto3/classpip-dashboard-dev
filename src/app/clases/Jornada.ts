@@ -1,15 +1,16 @@
 export class Jornada {
-  Fecha: Date;
-  CriterioGanador: string;
-  JuegoDeCompeticionLigaId: number;
-  GanadoresFormulaUno: number[];
+
+  fecha: Date;
+  criterioGanador: string;
+  juegoDeCompeticionLigaId: number;
+  ganadoresFormulaUno: number[];
   id: number;
 
   constructor(Fecha?: Date, CriterioGanador?: string, JuegoDeCompeticionId?: number, GanadoresFormulaUno?: number[]) {
 
-    this.Fecha = Fecha;
-    this.CriterioGanador = CriterioGanador;
-    this.JuegoDeCompeticionLigaId = JuegoDeCompeticionId;
-    this.GanadoresFormulaUno = GanadoresFormulaUno;
+    this.fecha = Fecha;
+    this.criterioGanador = CriterioGanador;
+    this.juegoDeCompeticionLigaId = JuegoDeCompeticionId;
+    this.ganadoresFormulaUno = GanadoresFormulaUno;
   }
 }

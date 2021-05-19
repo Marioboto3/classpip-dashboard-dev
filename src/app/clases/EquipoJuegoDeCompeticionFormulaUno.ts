@@ -1,15 +1,15 @@
 export class EquipoJuegoDeCompeticionFormulaUno {
 
-  PuntosTotalesEquipo: number;
-  EquipoId: number;
-  JuegoDeCompeticionFormulaUnoId: number;
+  puntosTotalesEquipo: number;
+  equipoId: number;
+  juegoDeCompeticionFormulaUnoId: number;
   id: number;
 
   constructor(EquipoId?: number, JuegoDeCompeticionFormulaUnoId?: number, PuntosTotalesEquipo?: number, id?: number) {
 
-    this.EquipoId = EquipoId;
-    this.JuegoDeCompeticionFormulaUnoId = JuegoDeCompeticionFormulaUnoId;
-    this.PuntosTotalesEquipo = PuntosTotalesEquipo;
+    this.equipoId = EquipoId;
+    this.juegoDeCompeticionFormulaUnoId = JuegoDeCompeticionFormulaUnoId;
+    this.puntosTotalesEquipo = PuntosTotalesEquipo;
     this.id = id;
   }
 }

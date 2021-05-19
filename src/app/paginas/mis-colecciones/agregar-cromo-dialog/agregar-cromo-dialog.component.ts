@@ -99,7 +99,7 @@ export class AgregarCromoDialogComponent implements OnInit {
     .subscribe((res) => {
       if (res != null) {
         this.cromosAgregados.push(res);
-        this.cromosAgregados = this.cromosAgregados.filter(cromo => cromo.Nombre !== '');
+        this.cromosAgregados = this.cromosAgregados.filter(cromo => cromo.nombre !== '');
          // Hago el POST de la imagen SOLO si hay algo cargado. Ese boolean se cambiará en la función ExaminarImagenCromo
         if (this.imagenDelanteCargada === true) {
 

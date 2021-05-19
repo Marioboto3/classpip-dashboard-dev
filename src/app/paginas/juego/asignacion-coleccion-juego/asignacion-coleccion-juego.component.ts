@@ -108,7 +108,7 @@ export class AsignacionColeccionJuegoComponent implements OnInit {
       .subscribe (profesores => {
         publicasDeOtros.forEach (coleccion => {
           const propietario = profesores.filter (profesor => profesor.id === coleccion.profesorId)[0];
-          coleccion.Nombre = coleccion.Nombre + '(' + propietario.Nombre + ' ' + propietario.PrimerApellido + ')';
+          coleccion.nombre = coleccion.nombre + '(' + propietario.nombre + ' ' + propietario.primerApellido + ')';
         });
         this.coleccionesPublicas = publicasDeOtros;
 

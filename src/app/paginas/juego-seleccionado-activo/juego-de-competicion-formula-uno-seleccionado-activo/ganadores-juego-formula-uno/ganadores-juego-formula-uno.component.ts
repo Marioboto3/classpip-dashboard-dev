@@ -119,7 +119,7 @@ export class GanadoresJuegoDeCompeticionFormulaUnoComponent implements OnInit {
       // ordena la lista por puntos
       // tslint:disable-next-line:only-arrow-functions
       this.listaAlumnosOrdenadaPorPuntosJuegoDePuntos = this.listaAlumnosOrdenadaPorPuntosJuegoDePuntos.sort(function(obj1, obj2) {
-        return obj2.PuntosTotalesAlumno - obj1.PuntosTotalesAlumno;
+        return obj2.puntosTotalesAlumno - obj1.puntosTotalesAlumno;
       });
     });
   }
@@ -131,7 +131,7 @@ export class GanadoresJuegoDeCompeticionFormulaUnoComponent implements OnInit {
       console.log(this.listaEquiposOrdenadaPorPuntosJuegoDePuntos);
       // tslint:disable-next-line:only-arrow-functions
       this.listaEquiposOrdenadaPorPuntosJuegoDePuntos = this.listaEquiposOrdenadaPorPuntosJuegoDePuntos.sort(function(obj1, obj2) {
-        return obj2.PuntosTotalesEquipo - obj1.PuntosTotalesEquipo;
+        return obj2.puntosTotalesEquipo - obj1.puntosTotalesEquipo;
       });
     });
 
@@ -149,7 +149,7 @@ export class GanadoresJuegoDeCompeticionFormulaUnoComponent implements OnInit {
       // tslint:disable-next-line:only-arrow-functions
       // tslint:disable-next-line:max-line-length
       this.listaAlumnosOrdenadaPorPuntosJuegoDeCuestionario = this.listaAlumnosOrdenadaPorPuntosJuegoDeCuestionario.sort(function(obj1, obj2) {
-        return obj2.Nota - obj1.Nota;
+        return obj2.nota - obj1.nota;
       });
     });
   }
@@ -221,7 +221,7 @@ export class GanadoresJuegoDeCompeticionFormulaUnoComponent implements OnInit {
     this.ConstruirTabla();
     if (this.Disputada(this.jornadaId)) {
       // Si ya se ha disputado, los ganadores están en la información de la jornada
-      const ganadores = this.jornadasDelJuego.filter (jornada => jornada.id === Number (this.jornadaId))[0].GanadoresFormulaUno;
+      const ganadores = this.jornadasDelJuego.filter (jornada => jornada.id === Number (this.jornadaId))[0].ganadoresFormulaUno;
       // Añadimos los ganadores a la tabla
       this.AñadirResultados ( ganadores);
     }

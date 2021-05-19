@@ -71,7 +71,7 @@ export class JuegoDeGeocachingSeleccionadoPreparadoComponent implements OnInit {
       this.listaAlumnosOrdenadaPorPuntuacion = inscripciones;
       // tslint:disable-next-line:only-arrow-functions
       this.listaAlumnosOrdenadaPorPuntuacion = this.listaAlumnosOrdenadaPorPuntuacion.sort(function(a, b) {
-        return b.Puntuacion - a.Puntuacion;
+        return b.puntuacion - a.puntuacion;
       });
       this.TablaClasificacionTotal();
     });
@@ -87,9 +87,9 @@ export class JuegoDeGeocachingSeleccionadoPreparadoComponent implements OnInit {
 
   ActivarJuego() {
     // tslint:disable-next-line:max-line-length
-    this.peticionesAPI.ModificaJuegoDeGeocaching(new JuegoDeGeocaching(this.juegoSeleccionado.NombreJuego, this.juegoSeleccionado.Tipo, this.juegoSeleccionado.PuntuacionCorrecta,
+    this.peticionesAPI.ModificaJuegoDeGeocaching(new JuegoDeGeocaching(this.juegoSeleccionado.nombreJuego, this.juegoSeleccionado.tipo, this.juegoSeleccionado.puntuacionCorrecta,
       // tslint:disable-next-line:max-line-length
-      this.juegoSeleccionado.PuntuacionIncorrecta, this.juegoSeleccionado.PuntuacionCorrectaBonus, this.juegoSeleccionado.PuntuacionIncorrectaBonus, this.juegoSeleccionado.PreguntasBasicas, this.juegoSeleccionado.PreguntasBonus, true, this.juegoSeleccionado.JuegoTerminado,
+      this.juegoSeleccionado.puntuacionIncorrecta, this.juegoSeleccionado.puntuacionCorrectaBonus, this.juegoSeleccionado.puntuacionIncorrectaBonus, this.juegoSeleccionado.preguntasBasicas, this.juegoSeleccionado.preguntasBonus, true, this.juegoSeleccionado.juegoTerminado,
       // tslint:disable-next-line:max-line-length
       this.juegoSeleccionado.profesorId, this.juegoSeleccionado.grupoId, this.juegoSeleccionado.idescenario), this.juegoSeleccionado.id, this.juegoSeleccionado.grupoId)
       .subscribe(res => {
@@ -103,14 +103,14 @@ export class JuegoDeGeocachingSeleccionadoPreparadoComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: this.juegoSeleccionado.Tipo,
+        nombre: this.juegoSeleccionado.tipo,
       }
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.ActivarJuego();
-        Swal.fire('Activado', this.juegoSeleccionado.Tipo + ' activado correctamente', 'success');
+        Swal.fire('Activado', this.juegoSeleccionado.tipo + ' activado correctamente', 'success');
       }
     });
   }
@@ -128,14 +128,14 @@ export class JuegoDeGeocachingSeleccionadoPreparadoComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensajeEliminar,
-        nombre: this.juegoSeleccionado.Tipo,
+        nombre: this.juegoSeleccionado.tipo,
       }
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.EliminarJuego();
-        Swal.fire('Eliminado', this.juegoSeleccionado.Tipo + ' eliminado correctamente', 'success');
+        Swal.fire('Eliminado', this.juegoSeleccionado.tipo + ' eliminado correctamente', 'success');
       }
     });
   }

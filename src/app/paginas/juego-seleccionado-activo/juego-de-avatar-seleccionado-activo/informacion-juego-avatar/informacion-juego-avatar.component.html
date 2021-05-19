@@ -1,6 +1,6 @@
 
 <div class="titulo">Información Juego De Avatar </div>
-<div class="subtitulo">{{juegoAvatar.NombreJuego}} </div>
+<div class="subtitulo">{{juegoAvatar.nombreJuego}} </div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 
 
@@ -16,7 +16,7 @@
             <mat-expansion-panel *ngFor="let familia of familiasDelJuego" (opened) = "TraeImagenesFamilia(familia)">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  {{familia.NombreFamilia}}
+                  {{familia.nombreFamilia}}
                 </mat-panel-title>
               </mat-expansion-panel-header>
                 <div *ngIf = "familiaCargada" class = "enColumna">

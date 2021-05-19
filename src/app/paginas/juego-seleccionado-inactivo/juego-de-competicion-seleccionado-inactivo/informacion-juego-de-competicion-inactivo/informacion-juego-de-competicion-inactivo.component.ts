@@ -43,13 +43,13 @@ export class InformacionJuegoDeCompeticionInactivoComponent implements OnInit {
 
   ngOnInit() {
     this.juegoSeleccionado = this.sesion.DameJuego();
-    this.numeroTotalJornadas = this.juegoSeleccionado.NumeroTotalJornadas;
+    this.numeroTotalJornadas = this.juegoSeleccionado.numeroTotalJornadas;
     console.log('Juego seleccionado: ');
     console.log(this.juegoSeleccionado);
     console.log('Número total de jornadas: ');
     console.log(this.numeroTotalJornadas);
     const datos = this.sesion.DameDatosJornadas();
-    this.JornadasCompeticion = datos.JornadasCompeticion;
+    this.JornadasCompeticion = datos.jornadasCompeticion;
     this.jornadas = datos.Jornadas;
     console.log('Jornadas Competicion: ');
     // Teniendo la tabla de Jornadas puedo sacar los enfrentamientos de cada jornada accediendo a la api
@@ -97,12 +97,12 @@ export class InformacionJuegoDeCompeticionInactivoComponent implements OnInit {
 
   ParticipanteDescansa(jornadaSeleccionada: TablaJornadas) {
     this.participanteDescansa = null;
-    if (this.juegoSeleccionado.Modo === 'Individual' && this.listaAlumnosClasificacion.length % 2 !== 0) {
+    if (this.juegoSeleccionado.modo === 'Individual' && this.listaAlumnosClasificacion.length % 2 !== 0) {
       // Comparar lista alumnos del juego con los alumnos de los enfrentamientos, si alguno de los alumnos
       // no está en ningún enfrentamiento es por que este descansa
       this.ComprobarQuienDescansa(this.listaAlumnosClasificacion, this.EnfrentamientosJornadaSeleccionada);
       return true;
-    } else if (this.juegoSeleccionado.Modo === 'Equipos' && this.listaEquiposClasificacion.length % 2 !== 0) {
+    } else if (this.juegoSeleccionado.modo === 'Equipos' && this.listaEquiposClasificacion.length % 2 !== 0) {
       this.ComprobarQuienDescansa(this.listaEquiposClasificacion, this.EnfrentamientosJornadaSeleccionada);
       return true;
     } else {
@@ -116,8 +116,8 @@ export class InformacionJuegoDeCompeticionInactivoComponent implements OnInit {
       let encontrado = false;
       // tslint:disable-next-line:prefer-for-of
       for (let k = 0; k < enfrentamientosJornadaSeleccionada.length; k++) {
-        if (enfrentamientosJornadaSeleccionada[k].JugadorUno === participantes[i].id ||
-            enfrentamientosJornadaSeleccionada[k].JugadorDos === participantes[i].id) {
+        if (enfrentamientosJornadaSeleccionada[k].jugadorUno === participantes[i].id ||
+            enfrentamientosJornadaSeleccionada[k].jugadorDos === participantes[i].id) {
               encontrado = true;
         }
       }

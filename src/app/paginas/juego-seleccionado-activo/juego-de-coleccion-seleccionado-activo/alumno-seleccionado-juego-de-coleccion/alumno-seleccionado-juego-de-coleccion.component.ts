@@ -66,8 +66,8 @@ export class AlumnoSeleccionadoJuegoDeColeccionComponent implements OnInit {
   // Busca el logo que tiene el nombre del alumno.ImagenPerfil y lo carga en imagenPerfil
   DameImagenPerfil() {
 
-    if (this.alumno.ImagenPerfil !== undefined ) {
-      this.imagenPerfil = URL.ImagenesAlumno + this.alumno.ImagenPerfil;
+    if (this.alumno.imagenPerfil !== undefined ) {
+      this.imagenPerfil = URL.ImagenesAlumno + this.alumno.imagenPerfil;
     }
     //   this.http.get('http://localhost:3000/api/imagenes/imagenAlumno/download/' + this.alumno.ImagenPerfil,
     //   { responseType: ResponseContentType.Blob })
@@ -108,7 +108,7 @@ export class AlumnoSeleccionadoJuegoDeColeccionComponent implements OnInit {
       console.log ('temgo los cromos sin repeticiones');
       console.log (this.listaCromosSinRepetidos);
       this.sesion.TomaCromos(this.listaCromos);
-      this.listaCromos.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
+      this.listaCromos.sort((a, b) => a.nombre.localeCompare(b.nombre));
       this.DameImagenesCromos();
 
     });
@@ -200,7 +200,7 @@ export class AlumnoSeleccionadoJuegoDeColeccionComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: cromo.Nombre,
+        nombre: cromo.nombre,
       }
     });
 
@@ -209,7 +209,7 @@ export class AlumnoSeleccionadoJuegoDeColeccionComponent implements OnInit {
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.BorrarCromo(cromo);
-        Swal.fire('Eliminado', cromo.Nombre + ' eliminado correctamente', 'success');
+        Swal.fire('Eliminado', cromo.nombre + ' eliminado correctamente', 'success');
       }
     });
   }

@@ -1,4 +1,4 @@
-<div class="titulo"><h2>Álbum Del Alumno   {{alumno.Nombre}} {{alumno.PrimerApellido}} {{alumno.SegundoApellido}} </h2></div>
+<div class="titulo"><h2>Álbum Del Alumno   {{alumno.nombre}} {{alumno.primerApellido}} {{alumno.segundoApellido}} </h2></div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 <br>
 <br>
@@ -24,10 +24,10 @@ Columnas
 <span  *ngFor="let cromo of AlbumDelAlumno; let i = index">
   <span class="album3col">
     <div  *ngIf = "!coleccion.DosCaras">
-      <img class ="imagenCromo" *ngIf="cromo.Tengi" mat-card-image [src]="imagenCromoDelante[i]" >
-      <img class ="imagenCromo" *ngIf="!cromo.Tengi" style = "opacity: 0.5 !important;" mat-card-image [src]="imagenCromoDelante[i]" >
+      <img class ="imagenCromo" *ngIf="cromo.tengi" mat-card-image [src]="imagenCromoDelante[i]" >
+      <img class ="imagenCromo" *ngIf="!cromo.tengi" style = "opacity: 0.5 !important;" mat-card-image [src]="imagenCromoDelante[i]" >
     </div>
-    <div  *ngIf = "coleccion.DosCaras && !voltear"  >
+    <div  *ngIf = "coleccion.dosCaras && !voltear"  >
       <div class="flip-box">
       <div class="flip-box-inner">
         <div class="flip-box-front">
@@ -36,12 +36,12 @@ Columnas
         </div>
         <!-- mat-card-image -->
         <div class="flip-box-back">
-            <img class ="imagenCromo"   *ngIf="cromo.Tengi"  mat-card-image [src]="imagenCromoDetras[i]" >
+            <img class ="imagenCromo"   *ngIf="cromo.tengi"  mat-card-image [src]="imagenCromoDetras[i]" >
         </div>
       </div>
       </div>
     </div>
-    <div *ngIf = "coleccion.DosCaras && voltear" style = "margin-top:-17px;" >
+    <div *ngIf = "coleccion.dosCaras && voltear" style = "margin-top:-17px;" >
           <img class ="imagenCromo"  mat-card-image [src]="imagenCromoDetras[i]" >
     </div>
   </span>
@@ -51,25 +51,25 @@ Columnas
 <div *ngIf = "ncol===4" style = "width: 624px" >
   <span  *ngFor="let cromo of AlbumDelAlumno; let i = index">
     <span class="album4col">
-      <div  *ngIf = "!coleccion.DosCaras">
-        <img class ="imagenCromo" *ngIf="cromo.Tengi" mat-card-image [src]="imagenCromoDelante[i]" >
-        <img class ="imagenCromo" *ngIf="!cromo.Tengi" style = "opacity: 0.5 !important;" mat-card-image [src]="imagenCromoDelante[i]" >
+      <div  *ngIf = "!coleccion.dosCaras">
+        <img class ="imagenCromo" *ngIf="cromo.tengi" mat-card-image [src]="imagenCromoDelante[i]" >
+        <img class ="imagenCromo" *ngIf="!cromo.tengi" style = "opacity: 0.5 !important;" mat-card-image [src]="imagenCromoDelante[i]" >
       </div>
-      <div  *ngIf = "coleccion.DosCaras && !voltear"  >
+      <div  *ngIf = "coleccion.dosCaras && !voltear"  >
         <div class="flip-box">
         <div class="flip-box-inner">
           <div class="flip-box-front">
-              <img class ="imagenCromo"  *ngIf="cromo.Tengi" mat-card-image  [src]="imagenCromoDelante[i]" >
-              <img class ="imagenCromo"  *ngIf="!cromo.Tengi" mat-card-image style = "opacity: 0.5 !important;"  [src]="imagenCromoDelante[i]" >
+              <img class ="imagenCromo"  *ngIf="cromo.tengi" mat-card-image  [src]="imagenCromoDelante[i]" >
+              <img class ="imagenCromo"  *ngIf="!cromo.tengi" mat-card-image style = "opacity: 0.5 !important;"  [src]="imagenCromoDelante[i]" >
           </div>
           <!-- mat-card-image -->
           <div class="flip-box-back">
-              <img class ="imagenCromo"   *ngIf="cromo.Tengi"  mat-card-image [src]="imagenCromoDetras[i]" >
+              <img class ="imagenCromo"   *ngIf="cromo.tengi"  mat-card-image [src]="imagenCromoDetras[i]" >
           </div>
         </div>
         </div>
       </div>
-      <div *ngIf = "coleccion.DosCaras && voltear" style = "margin-top:-17px;" >
+      <div *ngIf = "coleccion.dosCaras && voltear" style = "margin-top:-17px;" >
             <img class ="imagenCromo"  mat-card-image [src]="imagenCromoDetras[i]" >
       </div>
     </span>
@@ -79,25 +79,25 @@ Columnas
   <div *ngIf = "ncol===5" style = "width: 780px" >
     <span  *ngFor="let cromo of AlbumDelAlumno; let i = index">
       <span class="album5col">
-        <div  *ngIf = "!coleccion.DosCaras">
-          <img class ="imagenCromo" *ngIf="cromo.Tengi" mat-card-image [src]="imagenCromoDelante[i]" >
-          <img class ="imagenCromo" *ngIf="!cromo.Tengi" style = "opacity: 0.5 !important;" mat-card-image [src]="imagenCromoDelante[i]" >
+        <div  *ngIf = "!coleccion.dosCaras">
+          <img class ="imagenCromo" *ngIf="cromo.tengi" mat-card-image [src]="imagenCromoDelante[i]" >
+          <img class ="imagenCromo" *ngIf="!cromo.tengi" style = "opacity: 0.5 !important;" mat-card-image [src]="imagenCromoDelante[i]" >
         </div>
-        <div  *ngIf = "coleccion.DosCaras && !voltear"  >
+        <div  *ngIf = "coleccion.dosCaras && !voltear"  >
           <div class="flip-box">
           <div class="flip-box-inner">
             <div class="flip-box-front">
-                <img class ="imagenCromo"  *ngIf="cromo.Tengi" mat-card-image  [src]="imagenCromoDelante[i]" >
-                <img class ="imagenCromo"  *ngIf="!cromo.Tengi" mat-card-image style = "opacity: 0.5 !important;"  [src]="imagenCromoDelante[i]" >
+                <img class ="imagenCromo"  *ngIf="cromo.tengi" mat-card-image  [src]="imagenCromoDelante[i]" >
+                <img class ="imagenCromo"  *ngIf="!cromo.tengi" mat-card-image style = "opacity: 0.5 !important;"  [src]="imagenCromoDelante[i]" >
             </div>
             <!-- mat-card-image -->
             <div class="flip-box-back">
-                <img class ="imagenCromo"   *ngIf="cromo.Tengi"  mat-card-image [src]="imagenCromoDetras[i]" >
+                <img class ="imagenCromo"   *ngIf="cromo.tengi"  mat-card-image [src]="imagenCromoDetras[i]" >
             </div>
           </div>
           </div>
         </div>
-        <div *ngIf = "coleccion.DosCaras && voltear" style = "margin-top:-17px;" >
+        <div *ngIf = "coleccion.dosCaras && voltear" style = "margin-top:-17px;" >
               <img class ="imagenCromo"  mat-card-image [src]="imagenCromoDetras[i]" >
         </div>
       </span>

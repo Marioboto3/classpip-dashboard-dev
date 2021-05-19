@@ -58,8 +58,8 @@ export class EditarEquipoComponent implements OnInit {
 
   ngOnInit() {
     this.equipo = this.sesion.DameEquipo();
-    this.imagenLogo = this.equipo.FotoEquipo;
-    this.nombreEquipo = this.equipo.Nombre;
+    this.imagenLogo = this.equipo.fotoEquipo;
+    this.nombreEquipo = this.equipo.nombre;
     this.alumnosEquipo = this.sesion.DameAlumnosEquipo();
     this.alumnosGrupo = this.sesion.DameAlumnosGrupo();
     console.log ('ya tengo equipo');
@@ -188,21 +188,21 @@ export class EditarEquipoComponent implements OnInit {
   // NOS PERMITE MODIFICAR EL NOMBRE Y EL LOGO DEL EQUIPO
   EditarEquipo() {
     if (this.logoCambiado) {
-      if (this.equipo.FotoEquipo !== undefined) {
+      if (this.equipo.fotoEquipo !== undefined) {
         // hay que eliminar el fichero con el logo actual
-        const url = this.equipo.FotoEquipo.split ('/');
+        const url = this.equipo.fotoEquipo.split ('/');
         const imagen = url[url.length - 1];
         this.peticionesAPI.BorraLogoEquipo (imagen).subscribe ();
       }
       if (this.imagenLogo !== undefined) {
-        this.equipo.FotoEquipo = URL.LogosEquipos + this.nombreLogo;
+        this.equipo.fotoEquipo = URL.LogosEquipos + this.nombreLogo;
       } else {
-        this.equipo.FotoEquipo = undefined;
+        this.equipo.fotoEquipo = undefined;
       }
     } else {
-      this.nombreLogo = this.equipo.FotoEquipo;
+      this.nombreLogo = this.equipo.fotoEquipo;
     }
-    this.equipo.Nombre = this.nombreEquipo;
+    this.equipo.nombre = this.nombreEquipo;
     this.peticionesAPI.ModificaEquipo(this.equipo)
     .subscribe((res) => {
       if (res != null) {
@@ -292,7 +292,7 @@ export class EditarEquipoComponent implements OnInit {
     if (!this.logoCambiado) {
       console.log ('vamos a quitar el logo');
       console.log (this.equipo);
-      const url = this.equipo.FotoEquipo.split ('/');
+      const url = this.equipo.fotoEquipo.split ('/');
       const imagen = url[url.length - 1];
 
       this.peticionesAPI.BorraLogoEquipo (imagen).subscribe ();
@@ -311,7 +311,7 @@ export class EditarEquipoComponent implements OnInit {
 
   // NOS DEVOLVERÁ A LA DE LA QUE VENIMOS
   goBack() {
-    if (this.logoCambiado || this.nombreEquipo !== this.equipo.Nombre) {
+    if (this.logoCambiado || this.nombreEquipo !== this.equipo.nombre) {
 
       Swal.fire({
         title: '¿Seguro que quieres salir?',

@@ -59,7 +59,7 @@ export class AsignaPreguntasComponent implements OnInit {
     .subscribe (res => {
       console.log(res);
       this.misPreguntas = res;
-      this.misPreguntas.sort((a, b) => a.Tematica.localeCompare(b.Tematica));
+      this.misPreguntas.sort((a, b) => a.tematica.localeCompare(b.tematica));
       this.dataSourceMisPreguntas = new MatTableDataSource (this.misPreguntas);
     })
   }
@@ -73,7 +73,7 @@ export class AsignaPreguntasComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje1,
-        nombre: pregunta.Titulo
+        nombre: pregunta.titulo
       }
     });
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
@@ -89,7 +89,7 @@ export class AsignaPreguntasComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje2,
-        nombre: pregunta.Titulo
+        nombre: pregunta.titulo
       }
     });
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
@@ -101,15 +101,15 @@ export class AsignaPreguntasComponent implements OnInit {
   }
 
   AsignarPreguntaBasica(pregunta: Pregunta) {
-    const found = this.misPreguntasBasicas.find (a => a.Titulo === pregunta.Titulo && a.Pregunta === pregunta.Pregunta);
+    const found = this.misPreguntasBasicas.find (a => a.titulo === pregunta.titulo && a.pregunta === pregunta.pregunta);
     if (found === undefined) {
       // Añadimos las preguntas a la lista
       this.misPreguntasBasicas.push (pregunta);
       this.IDmisPreguntasBasicas.push (pregunta.id);
       console.log(this.IDmisPreguntasBasicas);
-      this.misPreguntasBasicas.sort((a, b) => a.Tematica.localeCompare(b.Tematica));
+      this.misPreguntasBasicas.sort((a, b) => a.tematica.localeCompare(b.tematica));
       this.dataSourceMisPreguntasBasicas = new MatTableDataSource (this.misPreguntasBasicas);
-      this.misPreguntas = this.misPreguntas.filter (a => a.Titulo !== pregunta.Titulo && a.Pregunta !== pregunta.Pregunta);
+      this.misPreguntas = this.misPreguntas.filter (a => a.titulo !== pregunta.titulo && a.pregunta !== pregunta.pregunta);
       this.dataSourceMisPreguntas = new MatTableDataSource (this.misPreguntas);
     } else {
       Swal.fire('Cuidado', 'Esta pregunta ya esta en el juego', 'error');
@@ -117,15 +117,15 @@ export class AsignaPreguntasComponent implements OnInit {
   }
 
   AsignarPreguntaBonus(pregunta: Pregunta) {
-    const found = this.misPreguntasBonus.find (a => a.Titulo === pregunta.Titulo && a.Pregunta === pregunta.Pregunta);
+    const found = this.misPreguntasBonus.find (a => a.titulo === pregunta.titulo && a.pregunta === pregunta.pregunta);
     if (found === undefined) {
       // Añadimos las preguntas a la lista
       this.misPreguntasBonus.push (pregunta);
       this.IDmisPreguntasBonus.push (pregunta.id);
       console.log(this.IDmisPreguntasBonus);
-      this.misPreguntasBonus.sort((a, b) => a.Tematica.localeCompare(b.Tematica));
+      this.misPreguntasBonus.sort((a, b) => a.tematica.localeCompare(b.tematica));
       this.dataSourceMisPreguntasBonus = new MatTableDataSource (this.misPreguntasBonus);
-      this.misPreguntas = this.misPreguntas.filter (a => a.Titulo !== pregunta.Titulo && a.Pregunta !== pregunta.Pregunta);
+      this.misPreguntas = this.misPreguntas.filter (a => a.titulo !== pregunta.titulo && a.pregunta !== pregunta.pregunta);
       this.dataSourceMisPreguntas = new MatTableDataSource (this.misPreguntas);
     } else {
       Swal.fire('Cuidado', 'Esta pregunta ya esta en el juego', 'error');
@@ -135,22 +135,22 @@ export class AsignaPreguntasComponent implements OnInit {
 
   EliminarDePreguntasBasicas(pregunta: Pregunta){
         // tslint:disable-next-line:max-line-length
-        this.misPreguntasBasicas = this.misPreguntasBasicas.filter(a => a.Titulo !== pregunta.Titulo && a.Pregunta !== pregunta.Pregunta && a.Tematica !== pregunta.Tematica);
+        this.misPreguntasBasicas = this.misPreguntasBasicas.filter(a => a.titulo !== pregunta.titulo && a.pregunta !== pregunta.pregunta && a.tematica !== pregunta.tematica);
         this.IDmisPreguntasBasicas = this.IDmisPreguntasBasicas.filter(a => a !== pregunta.id);
         this.dataSourceMisPreguntasBasicas = new MatTableDataSource (this.misPreguntasBasicas);
         this.misPreguntas.push(pregunta);
-        this.misPreguntas.sort((a, b) => a.Tematica.localeCompare(b.Tematica));
+        this.misPreguntas.sort((a, b) => a.tematica.localeCompare(b.tematica));
         this.dataSourceMisPreguntas = new MatTableDataSource (this.misPreguntas);
   }
 
   EliminarDePreguntasBonus(pregunta: Pregunta) {
 
     // tslint:disable-next-line:max-line-length
-    this.misPreguntasBonus = this.misPreguntasBonus.filter(a => a.Titulo !== pregunta.Titulo && a.Pregunta !== pregunta.Pregunta && a.Tematica !== pregunta.Tematica);
+    this.misPreguntasBonus = this.misPreguntasBonus.filter(a => a.titulo !== pregunta.titulo && a.pregunta !== pregunta.pregunta && a.tematica !== pregunta.tematica);
     this.IDmisPreguntasBonus = this.IDmisPreguntasBonus.filter(a => a !== pregunta.id);
     this.dataSourceMisPreguntasBonus = new MatTableDataSource (this.misPreguntasBonus);
     this.misPreguntas.push(pregunta);
-    this.misPreguntas.sort((a, b) => a.Tematica.localeCompare(b.Tematica));
+    this.misPreguntas.sort((a, b) => a.tematica.localeCompare(b.tematica));
     this.dataSourceMisPreguntas = new MatTableDataSource (this.misPreguntas);
 }
 

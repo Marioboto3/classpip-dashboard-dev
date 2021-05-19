@@ -66,10 +66,10 @@ export class MostrarColeccionComponent implements OnInit {
 
   ngOnInit() {
     this.coleccion = this.sesion.DameColeccion();
-    this.nombreColeccion = this.coleccion.Nombre;
+    this.nombreColeccion = this.coleccion.nombre;
 
-    if (this.coleccion.ImagenColeccion !== undefined) {
-      this.imagenColeccion = URL.ImagenesColeccion + this.coleccion.ImagenColeccion ;
+    if (this.coleccion.imagenColeccion !== undefined) {
+      this.imagenColeccion = URL.ImagenesColeccion + this.coleccion.imagenColeccion ;
     } else {
       this.imagenColeccion = undefined;
     }
@@ -82,8 +82,8 @@ export class MostrarColeccionComponent implements OnInit {
       for (let i = 0; i < this.cromosColeccion.length; i++) {
 
         this.cromo = this.cromosColeccion[i];
-        this.imagenesCromosDelante[i] = URL.ImagenesCromo + this.cromo.ImagenDelante;
-        this.imagenesCromosDetras[i] = URL.ImagenesCromo + this.cromo.ImagenDetras;
+        this.imagenesCromosDelante[i] = URL.ImagenesCromo + this.cromo.imagenDelante;
+        this.imagenesCromosDetras[i] = URL.ImagenesCromo + this.cromo.imagenDetras;
 
       }
 
@@ -98,8 +98,8 @@ export class MostrarColeccionComponent implements OnInit {
     for (let i = 0; i < this.cromosColeccion.length; i++) {
 
       this.cromo = this.cromosColeccion[i];
-      this.imagenesCromosDelante[i] = URL.ImagenesCromo + this.cromo.ImagenDelante;
-      this.imagenesCromosDetras[i] = URL.ImagenesCromo + this.cromo.ImagenDetras;
+      this.imagenesCromosDelante[i] = URL.ImagenesCromo + this.cromo.imagenDelante;
+      this.imagenesCromosDetras[i] = URL.ImagenesCromo + this.cromo.imagenDetras;
 
     }
   }
@@ -108,11 +108,11 @@ export class MostrarColeccionComponent implements OnInit {
  TraeImagenColeccion(coleccion: Coleccion) {
 
   console.log('entro a buscar cromos y foto');
-  console.log(coleccion.ImagenColeccion);
+  console.log(coleccion.imagenColeccion);
   // Si la coleccion tiene una foto (recordemos que la foto no es obligatoria)
-  if (coleccion.ImagenColeccion !== undefined) {
+  if (coleccion.imagenColeccion !== undefined) {
 
-    this.imagenColeccion = URL.ImagenesColeccion + coleccion.ImagenColeccion ;
+    this.imagenColeccion = URL.ImagenesColeccion + coleccion.imagenColeccion ;
 
     // Sino la imagenColeccion será undefined para que no nos pinte la foto de otro equipo préviamente seleccionado
   } else {
@@ -124,7 +124,7 @@ export class MostrarColeccionComponent implements OnInit {
   console.log('voy a mostrar los cromos de la coleccion ' + coleccion.id);
 
   // Ordena los cromos por nombre. Asi si tengo algun cromo repetido, salen juntos
-  this.cromosColeccion.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
+  this.cromosColeccion.sort((a, b) => a.nombre.localeCompare(b.nombre));
   this.TraeImagenesCromos();
 
   }

@@ -26,15 +26,15 @@ export class EditarPuntoComponent implements OnInit {
 
   ngOnInit() {
     this.punto = this.sesion.DameTipoPunto();
-    this.nombrePunto = this.punto.Nombre;
-    this.descripcionPunto = this.punto.Descripcion;
+    this.nombrePunto = this.punto.nombre;
+    this.descripcionPunto = this.punto.descripcion;
   }
 
   EditarPunto() {
     console.log('Entro a editar');
 
-    this.punto.Nombre = this.nombrePunto;
-    this.punto.Descripcion = this.descripcionPunto;
+    this.punto.nombre = this.nombrePunto;
+    this.punto.descripcion = this.descripcionPunto;
     this.peticionesAPI.ModificaTipoDePunto(new Punto(this.nombrePunto, this.descripcionPunto), this.punto.profesorId, this.punto.id)
     .subscribe((res) => {
       if (res != null) {

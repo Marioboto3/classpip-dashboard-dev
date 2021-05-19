@@ -108,16 +108,16 @@ export class JuegoDeCuestionarioRapidoComponent implements OnInit {
           const indexDonut = this.misDonuts.findIndex (elemento => elemento[0].preguntaId === pregunta.id);
           console.log ('donut de la pregunta');
           console.log (this.misDonuts[indexDonut]);
-          if (pregunta.Tipo === 'Emparejamiento') {
+          if (pregunta.tipo === 'Emparejamiento') {
             // primero actualizamos el histograma
             if (respuesta.respuestas.Respuestas[i] !== undefined) {
               let n = 0;
-              for (let j = 0; j < pregunta.Emparejamientos.length; j++) {
-                if (pregunta.Emparejamientos[j].r === respuesta.respuestas.Respuestas[i][j]) {
+              for (let j = 0; j < pregunta.emparejamientos.length; j++) {
+                if (pregunta.emparejamientos[j].r === respuesta.respuestas.Respuestas[i][j]) {
                   n++;
                 }
               }
-              if (n === pregunta.Emparejamientos.length) {
+              if (n === pregunta.emparejamientos.length) {
                 aciertos++;
                 this.misDonuts[indexDonut][1].cont++; // respuesta correcta
               } else {
@@ -128,16 +128,16 @@ export class JuegoDeCuestionarioRapidoComponent implements OnInit {
               this.misDonuts[indexDonut][3].cont++; // respuesta en blanco
             }
 
-          } else if (pregunta.Tipo === 'Cuatro opciones') {
+          } else if (pregunta.tipo === 'Cuatro opciones') {
             // actualizo histograma
-            if (pregunta.RespuestaCorrecta === respuesta.respuestas.Respuestas[i][0]) {
+            if (pregunta.respuestaCorrecta === respuesta.respuestas.Respuestas[i][0]) {
               aciertos++;
             }
             console.log ('voy a modificar el donut de 4 opciones');
             this.misDonuts[indexDonut].filter (entrada => entrada.respuesta === respuesta.respuestas.Respuestas[i][0])[0].cont++;
           } else {
             console.log ('pregunta de respuesta abierta o verdadero o falso');
-            if (pregunta.RespuestaCorrecta === respuesta.respuestas.Respuestas[i][0]) {
+            if (pregunta.respuestaCorrecta === respuesta.respuestas.Respuestas[i][0]) {
               aciertos++;
               this.misDonuts[indexDonut][1].cont++;  // respuesta correcta
             } else if (respuesta.respuestas.Respuestas[i][0] === '-') {
@@ -255,22 +255,22 @@ export class JuegoDeCuestionarioRapidoComponent implements OnInit {
           miDonut = [];
           // preparo los datos del donut
           // primero meto el tipo de pregunta
-          miDonut.push ( { preguntaId: pregunta.id, Tipo: pregunta.Tipo});
-          if (pregunta.Tipo === 'Cuatro opciones') {
-            miDonut.push ( { respuesta: pregunta.RespuestaCorrecta, cont: 0});
-            miDonut.push ( { respuesta: pregunta.RespuestaIncorrecta1, cont: 0});
-            miDonut.push ( { respuesta: pregunta.RespuestaIncorrecta2, cont: 0});
-            miDonut.push ( { respuesta: pregunta.RespuestaIncorrecta3, cont: 0});
+          miDonut.push ( { preguntaId: pregunta.id, Tipo: pregunta.tipo});
+          if (pregunta.tipo === 'Cuatro opciones') {
+            miDonut.push ( { respuesta: pregunta.respuestaCorrecta, cont: 0});
+            miDonut.push ( { respuesta: pregunta.respuestaIncorrecta1, cont: 0});
+            miDonut.push ( { respuesta: pregunta.respuestaIncorrecta2, cont: 0});
+            miDonut.push ( { respuesta: pregunta.respuestaIncorrecta3, cont: 0});
             // esto es para el caso de respuesta en blando
             miDonut.push ( { respuesta: '-', cont: 0});
 
-          } else if (pregunta.Tipo === 'Respuesta abierta') {
-            miDonut.push ( { respuesta: pregunta.RespuestaCorrecta, cont: 0});
+          } else if (pregunta.tipo === 'Respuesta abierta') {
+            miDonut.push ( { respuesta: pregunta.respuestaCorrecta, cont: 0});
             miDonut.push ( { respuesta: 'Otras respuestas', cont: 0});
             // esto es para el caso de respuesta en blando
             miDonut.push ( { respuesta: '-', cont: 0});
-          } else if (pregunta.Tipo === 'Verdadero o falso') {
-            miDonut.push ( { respuesta: pregunta.RespuestaCorrecta, cont: 0});
+          } else if (pregunta.tipo === 'Verdadero o falso') {
+            miDonut.push ( { respuesta: pregunta.respuestaCorrecta, cont: 0});
             miDonut.push ( { respuesta: 'Mal', cont: 0});
             // esto es para el caso de respuesta en blando
             miDonut.push ( { respuesta: '-', cont: 0});
@@ -452,16 +452,16 @@ export class JuegoDeCuestionarioRapidoComponent implements OnInit {
         const donut = this.misDonuts.filter (elemento => elemento[0].preguntaId === pregunta.id)[0];
         console.log ('donut de la pregunta');
         console.log (donut);
-        if (pregunta.Tipo === 'Emparejamiento') {
+        if (pregunta.tipo === 'Emparejamiento') {
           // primero actualizamos el histograma
           if (respuesta.respuestas.Respuestas[i] !== undefined) {
             let n = 0;
-            for (let j = 0; j < pregunta.Emparejamientos.length; j++) {
-              if (pregunta.Emparejamientos[j].r === respuesta.respuestas.Respuestas[i][j]) {
+            for (let j = 0; j < pregunta.emparejamientos.length; j++) {
+              if (pregunta.emparejamientos[j].r === respuesta.respuestas.Respuestas[i][j]) {
                 n++;
               }
             }
-            if (n === pregunta.Emparejamientos.length) {
+            if (n === pregunta.emparejamientos.length) {
               aciertos++;
               donut[1].cont++; // respuesta correcta
             } else {
@@ -471,15 +471,15 @@ export class JuegoDeCuestionarioRapidoComponent implements OnInit {
             donut[3].cont++; // respuesta en blanco
           }
 
-        } else if (pregunta.Tipo === 'Cuatro opciones') {
+        } else if (pregunta.tipo === 'Cuatro opciones') {
           // actualizo histograma
-          if (pregunta.RespuestaCorrecta === respuesta.respuestas.Respuestas[i][0]) {
+          if (pregunta.respuestaCorrecta === respuesta.respuestas.Respuestas[i][0]) {
             aciertos++;
           }
           donut.filter (entrada => entrada.respuesta === respuesta.respuestas.Respuestas[i][0])[0].cont++;
         } else {
           console.log ('pregunta de respuesta abierta o verdadero o falso');
-          if (pregunta.RespuestaCorrecta === respuesta.respuestas.Respuestas[i][0]) {
+          if (pregunta.respuestaCorrecta === respuesta.respuestas.Respuestas[i][0]) {
             aciertos++;
             donut[1].cont++;  // respuesta correcta
           } else if (respuesta.respuestas.Respuestas[i][0] === '-') {

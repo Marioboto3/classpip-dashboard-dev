@@ -46,7 +46,7 @@ export class InformacionJuegoColeccionComponent implements OnInit {
   ngOnInit() {
     this.coleccion = this.sesion.DameColeccion();
 
-    this.nombreColeccion = this.coleccion.Nombre;
+    this.nombreColeccion = this.coleccion.nombre;
 
     this.CromosEImagenDeLaColeccion(this.coleccion);
     // Cargo el imagen de la coleccion
@@ -80,10 +80,10 @@ export class InformacionJuegoColeccionComponent implements OnInit {
  CromosEImagenDeLaColeccion(coleccion: Coleccion) {
 
   console.log('entro a buscar cromos y foto');
-  console.log(coleccion.ImagenColeccion);
+  console.log(coleccion.imagenColeccion);
   // Si la coleccion tiene una foto (recordemos que la foto no es obligatoria)
-  if (coleccion.ImagenColeccion !== undefined) {
-    this.imagenColeccion = URL.ImagenesColeccion + this.coleccion.ImagenColeccion;
+  if (coleccion.imagenColeccion !== undefined) {
+    this.imagenColeccion = URL.ImagenesColeccion + this.coleccion.imagenColeccion;
 
     // // Busca en la base de datos la imágen con el nombre registrado en equipo.FotoEquipo y la recupera
     // this.peticionesAPI.DameImagenColeccion (coleccion.ImagenColeccion)
@@ -131,8 +131,8 @@ for (let i = 0; i < this.cromosColeccion.length; i++) {
 
   this.cromo = this.cromosColeccion[i];
 
-  if (this.cromo.ImagenDelante !== undefined ) {
-    this.imagenCromoDelante[i] = URL.ImagenesCromo + this.cromo.ImagenDelante;
+  if (this.cromo.imagenDelante !== undefined ) {
+    this.imagenCromoDelante[i] = URL.ImagenesCromo + this.cromo.imagenDelante;
     // Busca en la base de datos la imágen con el nombre registrado en equipo.FotoEquipo y la recupera
     // this.peticionesAPI.DameImagenCromo (this.cromo.ImagenDelante)
     // .subscribe(response => {
@@ -149,8 +149,8 @@ for (let i = 0; i < this.cromosColeccion.length; i++) {
     // });
   }
 
-  if (this.cromo.ImagenDetras !== undefined ) {
-    this.imagenCromoDetras[i] = URL.ImagenesCromo + this.cromo.ImagenDetras;
+  if (this.cromo.imagenDetras !== undefined ) {
+    this.imagenCromoDetras[i] = URL.ImagenesCromo + this.cromo.imagenDetras;
     // Busca en la base de datos la imágen con el nombre registrado en equipo.FotoEquipo y la recupera
     // this.peticionesAPI.DameImagenCromo (this.cromo.ImagenDetras)
     // .subscribe(response => {

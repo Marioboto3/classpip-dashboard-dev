@@ -1,4 +1,4 @@
-<div *ngIf = "juegoSeleccionado.Modalidad === 'Test clásico'; else elseBlock" class="contenedor">
+<div *ngIf = "juegoSeleccionado.modalidad === 'Test clásico'; else elseBlock" class="contenedor">
   <div class="contenedor">
     <div class="enColumna">
       <div class="enFila" style= "width:50%">
@@ -73,7 +73,7 @@
 </div>  
 
 <!-- VENTANA A VISUAIZAR EN DASHBOARD SI EL JUEGO ES MODALIDAD KAHOOT-->
-<div *ngIf = "juegoSeleccionado.Modalidad === 'Kahoot';" class="contenedor">
+<div *ngIf = "juegoSeleccionado.modalidad === 'Kahoot';" class="contenedor">
  
   <!--    En esta tabla queremos mostrar los alumnos conectados-->
   <table align="center"  mat-table [dataSource]="dataSourceAlumnosConectados" class="mat-elevation-z8">
@@ -84,7 +84,7 @@
       <ng-container matColumnDef="nombreAlumno">
         <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"  align="center">Nombre</th>
         <td mat-cell  *matCellDef="let item">
-          <p>{{item.alumno.Nombre}} </p>
+          <p>{{item.alumno.nombre}} </p>
         </td>
 
       </ng-container>
@@ -93,7 +93,7 @@
       <ng-container matColumnDef="primerApellido">
           <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla" align="center">Primer Apellido</th>
           <td mat-cell  *matCellDef="let item">
-            <p >{{item.alumno.PrimerApellido}} </p>
+            <p >{{item.alumno.primerApellido}} </p>
           </td>
       </ng-container>
 
@@ -101,7 +101,7 @@
       <ng-container matColumnDef="segundoApellido">
           <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla" align="center">Segundo Apellido</th>
           <td mat-cell  *matCellDef="let item">
-            <p >{{item.alumno.SegundoApellido}} </p>
+            <p >{{item.alumno.segundoApellido}} </p>
           </td>
       </ng-container>
 

@@ -30,8 +30,8 @@ export class CrearFamiliaImagenesPerfilComponent implements OnInit {
 
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
   }
 
   CrearFamilia() {

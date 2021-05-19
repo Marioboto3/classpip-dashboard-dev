@@ -1,16 +1,16 @@
 import { Criterio } from './';
 export class Rubrica {
-    Nombre: string;
-    Descripcion: string;
+    nombre: string;
+    descripcion: string;
     id: number;
     profesorId: number;
-    Criterios: Criterio[];
+    criterios: Criterio[];
 
     constructor(nombre?: string, descripcion?: string, criterios?: Criterio[], profesorId?: number) {
 
-      this.Nombre = nombre;
-      this.Descripcion = descripcion;
-      this.Criterios = criterios;
+      this.nombre = nombre;
+      this.descripcion = descripcion;
+      this.criterios = criterios;
       this.profesorId = profesorId;
     }
 

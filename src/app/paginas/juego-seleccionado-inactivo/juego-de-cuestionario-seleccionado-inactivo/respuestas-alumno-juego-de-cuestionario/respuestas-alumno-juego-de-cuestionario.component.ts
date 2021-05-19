@@ -47,7 +47,7 @@ barras: any[];
               this.preguntas.sort((a , b) => (a.id > b.id ? 1 : -1));
               // guardo los titulos de las preguntas para mostrarlos en el grafico
               this.titulos = [];
-              this.preguntas.forEach (pregunta => this.titulos.push (pregunta.Titulo));
+              this.preguntas.forEach (pregunta => this.titulos.push (pregunta.titulo));
 
               // Traigo las respuestas del alumno a las preguntas
               this.peticionesApi.DameRespuestasAlumnoJuegoDeCuestionario (this.inscripcionAlumnoJuegoDeCuestionario.id)
@@ -57,41 +57,41 @@ barras: any[];
                 respuestas.sort((a , b) => (a.preguntaId > b.preguntaId) ? 1 : -1);
                 respuestas.forEach (respuesta => {
                   const pregunta = this.preguntas.filter (p => p.id === respuesta.preguntaId)[0];
-                  if (pregunta.Tipo === 'Emparejamiento') {
+                  if (pregunta.tipo === 'Emparejamiento') {
 
-                    if (respuesta.Respuesta === undefined) {
+                    if (respuesta.respuesta === undefined) {
                       this.barras.push (
                         {value: -1, respuesta: '-', label: {position: 'right'}, itemStyle: {color: 'red'}}
                       );
                     } else {
                       let cont = 0;
-                      for (let i = 0; i < pregunta.Emparejamientos.length; i++) {
-                        if (pregunta.Emparejamientos[i].r === respuesta.Respuesta[i]) {
+                      for (let i = 0; i < pregunta.emparejamientos.length; i++) {
+                        if (pregunta.emparejamientos[i].r === respuesta.respuesta[i]) {
                           cont++;
                         }
                       }
-                      if (cont === pregunta.Emparejamientos.length) {
+                      if (cont === pregunta.emparejamientos.length) {
                         this.barras.push (
-                          {value: 1, respuesta: respuesta.Respuesta, itemStyle: {color: 'green'}}
+                          {value: 1, respuesta: respuesta.respuesta, itemStyle: {color: 'green'}}
                         );
                       } else {
                         this.barras.push (
-                          {value: -1, respuesta: respuesta.Respuesta, label: {position: 'right'}, itemStyle: {color: 'red'}}
+                          {value: -1, respuesta: respuesta.respuesta, label: {position: 'right'}, itemStyle: {color: 'red'}}
                         );
                       }
                     }
 
                   } else {
-                    const respuestaCorrecta = pregunta.RespuestaCorrecta;
-                    if (respuestaCorrecta === respuesta.Respuesta[0]) {
+                    const respuestaCorrecta = pregunta.respuestaCorrecta;
+                    if (respuestaCorrecta === respuesta.respuesta[0]) {
                       // la respuesta es correcta: barra verde
                       this.barras.push (
-                        {value: 1, respuesta: respuesta.Respuesta[0], itemStyle: {color: 'green'}}
+                        {value: 1, respuesta: respuesta.respuesta[0], itemStyle: {color: 'green'}}
                       );
                     } else {
                       // la respuesta es incorrecta: barra roja
                       this.barras.push (
-                        {value: -1, respuesta: respuesta.Respuesta[0], label: {position: 'right'}, itemStyle: {color: 'red'}}
+                        {value: -1, respuesta: respuesta.respuesta[0], label: {position: 'right'}, itemStyle: {color: 'red'}}
                       );
                     }
                   }

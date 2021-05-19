@@ -1,26 +1,26 @@
 
 export class JuegoDeVotacionRapida {
 
-    NombreJuego: string;
-    Tipo: string;
-    Clave: string;
-    ModoReparto: string;
+    nombreJuego: string;
+    tipo: string;
+    clave: string;
+    modoReparto: string;
     id: number;
     profesorId: number;
-    Conceptos: string[];
-    Puntos: number[];
-    Respuestas: any;
+    conceptos: string[];
+    puntos: number[];
+    respuestas: any;
 
     // tslint:disable-next-line:max-line-length
     constructor(NombreJuego?: string, Tipo?: string, Clave?: string, ModoReparto?: string,
                 profesorId?: number,  Conceptos?: string[], Puntos?: number[]) {
-        this.NombreJuego = NombreJuego;
-        this.Tipo = Tipo;
-        this.ModoReparto = ModoReparto;
+        this.nombreJuego = NombreJuego;
+        this.tipo = Tipo;
+        this.modoReparto = ModoReparto;
         this.profesorId = profesorId;
-        this.Clave = Clave;
-        this.Conceptos = Conceptos;
-        this.Puntos = Puntos;
-        this.Respuestas = [];
+        this.clave = Clave;
+        this.conceptos = Conceptos;
+        this.puntos = Puntos;
+        this.respuestas = [];
     }
 }

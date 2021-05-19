@@ -9,7 +9,7 @@
   <br>
 
   <!-- ////////////////////////////////////// CLASIFICACIÓN INDIVIDUAL ////////////////////////////////////////////////////-->
-  <form style="width: 100%"  *ngIf="juegoSeleccionado.Modo === 'Individual'">
+  <form style="width: 100%"  *ngIf="juegoSeleccionado.modo === 'Individual'">
     <div class="filter"  style="width: 60%">
       <mat-form-field style="width: 95% !Important;">
         <input matInput (keyup)="applyFilter($event.target.value)"  placeholder="Filtro para buscar alumno...">

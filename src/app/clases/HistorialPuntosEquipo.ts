@@ -1,6 +1,6 @@
 export class HistorialPuntosEquipo {
 
-  ValorPunto: number;
+  valorPunto: number;
   puntoId: number;
   equipoJuegoDePuntosId: number;
   id: number;
@@ -8,7 +8,7 @@ export class HistorialPuntosEquipo {
 
   constructor(ValorPunto?: number, puntoId?: number, equipoJuegoDePuntosId?: number, fecha?: string) {
 
-    this.ValorPunto = ValorPunto;
+    this.valorPunto = ValorPunto;
     this.puntoId = puntoId;
     this.equipoJuegoDePuntosId = equipoJuegoDePuntosId;
     this.fecha = fecha;

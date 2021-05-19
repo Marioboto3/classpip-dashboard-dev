@@ -10,7 +10,7 @@
 
       <p style="font-size: 110%">
         <span style="font-weight: bold;">Cromos de: </span>
-        {{equipo.Nombre}}
+        {{equipo.nombre}}
       </p>
       <button type="button" class="btn Info" routerLink = "AlbumEquipo">Álbum Equipo</button>
   </div>
@@ -28,17 +28,17 @@
       [rowspan]="4"
       [style.background]="white">
       <mat-card class="cromo" [ngClass]="{
-        'Diamante' : elem.cromo.Nivel === 'Diamante',
-        'Platino' : elem.cromo.Nivel === 'Platino',
-        'Oro' : elem.cromo.Nivel === 'Oro',
-        'Plata' : elem.cromo.Nivel === 'Plata',
-        'Bronce' : elem.cromo.Nivel === 'Bronce'}">
+        'Diamante' : elem.cromo.nivel === 'Diamante',
+        'Platino' : elem.cromo.nivel === 'Platino',
+        'Oro' : elem.cromo.nivel === 'Oro',
+        'Plata' : elem.cromo.nivel === 'Plata',
+        'Bronce' : elem.cromo.nivel === 'Bronce'}">
 
         <div class= "enColumna">
           <mat-card-header style = "margin-top: 20%;">
             <!-- <div style="display: flex; justify-content:space-between; width: 250px "> -->
-              <mat-card-title align = "center">{{elem.cromo.Nombre}}</mat-card-title>
-              <mat-card-subtitle align = "center">{{elem.cromo.Probabilidad}}</mat-card-subtitle>
+              <mat-card-title align = "center">{{elem.cromo.nombre}}</mat-card-title>
+              <mat-card-subtitle align = "center">{{elem.cromo.probabilidad}}</mat-card-subtitle>
 
           </mat-card-header>
           <!-- <mat-card-content style="display: flex; align-items: center;justify-content: center;"> -->
@@ -50,11 +50,11 @@
                 <i  class="material-icons">delete </i>
               </button>
             </div>
-              <div *ngIf = "!coleccion.DosCaras" class="posicionImagen">
+              <div *ngIf = "!coleccion.dosCaras" class="posicionImagen">
                 <img class ="imagenCromo" *ngIf="imagenCromoDelante[i]"  mat-card-image [src]="imagenCromoDelante[i]" >
               </div>
 
-              <div  *ngIf = "coleccion.DosCaras"  class="flip-box">
+              <div  *ngIf = "coleccion.dosCaras"  class="flip-box">
                   <div class="flip-box-inner">
                     <div class="flip-box-front">
                       <div class="posicionImagen" >

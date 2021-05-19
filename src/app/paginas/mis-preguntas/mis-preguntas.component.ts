@@ -33,8 +33,8 @@ export class MisPreguntasComponent implements OnInit {
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
     this.DameTodasMisPreguntas();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
   }
 
   //Cogemos todas las preguntas del profesor para rellenar la tabla
@@ -77,13 +77,13 @@ export class MisPreguntasComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        pregunta: pregunta.Pregunta,
+        pregunta: pregunta.pregunta,
       }
     });
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.EliminarPregunta(pregunta);
-        Swal.fire('Eliminado', 'Pregunta: ' + pregunta.Pregunta + ' eliminada correctamente', 'success');
+        Swal.fire('Eliminado', 'Pregunta: ' + pregunta.pregunta + ' eliminada correctamente', 'success');
       }
     });
   }

@@ -50,8 +50,8 @@ export class MisGruposComponent implements OnInit {
     // tslint:disable-next-line:no-string-literal
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/grupo';
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = 'titulo' + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = 'titulo' + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
     // CUANDO INICIEMOS EL COMPONENTE NOS LISTARÁ LOS GRUPOS DEL PROFESOR QUE RECUPERAMOS EL ID DE LA URL
     this.GruposDelProfesor();
   }

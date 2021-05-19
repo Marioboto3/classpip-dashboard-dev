@@ -26,7 +26,7 @@ export class JuegoDeAvatarSeleccionadoInactivoComponent implements OnInit {
     this.juegoSeleccionado = this.sesion.DameJuego();
     console.log(this.juegoSeleccionado);
 
-    if (this.juegoSeleccionado.Modo === 'Individual') {
+    if (this.juegoSeleccionado.modo === 'Individual') {
       this.AlumnosDelJuego();
     } else {
       console.log ('aun no funciona la modalidad por equipos');
@@ -70,8 +70,8 @@ RecuperarInscripcionesAlumnoJuego() {
         let cont = 0;
         this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => {
           // Si hay un fichero de voz lo borro
-          if (inscripcion.Voz) {
-            this.peticionesAPI.BorraAudioAvatar (inscripcion.Voz).subscribe();
+          if (inscripcion.voz) {
+            this.peticionesAPI.BorraAudioAvatar (inscripcion.voz).subscribe();
           }
           this.peticionesAPI.BorraInscripcionAlumnoJuegoDeAvatar (inscripcion.id)
           .subscribe(() => {

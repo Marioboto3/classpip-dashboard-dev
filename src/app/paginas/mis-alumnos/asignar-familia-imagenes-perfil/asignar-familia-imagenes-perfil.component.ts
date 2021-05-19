@@ -47,7 +47,7 @@ export class AsignarFamiliaImagenesPerfilComponent implements OnInit {
       console.log ('ya tengo las familias de imagenes de perfil');
       console.log (familias);
       this.familias.forEach (f => {
-        const ejemploImagen = URL.ImagenesPerfil + f.Imagenes[0];
+        const ejemploImagen = URL.ImagenesPerfil + f.imagenes[0];
         this.listaFamiliasMias.push ({
           familia: f,
           ejemplo: ejemploImagen
@@ -80,12 +80,12 @@ export class AsignarFamiliaImagenesPerfilComponent implements OnInit {
           .subscribe ( profesores => {
             familiasPublicas.forEach (familia => {
               const propietario = profesores.filter (p => p.id === familia.profesorId)[0];
-              this.propietarios.push (propietario.Nombre + ' ' + propietario.PrimerApellido);
+              this.propietarios.push (propietario.nombre + ' ' + propietario.primerApellido);
             });
             let i;
             for (i = 0; i < familiasPublicas.length; i++ ) {
-              const ejemploImagen = URL.ImagenesPerfil + familiasPublicas[i].Imagenes[0];
-              familiasPublicas[i].NombreFamilia = familiasPublicas[i].NombreFamilia + ' (' + this.propietarios[i] + ')';
+              const ejemploImagen = URL.ImagenesPerfil + familiasPublicas[i].imagenes[0];
+              familiasPublicas[i].nombreFamilia = familiasPublicas[i].nombreFamilia + ' (' + this.propietarios[i] + ')';
               this.listaFamiliasPublicas.push ({
                 familia: familiasPublicas[i],
                 ejemplo: ejemploImagen,

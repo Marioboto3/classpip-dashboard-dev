@@ -43,10 +43,10 @@ export class InformacionJuegoPuntosComponent implements OnInit {
     console.log('entro a buscar nivel y foto');
     console.log(nivel);
     // Si el equipo tiene una foto (recordemos que la foto no es obligatoria)
-    if (nivel.Imagen !== undefined) {
+    if (nivel.imagen !== undefined) {
 
       // Busca en la base de datos la imágen con el nombre registrado en equipo.FotoEquipo y la recupera
-      this.peticionesApi.DameImagenNivel ( nivel.Imagen)
+      this.peticionesApi.DameImagenNivel ( nivel.imagen)
       .subscribe(response => {
         const blob = new Blob([response.blob()], { type: 'image/jpg'});
 

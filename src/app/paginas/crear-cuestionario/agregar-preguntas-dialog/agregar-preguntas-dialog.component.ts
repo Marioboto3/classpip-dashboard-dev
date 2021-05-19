@@ -48,14 +48,14 @@ export class AgregarPreguntasDialogComponent implements OnInit {
     .subscribe (res => {
       console.log(res);
       this.misPreguntas = res;
-      this.misPreguntas.sort((a, b) => a.Tematica.localeCompare(b.Tematica));
+      this.misPreguntas.sort((a, b) => a.tematica.localeCompare(b.tematica));
       this.dataSourceMisPreguntas = new MatTableDataSource (this.misPreguntas);
     })
 
     this.peticionesAPI.DamePreguntasCuestionario (this.cuestionarioId)
     .subscribe ( res => {
       this.preguntasDelCuestionario = res;
-      this.preguntasDelCuestionario.sort((a, b) => a.Tematica.localeCompare(b.Tematica));
+      this.preguntasDelCuestionario.sort((a, b) => a.tematica.localeCompare(b.tematica));
       this.dataSourcePreguntasDelCuestionario = new MatTableDataSource (this.preguntasDelCuestionario);
     })
 
@@ -70,14 +70,14 @@ export class AgregarPreguntasDialogComponent implements OnInit {
   }
 
   AsignarPregunta(pregunta: Pregunta) {
-    const found = this.preguntasDelCuestionario.find (a => a.Titulo === pregunta.Titulo && a.Pregunta === pregunta.Pregunta);
+    const found = this.preguntasDelCuestionario.find (a => a.titulo === pregunta.titulo && a.pregunta === pregunta.pregunta);
     if (found === undefined){
       this.peticionesAPI.PreguntasEnCuestionario( new PreguntaDelCuestionario (pregunta.id, this.cuestionarioId))
       .subscribe();
 
       //Añadimos las preguntas a la lista
       this.preguntasDelCuestionario.push (pregunta);
-      this.preguntasDelCuestionario.sort((a, b) => a.Tematica.localeCompare(b.Tematica));
+      this.preguntasDelCuestionario.sort((a, b) => a.tematica.localeCompare(b.tematica));
       this.dataSourcePreguntasDelCuestionario = new MatTableDataSource (this.preguntasDelCuestionario);
 
       this.misPreguntas = this.misPreguntas.filter (a => a.id  !== pregunta.id);
@@ -92,7 +92,7 @@ export class AgregarPreguntasDialogComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: pregunta.Titulo
+        nombre: pregunta.titulo
       }
     });
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
@@ -108,10 +108,10 @@ export class AgregarPreguntasDialogComponent implements OnInit {
     .subscribe((preguntaDelCuestionario) => {
       this.peticionesAPI.BorraPreguntaDelCuestionario (preguntaDelCuestionario[0].id)
       .subscribe (() => {
-        this.preguntasDelCuestionario = this.preguntasDelCuestionario.filter(a => a.Titulo !== pregunta.Titulo && a.Pregunta !== pregunta.Pregunta && a.Tematica !== pregunta.Tematica);
+        this.preguntasDelCuestionario = this.preguntasDelCuestionario.filter(a => a.titulo !== pregunta.titulo && a.pregunta !== pregunta.pregunta && a.tematica !== pregunta.tematica);
         this.dataSourcePreguntasDelCuestionario = new MatTableDataSource (this.preguntasDelCuestionario);
         this.misPreguntas.push(pregunta);
-        this.misPreguntas.sort((a, b) => a.Tematica.localeCompare(b.Tematica));
+        this.misPreguntas.sort((a, b) => a.tematica.localeCompare(b.tematica));
         this.dataSourceMisPreguntas = new MatTableDataSource (this.misPreguntas);
       });
     });

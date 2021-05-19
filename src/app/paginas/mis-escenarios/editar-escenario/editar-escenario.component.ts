@@ -49,8 +49,8 @@ export class EditarEscenarioComponent implements OnInit {
   ngOnInit() {
     this.escenario = this.sesion.DameEscenario();
     this.DamePuntosGeolocalizablesDelEscenario();
-    this.mapaEscenario = this.escenario.Mapa;
-    this.descripcionEscenario = this.escenario.Descripcion;
+    this.mapaEscenario = this.escenario.mapa;
+    this.descripcionEscenario = this.escenario.descripcion;
 
     // Me traigo la imagen de la colección y las imagenes de cada cromo
     // Cargo el imagen de la coleccion
@@ -154,14 +154,14 @@ export class EditarEscenarioComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: puntogeolocalizable.Nombre,
+        nombre: puntogeolocalizable.nombre,
       }
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.BorrarPuntoGeolocalizable(puntogeolocalizable);
-        Swal.fire('Eliminado', puntogeolocalizable.Nombre + ' eliminado correctamente', 'success');
+        Swal.fire('Eliminado', puntogeolocalizable.nombre + ' eliminado correctamente', 'success');
 
       }
     });

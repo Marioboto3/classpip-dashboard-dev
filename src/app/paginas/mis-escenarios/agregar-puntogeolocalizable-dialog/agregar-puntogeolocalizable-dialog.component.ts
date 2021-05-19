@@ -52,7 +52,7 @@ export class AgregarPuntoGeolocalizableDialogComponent implements OnInit {
     .subscribe((res) => {
       if (res != null) {
         this.puntosgeolocalizablesAgregados.push(res);
-        this.puntosgeolocalizablesAgregados = this.puntosgeolocalizablesAgregados.filter(puntogeolocalizable => puntogeolocalizable.Nombre !== '');
+        this.puntosgeolocalizablesAgregados = this.puntosgeolocalizablesAgregados.filter(puntogeolocalizable => puntogeolocalizable.nombre !== '');
         this.LimpiarCampos();
       } else {
         console.log('fallo en la asignación');

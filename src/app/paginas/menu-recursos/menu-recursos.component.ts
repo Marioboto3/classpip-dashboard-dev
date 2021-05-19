@@ -22,7 +22,7 @@ export class MenuRecursosComponent implements OnInit {
 
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = 'titulo' + this.profesor.Estacion;
+    this.varTitulo = 'titulo' + this.profesor.estacion;
   }
 
   NavegarA(destino) {

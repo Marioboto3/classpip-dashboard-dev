@@ -192,9 +192,9 @@ export class EditarJornadasJuegoDeCompeticionFormulaUnoComponent implements OnIn
           this.jornadas[i] = JornadaCreada;
         });
         console.log('Jornada Modificada');
-        this.JornadasCompeticion[i].CriterioGanador = this.jornadas[i].CriterioGanador;
-        this.JornadasCompeticion[i].Fecha = this.jornadas[i].Fecha;
-        this.JornadasCompeticion[i].NumeroDeJornada = i + 1;
+        this.JornadasCompeticion[i].criterioGanador = this.jornadas[i].criterioGanador;
+        this.JornadasCompeticion[i].fecha = this.jornadas[i].fecha;
+        this.JornadasCompeticion[i].numeroDeJornada = i + 1;
         console.log(this.JornadasCompeticion[i]);
 
 
@@ -259,7 +259,7 @@ export class EditarJornadasJuegoDeCompeticionFormulaUnoComponent implements OnIn
               console.log(NuevaPuntuacion);
               this.Puntuacion[i] = NuevaPuntuacion;
               console.log(this.Puntuacion);
-              this.TablaPuntuacion[i].Puntuacion = NuevaPuntuacion;
+              this.TablaPuntuacion[i].puntuacion = NuevaPuntuacion;
               console.log(this.TablaPuntuacion[i]);
               }
             }
@@ -289,7 +289,7 @@ export class EditarJornadasJuegoDeCompeticionFormulaUnoComponent implements OnIn
     }
     if (i < NumeroParticipantes) {
       this.TablaPuntuacion[i] = new TablaPuntosFormulaUno(i + 1, 1);
-      this.Puntuacion[i] = this.TablaPuntuacion[i].Puntuacion;
+      this.Puntuacion[i] = this.TablaPuntuacion[i].puntuacion;
       console.log(this.TablaPuntuacion[i]);
       this.dataSource = new MatTableDataSource (this.TablaPuntuacion);
     } else {

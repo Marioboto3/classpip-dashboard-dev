@@ -56,21 +56,21 @@
           <!-- Nombre Alumno Column -->
           <ng-container matColumnDef="nombreAlumno">
             <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Nombre </th>
-            <td mat-cell *matCellDef="let alumno"> {{alumno.Nombre}} </td>
+            <td mat-cell *matCellDef="let alumno"> {{alumno.nombre}} </td>
 
           </ng-container>
 
           <!-- Primer Apellido Column -->
           <ng-container matColumnDef="primerApellido">
             <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Primer Apellido </th>
-            <td mat-cell *matCellDef="let alumno"> {{alumno.PrimerApellido}} </td>
+            <td mat-cell *matCellDef="let alumno"> {{alumno.primerApellido}} </td>
 
           </ng-container>
 
           <!-- Segundo Apellido Column -->
           <ng-container  matColumnDef="segundoApellido">
             <th style= "width: 15%" mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Segundo Apellido </th>
-            <td mat-cell *matCellDef="let alumno"> {{alumno.SegundoApellido}} </td>
+            <td mat-cell *matCellDef="let alumno"> {{alumno.segundoApellido}} </td>
 
           </ng-container>
 
@@ -84,15 +84,15 @@
           <ng-container matColumnDef="imagen">
             <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Imagen de Perfil</th>
             <td mat-cell *matCellDef="let alumno">
-              <img  *ngIf = "alumno.ImagenPerfil" style = "width:50px; height: 50px;" [src]="alumno.ImagenPerfil">
+              <img  *ngIf = "alumno.imagenPerfil" style = "width:50px; height: 50px;" [src]="alumno.imagenPerfil">
             </td>
           </ng-container>
 
           <ng-container matColumnDef="permisoCambio">
             <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Permiso cambio imagen</th>
             <td mat-cell *matCellDef="let alumno">
-              <i  *ngIf = "alumno.PermisoCambioImagenPerfil" class="material-icons green md-36">thumb_up_alt</i>
-              <i  *ngIf = "!alumno.PermisoCambioImagenPerfil" class="material-icons red md-36">not_interested</i>
+              <i  *ngIf = "alumno.permisoCambioImagenPerfil" class="material-icons green md-36">thumb_up_alt</i>
+              <i  *ngIf = "!alumno.permisoCambioImagenPerfil" class="material-icons red md-36">not_interested</i>
               <!-- <p  *ngIf = "alumno.PermisoCambioImagenPerfil">Sí</p>
               <p  *ngIf = "!alumno.PermisoCambioImagenPerfil">No</p> -->
             </td>
@@ -102,7 +102,7 @@
           <ng-container matColumnDef=" ">
               <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"></th>
               <td mat-cell *matCellDef="let alumno">
-                <button (click) = "AbrirDialogoConfirmacionEliminarAlumno (alumno)" mat-icon-button matTooltip="Eliminar al alumno {{alumno.Nombre}}">
+                <button (click) = "AbrirDialogoConfirmacionEliminarAlumno (alumno)" mat-icon-button matTooltip="Eliminar al alumno {{alumno.nombre}}">
                   <i class="material-icons red md-36">delete</i>
                 </button>
               </td>

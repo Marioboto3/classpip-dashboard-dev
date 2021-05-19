@@ -33,8 +33,8 @@ export class MisFamiliasImagenesPerfilComponent implements OnInit {
 
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
     this.peticionesAPI.DameFamiliasDeImagenesDePerfilProfesor (this.profesor.id)
     .subscribe (familias => {
       if (familias.length !== 0) {
@@ -42,9 +42,9 @@ export class MisFamiliasImagenesPerfilComponent implements OnInit {
         console.log ('ya tengo las familias de imagenes de perfil');
         console.log (familias);
         this.familias.forEach (f => {
-          const ejemploImagen1 = URL.ImagenesPerfil + f.Imagenes[0];
-          const ejemploImagen2 = URL.ImagenesPerfil + f.Imagenes[1];
-          const ejemploImagen3 = URL.ImagenesPerfil + f.Imagenes[2];
+          const ejemploImagen1 = URL.ImagenesPerfil + f.imagenes[0];
+          const ejemploImagen2 = URL.ImagenesPerfil + f.imagenes[1];
+          const ejemploImagen3 = URL.ImagenesPerfil + f.imagenes[2];
           this.listaFamilias.push ({
             familia: f,
             ejemplo1: ejemploImagen1,
@@ -77,9 +77,9 @@ export class MisFamiliasImagenesPerfilComponent implements OnInit {
 
         } else {
           this.familiasPublicas.forEach (f => {
-            const ejemploImagen1 = URL.ImagenesPerfil + f.Imagenes[0];
-            const ejemploImagen2 = URL.ImagenesPerfil + f.Imagenes[1];
-            const ejemploImagen3 = URL.ImagenesPerfil + f.Imagenes[2];
+            const ejemploImagen1 = URL.ImagenesPerfil + f.imagenes[0];
+            const ejemploImagen2 = URL.ImagenesPerfil + f.imagenes[1];
+            const ejemploImagen3 = URL.ImagenesPerfil + f.imagenes[2];
             this.listaFamiliasPublicas.push ({
               familia: f,
               ejemplo1: ejemploImagen1,
@@ -94,7 +94,7 @@ export class MisFamiliasImagenesPerfilComponent implements OnInit {
           .subscribe ( profesores => {
             this.familiasPublicas.forEach (familia => {
               const propietario = profesores.filter (p => p.id === familia.profesorId)[0];
-              this.propietarios.push (propietario.Nombre + ' ' + propietario.PrimerApellido);
+              this.propietarios.push (propietario.nombre + ' ' + propietario.primerApellido);
             });
           });
         }
@@ -107,11 +107,11 @@ export class MisFamiliasImagenesPerfilComponent implements OnInit {
     this.peticionesAPI.BorrarFamiliaDeImagenesDePerfil (familia.id)
     .subscribe (() => {
       let cont = 0;
-      familia.Imagenes.forEach (imagen => {
+      familia.imagenes.forEach (imagen => {
         this.peticionesAPI.BorraImagenPerfil (imagen)
         .subscribe (() => {
           cont++;
-          if (cont === familia.Imagenes.length) {
+          if (cont === familia.imagenes.length) {
             Swal.fire('OK', 'Familia de imagenes de perfil eliminada', 'success');
             this.listaFamilias = this.listaFamilias.filter (elemento => elemento.familia.id !== familia.id);
             console.log (this.listaFamilias);
@@ -124,7 +124,7 @@ export class MisFamiliasImagenesPerfilComponent implements OnInit {
   }
   AdvertenciaBorrar(familia: FamiliaDeImagenesDePerfil) {
     Swal.fire({
-      title: '¿Seguro que quieres eliminar la familia: ' + familia.NombreFamilia + '?',
+      title: '¿Seguro que quieres eliminar la familia: ' + familia.nombreFamilia + '?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -139,13 +139,13 @@ export class MisFamiliasImagenesPerfilComponent implements OnInit {
   }
 
   HazPublica(familia: FamiliaDeImagenesDePerfil) {
-    familia.Publica = true;
+    familia.publica = true;
     this.peticionesAPI.ModificaFamiliaDeImagenesDePerfil (familia).subscribe();
   }
 
 
   HazPrivada(familia: FamiliaDeImagenesDePerfil) {
-    familia.Publica = false;
+    familia.publica = false;
     this.peticionesAPI.ModificaFamiliaDeImagenesDePerfil (familia).subscribe();
   }
 

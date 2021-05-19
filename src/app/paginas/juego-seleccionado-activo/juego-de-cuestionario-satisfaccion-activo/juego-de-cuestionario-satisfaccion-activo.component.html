@@ -25,13 +25,13 @@
 
           <ng-container matColumnDef="afirmacion">
             <th mat-header-cell  *matHeaderCellDef class="tituloColumnaTabla"> Afirmacion  </th>
-            <td mat-cell style= "text-align: left"  *matCellDef="let afirmacion"> {{afirmacion.Texto}} </td>
+            <td mat-cell style= "text-align: left"  *matCellDef="let afirmacion"> {{afirmacion.texto}} </td>
           </ng-container>
 
           <!-- Descripcion Column -->
           <ng-container matColumnDef="media">
             <th mat-header-cell  *matHeaderCellDef class="tituloColumnaTabla"> Media </th>
-            <td mat-cell style= "text-align: left"  *matCellDef="let afirmacion"> {{(afirmacion.Media).toFixed(2)}} </td>
+            <td mat-cell style= "text-align: left"  *matCellDef="let afirmacion"> {{(afirmacion.media).toFixed(2)}} </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
@@ -62,7 +62,7 @@
           <mat-expansion-panel-header>
 
             <mat-panel-title>
-              {{cuestionario.PreguntasAbiertas[i]}}
+              {{cuestionario.preguntasAbiertas[i]}}
             </mat-panel-title>
 
           </mat-expansion-panel-header>

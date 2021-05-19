@@ -15,7 +15,7 @@
           <mat-expansion-panel-header>
 
             <mat-panel-title>
-              {{equipo.Nombre}}
+              {{equipo.nombre}}
             </mat-panel-title>
             <!-- <mat-panel-description>
               Información sobre {{equipo.Nombre}}
@@ -23,13 +23,13 @@
           </mat-expansion-panel-header>
             <div class="enFila">
                 <div>
-                <img style = "width: 130px; height: 130px;" *ngIf="equipo.FotoEquipo" mat-card-image [src]="equipo.FotoEquipo" >
+                <img style = "width: 130px; height: 130px;" *ngIf="equipo.fotoEquipo" mat-card-image [src]="equipo.fotoEquipo" >
                 </div>
                 <div style="margin-left: 10%; width: 40%">
                 <span style="font-weight: bold; font-size: 130%;">Miembros del equipo</span>
                 <mat-list *ngFor="let alumno of alumnosEquipo">
                   <!-- <mat-list-item  role="listitem">{{alumno.Nombre}} {{alumno.PrimerApellido}} {{alumno.SegundoApellido}}</mat-list-item> -->
-                  <mat-list-item >{{alumno.Nombre}} {{alumno.PrimerApellido}} {{alumno.SegundoApellido}}</mat-list-item>
+                  <mat-list-item >{{alumno.nombre}} {{alumno.primerApellido}} {{alumno.segundoApellido}}</mat-list-item>
 
                 </mat-list>
                 </div>

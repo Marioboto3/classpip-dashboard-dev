@@ -66,8 +66,8 @@ export class EquipoSeleccionadoJuegoDeColeccionComponent implements OnInit {
 
   GET_ImagenPerfil() {
 
-    if (this.equipo.FotoEquipo !== undefined ) {
-      this.http.get('http://localhost:3000/api/imagenes/LogosEquipos/download/' + this.equipo.FotoEquipo,
+    if (this.equipo.fotoEquipo !== undefined ) {
+      this.http.get('http://localhost:3000/api/imagenes/LogosEquipos/download/' + this.equipo.fotoEquipo,
       { responseType: ResponseContentType.Blob })
       .subscribe(response => {
 
@@ -94,7 +94,7 @@ export class EquipoSeleccionadoJuegoDeColeccionComponent implements OnInit {
       this.listaCromosSinRepetidos.sort((a, b) => a.cromo.Nombre.localeCompare(b.cromo.Nombre));
 
       this.sesion.TomaCromos(this.listaCromos);
-      this.listaCromos.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
+      this.listaCromos.sort((a, b) => a.nombre.localeCompare(b.nombre));
       this.DameImagenesCromos();
 
     });
@@ -186,7 +186,7 @@ export class EquipoSeleccionadoJuegoDeColeccionComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: cromo.Nombre,
+        nombre: cromo.nombre,
       }
     });
 
@@ -195,7 +195,7 @@ export class EquipoSeleccionadoJuegoDeColeccionComponent implements OnInit {
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.BorrarCromo(cromo);
-        Swal.fire('Eliminado', cromo.Nombre + ' eliminado correctamente', 'success');
+        Swal.fire('Eliminado', cromo.nombre + ' eliminado correctamente', 'success');
 
       }
     });

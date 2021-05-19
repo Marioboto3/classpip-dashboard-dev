@@ -65,7 +65,7 @@ export class JuegoDeCuestionarioSeleccionadoPreparadoComponent implements OnInit
       this.listaAlumnosOrdenadaPorNota = inscripciones;
       // tslint:disable-next-line:only-arrow-functions
       this.listaAlumnosOrdenadaPorNota = this.listaAlumnosOrdenadaPorNota.sort(function(a, b) {
-        return b.Nota - a.Nota;
+        return b.nota - a.nota;
       });
       this.TablaClasificacionTotal();
     });
@@ -79,8 +79,8 @@ export class JuegoDeCuestionarioSeleccionadoPreparadoComponent implements OnInit
 
   ActivarJuego() {
     // tslint:disable-next-line:max-line-length
-    this.peticionesAPI.ModificaJuegoDeCuestionario(new JuegoDeCuestionario(this.juegoSeleccionado.NombreJuego, this.juegoSeleccionado.Tipo, this.juegoSeleccionado.Modalidad, this.juegoSeleccionado.PuntuacionCorrecta,
-      this.juegoSeleccionado.PuntuacionIncorrecta, this.juegoSeleccionado.Presentacion, true, this.juegoSeleccionado.JuegoTerminado,
+    this.peticionesAPI.ModificaJuegoDeCuestionario(new JuegoDeCuestionario(this.juegoSeleccionado.nombreJuego, this.juegoSeleccionado.tipo, this.juegoSeleccionado.modalidad, this.juegoSeleccionado.puntuacionCorrecta,
+      this.juegoSeleccionado.puntuacionIncorrecta, this.juegoSeleccionado.presentacion, true, this.juegoSeleccionado.juegoTerminado,
       // tslint:disable-next-line:max-line-length
       this.juegoSeleccionado.profesorId, this.juegoSeleccionado.grupoId, this.juegoSeleccionado.cuestionarioId), this.juegoSeleccionado.id, this.juegoSeleccionado.grupoId)
       .subscribe(res => {
@@ -94,14 +94,14 @@ export class JuegoDeCuestionarioSeleccionadoPreparadoComponent implements OnInit
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: this.juegoSeleccionado.Tipo,
+        nombre: this.juegoSeleccionado.tipo,
       }
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.ActivarJuego();
-        Swal.fire('Activado', this.juegoSeleccionado.Tipo + ' activado correctamente', 'success');
+        Swal.fire('Activado', this.juegoSeleccionado.tipo + ' activado correctamente', 'success');
       }
     });
   }
@@ -119,14 +119,14 @@ export class JuegoDeCuestionarioSeleccionadoPreparadoComponent implements OnInit
       height: '150px',
       data: {
         mensaje: this.mensajeEliminar,
-        nombre: this.juegoSeleccionado.Tipo,
+        nombre: this.juegoSeleccionado.tipo,
       }
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.EliminarJuego();
-        Swal.fire('Eliminado', this.juegoSeleccionado.Tipo + ' eliminado correctamente', 'success');
+        Swal.fire('Eliminado', this.juegoSeleccionado.tipo + ' eliminado correctamente', 'success');
       }
     });
   }

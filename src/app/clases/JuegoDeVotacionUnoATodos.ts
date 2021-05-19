@@ -1,26 +1,26 @@
 export class JuegoDeVotacionUnoATodos {
   id: number;
-  Tipo: string;
+  tipo: string;
   grupoId: number;
-  NombreJuego: string;
-  Modo: string;
-  ModoReparto: string;
-  JuegoActivo: boolean;
-  JuegoTerminado: boolean;
-  Puntos: number[];
+  nombreJuego: string;
+  modo: string;
+  modoReparto: string;
+  juegoActivo: boolean;
+  juegoTerminado: boolean;
+  puntos: number[];
 
 
   constructor(Tipo?: string, Modo?: string, ModoReparto?: string,  JuegoActivo?: boolean,
               Puntos?: number[], NombreJuego?: string,
               JuegoTerminado?: boolean, grupoId?: number) {
 
-    this.Tipo = Tipo;
-    this.Modo = Modo;
-    this.ModoReparto = ModoReparto;
-    this.JuegoActivo = JuegoActivo;
-    this.Puntos = Puntos;
-    this.NombreJuego = NombreJuego;
-    this.JuegoTerminado = JuegoTerminado;
+    this.tipo = Tipo;
+    this.modo = Modo;
+    this.modoReparto = ModoReparto;
+    this.juegoActivo = JuegoActivo;
+    this.puntos = Puntos;
+    this.nombreJuego = NombreJuego;
+    this.juegoTerminado = JuegoTerminado;
     this.grupoId = grupoId;
   }
 }

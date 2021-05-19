@@ -96,8 +96,8 @@ export class PreguntaComponent implements OnInit {
     this.profesor = this.sesion.DameProfesor();
     // tslint:disable-next-line:no-string-literal
     this.URLVueltaInicio = this.route.snapshot.queryParams['URLVueltaInicio'] || '/inicio';
-    this.varTitulo = "titulo" + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
 
   }
 
@@ -107,11 +107,11 @@ export class PreguntaComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     const pregunta = new Pregunta (this.titulo, this.tipoDePreguntaSeleccionado, this.pregunta, this.tematica, this.nombreFicheroImagen, this.feedbackCorrecto, this.feedbackIncorrecto);
 
-    pregunta.Emparejamientos = this.emparejamientos;
-    pregunta.RespuestaCorrecta = this.respuestaCorrecta;
-    pregunta.RespuestaIncorrecta1 = this.respuestaIncorrecta1;
-    pregunta.RespuestaIncorrecta2 = this.respuestaIncorrecta2;
-    pregunta.RespuestaIncorrecta3 = this.respuestaIncorrecta3;
+    pregunta.emparejamientos = this.emparejamientos;
+    pregunta.respuestaCorrecta = this.respuestaCorrecta;
+    pregunta.respuestaIncorrecta1 = this.respuestaIncorrecta1;
+    pregunta.respuestaIncorrecta2 = this.respuestaIncorrecta2;
+    pregunta.respuestaIncorrecta3 = this.respuestaIncorrecta3;
 
 
 
@@ -294,15 +294,15 @@ export class PreguntaComponent implements OnInit {
           // tslint:disable-next-line:no-shadowed-variable
           const pregunta = res;
           //Si la pregunta se registra correctamente, enviamos también la imagen (si es que la hay)
-          if (pregunta.Imagen) {
+          if (pregunta.imagen) {
             console.log ('Si que registro');
-            console.log (pregunta.Imagen);
+            console.log (pregunta.imagen);
             //guardamos la imagen de la pregunta
-            const ImagenPregunta = this.ficherosPreguntas.filter (f => f.name === pregunta.Imagen)[0];
+            const ImagenPregunta = this.ficherosPreguntas.filter (f => f.name === pregunta.imagen)[0];
             console.log ('imagen ');
             console.log (ImagenPregunta);
             const formDataImagen = new FormData();
-            formDataImagen.append(pregunta.Imagen, ImagenPregunta);
+            formDataImagen.append(pregunta.imagen, ImagenPregunta);
             this.peticionesAPI.PonImagenPregunta (formDataImagen)
             .subscribe(() => console.log('Imagen cargado'));
            }
@@ -365,7 +365,7 @@ ExisteImagen(){
 
   if (this.misPreguntas != null) {
   this.misPreguntas.forEach( pregunta => {
-    if (pregunta.Imagen === this.imagenPregunta) {
+    if (pregunta.imagen === this.imagenPregunta) {
         this.existeImagen = true} });
   }
 }

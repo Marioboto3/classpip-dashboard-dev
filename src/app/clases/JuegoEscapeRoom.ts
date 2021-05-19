@@ -1,6 +1,7 @@
 import { Escenario } from "./Escenario";
 
 export class JuegoEscapeRoom {
+  
     id: number;
     grupoId: number;
     nombreJuego: string;

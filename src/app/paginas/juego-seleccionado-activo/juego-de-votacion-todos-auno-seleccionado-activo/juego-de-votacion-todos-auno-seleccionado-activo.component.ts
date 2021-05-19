@@ -65,10 +65,10 @@ export class JuegoDeVotacionTodosAUnoSeleccionadoActivoComponent implements OnIn
     console.log ('columnas');
     console.log (this.displayedColumnsAlumnos);
     console.log ('conceptos');
-    console.log (this.juegoSeleccionado.Conceptos);
+    console.log (this.juegoSeleccionado.conceptos);
 
 
-    if (this.juegoSeleccionado.Modo === 'Individual') {
+    if (this.juegoSeleccionado.modo === 'Individual') {
       this.AlumnosDelJuego();
     } else {
       console.log ('aun no funciona la modalidad por equipos');
@@ -145,7 +145,7 @@ export class JuegoDeVotacionTodosAUnoSeleccionadoActivoComponent implements OnIn
       if (result.value) {
         // Primero registro las puntuaciones definitivas de cada alumno
         this.listaAlumnosOrdenadaPorPuntos.forEach (alumno => {
-          alumno.PuntosTotales = this.rankingIndividualJuegoDeVotacionTodosAUno.filter (al => al.id === alumno.alumnoId)[0].nota;
+          alumno.puntosTotales = this.rankingIndividualJuegoDeVotacionTodosAUno.filter (al => al.id === alumno.alumnoId)[0].nota;
           console.log ('actualizo');
           console.log (alumno);
           this.peticionesAPI.ModificaInscripcionAlumnoJuegoDeVotacionTodosAUno (alumno).subscribe();

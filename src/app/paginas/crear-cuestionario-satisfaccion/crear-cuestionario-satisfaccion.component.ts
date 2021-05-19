@@ -28,8 +28,8 @@ export class CrearCuestionarioSatisfaccionComponent implements OnInit {
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
     this.profesorId = this.sesion.DameProfesor().id;
-    this.varTitulo = "titulo" + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
   }
 
   // Activa la función SeleccionarFicheroPreguntas

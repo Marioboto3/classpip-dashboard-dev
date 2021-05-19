@@ -47,7 +47,7 @@ export class MisPuntosComponent implements OnInit {
     // this.profesorId = this.profesorService.RecibirProfesorIdDelServicio();
     this.profesorId = Number (this.route.snapshot.paramMap.get('id'));
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
     console.log(this.profesorId);
 
     this.PuntosDelProfesor();
@@ -79,7 +79,7 @@ export class MisPuntosComponent implements OnInit {
   EnviarTipoPuntoEditar(punto: Punto) {
     console.log('voy a enviar');
     this.sesion.TomaTipoPunto(punto);
-    console.log(punto.Nombre);
+    console.log(punto.nombre);
 
   }
 
@@ -91,7 +91,7 @@ export class MisPuntosComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: punto.Nombre,
+        nombre: punto.nombre,
       }
     });
 
@@ -100,7 +100,7 @@ export class MisPuntosComponent implements OnInit {
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.BorrarPunto(punto);
-        Swal.fire('Eliminado', punto.Nombre + ' eliminado correctamente', 'success');
+        Swal.fire('Eliminado', punto.nombre + ' eliminado correctamente', 'success');
 
       }
     });
@@ -136,7 +136,7 @@ export class MisPuntosComponent implements OnInit {
      EnviarInsigniaEditar(insigna: Insignia) {
       console.log('voy a enviar');
       this.sesion.TomaInsignia(insigna);
-      console.log(insigna.Nombre);
+      console.log(insigna.nombre);
     }
 
     // Lo mismo que con el punto
@@ -146,7 +146,7 @@ export class MisPuntosComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: insigna.Nombre,
+        nombre: insigna.nombre,
       }
     });
 
@@ -155,7 +155,7 @@ export class MisPuntosComponent implements OnInit {
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.BorrarInsignia(insigna);
-        Swal.fire('Eliminada', insigna.Nombre + ' eliminada correctamente', 'success');
+        Swal.fire('Eliminada', insigna.nombre + ' eliminada correctamente', 'success');
       }
     });
   }
@@ -171,12 +171,12 @@ export class MisPuntosComponent implements OnInit {
   ImagenDelaInsignia(insigna: Insignia) {
 
     console.log('entro a buscar insignia y foto');
-    console.log(insigna.Imagen);
+    console.log(insigna.imagen);
     // Si la insignia tiene una foto (recordemos que la foto no es obligatoria)
-    if (insigna.Imagen !== undefined) {
+    if (insigna.imagen !== undefined) {
 
       // Busca en la base de datos la imágen con el nombre registrado en insingnia.Imagen y la recupera
-      this.peticionesAPI.DameImagenInsignia (insigna.Imagen)
+      this.peticionesAPI.DameImagenInsignia (insigna.imagen)
       .subscribe(response => {
         const blob = new Blob([response.blob()], { type: 'image/jpg'});
 

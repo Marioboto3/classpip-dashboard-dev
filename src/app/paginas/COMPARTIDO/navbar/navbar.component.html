@@ -1,4 +1,4 @@
-<form class={{profesor.Estacion}} *ngIf = "profesor">
+<form class={{profesor.estacion}} *ngIf = "profesor">
 
     <img style="display: inline-block;" width="40" src={{rutaLogo}}>
     <button routerLink = aboutClasspip mat-button [matMenuTriggerFor]="Classpip" class="btnNavbarNegro">Classpip</button>
@@ -43,7 +43,7 @@
     </mat-menu>
 
 
-    <button mat-button [matMenuTriggerFor]="NombreProfesor" class="btnNavbarName"> {{profesor.Nombre}} {{profesor.PrimerApellido}} </button>
+    <button mat-button [matMenuTriggerFor]="NombreProfesor" class="btnNavbarName"> {{profesor.nombre}} {{profesor.primerApellido}} </button>
     <mat-menu #NombreProfesor="matMenu">
       <button mat-menu-item routerLink= "{{URLConfiguracion}}"> Configuración del perfil</button>
       <button mat-menu-item routerLink = "{{URLCambiarEstacion}}"> Configuración del dashboard</button>

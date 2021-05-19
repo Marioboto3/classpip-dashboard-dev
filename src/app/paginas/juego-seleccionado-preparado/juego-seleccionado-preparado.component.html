@@ -1,5 +1,5 @@
-<div class="titulo">{{juegoSeleccionado.Tipo}}</div>
-<div class="subtitulo">{{juegoSeleccionado.Modo}}</div>
+<div class="titulo">{{juegoSeleccionado.tipo}}</div>
+<div class="subtitulo">{{juegoSeleccionado.modo}}</div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 
 <!-- <div *ngIf= "juegoSeleccionado.Tipo === 'Juego De Puntos'">
@@ -18,11 +18,11 @@
   <app-juego-de-competicion-seleccionado-preparado></app-juego-de-competicion-seleccionado-preparado>
 </div> -->
 
-<div  class="contenedor" *ngIf= "juegoSeleccionado.Tipo === 'Juego De Cuestionario'">
+<div  class="contenedor" *ngIf= "juegoSeleccionado.tipo === 'Juego De Cuestionario'">
   <app-juego-de-cuestionario-seleccionado-preparado></app-juego-de-cuestionario-seleccionado-preparado>
 </div>
 
-<div  class="contenedor" *ngIf= "juegoSeleccionado.Tipo === 'Juego De Geocaching'">
+<div  class="contenedor" *ngIf= "juegoSeleccionado.tipo === 'Juego De Geocaching'">
   <app-juego-de-geocaching-seleccionado-preparado></app-juego-de-geocaching-seleccionado-preparado>
 </div>
 

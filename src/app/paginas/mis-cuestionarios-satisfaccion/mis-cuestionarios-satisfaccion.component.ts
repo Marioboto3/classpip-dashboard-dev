@@ -37,8 +37,8 @@ export class MisCuestionariosSatisfaccionComponent implements OnInit {
 
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
     this.DameTodosMisCuestionariosDeSatisfaccion();
     this.DameTodosLosCuestionariosDeSatisfaccionPublicos();
   }
@@ -72,7 +72,7 @@ export class MisCuestionariosSatisfaccionComponent implements OnInit {
           .subscribe ( profesores => {
             this.cuestionariosDeSatisfaccionPublicos.forEach (cuestionario => {
               const propietario = profesores.filter (p => p.id === cuestionario.profesorId)[0];
-              this.propietarios.push (propietario.Nombre + ' ' + propietario.PrimerApellido);
+              this.propietarios.push (propietario.nombre + ' ' + propietario.primerApellido);
             });
           });
         }
@@ -118,10 +118,10 @@ export class MisCuestionariosSatisfaccionComponent implements OnInit {
   CrearCopia(cuestionario: CuestionarioSatisfaccion) {
     console.log ('vamos a crear copia');
     const copia = new CuestionarioSatisfaccion(
-      cuestionario.Titulo + '(copia)',
-      cuestionario.Descripcion,
-      cuestionario.Afirmaciones,
-      cuestionario.PreguntasAbiertas,
+      cuestionario.titulo + '(copia)',
+      cuestionario.descripcion,
+      cuestionario.afirmaciones,
+      cuestionario.preguntasAbiertas,
       cuestionario.profesorId);
 
 
@@ -138,13 +138,13 @@ export class MisCuestionariosSatisfaccionComponent implements OnInit {
   }
 
   HazPublico(cuestionario: CuestionarioSatisfaccion) {
-    cuestionario.Publico = true;
+    cuestionario.publico = true;
     this.peticionesAPI.ModificaCuestionarioSatisfaccion (cuestionario).subscribe();
   }
 
 
   HazPrivado(cuestionario: CuestionarioSatisfaccion) {
-    cuestionario.Publico = false;
+    cuestionario.publico = false;
     this.peticionesAPI.ModificaCuestionarioSatisfaccion (cuestionario).subscribe();
   }
 

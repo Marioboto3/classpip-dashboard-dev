@@ -44,7 +44,7 @@ export class GuardarFamiliaComponent implements OnInit {
 
     const a = document.getElementById('generarJSON');
     a.setAttribute ('href', uri);
-    a.setAttribute ('download', this.familiaElegida.NombreFamilia);
+    a.setAttribute ('download', this.familiaElegida.nombreFamilia);
     a.innerHTML = "Botón derecho y selecciona 'deja el enlace como...'";
   }
 
@@ -52,23 +52,23 @@ export class GuardarFamiliaComponent implements OnInit {
   PreparaImagenes() {
 
     // Vamos a por las imagenes de cada uno de los complementos
-    this.imagenSilueta = URL.ImagenesAvatares + this.familiaElegida.Silueta;
+    this.imagenSilueta = URL.ImagenesAvatares + this.familiaElegida.silueta;
 
     this.c1 = [];
-    this.familiaElegida.Complemento1.forEach (imagenComplemento => {
+    this.familiaElegida.complemento1.forEach (imagenComplemento => {
       this.c1.push (URL.ImagenesAvatares + imagenComplemento);
     });
 
     this.c2 = [];
-    this.familiaElegida.Complemento2.forEach (imagenComplemento => {
+    this.familiaElegida.complemento2.forEach (imagenComplemento => {
       this.c2.push (URL.ImagenesAvatares + imagenComplemento);
     });
     this.c3 = [];
-    this.familiaElegida.Complemento3.forEach (imagenComplemento => {
+    this.familiaElegida.complemento3.forEach (imagenComplemento => {
       this.c3.push (URL.ImagenesAvatares + imagenComplemento);
     });
     this.c4 = [];
-    this.familiaElegida.Complemento4.forEach (imagenComplemento => {
+    this.familiaElegida.complemento4.forEach (imagenComplemento => {
       this.c4.push (URL.ImagenesAvatares + imagenComplemento);
     });
   }

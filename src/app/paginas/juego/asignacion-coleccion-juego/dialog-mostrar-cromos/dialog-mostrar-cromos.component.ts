@@ -62,9 +62,9 @@ export class DialogMostrarCromosComponent implements OnInit {
     for (let i = 0; i < this.cromosColeccion.length; i++) {
       this.cromo = this.cromosColeccion[i];
 
-      if (this.cromo.ImagenDelante !== undefined ) {
+      if (this.cromo.imagenDelante !== undefined ) {
         // Busca en la base de datos la imágen con el nombre registrado en equipo.FotoEquipo y la recupera
-        this.peticionesAPI.DameImagenCromo (this.cromo.ImagenDelante)
+        this.peticionesAPI.DameImagenCromo (this.cromo.imagenDelante)
         .subscribe(response => {
           const blob = new Blob([response.blob()], { type: 'image/jpg'});
 
@@ -79,9 +79,9 @@ export class DialogMostrarCromosComponent implements OnInit {
       });
       }
 
-      if (this.cromo.ImagenDetras !== undefined ) {
+      if (this.cromo.imagenDetras !== undefined ) {
         // Busca en la base de datos la imágen con el nombre registrado en equipo.FotoEquipo y la recupera
-        this.peticionesAPI.DameImagenCromo (this.cromo.ImagenDetras)
+        this.peticionesAPI.DameImagenCromo (this.cromo.imagenDetras)
         .subscribe(response => {
           const blob = new Blob([response.blob()], { type: 'image/jpg'});
 

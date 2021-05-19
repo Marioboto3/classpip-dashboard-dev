@@ -90,8 +90,8 @@ export class GestionPreguntaKahootComponent implements OnInit {
   TraeImagenPregunta(pregunta: Pregunta) {
 
     // Si la pregunta tiene una foto (recordemos que la foto no es obligatoria)
-    if (pregunta.Imagen !== undefined) {
-      this.imagenPregunta = URL.ImagenesPregunta + pregunta.Imagen ;
+    if (pregunta.imagen !== undefined) {
+      this.imagenPregunta = URL.ImagenesPregunta + pregunta.imagen ;
       console.log (this.imagenPregunta);
 
       // Si no, la imagenPregunta será undefined para que no nos pinte la foto de otro equipo préviamente seleccionado

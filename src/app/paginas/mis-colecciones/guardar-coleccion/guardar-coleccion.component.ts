@@ -68,8 +68,8 @@ export class GuardarColeccionComponent implements OnInit {
     this.coleccion = this.sesion.DameColeccion();
     console.log ('ya tengo coleccion');
     console.log (this.coleccion);
-    if (this.coleccion.ImagenColeccion !== undefined) {
-      this.imagenColeccion = URL.ImagenesColeccion + this.coleccion.ImagenColeccion ;
+    if (this.coleccion.imagenColeccion !== undefined) {
+      this.imagenColeccion = URL.ImagenesColeccion + this.coleccion.imagenColeccion ;
     } else {
       this.imagenColeccion = undefined;
     }
@@ -83,8 +83,8 @@ export class GuardarColeccionComponent implements OnInit {
       for (let i = 0; i < this.cromosColeccion.length; i++) {
 
         this.cromo = this.cromosColeccion[i];
-        this.imagenesCromosDelante[i] = URL.ImagenesCromo + this.cromo.ImagenDelante;
-        this.imagenesCromosDetras[i] = URL.ImagenesCromo + this.cromo.ImagenDetras;
+        this.imagenesCromosDelante[i] = URL.ImagenesCromo + this.cromo.imagenDelante;
+        this.imagenesCromosDetras[i] = URL.ImagenesCromo + this.cromo.imagenDetras;
 
       }
       console.log ('imagenes');
@@ -109,7 +109,7 @@ export class GuardarColeccionComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: cromo.Nombre,
+        nombre: cromo.nombre,
       }
     });
 
@@ -118,7 +118,7 @@ export class GuardarColeccionComponent implements OnInit {
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.BorrarCromo(cromo);
-        Swal.fire('Eliminado', cromo.Nombre + ' eliminado correctamente', 'success');
+        Swal.fire('Eliminado', cromo.nombre + ' eliminado correctamente', 'success');
 
       }
     });
@@ -137,14 +137,14 @@ export class GuardarColeccionComponent implements OnInit {
       }
     );
     console.log (this.cromosColeccion);
-    this.peticionesAPI.BorrarImagenCromo(cromo.ImagenDelante).subscribe( () => {
+    this.peticionesAPI.BorrarImagenCromo(cromo.imagenDelante).subscribe( () => {
         // tslint:disable-next-line:max-line-length
         const nueva = this.imagenesCromosDelante.slice(0, posicion).concat(this.imagenesCromosDelante.slice(posicion + 1, this.imagenesCromosDelante.length));
         this.imagenesCromosDelante = nueva;
       }
     );
-    if (cromo.ImagenDetras !== undefined) {
-      this.peticionesAPI.BorrarImagenCromo(cromo.ImagenDelante).subscribe( () => {
+    if (cromo.imagenDetras !== undefined) {
+      this.peticionesAPI.BorrarImagenCromo(cromo.imagenDelante).subscribe( () => {
         // tslint:disable-next-line:max-line-length
         const nueva = this.imagenesCromosDetras.slice(0, posicion).concat(this.imagenesCromosDetras.slice(posicion + 1, this.imagenesCromosDetras.length));
         this.imagenesCromosDelante = nueva;
@@ -173,18 +173,18 @@ export class GuardarColeccionComponent implements OnInit {
     // creamos un objeto con los datos de la colección tal y como se necesitan
     // para generar el JSON
     const coleccion = {
-      Nombre:  this.coleccion.Nombre,
-      ImagenColeccion: this.coleccion.ImagenColeccion,
-      DosCaras: this.coleccion.DosCaras,
+      Nombre:  this.coleccion.nombre,
+      ImagenColeccion: this.coleccion.imagenColeccion,
+      DosCaras: this.coleccion.dosCaras,
       cromos: []
     };
     this.cromosColeccion.forEach (cromo => {
       const c = {
-        nombreCromo: cromo.Nombre,
-        nombreImagenCromoDelante: cromo.ImagenDelante,
-        nombreImagenCromoDetras: cromo.ImagenDetras,
-        nivelCromo: cromo.Nivel,
-        probabilidadCromo: cromo.Probabilidad,
+        nombreCromo: cromo.nombre,
+        nombreImagenCromoDelante: cromo.imagenDelante,
+        nombreImagenCromoDetras: cromo.imagenDetras,
+        nivelCromo: cromo.nivel,
+        probabilidadCromo: cromo.probabilidad,
       };
       coleccion.cromos.push(c);
     });
@@ -209,7 +209,7 @@ export class GuardarColeccionComponent implements OnInit {
     this.interval = setInterval(() => {
       const a = document.getElementById('generarJSON');
       a.setAttribute ('href', uri);
-      a.setAttribute ('download', this.coleccion.Nombre);
+      a.setAttribute ('download', this.coleccion.nombre);
       a.innerHTML = "Botón derecho y selecciona 'deja el enlace como...'";
       clearInterval(this.interval);
     }, 0);

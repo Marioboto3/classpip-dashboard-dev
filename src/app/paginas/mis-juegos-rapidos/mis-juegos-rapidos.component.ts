@@ -33,8 +33,8 @@ export class MisJuegosRapidosComponent implements OnInit {
 
     this.profesor = this.sesion.DameProfesor();
     this.ObtenJuegosRapidos();
-    this.varTitulo = 'titulo' + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = 'titulo' + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
   }
 
   ObtenJuegosRapidos() {

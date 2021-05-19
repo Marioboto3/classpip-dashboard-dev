@@ -1,6 +1,6 @@
 export class EquipoJuegoDePuntos {
 
-  PuntosTotalesEquipo: number;
+  puntosTotalesEquipo: number;
   equipoId: number;
   juegoDePuntosId: number;
   id: number;
@@ -11,7 +11,7 @@ export class EquipoJuegoDePuntos {
     this.equipoId = equipoId;
     this.juegoDePuntosId = juegoDePuntosId;
     this.nivelId = nivelId;
-    this.PuntosTotalesEquipo = PuntosTotalesEquipo;
+    this.puntosTotalesEquipo = PuntosTotalesEquipo;
 
   }
 }

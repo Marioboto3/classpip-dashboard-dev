@@ -1,16 +1,18 @@
 export class Insignia {
-  Nombre: string;
-  Descripcion: string;
-  Imagen: string;
+
+  nombre: string;
+  descripcion: string;
+  imagen: string;
   id: number;
   profesorId: number;
 
 
   constructor(nombre?: string, descripcion?: string, imagen?: string) {
 
-    this.Nombre = nombre;
-    this.Descripcion = descripcion;
-    this.Imagen = imagen;
+    this.nombre = nombre;
+    this.descripcion = descripcion;
+    this.imagen = imagen;
+    
   }
 
 }

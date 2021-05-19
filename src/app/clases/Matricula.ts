@@ -1,4 +1,5 @@
 export class Matricula {
+  
   alumnoId: number;
   grupoId: number;
   id: number;

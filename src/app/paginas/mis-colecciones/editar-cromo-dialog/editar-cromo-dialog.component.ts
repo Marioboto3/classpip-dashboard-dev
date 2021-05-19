@@ -94,12 +94,12 @@ export class EditarCromoDialogComponent implements OnInit {
     this.cromo = this.data.cr;
     this.coleccion = this.data.coleccion;
 
-    this.nombreCromo = this.cromo.Nombre;
-    this.nivelCromo = this.cromo.Nivel;
-    this.probabilidadCromo = this.cromo.Probabilidad;
+    this.nombreCromo = this.cromo.nombre;
+    this.nivelCromo = this.cromo.nivel;
+    this.probabilidadCromo = this.cromo.probabilidad;
     this.cromosColeccion = this.sesion.DameCromos();
 
-    this.opcionSeleccionadaNivel = this.cromo.Nivel;
+    this.opcionSeleccionadaNivel = this.cromo.nivel;
     // this.opcionSeleccionadaProbabilidad = this.cromo.Probabilidad;
     console.log(this.cromo);
     // Cargo el imagen del cromo
@@ -147,9 +147,9 @@ export class EditarCromoDialogComponent implements OnInit {
 
   TraeImagenCromo() {
 
-    if (this.cromo.ImagenDelante !== undefined ) {
+    if (this.cromo.imagenDelante !== undefined ) {
 
-      this.imagenCromoDelante = URL.ImagenesCromo + this.cromo.ImagenDelante;
+      this.imagenCromoDelante = URL.ImagenesCromo + this.cromo.imagenDelante;
 
       // Busca en la base de datos la imágen con el nombre registrado en cromo.Imagen y la recupera
 
@@ -168,8 +168,8 @@ export class EditarCromoDialogComponent implements OnInit {
         // });
     }
 
-    if (this.cromo.ImagenDetras !== undefined ) {
-      this.imagenCromoDetras = URL.ImagenesCromo + this.cromo.ImagenDetras;
+    if (this.cromo.imagenDetras !== undefined ) {
+      this.imagenCromoDetras = URL.ImagenesCromo + this.cromo.imagenDetras;
       // Busca en la base de datos la imágen con el nombre registrado en cromo.Imagen y la recupera
       // this.peticionesAPI.DameImagenCromo (this.cromo.ImagenDetras)
       // .subscribe(response => {

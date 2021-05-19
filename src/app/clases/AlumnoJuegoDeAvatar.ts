@@ -1,11 +1,11 @@
 export class AlumnoJuegoDeAvatar {
-  Silueta: string;
-  Privilegios: boolean[];
-  Complemento1: string;
-  Complemento2: string;
-  Complemento3: string;
-  Complemento4: string;
-  Voz: string;
+  silueta: string;
+  privilegios: boolean[];
+  complemento1: string;
+  complemento2: string;
+  complemento3: string;
+  complemento4: string;
+  voz: string;
   id: number;
   alumnoId: number;
   juegoDeAvatarId: number;
@@ -13,6 +13,6 @@ export class AlumnoJuegoDeAvatar {
   constructor(alumnoId?: number, juegoDeAvatarId?: number) {
     this.alumnoId = alumnoId;
     this.juegoDeAvatarId = juegoDeAvatarId;
-    this.Privilegios = Array(6).fill (false);
+    this.privilegios = Array(6).fill (false);
   }
 }

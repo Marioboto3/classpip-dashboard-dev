@@ -261,18 +261,18 @@ export class AsignarCromosComponent implements OnInit {
 
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < this.cromosColeccion.length; i ++) {
-          if (this.cromosColeccion[i].Probabilidad === 'Muy Baja') {
+          if (this.cromosColeccion[i].probabilidad === 'Muy Baja') {
             this.probabilidadCromos[i] = 3;
 
-          } else if (this.cromosColeccion[i].Probabilidad === 'Baja') {
+          } else if (this.cromosColeccion[i].probabilidad === 'Baja') {
 
             this.probabilidadCromos[i] = 7;
 
-          } else if (this.cromosColeccion[i].Probabilidad === 'Media') {
+          } else if (this.cromosColeccion[i].probabilidad === 'Media') {
 
             this.probabilidadCromos[i] = 20;
 
-          } else if (this.cromosColeccion[i].Probabilidad === 'Alta') {
+          } else if (this.cromosColeccion[i].probabilidad === 'Alta') {
 
             this.probabilidadCromos[i] = 30;
 
@@ -338,7 +338,7 @@ export class AsignarCromosComponent implements OnInit {
                     if (this.selection.isSelected(row))  {
                       let alumno: Alumno;
                       alumno = row;
-                      console.log(alumno.Nombre + ' seleccionado');
+                      console.log(alumno.nombre + ' seleccionado');
 
                       let alumnoJuegoDeColeccion: AlumnoJuegoDeColeccion;
                       alumnoJuegoDeColeccion = this.inscripcionesAlumnos.filter(res => res.alumnoId === alumno.id)[0];
@@ -370,7 +370,7 @@ export class AsignarCromosComponent implements OnInit {
 
                         let equipo: Equipo;
                         equipo = row;
-                        console.log(equipo.Nombre + ' seleccionado');
+                        console.log(equipo.nombre + ' seleccionado');
 
                         let equipoJuegoDeColeccion: EquipoJuegoDeColeccion;
                         equipoJuegoDeColeccion = this.inscripcionesEquipos.filter(res => res.equipoId === equipo.id)[0];
@@ -531,7 +531,7 @@ export class AsignarCromosComponent implements OnInit {
     this.comService.EnviarNotificacionIndividual (
             this.alumnoElegido.id,
             'Tienes nuevos cromos en el juego ' + this.juegoSeleccionado.NombreJuego);
-    Swal.fire('OK', 'Cromos aleatorios asignados a: ' + this.alumnoElegido.Nombre, 'success');
+    Swal.fire('OK', 'Cromos aleatorios asignados a: ' + this.alumnoElegido.nombre, 'success');
   }
 
   AsignarCromosAleatoriosEquipoAleatorio() {
@@ -546,7 +546,7 @@ export class AsignarCromosComponent implements OnInit {
         this.equipoElegido.id,
         'Tienes nuevos cromos en el juego ' + this.juegoSeleccionado.NombreJuego
     );
-    Swal.fire('OK', 'Cromos aleatorios asignados al equipo: ' + this.equipoElegido.Nombre, 'success');
+    Swal.fire('OK', 'Cromos aleatorios asignados al equipo: ' + this.equipoElegido.nombre, 'success');
   }
 
   AsignarCromosAleatoriosEquipoDeAlumnoAleatorio() {
@@ -565,7 +565,7 @@ export class AsignarCromosComponent implements OnInit {
                     this.calculos.AsignarCromosAleatoriosEquipo (
                       equipo, this.inscripcionesEquipos, this.numeroCromosRandom, this.probabilidadCromos, this.cromosColeccion
                     );
-                    Swal.fire('OK', 'Cromos aleatorios asignados al equipo de: ' + alumno.Nombre, 'success');
+                    Swal.fire('OK', 'Cromos aleatorios asignados al equipo de: ' + alumno.nombre, 'success');
                     console.log ('envio notificación los miembros del equipo');
                     this.comService.EnviarNotificacionEquipo (
                         equipo.id,
@@ -597,7 +597,7 @@ export class AsignarCromosComponent implements OnInit {
       .subscribe(inscripciones => {
         // tslint:disable-next-line:only-arrow-functions
         const ranking = inscripciones.sort(function(obj1, obj2) {
-          return obj2.PuntosTotalesAlumno - obj1.PuntosTotalesAlumno;
+          return obj2.puntosTotalesAlumno - obj1.puntosTotalesAlumno;
         });
         // Obtengo los tres primeros alumnos del ranking (atención porque el ranking solo
         // tiene los identificadores de los alumnos y a partir de ellos tengo que conseguir los alumnos)
@@ -634,7 +634,7 @@ export class AsignarCromosComponent implements OnInit {
       .subscribe(inscripciones => {
         // tslint:disable-next-line:only-arrow-functions
         const ranking = inscripciones.sort(function(obj1, obj2) {
-          return obj2.PuntosTotalesEquipo - obj1.PuntosTotalesEquipo;
+          return obj2.puntosTotalesEquipo - obj1.puntosTotalesEquipo;
         });
         // Obtengo los tres primeros equipos del ranking (atención porque el ranking solo
         // tiene los identificadores de los equipos y a partir de ellos tengo que conseguir los equipos)
@@ -674,7 +674,7 @@ export class AsignarCromosComponent implements OnInit {
     .subscribe(inscripciones => {
       // tslint:disable-next-line:only-arrow-functions
       const ranking = inscripciones.sort(function(obj1, obj2) {
-        return obj2.PuntosTotalesAlumno - obj1.PuntosTotalesAlumno;
+        return obj2.puntosTotalesAlumno - obj1.puntosTotalesAlumno;
       });
       // Obtengo los tres primeros alumnos del ranking (atención porque el ranking solo
       // tiene los identificadores de los alumnos y a partir de ellos tengo que conseguir los alumnos)
@@ -737,7 +737,7 @@ export class AsignarCromosComponent implements OnInit {
 
       data: {
         mensaje: this.mensaje,
-        nombre: cromo.Nombre
+        nombre: cromo.nombre
       }
     });
 
@@ -802,13 +802,13 @@ export class AsignarCromosComponent implements OnInit {
     // Busca la imagen que tiene el nombre del cromo.Imagen y lo carga en imagenCromo
     GET_ImagenCromo() {
 
-      if (this.cromoSeleccionado.ImagenDelante !== undefined ) {
-        this.imagenDelanteCromoSeleccionado = URL.ImagenesCromo + this.cromoSeleccionado.ImagenDelante;
+      if (this.cromoSeleccionado.imagenDelante !== undefined ) {
+        this.imagenDelanteCromoSeleccionado = URL.ImagenesCromo + this.cromoSeleccionado.imagenDelante;
 
       }
 
-      if (this.cromoSeleccionado.ImagenDetras !== undefined ) {
-        this.imagenDetrasCromoSeleccionado = URL.ImagenesCromo + this.cromoSeleccionado.ImagenDetras;
+      if (this.cromoSeleccionado.imagenDetras !== undefined ) {
+        this.imagenDetrasCromoSeleccionado = URL.ImagenesCromo + this.cromoSeleccionado.imagenDetras;
 
       }
   }

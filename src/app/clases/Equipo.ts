@@ -1,12 +1,12 @@
 export class Equipo {
-  Nombre: string;
-  FotoEquipo: string;
+  nombre: string;
+  fotoEquipo: string;
   id: number;
   grupoId: number;
 
   constructor(nombre?: string, FotoEquipo?: string) {
 
-    this.Nombre = nombre;
-    this.FotoEquipo = FotoEquipo;
+    this.nombre = nombre;
+    this.fotoEquipo = FotoEquipo;
   }
 }

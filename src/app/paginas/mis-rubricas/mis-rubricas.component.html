@@ -10,7 +10,7 @@
           <mat-label>Rúbricas</mat-label>
           <select matNativeControl [(ngModel)]="rubricaId"  (change) = "MuestraRubrica()">
             <option *ngFor="let rubrica of listaRubricas" [value]="rubrica.id">
-              <p >{{rubrica.Nombre}}</p>
+              <p >{{rubrica.nombre}}</p>
             </option>
           </select>
         </mat-form-field>
@@ -21,15 +21,15 @@
 
     <div *ngIf = "rubricaElegida" style = "width:60%">
 
-      <h2>{{rubricaElegida.Nombre}}</h2>
-      <h3>{{rubricaElegida.Descripcion}}</h3>
+      <h2>{{rubricaElegida.nombre}}</h2>
+      <h3>{{rubricaElegida.descripcion}}</h3>
       <br>
       <mat-accordion>
         <h5 style="color: rgb(197, 15, 15)">   Criterios</h5>
-        <mat-expansion-panel *ngFor="let criterio of rubricaElegida.Criterios ;let i = index" hideToggle>
+        <mat-expansion-panel *ngFor="let criterio of rubricaElegida.criterios ;let i = index" hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              <h3>{{criterio.Nombre}}</h3>
+              <h3>{{criterio.nombre}}</h3>
             </mat-panel-title>
           </mat-expansion-panel-header>
 
@@ -37,7 +37,7 @@
           <div fxLayout="column" fxLayoutAlign="start start" style="min-height: min-content; width: 60%">
           <mat-divider style="align-self: stretch;"></mat-divider>
           <mat-selection-list>
-            <mat-list-option *ngFor="let elemento of criterio.Elementos">
+            <mat-list-option *ngFor="let elemento of criterio.elementos">
               <h3>{{elemento}}</h3>
             </mat-list-option>
           </mat-selection-list>

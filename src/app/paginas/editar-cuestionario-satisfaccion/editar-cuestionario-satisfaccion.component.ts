@@ -40,12 +40,12 @@ export class EditarCuestionarioSatisfaccionComponent implements OnInit {
   }
 
   dropAfirmacion(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.cuestionarioSeleccionado.Afirmaciones, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.cuestionarioSeleccionado.afirmaciones, event.previousIndex, event.currentIndex);
     this.cuestionarioModificado = true;
   }
 
   EliminarAfirmacion(i) {
-    this.cuestionarioSeleccionado.Afirmaciones.splice (i, 1);
+    this.cuestionarioSeleccionado.afirmaciones.splice (i, 1);
     this.cuestionarioModificado = true;
   }
 
@@ -53,11 +53,11 @@ export class EditarCuestionarioSatisfaccionComponent implements OnInit {
     Swal.fire({
       title: "Modifica la afirmación",
       input: 'text',
-      inputValue: this.cuestionarioSeleccionado.Afirmaciones[i],
+      inputValue: this.cuestionarioSeleccionado.afirmaciones[i],
       showCancelButton: true
     }).then((result) => {
       if (result.value) {
-        this.cuestionarioSeleccionado.Afirmaciones[i] = result.value;
+        this.cuestionarioSeleccionado.afirmaciones[i] = result.value;
         this.cuestionarioModificado = true;
       }
     });
@@ -69,7 +69,7 @@ export class EditarCuestionarioSatisfaccionComponent implements OnInit {
       showCancelButton: true
     }).then((result) => {
       if (result.value) {
-        this.cuestionarioSeleccionado.Afirmaciones.push (result.value);
+        this.cuestionarioSeleccionado.afirmaciones.push (result.value);
         this.cuestionarioModificado = true;
       }
     });
@@ -77,12 +77,12 @@ export class EditarCuestionarioSatisfaccionComponent implements OnInit {
 
 
   dropPregunta(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.cuestionarioSeleccionado.PreguntasAbiertas, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.cuestionarioSeleccionado.preguntasAbiertas, event.previousIndex, event.currentIndex);
     this.cuestionarioModificado = true;
   }
 
   EliminarPregunta(i) {
-    this.cuestionarioSeleccionado.PreguntasAbiertas.splice (i, 1);
+    this.cuestionarioSeleccionado.preguntasAbiertas.splice (i, 1);
     this.cuestionarioModificado = true;
   }
 
@@ -90,11 +90,11 @@ export class EditarCuestionarioSatisfaccionComponent implements OnInit {
     Swal.fire({
       title: "Modifica lapregunta",
       input: 'text',
-      inputPlaceholder: this.cuestionarioSeleccionado.PreguntasAbiertas[i],
+      inputPlaceholder: this.cuestionarioSeleccionado.preguntasAbiertas[i],
       showCancelButton: true
     }).then((result) => {
       if (result.value) {
-        this.cuestionarioSeleccionado.PreguntasAbiertas[i] = result.value;
+        this.cuestionarioSeleccionado.preguntasAbiertas[i] = result.value;
         this.cuestionarioModificado = true;
       }
     });
@@ -108,7 +108,7 @@ export class EditarCuestionarioSatisfaccionComponent implements OnInit {
       showCancelButton: true
     }).then((result) => {
       if (result.value) {
-        this.cuestionarioSeleccionado.PreguntasAbiertas.push (result.value);
+        this.cuestionarioSeleccionado.preguntasAbiertas.push (result.value);
         this.cuestionarioModificado = true;
       }
     });
@@ -174,7 +174,7 @@ export class EditarCuestionarioSatisfaccionComponent implements OnInit {
 
     const a = document.getElementById('generarJSON');
     a.setAttribute ('href', uri);
-    a.setAttribute ('download', this.cuestionarioSeleccionado.Titulo);
+    a.setAttribute ('download', this.cuestionarioSeleccionado.titulo);
     a.innerHTML = "Botón derecho aquí y selecciona 'deja el enlace como...'";
 
   }

@@ -1,26 +1,26 @@
 export class JuegoDeVotacionTodosAUno {
   id: number;
-  Tipo: string;
+  tipo: string;
   grupoId: number;
-  NombreJuego: string;
-  Modo: string;
-  JuegoActivo: boolean;
-  JuegoTerminado: boolean;
-  Conceptos: string[];
-  Pesos: number[];
+  nombreJuego: string;
+  modo: string;
+  juegoActivo: boolean;
+  juegoTerminado: boolean;
+  conceptos: string[];
+  pesos: number[];
 
 
   constructor(Tipo?: string, Modo?: string, JuegoActivo?: boolean, Conceptos?: string[],
               Pesos?: number[], NombreJuego?: string,
               JuegoTerminado?: boolean, grupoId?: number) {
 
-    this.Tipo = Tipo;
-    this.Modo = Modo;
-    this.JuegoActivo = JuegoActivo;
-    this.Pesos = Pesos;
-    this.Conceptos = Conceptos;
-    this.NombreJuego = NombreJuego;
-    this.JuegoTerminado = JuegoTerminado;
+    this.tipo = Tipo;
+    this.modo = Modo;
+    this.juegoActivo = JuegoActivo;
+    this.pesos = Pesos;
+    this.conceptos = Conceptos;
+    this.nombreJuego = NombreJuego;
+    this.juegoTerminado = JuegoTerminado;
     this.grupoId = grupoId;
   }
 }

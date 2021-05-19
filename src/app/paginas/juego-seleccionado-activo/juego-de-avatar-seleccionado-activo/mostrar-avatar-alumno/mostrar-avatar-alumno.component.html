@@ -1,15 +1,15 @@
-<div class="titulo">Avatar de {{alumno.Nombre}} {{alumno.PrimerApellido}} {{alumno.SegundoApellido}}</div>
+<div class="titulo">Avatar de {{alumno.nombre}} {{alumno.primerApellido}} {{alumno.segundoApellido}}</div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 <br>
 <br>
 <div class = "contenedor">
 <div *ngIf = "inscripcionAlumnoJuegoAvatar" class = "enColumna" >
-  <div   *ngIf = "inscripcionAlumnoJuegoAvatar.Silueta"  style="display: flex; width: 600px; height: 648px; margin: auto; ">
-    <img  [src]="imagenesAvatares + inscripcionAlumnoJuegoAvatar.Silueta" style=" width: 600px; height: 648px; position: relative; z-index: 0;">
-    <img  *ngIf = "inscripcionAlumnoJuegoAvatar.Complemento1" [src]="imagenesAvatares + inscripcionAlumnoJuegoAvatar.Complemento1" style=" width: 600px; height: 648px; position: absolute; z-index: 1;">
-    <img  *ngIf = "inscripcionAlumnoJuegoAvatar.Complemento2" [src]="imagenesAvatares + inscripcionAlumnoJuegoAvatar.Complemento2" style=" width: 600px; height: 648px;position: absolute; z-index: 2;">
-    <img  *ngIf = "inscripcionAlumnoJuegoAvatar.Complemento3" [src]="imagenesAvatares + inscripcionAlumnoJuegoAvatar.Complemento3" style=" width: 600px; height: 648px;position: absolute; z-index: 3;">
-    <img  *ngIf = "inscripcionAlumnoJuegoAvatar.Complemento4" [src]="imagenesAvatares + inscripcionAlumnoJuegoAvatar.Complemento4" style=" width: 600px; height: 648px;position: absolute; z-index: 4;">
+  <div   *ngIf = "inscripcionAlumnoJuegoAvatar.silueta"  style="display: flex; width: 600px; height: 648px; margin: auto; ">
+    <img  [src]="imagenesAvatares + inscripcionAlumnoJuegoAvatar.silueta" style=" width: 600px; height: 648px; position: relative; z-index: 0;">
+    <img  *ngIf = "inscripcionAlumnoJuegoAvatar.complemento1" [src]="imagenesAvatares + inscripcionAlumnoJuegoAvatar.complemento1" style=" width: 600px; height: 648px; position: absolute; z-index: 1;">
+    <img  *ngIf = "inscripcionAlumnoJuegoAvatar.complemento2" [src]="imagenesAvatares + inscripcionAlumnoJuegoAvatar.complemento2" style=" width: 600px; height: 648px;position: absolute; z-index: 2;">
+    <img  *ngIf = "inscripcionAlumnoJuegoAvatar.complemento3" [src]="imagenesAvatares + inscripcionAlumnoJuegoAvatar.complemento3" style=" width: 600px; height: 648px;position: absolute; z-index: 3;">
+    <img  *ngIf = "inscripcionAlumnoJuegoAvatar.complemento4" [src]="imagenesAvatares + inscripcionAlumnoJuegoAvatar.complemento4" style=" width: 600px; height: 648px;position: absolute; z-index: 4;">
   </div>
   <div  *ngIf = "!inscripcionAlumnoJuegoAvatar.Silueta" style="display: flex;  width: 600px; height: 648px; margin: auto;  opacity: 0.2;">
     <img  src = "../../assets/interrogante.jpg" style="width: 600px; height: 648px;position: relative; z-index: 0;">

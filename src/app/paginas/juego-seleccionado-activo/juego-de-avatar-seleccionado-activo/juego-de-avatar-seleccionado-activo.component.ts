@@ -90,32 +90,32 @@ export class JuegoDeAvatarSeleccionadoActivoComponent implements OnInit {
       // recorro los alumnos y para cada uno de ellos obtengo su inscripción
       const inscripcion = this.inscripcionesAlumnosJuegodeAvatar.filter (ins => ins.alumnoId === row.id)[0];
       // Ahora activo o desactivo el selector de cada privilegio según tenga el alumno ese privilegio o no
-      if (inscripcion.Privilegios[0]) {
+      if (inscripcion.privilegios[0]) {
         this.selection1.select(row);
       } else {
         this.selection1.deselect(row);
       }
-      if (inscripcion.Privilegios[1]) {
+      if (inscripcion.privilegios[1]) {
         this.selection2.select(row);
       } else {
         this.selection2.deselect(row);
       }
-      if (inscripcion.Privilegios[2]) {
+      if (inscripcion.privilegios[2]) {
         this.selection3.select(row);
       } else {
         this.selection3.deselect(row);
       }
-      if (inscripcion.Privilegios[3]) {
+      if (inscripcion.privilegios[3]) {
         this.selection4.select(row);
       } else {
         this.selection4.deselect(row);
       }
-      if (inscripcion.Privilegios[4]) {
+      if (inscripcion.privilegios[4]) {
         this.selection5.select(row);
       } else {
         this.selection5.deselect(row);
       }
-      if (inscripcion.Privilegios[5]) {
+      if (inscripcion.privilegios[5]) {
         this.selection6.select(row);
       } else {
         this.selection6.deselect(row);
@@ -162,58 +162,58 @@ export class JuegoDeAvatarSeleccionadoActivoComponent implements OnInit {
           // Si todos los elementos del selector estan activos hay que desactivarlos todos
           this.selection1.clear(); // Desactivamos todos
           // y quitar el privilegio correspondiente a todos los alumnos
-          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.Privilegios[0] = false);
+          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.privilegios[0] = false);
         } else {
           console.log ('activo todos');
           // Tengo que activar todos los elementos del selector
           this.datasourceAlumnos.data.forEach(row => this.selection1.select(row));
           // y conceder el privilegio correspondiente a todos los alumnos
-          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.Privilegios[0] = true);
+          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.privilegios[0] = true);
         }
       }
       if (n === 2) {
         if (this.IsAllSelected(2)) {
           this.selection2.clear(); // Desactivamos todos
-          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.Privilegios[1] = false);
+          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.privilegios[1] = false);
         } else {
           this.datasourceAlumnos.data.forEach(row => this.selection2.select(row));
-          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.Privilegios[1] = true);
+          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.privilegios[1] = true);
         }
       }
       if (n === 3) {
         if (this.IsAllSelected(3)) {
           this.selection3.clear(); // Desactivamos todos
-          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.Privilegios[2] = false);
+          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.privilegios[2] = false);
         } else {
           this.datasourceAlumnos.data.forEach(row => this.selection3.select(row));
-          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.Privilegios[2] = true);
+          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.privilegios[2] = true);
         }
       }
       if (n === 4) {
         if (this.IsAllSelected(4)) {
           this.selection4.clear(); // Desactivamos todos
-          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.Privilegios[3] = false);
+          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.privilegios[3] = false);
         } else {
           this.datasourceAlumnos.data.forEach(row => this.selection4.select(row));
-          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.Privilegios[3] = true);
+          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.privilegios[3] = true);
         }
       }
       if (n === 5) {
         if (this.IsAllSelected(5)) {
           this.selection5.clear(); // Desactivamos todos
-          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.Privilegios[4] = false);
+          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.privilegios[4] = false);
         } else {
           this.datasourceAlumnos.data.forEach(row => this.selection5.select(row));
-          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.Privilegios[4] = true);
+          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.privilegios[4] = true);
         }
       }
       if (n === 6) {
         if (this.IsAllSelected(6)) {
           this.selection6.clear(); // Desactivamos todos
-          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.Privilegios[5] = false);
+          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.privilegios[5] = false);
         } else {
           this.datasourceAlumnos.data.forEach(row => this.selection6.select(row));
-          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.Privilegios[5] = true);
+          this.inscripcionesAlumnosJuegodeAvatar.forEach (inscripcion => inscripcion.privilegios[5] = true);
         }
       }
       this.hayCambios = true;
@@ -222,7 +222,7 @@ export class JuegoDeAvatarSeleccionadoActivoComponent implements OnInit {
   }
   HaCambiado(n ,i) {
     // Cuando hago click sobre el privilegio n del alumno i debo cambiar el estado de ese privilegio
-    this.inscripcionesAlumnosJuegodeAvatar[i].Privilegios[n - 1] = !this.inscripcionesAlumnosJuegodeAvatar[i].Privilegios[n - 1];
+    this.inscripcionesAlumnosJuegodeAvatar[i].privilegios[n - 1] = !this.inscripcionesAlumnosJuegodeAvatar[i].privilegios[n - 1];
     this.haCambiado[i] = true;
     this.hayCambios = true;
   }

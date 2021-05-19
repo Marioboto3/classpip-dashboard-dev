@@ -52,8 +52,8 @@ export class AsignaEscenarioComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogoConfirmacionComponent, {
       height: '150px',
       data: {
-        mensaje: this.mensaje + escenario.Mapa,
-        titulo: escenario.Mapa,
+        mensaje: this.mensaje + escenario.mapa,
+        titulo: escenario.mapa,
       }
     });
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {

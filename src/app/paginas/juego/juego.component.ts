@@ -690,25 +690,25 @@ export class JuegoComponent implements OnInit {
     this.tengoCriterioEvaluacion = true;
     if (this.criterioEvaluacionSeleccionado === 'Por pesos') {
       this.pesosArray = [];
-      for (let i = 0; i < this.rubricaElegida.Criterios.length; i++) {
+      for (let i = 0; i < this.rubricaElegida.criterios.length; i++) {
         this.pesosArray.push([]);
-        this.pesosArray[i].push(this.PesoPorDefecto(this.rubricaElegida.Criterios.length));
-        for (let j = 0; j < this.rubricaElegida.Criterios[i].Elementos.length; j++) {
-          this.pesosArray[i].push(this.PesoPorDefecto(this.rubricaElegida.Criterios[i].Elementos.length));
+        this.pesosArray[i].push(this.PesoPorDefecto(this.rubricaElegida.criterios.length));
+        for (let j = 0; j < this.rubricaElegida.criterios[i].elementos.length; j++) {
+          this.pesosArray[i].push(this.PesoPorDefecto(this.rubricaElegida.criterios[i].elementos.length));
         }
       }
       console.log('pesos array', this.pesosArray);
     } else {
       this.penalizacionArray = [];
-      for (let i = 0; i < this.rubricaElegida.Criterios.length; i++) {
+      for (let i = 0; i < this.rubricaElegida.criterios.length; i++) {
         this.penalizacionArray.push([]);
-        if (this.rubricaElegida.Criterios[i].Elementos.length >= 1) {
+        if (this.rubricaElegida.criterios[i].elementos.length >= 1) {
           this.penalizacionArray[i].push({num: 1, p: 75});
         }
-        if (this.rubricaElegida.Criterios[i].Elementos.length >= 2) {
+        if (this.rubricaElegida.criterios[i].elementos.length >= 2) {
           this.penalizacionArray[i].push({num: 2, p: 50});
         }
-        if (this.rubricaElegida.Criterios[i].Elementos.length >= 3) {
+        if (this.rubricaElegida.criterios[i].elementos.length >= 3) {
           this.penalizacionArray[i].push({num: 3, p: 0});
         }
       }
@@ -1024,7 +1024,7 @@ export class JuegoComponent implements OnInit {
       console.log ('envio notificación los miembros del grupo');
       this.comService.EnviarNotificacionGrupo (
           this.grupo.id,
-          'Nuevo juego de colección para el grupo ' + this.grupo.Nombre
+          'Nuevo juego de colección para el grupo ' + this.grupo.nombre
       );
 
     });
@@ -1102,7 +1102,7 @@ export class JuegoComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       this.cuestionario = this.sesion.DameCuestionario();
       this.tengoCuestionario = true;
-      console.log('CUESTIONARIO SELECCIONADO --->' + this.cuestionario.Titulo);
+      console.log('CUESTIONARIO SELECCIONADO --->' + this.cuestionario.titulo);
     });
   }
 
@@ -1178,13 +1178,13 @@ export class JuegoComponent implements OnInit {
                                       this.tipoDeJuegoSeleccionado,
                                       this.modoDeJuegoSeleccionado,
                                       true);
-    juego.Familias = this.familiasElegidas;
-    juego.CriteriosPrivilegioComplemento1 = this.myForm.value.criterioPrivilegioComplemento1;
-    juego.CriteriosPrivilegioComplemento2 = this.myForm.value.criterioPrivilegioComplemento2;
-    juego.CriteriosPrivilegioComplemento3 = this.myForm.value.criterioPrivilegioComplemento3;
-    juego.CriteriosPrivilegioComplemento4 = this.myForm.value.criterioPrivilegioComplemento4;
-    juego.CriteriosPrivilegioVoz = this.myForm.value.criterioPrivilegioVoz;
-    juego.CriteriosPrivilegioVerTodos = this.myForm.value.criterioPrivilegioVerTodos;
+    juego.familias = this.familiasElegidas;
+    juego.criteriosPrivilegioComplemento1 = this.myForm.value.criterioPrivilegioComplemento1;
+    juego.criteriosPrivilegioComplemento2 = this.myForm.value.criterioPrivilegioComplemento2;
+    juego.criteriosPrivilegioComplemento3 = this.myForm.value.criterioPrivilegioComplemento3;
+    juego.criteriosPrivilegioComplemento4 = this.myForm.value.criterioPrivilegioComplemento4;
+    juego.criteriosPrivilegioVoz = this.myForm.value.criterioPrivilegioVoz;
+    juego.criteriosPrivilegioVerTodos = this.myForm.value.criterioPrivilegioVerTodos;
     this.peticionesAPI.CreaJuegoDeAvatar (juego, this.grupo.id)
       .subscribe (nuevoJuego => {
         this.juegoDeAvatar = nuevoJuego;
@@ -1254,7 +1254,7 @@ export class JuegoComponent implements OnInit {
         // Buscamos los alumnos que hemos seleccionado
         if (this.selection.isSelected(this.dataSource.data[i]))  {
           this.Puntuacion[i] = this.nuevaPuntuacion;
-          this.TablaPuntuacion[i].Puntuacion = this.nuevaPuntuacion;
+          this.TablaPuntuacion[i].puntuacion = this.nuevaPuntuacion;
         }
       }
     } else {
@@ -1279,7 +1279,7 @@ export class JuegoComponent implements OnInit {
 
     if (i < NumeroParticipantes) {
     this.TablaPuntuacion[i] = new TablaPuntosFormulaUno(i + 1, 1);
-    this.Puntuacion[i] = this.TablaPuntuacion[i].Puntuacion;
+    this.Puntuacion[i] = this.TablaPuntuacion[i].puntuacion;
     console.log(this.TablaPuntuacion[i]);
 
     this.dataSource = new MatTableDataSource (this.TablaPuntuacion);
@@ -1426,7 +1426,7 @@ export class JuegoComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       this.escenario = this.sesion.DameEscenario();
 
-      console.log('ESCENARIO SELECCIONADO --->' + this.escenario.Mapa);
+      console.log('ESCENARIO SELECCIONADO --->' + this.escenario.mapa);
       this.DamePuntosGeolocalizablesDelEscenario(this.escenario);
       console.log(this.numeroDePuntosGeolocalizables);
       console.log(this.puntosgeolocalizablesEscenario);
@@ -1686,20 +1686,20 @@ CrearJuegoDeVotacionTodosAUno() {
 RecibeCuestionarioSatisfaccionElegido($event) {
   this.cuestionarioSatisfaccion = $event;
   this.tengoCuestionarioSatisfaccion = true;
-  console.log ('tengo cuestionario: ' + this.cuestionarioSatisfaccion.Titulo);
+  console.log ('tengo cuestionario: ' + this.cuestionarioSatisfaccion.titulo);
 }
 GuardaDescripcionCuestionarioSatisfaccion(ev) {
-  this.cuestionarioSatisfaccion.Descripcion = ev.target.value;
+  this.cuestionarioSatisfaccion.descripcion = ev.target.value;
 }
 
 CrearJuegoDeCuestionarioDeSatisfaccion() {
   console.log ('voy a crear el juego');
-  console.log ('cuestionario: ' + this.cuestionarioSatisfaccion.Titulo);
-  console.log ('Descripcion: ' + this.cuestionarioSatisfaccion.Descripcion);
+  console.log ('cuestionario: ' + this.cuestionarioSatisfaccion.titulo);
+  console.log ('Descripcion: ' + this.cuestionarioSatisfaccion.descripcion);
   const juegoDeCuestionarioSatisfaccion = new JuegoDeCuestionarioSatisfaccion (
     this.nombreDelJuego,
     this.tipoDeJuegoSeleccionado,
-    this.cuestionarioSatisfaccion.Descripcion,
+    this.cuestionarioSatisfaccion.descripcion,
     true,
     false,
     this.profesorId,

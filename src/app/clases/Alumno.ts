@@ -1,12 +1,12 @@
 export class Alumno {
-  Nombre: string;
-  PrimerApellido: string;
-  SegundoApellido: string;
-  ImagenPerfil: string;
-  Username: string;
-  Password: string;
-  Email: string;
-  PermisoCambioImagenPerfil: boolean;
+  nombre: string;
+  primerApellido: string;
+  segundoApellido: string;
+  imagenPerfil: string;
+  username: string;
+  password: string;
+  email: string;
+  permisoCambioImagenPerfil: boolean;
   profesorId: number;
   id: number;
 
@@ -14,14 +14,14 @@ export class Alumno {
               Username?: string, Password?: string, Email?: string, profesorId?: number,
               imagenPerfil?: string) {
 
-    this.Nombre = nombre;
-    this.PrimerApellido = primerApellido;
-    this.SegundoApellido = segundoApellido;
-    this.ImagenPerfil = null;
-    this.PermisoCambioImagenPerfil = false;
-    this.Username = Username;
-    this.Password = Password;
-    this.Email = Email;
+    this.nombre = nombre;
+    this.primerApellido = primerApellido;
+    this.segundoApellido = segundoApellido;
+    this.imagenPerfil = null;
+    this.permisoCambioImagenPerfil = false;
+    this.username = Username;
+    this.password = Password;
+    this.email = Email;
     this.profesorId = profesorId;
   }
 }

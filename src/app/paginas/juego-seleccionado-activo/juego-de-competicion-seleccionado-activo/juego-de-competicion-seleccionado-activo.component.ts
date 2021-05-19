@@ -162,8 +162,8 @@ export class JuegoDeCompeticionSeleccionadoActivoComponent implements OnInit {
 
   AccederAlumno(alumno: TablaAlumnoJuegoDeCompeticion) {
 
-    const alumnoSeleccionado = this.alumnosDelJuego.filter(res => res.Nombre === alumno.nombre &&
-      res.PrimerApellido === alumno.primerApellido && res.SegundoApellido === alumno.segundoApellido)[0];
+    const alumnoSeleccionado = this.alumnosDelJuego.filter(res => res.nombre === alumno.nombre &&
+      res.primerApellido === alumno.primerApellido && res.segundoApellido === alumno.segundoApellido)[0];
 
     const posicion = this.rankingAlumnoJuegoDeCompeticion.filter(res => res.nombre === alumno.nombre &&
       res.primerApellido === alumno.primerApellido && res.segundoApellido === alumno.segundoApellido)[0].posicion;
@@ -172,7 +172,7 @@ export class JuegoDeCompeticionSeleccionadoActivoComponent implements OnInit {
     this.sesion.TomaDatosEvolucionAlumnoJuegoCompeticionLiga (
       posicion,
       alumnoSeleccionado,
-      this.listaAlumnosOrdenadaPorPuntos.filter(res => res.AlumnoId === alumnoSeleccionado.id)[0]
+      this.listaAlumnosOrdenadaPorPuntos.filter(res => res.alumnoId === alumnoSeleccionado.id)[0]
     );
   }
 
@@ -186,8 +186,8 @@ export class JuegoDeCompeticionSeleccionadoActivoComponent implements OnInit {
       // ordena la lista por puntos
       // tslint:disable-next-line:only-arrow-functions
       this.listaAlumnosOrdenadaPorPuntos = this.listaAlumnosOrdenadaPorPuntos.sort(function(obj1, obj2) {
-        console.log (obj2.PuntosTotalesAlumno + ' ; ' + obj1.PuntosTotalesAlumno);
-        return obj2.PuntosTotalesAlumno - obj1.PuntosTotalesAlumno;
+        console.log (obj2.puntosTotalesAlumno + ' ; ' + obj1.puntosTotalesAlumno);
+        return obj2.puntosTotalesAlumno - obj1.puntosTotalesAlumno;
       });
       console.log(this.listaAlumnosOrdenadaPorPuntos);
       this.TablaClasificacionTotal();
@@ -202,8 +202,8 @@ export class JuegoDeCompeticionSeleccionadoActivoComponent implements OnInit {
       // ordena la lista por puntos
       // tslint:disable-next-line:only-arrow-functions
       this.listaEquiposOrdenadaPorPuntos = this.listaEquiposOrdenadaPorPuntos.sort(function(obj1, obj2) {
-        console.log (obj2.PuntosTotalesEquipo + ' ; ' + obj1.PuntosTotalesEquipo);
-        return obj2.PuntosTotalesEquipo - obj1.PuntosTotalesEquipo;
+        console.log (obj2.puntosTotalesEquipo + ' ; ' + obj1.puntosTotalesEquipo);
+        return obj2.puntosTotalesEquipo - obj1.puntosTotalesEquipo;
       });
       console.log(this.listaEquiposOrdenadaPorPuntos);
       this.TablaClasificacionTotal();
@@ -360,7 +360,7 @@ export class JuegoDeCompeticionSeleccionadoActivoComponent implements OnInit {
       console.log (juegos);
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < juegos.length; i++) {
-        if (juegos[i].JuegoActivo === false) {
+        if (juegos[i].juegoActivo === false) {
           this.juegosDeVotacionUnoATodosTerminados.push(juegos[i]);
         }
       }

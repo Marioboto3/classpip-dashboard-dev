@@ -1,5 +1,5 @@
 <div  class="titulo">Información del Juego</div>
-<div class="subtitulo">Jornadas de {{juegoSeleccionado.NombreJuego}}: {{juegoSeleccionado.Tipo}}  {{juegoSeleccionado.Modo}}</div>
+<div class="subtitulo">Jornadas de {{juegoSeleccionado.nombreJuego}}: {{juegoSeleccionado.tipo}}  {{juegoSeleccionado.modo}}</div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 
 <div  class="enColumna">
@@ -14,13 +14,13 @@
                     <mat-icon *ngIf="JornadaFinalizada(jornada) === true" mat-list-icon><i class="material-icons green">check_circle_outline</i></mat-icon>
                     <mat-icon *ngIf="JornadaFinalizada(jornada) === false" mat-list-icon><i class="material-icons red">history</i></mat-icon>
                     &nbsp;&nbsp;&nbsp;
-                    Jornada {{jornada.NumeroDeJornada}}:    {{jornada.Fecha | date: 'shortDate'}}
+                    Jornada {{jornada.numeroDeJornada}}:    {{jornada.fecha | date: 'shortDate'}}
                   </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="enFila">
                   <!-- <div style="margin-right: 15%; border: 15px; width: 60%;"> -->
                   <div style="margin-left: 110px; font-size: 130%; width: 40%;">
-                      <span style="font-weight: bold; font-size: 80%;">Criterio: {{jornada.CriterioGanador}}</span>
+                      <span style="font-weight: bold; font-size: 80%;">Criterio: {{jornada.criterioGanador}}</span>
                       <!-- (click)="AñadirResultados()" -->
                       <!-- ///////////////////////////////////// TABLA CLASIFICACIÓN JORNADA ////////////////////////////////////// -->
                       <table style="width: 180%"  align="center"  mat-table [dataSource]="dataSourceClasificacionJornada" class="example-container mat-elevation-z8">

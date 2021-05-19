@@ -53,7 +53,7 @@ export class AsignaCuestionarioComponent implements OnInit {
       .subscribe (profesores => {
         publicosDeOtros.forEach (publico => {
           const propietario = profesores.filter (profesor => profesor.id === publico.profesorId)[0];
-          publico.Titulo = publico.Titulo + '(' + propietario.Nombre + ' ' + propietario.PrimerApellido + ')';
+          publico.titulo = publico.titulo + '(' + propietario.nombre + ' ' + propietario.primerApellido + ')';
         });
         this.cuestionariosPublicos = publicosDeOtros;
         console.log ('ya tengo los cuestionarios publicos');
@@ -70,8 +70,8 @@ export class AsignaCuestionarioComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogoConfirmacionComponent, {
       height: '150px',
       data: {
-        mensaje: this.mensaje + cuestionario.Titulo,
-        titulo: cuestionario.Titulo,
+        mensaje: this.mensaje + cuestionario.titulo,
+        titulo: cuestionario.titulo,
       }
     });
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {

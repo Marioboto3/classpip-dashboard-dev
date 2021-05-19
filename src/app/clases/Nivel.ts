@@ -1,18 +1,18 @@
 export class Nivel {
 
-  Nombre: string;
-  PuntosAlcanzar: number;
-  PrivilegiosDelNivel: string;
-  Imagen: string;
+  nombre: string;
+  puntosAlcanzar: number;
+  privilegiosDelNivel: string;
+  imagen: string;
   id: number;
   juegoDePuntosId: number;
 
   constructor(Nombre?: string, PuntosAlcanzar?: number, PrivilegiosDelNivel?: string, Imagen?: string, juegoDePuntosId?: number) {
 
-    this.Nombre = Nombre;
-    this.PuntosAlcanzar = PuntosAlcanzar;
-    this.PrivilegiosDelNivel = PrivilegiosDelNivel;
-    this.Imagen = Imagen;
+    this.nombre = Nombre;
+    this.puntosAlcanzar = PuntosAlcanzar;
+    this.privilegiosDelNivel = PrivilegiosDelNivel;
+    this.imagen = Imagen;
     this.juegoDePuntosId = juegoDePuntosId;
 
   }

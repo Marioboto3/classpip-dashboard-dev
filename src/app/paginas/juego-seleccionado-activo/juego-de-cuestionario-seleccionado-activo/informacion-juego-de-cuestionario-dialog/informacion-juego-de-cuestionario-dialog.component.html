@@ -8,48 +8,48 @@
           <mat-card-content>
                   <p style="font-size: medium;">
                     <span style="font-weight: bold; font-size: medium;">Nombre del Juego: </span>
-                    {{NombreJuego}}
+                    {{nombreJuego}}
                   </p>
                 <div>
                   <p style="font-size: medium;">
                     <span style="font-weight: bold; font-size: medium;">Puntuación correcta: </span>
-                    {{PuntuacionCorrecta}}
+                    {{puntuacionCorrecta}}
                   </p>
                 </div>
                 <div>
                   <p style="font-size: medium;">
                     <span style="font-weight: bold; font-size: medium;">Puntuación Incorrecta: </span>
-                    {{PuntuacionIncorrecta}}
+                    {{puntuacionIncorrecta}}
                   </p>
                 </div>
                 <div>
                   <p style="font-size: medium;">
                     <span style="font-weight: bold; font-size: medium;">Presentación: </span>
-                    {{Presentacion}}
+                    {{presentacion}}
                   </p>
                 </div>
                 <div>
                   <p style="font-size: medium;">
                     <span style="font-weight: bold; font-size: medium;">Modalidad: </span>
-                    {{Modalidad}}
+                    {{modalidad}}
                   </p>
                 </div>
                 <div>
                   <p style="font-size: medium;">
                     <span style="font-weight: bold; font-size: medium;">Juego Activo: </span>
-                    {{JuegoActivo}}
+                    {{juegoActivo}}
                   </p>
                 </div>
                 <div>
                   <p style="font-size: medium;">
                     <span style="font-weight: bold; font-size: medium;">Juego Termiando: </span>
-                    {{JuegoTerminado}}
+                    {{juegoTerminado}}
                   </p>
                 </div>
                 <div>
                   <p style="font-size: medium;">
                     <span style="font-weight: bold; font-size: medium;">Cuestionario: </span>
-                    {{TituloCuestionario}}
+                    {{tituloCuestionario}}
                   </p>
                 </div>
                 <div class="enColumna"> <button type="button" class="btn Back" (click)="goBack()"> Cerrar </button>
@@ -66,24 +66,24 @@
           <mat-card-content>
                 <mat-form-field style=  "width: 100%;">
                   <mat-label>Nombre del Juego</mat-label>
-                  <input (keyup)="Disabled()" matInput formControlName="NombreJuego" required [(ngModel)]="NombreJuego">
+                  <input (keyup)="Disabled()" matInput formControlName="NombreJuego" required [(ngModel)]="nombreJuego">
                 </mat-form-field>
                 <div>
                   <mat-form-field style=  "width: 100%;">
                     <mat-label>Puntuacion Correcta</mat-label>
-                      <input (keyup)="Disabled()" matInput formControlName="PuntuacionCorrecta" required [(ngModel)]="PuntuacionCorrecta">
+                      <input (keyup)="Disabled()" matInput formControlName="PuntuacionCorrecta" required [(ngModel)]="puntuacionCorrecta">
                   </mat-form-field>
                 </div>
                 <div>
                   <mat-form-field style=  "width: 100%;">
                     <mat-label>Puntuacion Incorrecta</mat-label>
-                      <input (keyup)="Disabled()" matInput formControlName="PuntuacionIncorrecta" required [(ngModel)]="PuntuacionIncorrecta">
+                      <input (keyup)="Disabled()" matInput formControlName="PuntuacionIncorrecta" required [(ngModel)]="puntuacionIncorrecta">
                   </mat-form-field>
                 </div>
                 <div>
                   <mat-form-field style="width: 100%;">
                     <mat-label>Presentacion</mat-label>
-                    <select (click)="Disabled()" matNativeControl formControlName="Presentacion" [(ngModel)]="Presentacion">
+                    <select (click)="Disabled()" matNativeControl formControlName="Presentacion" [(ngModel)]="presentacion">
                       <option *ngFor="let presentacion of Presentaciones" [value]="presentacion">
                         {{presentacion}}
                       </option>
@@ -93,7 +93,7 @@
                 <div>
                   <mat-form-field style="width: 100%;">
                     <mat-label>Modalidad</mat-label>
-                    <select (click)="Disabled()" matNativeControl formControlName="Modalidad" [(ngModel)]="Modalidad">
+                    <select (click)="Disabled()" matNativeControl formControlName="Modalidad" [(ngModel)]="modalidad">
                       <option *ngFor="let modalidad of Modalidades" [value]="modalidad">
                         {{modalidad}}
                       </option>
@@ -103,19 +103,19 @@
                 <div>
                   <p style="font-size: medium;">
                     <span style="font-weight: bold; font-size: medium;">Juego Activo: </span>
-                    {{JuegoActivo}}
+                    {{juegoActivo}}
                   </p>
                 </div>
                 <div>
                   <p style="font-size: medium;">
                     <span style="font-weight: bold; font-size: medium;">Juego Terminado: </span>
-                    {{JuegoTerminado}}
+                    {{juegoTerminado}}
                   </p>
                 </div>
                 <div>
                   <p style="font-size: medium;">
                     <span style="font-weight: bold; font-size: medium;">Cuestionario: </span>
-                    {{TituloCuestionario}}
+                    {{tituloCuestionario}}
                   </p>
                 </div>
                 <div class="btnCambiarStep">

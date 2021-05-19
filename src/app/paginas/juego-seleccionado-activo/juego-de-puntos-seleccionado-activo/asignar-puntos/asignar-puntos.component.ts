@@ -108,7 +108,7 @@ export class AsignarPuntosComponent implements OnInit {
     // Ordena la lista de niveles por si el profesor no los creó de forma ascendente
      // tslint:disable-next-line:only-arrow-functions
     this.nivelesDelJuego = this.nivelesDelJuego.sort(function(obj1, obj2) {
-      return obj1.PuntosAlcanzar - obj2.PuntosAlcanzar;
+      return obj1.puntosAlcanzar - obj2.puntosAlcanzar;
     });
 
     if (this.juegoSeleccionado.Modo === 'Individual') {
@@ -198,7 +198,7 @@ export class AsignarPuntosComponent implements OnInit {
         this.rankingJuegoDePuntos[i].puntos = this.rankingJuegoDePuntos[i].puntos + this.valorPunto;
         if (this.listaAlumnosOrdenadaPorPuntos[i].nivelId !== undefined) {
           const nivel = this.nivelesDelJuego.filter (n => n.id === this.listaAlumnosOrdenadaPorPuntos[i].nivelId)[0];
-          this.rankingJuegoDePuntos[i].nivel = nivel.Nombre;
+          this.rankingJuegoDePuntos[i].nivel = nivel.nombre;
         }
 
       }
@@ -206,7 +206,7 @@ export class AsignarPuntosComponent implements OnInit {
     }
     // tslint:disable-next-line:only-arrow-functions
     this.listaAlumnosOrdenadaPorPuntos = this.listaAlumnosOrdenadaPorPuntos.sort(function(obj1, obj2) {
-      return obj2.PuntosTotalesAlumno - obj1.PuntosTotalesAlumno;
+      return obj2.puntosTotalesAlumno - obj1.puntosTotalesAlumno;
     });
     // tslint:disable-next-line:only-arrow-functions
     this.rankingJuegoDePuntos = this.rankingJuegoDePuntos.sort(function(obj1, obj2) {
@@ -235,13 +235,13 @@ export class AsignarPuntosComponent implements OnInit {
         this.rankingEquiposJuegoDePunto[i].puntos = this.rankingEquiposJuegoDePunto[i].puntos + this.valorPunto;
         if (this.listaEquiposOrdenadaPorPuntos[i].nivelId !== undefined) {
             const nivel = this.nivelesDelJuego.filter (n => n.id === this.listaEquiposOrdenadaPorPuntos[i].nivelId)[0];
-            this.rankingEquiposJuegoDePunto[i].nivel = nivel.Nombre;
+            this.rankingEquiposJuegoDePunto[i].nivel = nivel.nombre;
         }
       }
     }
     // tslint:disable-next-line:only-arrow-functions
     this.listaEquiposOrdenadaPorPuntos = this.listaEquiposOrdenadaPorPuntos.sort(function(obj1, obj2) {
-      return obj2.PuntosTotalesEquipo - obj1.PuntosTotalesEquipo;
+      return obj2.puntosTotalesEquipo - obj1.puntosTotalesEquipo;
     });
     // tslint:disable-next-line:only-arrow-functions
     this.rankingEquiposJuegoDePunto = this.rankingEquiposJuegoDePunto.sort(function(obj1, obj2) {
@@ -280,12 +280,12 @@ export class AsignarPuntosComponent implements OnInit {
           this.rankingJuegoDePuntos[elegido].puntos = this.rankingJuegoDePuntos[elegido].puntos + this.valorPunto;
           if (this.listaAlumnosOrdenadaPorPuntos[elegido].nivelId !== undefined) {
             const nivel = this.nivelesDelJuego.filter (n => n.id === this.listaAlumnosOrdenadaPorPuntos[elegido].nivelId)[0];
-            this.rankingJuegoDePuntos[elegido].nivel = nivel.Nombre;
+            this.rankingJuegoDePuntos[elegido].nivel = nivel.nombre;
           }
 
           // tslint:disable-next-line:only-arrow-functions
           this.listaAlumnosOrdenadaPorPuntos = this.listaAlumnosOrdenadaPorPuntos.sort(function(obj1, obj2) {
-            return obj2.PuntosTotalesAlumno - obj1.PuntosTotalesAlumno;
+            return obj2.puntosTotalesAlumno - obj1.puntosTotalesAlumno;
           });
           // tslint:disable-next-line:only-arrow-functions
           this.rankingJuegoDePuntos = this.rankingJuegoDePuntos.sort(function(obj1, obj2) {
@@ -322,12 +322,12 @@ export class AsignarPuntosComponent implements OnInit {
           this.rankingEquiposJuegoDePunto[elegido].puntos = this.rankingEquiposJuegoDePunto[elegido].puntos + this.valorPunto;
           if (this.listaEquiposOrdenadaPorPuntos[elegido].nivelId !== undefined) {
             const nivel = this.nivelesDelJuego.filter (n => n.id === this.listaEquiposOrdenadaPorPuntos[elegido].nivelId)[0];
-            this.rankingEquiposJuegoDePunto[elegido].nivel = nivel.Nombre;
+            this.rankingEquiposJuegoDePunto[elegido].nivel = nivel.nombre;
           }
 
           // tslint:disable-next-line:only-arrow-functions
           this.listaEquiposOrdenadaPorPuntos = this.listaEquiposOrdenadaPorPuntos.sort(function(obj1, obj2) {
-            return obj2.PuntosTotalesEquipo - obj1.PuntosTotalesEquipo;
+            return obj2.puntosTotalesEquipo - obj1.puntosTotalesEquipo;
           });
           // tslint:disable-next-line:only-arrow-functions
           this.rankingEquiposJuegoDePunto = this.rankingEquiposJuegoDePunto.sort(function(obj1, obj2) {

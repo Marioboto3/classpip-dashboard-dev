@@ -58,8 +58,8 @@ export class EditarPreguntaDialogComponent implements OnInit {
     this.profesorId = this.data.profesorId;
     console.log ("ya tengo la pregunta");
     console.log (this.preguntaEditar);
-    if (this.preguntaEditar.Imagen !== undefined) {
-      this.imagenPregunta = URL.ImagenesPregunta + this.preguntaEditar.Imagen ;
+    if (this.preguntaEditar.imagen !== undefined) {
+      this.imagenPregunta = URL.ImagenesPregunta + this.preguntaEditar.imagen ;
       // Sino la imagenColeccion será undefined para que no nos pinte la foto de otro equipo préviamente seleccionado
     } else {
       this.imagenPregunta = undefined;
@@ -126,11 +126,11 @@ export class EditarPreguntaDialogComponent implements OnInit {
   }
 
   EliminarPareja(i) {
-    this.preguntaEditar.Emparejamientos.splice (i, 1);
+    this.preguntaEditar.emparejamientos.splice (i, 1);
     this.hayCambios = true;
   }
   NuevoEmparejamiento () {
-    this.preguntaEditar.Emparejamientos.push ({
+    this.preguntaEditar.emparejamientos.push ({
       l: '',
       r: ''
     });
@@ -151,14 +151,14 @@ export class EditarPreguntaDialogComponent implements OnInit {
       if (repetido) {
         Swal.fire('Error', 'Ya hay un fichero en la base de datos con el mismo nombre', 'error');
       } else {
-        this.imagenAnterior =  this.preguntaEditar.Imagen;
-        this.preguntaEditar.Imagen = this.filePregunta.name;
+        this.imagenAnterior =  this.preguntaEditar.imagen;
+        this.preguntaEditar.imagen = this.filePregunta.name;
         this.hayCambios = true;
         const imagenPreguntaData: FormData = new FormData();
         imagenPreguntaData.append(this.filePregunta.name, this.filePregunta);
         this.peticionesAPI.PonImagenPregunta(imagenPreguntaData)
         .subscribe(res => {
-          this.imagenPregunta = URL.ImagenesPregunta +  this.preguntaEditar.Imagen ;
+          this.imagenPregunta = URL.ImagenesPregunta +  this.preguntaEditar.imagen ;
         });
         console.log ('voy a borrar la imagen anterior');
         console.log (this.imagenAnterior);

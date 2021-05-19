@@ -1,18 +1,18 @@
 export class AlumnoJuegoDeVotacionTodosAUno {
 
-  PuntosTotales: number;
+  puntosTotales: number;
   id: number;
   alumnoId: number;
   juegoDeVotacionTodosAUnoId: number;
-  VotosEmitidos: any[];
-  VotosRecibidos: any[];
+  votosEmitidos: any[];
+  votosRecibidos: any[];
 
   constructor(alumnoId?: number, juegoDeVotacionTodosAUnoId?: number) {
 
     this.alumnoId = alumnoId;
     this.juegoDeVotacionTodosAUnoId = juegoDeVotacionTodosAUnoId;
-    this.PuntosTotales = 0;
-    this.VotosEmitidos = [];
-    this.VotosRecibidos = [];
+    this.puntosTotales = 0;
+    this.votosEmitidos = [];
+    this.votosRecibidos = [];
   }
 }

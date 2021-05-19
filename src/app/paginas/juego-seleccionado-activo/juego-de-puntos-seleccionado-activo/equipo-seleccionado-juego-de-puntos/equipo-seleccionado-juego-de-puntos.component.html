@@ -1,4 +1,4 @@
-<div class="titulo"><h2>{{juegoSeleccionado.Tipo}}</h2></div>
+<div class="titulo"><h2>{{juegoSeleccionado.tipo}}</h2></div>
 <div class="subtitulo"><h3>Información del equipo</h3></div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 
@@ -11,24 +11,24 @@
   <div>
       <p style="font-size: 110%">
         <span style="font-weight: bold;">Nombre:</span>
-        {{equipoSeleccionado.Nombre}}
+        {{equipoSeleccionado.nombre}}
       </p>
       <p style="font-size: 110%">
           <span style="font-weight: bold;">Puntos:</span>
-          {{equipoJuegoDePuntos.PuntosTotalesEquipo}}
+          {{equipoJuegoDePuntos.puntosTotalesEquipo}}
       </p>
       <p style="font-size: 110%">
         <span style="font-weight: bold;">Posición Total:</span>
-        {{posicion}}º
+        {{posicion}}
       </p>
 
       <div   *ngIf="nivelesDelJuego">
 
         <div *ngIf="nivel"  style="font-size: 110%">
-          <span style="font-weight: bold; ">Nivel: </span> {{nivel.Nombre}}
+          <span style="font-weight: bold; ">Nivel: </span> {{nivel.nombre}}
         </div>
         <div *ngIf="siguienteNivel"  style="font-size: 110%">
-            <span style="font-weight: bold; ">Puntos que te faltan para el siguiente nivel: </span> {{siguienteNivel.PuntosAlcanzar - equipoJuegoDePuntos.PuntosTotalesEquipo}}
+            <span style="font-weight: bold; ">Puntos que te faltan para el siguiente nivel: </span> {{siguienteNivel.puntosAlcanzar - equipoJuegoDePuntos.puntosTotalesEquipo}}
         </div>
         <div *ngIf="siguienteNivel === undefined"  style="font-size: 110%">
             <span style="font-weight: bold; ">Estas en el máximo nivel</span>
@@ -49,7 +49,7 @@
   <mat-label>Tipo de punto</mat-label>
   <select matNativeControl [(ngModel)]="puntoSeleccionadoId" name="punto" (change) = "MostrarHistorialSeleccionado()">
     <option *ngFor="let punto of listaSeleccionable" [value]="punto.id">
-      {{punto.Nombre}}
+      {{punto.nombre}}
     </option>
   </select>
 </mat-form-field>

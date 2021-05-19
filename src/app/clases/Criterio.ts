@@ -1,12 +1,12 @@
 export class Criterio {
-  Nombre: string;
-  Elementos: string[];
+  nombre: string;
+  elementos: string[];
 
 
   constructor(nombre?: string, elementos?: string[]) {
 
-    this.Nombre = nombre;
-    this.Elementos = elementos;
+    this.nombre = nombre;
+    this.elementos = elementos;
   }
 
 }

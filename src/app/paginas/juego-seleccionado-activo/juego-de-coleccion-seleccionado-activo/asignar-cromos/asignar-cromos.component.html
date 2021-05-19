@@ -17,7 +17,7 @@
           <mat-label>Cromo que desea asignar</mat-label>
           <select matNativeControl (change) = "TraeCromo()" [(ngModel)]="cromoSeleccionadoId" name="cromo">
             <option *ngFor="let cromo of cromosColeccion" [value]="cromo.id">
-              {{cromo.Nombre}}
+              {{cromo.nombre}}
             </option>
           </select>
         </mat-form-field>
@@ -25,17 +25,17 @@
 
       <div *ngIf="cromoSeleccionado">
         <mat-card class="cromo" [ngClass]="{
-          'Diamante' : cromoSeleccionado.Nivel === 'Diamante',
-          'Platino' : cromoSeleccionado.Nivel === 'Platino',
-          'Oro' : cromoSeleccionado.Nivel === 'Oro',
-          'Plata' : cromoSeleccionado.Nivel === 'Plata',
-          'Bronce' : cromoSeleccionado.Nivel === 'Bronce'}">
+          'Diamante' : cromoSeleccionado.nivel === 'Diamante',
+          'Platino' : cromoSeleccionado.nivel === 'Platino',
+          'Oro' : cromoSeleccionado.nivel === 'Oro',
+          'Plata' : cromoSeleccionado.nivel === 'Plata',
+          'Bronce' : cromoSeleccionado.nivel === 'Bronce'}">
 
           <div class= "enColumna">
             <mat-card-header style = "margin-top: 20%;">
               <!-- <div style="display: flex; justify-content:space-between; width: 250px "> -->
-                <mat-card-title align = "center">{{cromoSeleccionado.Nombre}}</mat-card-title>
-                <mat-card-subtitle align = "center">{{cromoSeleccionado.Probabilidad}}</mat-card-subtitle>
+                <mat-card-title align = "center">{{cromoSeleccionado.nombre}}</mat-card-title>
+                <mat-card-subtitle align = "center">{{cromoSeleccionado.probabilidad}}</mat-card-subtitle>
 
             </mat-card-header>
             <!-- <mat-card-content style="display: flex; align-items: center;justify-content: center;"> -->
@@ -45,7 +45,7 @@
                   <img class ="imagenCromo" *ngIf="imagenDelanteCromoSeleccionado"  mat-card-image [src]="imagenDelanteCromoSeleccionado" >
                 </div>
 
-                <div  *ngIf = "coleccion.DosCaras"  class="flip-box">
+                <div  *ngIf = "coleccion.dosCaras"  class="flip-box">
                     <div class="flip-box-inner">
                       <div class="flip-box-front">
                         <div class="posicionImagen" >
@@ -118,7 +118,7 @@
               <mat-label>Selecciona el juego de puntos</mat-label>
               <select matNativeControl [(ngModel)]="juegoPuntosSeleccionadoId" name="juego" (change) = "botonAsignacionDesactivado=false;">
                 <option *ngFor="let juego of juegosPuntos" [value]="juego.id">
-                  {{juego.NombreJuego}}
+                  {{juego.nombreJuego}}
                 </option>
               </select>
             </mat-form-field>
@@ -189,15 +189,15 @@
       <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Nombre </th>
       <td mat-cell   *matCellDef="let alumno; ">
             <div *ngIf = "alumnoElegido &&
-                          alumno.Nombre === alumnoElegido.Nombre &&
-                          alumno.PrimerApellido === alumnoElegido.PrimerApellido &&
-                          alumno.SegundoApellido === alumnoElegido.SegundoApellido"
-                          style = "color:green;font-weight: bold; font-size: 150%;">{{alumno.Nombre}} </div>
+                          alumno.nombre === alumnoElegido.nombre &&
+                          alumno.primerApellido === alumnoElegido.primerApellido &&
+                          alumno.segundoApellido === alumnoElegido.segundoApellido"
+                          style = "color:green;font-weight: bold; font-size: 150%;">{{alumno.nombre}} </div>
             <div *ngIf = "alumnoElegido === undefined ||
-                          alumno.Nombre !== alumnoElegido.Nombre ||
-                          alumno.PrimerApellido !== alumnoElegido.PrimerApellido ||
-                          alumno.SegundoApellido !== alumnoElegido.SegundoApellido"
-                          style = "color:black">{{alumno.Nombre}} </div>
+                          alumno.nombre !== alumnoElegido.nombre ||
+                          alumno.primerApellido !== alumnoElegido.primerApellido ||
+                          alumno.segundoApellido !== alumnoElegido.segundoApellido"
+                          style = "color:black">{{alumno.nombre}} </div>
       </td>
     </ng-container>
 
@@ -208,15 +208,15 @@
       <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Primer Apellido </th>
       <td mat-cell   *matCellDef="let alumno;">
             <div *ngIf = "alumnoElegido &&
-                          alumno.Nombre === alumnoElegido.Nombre &&
-                          alumno.PrimerApellido === alumnoElegido.PrimerApellido &&
-                          alumno.SegundoApellido === alumnoElegido.SegundoApellido"
-                          style = "color:green;font-weight: bold; font-size: 150%;">{{alumno.PrimerApellido}} </div>
+                          alumno.nombre === alumnoElegido.nombre &&
+                          alumno.primerApellido === alumnoElegido.primerApellido &&
+                          alumno.segundoApellido === alumnoElegido.segundoApellido"
+                          style = "color:green;font-weight: bold; font-size: 150%;">{{alumno.primerApellido}} </div>
             <div *ngIf = "alumnoElegido === undefined ||
-                          alumno.Nombre !== alumnoElegido.Nombre ||
-                          alumno.PrimerApellido !== alumnoElegido.PrimerApellido ||
-                          alumno.SegundoApellido !== alumnoElegido.SegundoApellido"
-                          style = "color:black">{{alumno.PrimerApellido}} </div>
+                          alumno.nombre !== alumnoElegido.nombre ||
+                          alumno.primerApellido !== alumnoElegido.primerApellido ||
+                          alumno.segundoApellido !== alumnoElegido.segundoApellido"
+                          style = "color:black">{{alumno.primerApellido}} </div>
 
 
       </td>
@@ -227,15 +227,15 @@
       <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Segundo Apellido </th>
       <td mat-cell   *matCellDef="let alumno; ">
             <div *ngIf = "alumnoElegido &&
-                          alumno.Nombre === alumnoElegido.Nombre &&
-                          alumno.PrimerApellido === alumnoElegido.PrimerApellido &&
-                          alumno.SegundoApellido === alumnoElegido.SegundoApellido"
-                          style = "color:green;font-weight: bold; font-size: 150%;">{{alumno.SegundoApellido}} </div>
+                          alumno.nombre === alumnoElegido.nombre &&
+                          alumno.primerApellido === alumnoElegido.primerApellido &&
+                          alumno.segundoApellido === alumnoElegido.segundoApellido"
+                          style = "color:green;font-weight: bold; font-size: 150%;">{{alumno.segundoApellido}} </div>
             <div *ngIf = "alumnoElegido === undefined ||
-                          alumno.Nombre !== alumnoElegido.Nombre ||
-                          alumno.PrimerApellido !== alumnoElegido.PrimerApellido ||
-                          alumno.SegundoApellido !== alumnoElegido.SegundoApellido"
-                          style = "color:black">{{alumno.SegundoApellido}} </div>
+                          alumno.nombre !== alumnoElegido.nombre ||
+                          alumno.primerApellido !== alumnoElegido.primerApellido ||
+                          alumno.segundoApellido !== alumnoElegido.segundoApellido"
+                          style = "color:black">{{alumno.segundoApellido}} </div>
       </td>
     </ng-container>
 
@@ -243,19 +243,19 @@
         <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> </th>
         <td mat-cell   *matCellDef="let alumno; ">
               <div *ngIf = "primerAlumno && cromosParaPrimero > 0 &&
-                            alumno.Nombre === primerAlumno.Nombre &&
-                            alumno.PrimerApellido === primerAlumno.PrimerApellido &&
-                            alumno.SegundoApellido === primerAlumno.SegundoApellido"
+                            alumno.nombre === primerAlumno.nombre &&
+                            alumno.primerApellido === primerAlumno.primerApellido &&
+                            alumno.segundoApellido === primerAlumno.segundoApellido"
                             style = "color:green;font-weight: bold; font-size: 150%;">{{cromosParaPrimero}} cromos más </div>
                             <div *ngIf = "segundoAlumno && cromosParaSegundo > 0 &&
-                            alumno.Nombre === segundoAlumno.Nombre &&
-                            alumno.PrimerApellido === segundoAlumno.PrimerApellido &&
-                            alumno.SegundoApellido === segundoAlumno.SegundoApellido"
+                            alumno.nombre === segundoAlumno.nombre &&
+                            alumno.primerApellido === segundoAlumno.primerApellido &&
+                            alumno.segundoApellido === segundoAlumno.segundoApellido"
                             style = "color:green;font-weight: bold; font-size: 150%;">{{cromosParaSegundo}} cromos más </div>
                             <div *ngIf = "tercerAlumno && cromosParaTercero > 0 &&
-                            alumno.Nombre === tercerAlumno.Nombre &&
-                            alumno.PrimerApellido === tercerAlumno.PrimerApellido &&
-                            alumno.SegundoApellido === tercerAlumno.SegundoApellido"
+                            alumno.nombre === tercerAlumno.nombre &&
+                            alumno.primerApellido === tercerAlumno.primerApellido &&
+                            alumno.segundoApellido === tercerAlumno.segundoApellido"
                             style = "color:green;font-weight: bold; font-size: 150%;">{{cromosParaTercero}} cromos más </div>
         </td>
       </ng-container>
@@ -310,11 +310,11 @@
       <td mat-cell *matCellDef="let equipo">
 
             <div *ngIf = "equipoElegido &&
-                          equipo.Nombre === equipoElegido.Nombre"
-                          style = "color:green;font-weight: bold; font-size: 150%;">{{equipo.Nombre}} </div>
+                          equipo.nombre === equipoElegido.nombre"
+                          style = "color:green;font-weight: bold; font-size: 150%;">{{equipo.nombre}} </div>
             <div *ngIf = "equipoElegido === undefined ||
-                          equipo.Nombre !== equipoElegido.Nombre"
-                          style = "color:black">{{equipo.Nombre}} </div>
+                          equipo.nombre !== equipoElegido.nombre"
+                          style = "color:black">{{equipo.nombre}} </div>
 
       </td>
     </ng-container>
@@ -335,7 +335,7 @@
               <mat-list>
                 <mat-list-item *ngFor="let alumno of alumnosEquipo">
                   <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
-                  <p class="md-body-1" mat-line>{{alumno.Nombre}} {{alumno.PrimerApellido}} {{alumno.SegundoApellido}}</p>
+                  <p class="md-body-1" mat-line>{{alumno.nombre}} {{alumno.primerApellido}} {{alumno.segundoApellido}}</p>
                 </mat-list-item>
               </mat-list>
             </mat-card-content>
@@ -358,13 +358,13 @@
         <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> </th>
         <td mat-cell   *matCellDef="let equipo; ">
               <div *ngIf = "primerEquipo && cromosParaPrimero > 0 &&
-                            equipo.Nombre === primerEquipo.Nombre"
+                            equipo.nombre === primerEquipo.nombre"
                             style = "color:green;font-weight: bold; font-size: 150%;">{{cromosParaPrimero}} cromos más </div>
               <div *ngIf = "segundoEquipo && cromosParaSegundo > 0 &&
-                            equipo.Nombre === segundoEquipo.Nombre"
+                            equipo.nombre === segundoEquipo.nombre"
                             style = "color:green;font-weight: bold; font-size: 150%;">{{cromosParaSegundo}} cromos más </div>
               <div *ngIf = "tercerEquipo && cromosParaTercero > 0 &&
-                            equipo.Nombre === tercerEquipo.Nombre"
+                            equipo.nombre === tercerEquipo.nombre"
                             style = "color:green;font-weight: bold; font-size: 150%;">{{cromosParaTercero}} cromos más </div>
 
         </td>

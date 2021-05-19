@@ -7,7 +7,7 @@ Seleccione el equipo al que desee mover los alumnos
   <select matNativeControl [(ngModel)]="equipoSeleccionadoId" name="equipo">
     <option value="" selected></option>
     <option *ngFor="let equipo of listaEquipos" [value]="equipo.id">
-      {{equipo.Nombre}}
+      {{equipo.nombre}}
     </option>
   </select>
 </mat-form-field>
@@ -41,19 +41,19 @@ Seleccione el equipo al que desee mover los alumnos
       <!-- Nombre Alumno Column -->
       <ng-container matColumnDef="nombreAlumno">
         <th mat-header-cell *matHeaderCellDef class="letraCabecera" style="width: 23%"> Nombre </th>
-        <td mat-cell *matCellDef="let alumno"> {{alumno.Nombre}} </td>
+        <td mat-cell *matCellDef="let alumno"> {{alumno.nombre}} </td>
       </ng-container>
 
       <!-- Primer Apellido Column -->
       <ng-container matColumnDef="primerApellido">
         <th mat-header-cell *matHeaderCellDef class="letraCabecera" style="width: 23%"> Primer Apellido </th>
-        <td mat-cell *matCellDef="let alumno"> {{alumno.PrimerApellido}} </td>
+        <td mat-cell *matCellDef="let alumno"> {{alumno.primerApellido}} </td>
       </ng-container>
 
       <!-- Segundo Apellido Column -->
       <ng-container matColumnDef="segundoApellido">
         <th mat-header-cell *matHeaderCellDef class="letraCabecera" style="width: 23%"> Segundo Apellido </th>
-        <td mat-cell *matCellDef="let alumno"> {{alumno.SegundoApellido}} </td>
+        <td mat-cell *matCellDef="let alumno"> {{alumno.segundoApellido}} </td>
       </ng-container>
 
       <!-- alumnoId Column -->

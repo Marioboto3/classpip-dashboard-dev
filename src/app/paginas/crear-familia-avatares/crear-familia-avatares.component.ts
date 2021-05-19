@@ -98,8 +98,8 @@ export class CrearFamiliaAvataresComponent implements OnInit {
       nombreComplemento4: ['', Validators.required]
     });
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
     this.fileComplemento = Array(4).fill([]);
     this.imagenComplemento = Array(4).fill(undefined);
     this.cont = Array(4).fill(0);
@@ -113,10 +113,10 @@ export class CrearFamiliaAvataresComponent implements OnInit {
     } else {
       this.botonAvanzarAPaso2Desactivado = false;
       this.familiaAvatares = new FamiliaAvatares (this.nombreFormGroup.value.nombreFamilia);
-      this.familiaAvatares.Complemento1 = [];
-      this.familiaAvatares.Complemento2 = [];
-      this.familiaAvatares.Complemento3 = [];
-      this.familiaAvatares.Complemento4 = [];
+      this.familiaAvatares.complemento1 = [];
+      this.familiaAvatares.complemento2 = [];
+      this.familiaAvatares.complemento3 = [];
+      this.familiaAvatares.complemento4 = [];
     }
   }
 
@@ -127,7 +127,7 @@ export class CrearFamiliaAvataresComponent implements OnInit {
     } else {
       this.activarCargaComplemento1 = true;
       this.muestraSeleccionarComplemento1 = true;
-      this.familiaAvatares.NombreComplemento1 =  this.complemento1FormGroup.value.nombreComplemento1;
+      this.familiaAvatares.nombreComplemento1 =  this.complemento1FormGroup.value.nombreComplemento1;
     }
   }
 
@@ -138,7 +138,7 @@ export class CrearFamiliaAvataresComponent implements OnInit {
     } else {
       this.activarCargaComplemento2 = true;
       this.muestraSeleccionarComplemento2 = true;
-      this.familiaAvatares.NombreComplemento2 =  this.complemento2FormGroup.value.nombreComplemento2;
+      this.familiaAvatares.nombreComplemento2 =  this.complemento2FormGroup.value.nombreComplemento2;
     }
   }
 
@@ -148,7 +148,7 @@ export class CrearFamiliaAvataresComponent implements OnInit {
     } else {
       this.activarCargaComplemento3 = true;
       this.muestraSeleccionarComplemento3 = true;
-      this.familiaAvatares.NombreComplemento3 =  this.complemento3FormGroup.value.nombreComplemento3;
+      this.familiaAvatares.nombreComplemento3 =  this.complemento3FormGroup.value.nombreComplemento3;
     }
   }
 
@@ -159,7 +159,7 @@ export class CrearFamiliaAvataresComponent implements OnInit {
     } else {
       this.activarCargaComplemento4 = true;
       this.muestraSeleccionarComplemento4 = true;
-      this.familiaAvatares.NombreComplemento4 =  this.complemento4FormGroup.value.nombreComplemento4;
+      this.familiaAvatares.nombreComplemento4 =  this.complemento4FormGroup.value.nombreComplemento4;
     }
   }
 
@@ -169,7 +169,7 @@ export class CrearFamiliaAvataresComponent implements OnInit {
 
   CargarImagenSilueta($event) {
     this.fileSilueta = $event.target.files[0];
-    this.familiaAvatares.Silueta = this.fileSilueta.name;
+    this.familiaAvatares.silueta = this.fileSilueta.name;
 
     const reader = new FileReader();
     reader.readAsDataURL(this.fileSilueta);
@@ -267,20 +267,20 @@ export class CrearFamiliaAvataresComponent implements OnInit {
     this.imagen.height = '162';
     if (n === 0) {
       document.getElementById('complementos1').appendChild(this.imagen);
-      this.familiaAvatares.Complemento1.push (this.file.name);
+      this.familiaAvatares.complemento1.push (this.file.name);
       this.muestraSeleccionarComplemento1 = true;
    } else if (n === 1) {
       document.getElementById('complementos2').appendChild(this.imagen);
-      this.familiaAvatares.Complemento2.push (this.file.name);
+      this.familiaAvatares.complemento2.push (this.file.name);
       this.muestraSeleccionarComplemento2 = true;
    } else if (n === 2) {
       document.getElementById('complementos3').appendChild(this.imagen);
 
-      this.familiaAvatares.Complemento3.push (this.file.name);
+      this.familiaAvatares.complemento3.push (this.file.name);
       this.muestraSeleccionarComplemento3 = true;
    } else {
       document.getElementById('complementos4').appendChild(this.imagen);
-      this.familiaAvatares.Complemento4.push (this.file.name);
+      this.familiaAvatares.complemento4.push (this.file.name);
       this.muestraSeleccionarComplemento4 = true;
    }
     this.cont[n]++;
@@ -432,14 +432,14 @@ export class CrearFamiliaAvataresComponent implements OnInit {
         if (res != null) {
           this.familiaAvatares = res;
           // guardamos la imagen de la silueta
-          const imagenColeccion = this.ficherosFamilia.filter (f => f.name === this.familiaAvatares.Silueta)[0];
+          const imagenColeccion = this.ficherosFamilia.filter (f => f.name === this.familiaAvatares.silueta)[0];
           const formDataSilueta = new FormData();
-          formDataSilueta.append(this.familiaAvatares.Silueta, imagenColeccion);
+          formDataSilueta.append(this.familiaAvatares.silueta, imagenColeccion);
           this.peticionesAPI.PonImagenAvatar (formDataSilueta)
           .subscribe(() => console.log('Imagen cargado'));
 
           // guadamos la imagen de cada una de las opciones de compkementos
-          this.familiaAvatares.Complemento1.forEach (opcion => {
+          this.familiaAvatares.complemento1.forEach (opcion => {
               const formDataOpcion = new FormData();
               const fileOpcion = this.ficherosFamilia.filter (f => f.name === opcion)[0];
               formDataOpcion.append(opcion, fileOpcion);
@@ -447,7 +447,7 @@ export class CrearFamiliaAvataresComponent implements OnInit {
               .subscribe(() => console.log('Imagen cargado'));
           });
 
-          this.familiaAvatares.Complemento2.forEach (opcion => {
+          this.familiaAvatares.complemento2.forEach (opcion => {
             const formDataOpcion = new FormData();
             const fileOpcion = this.ficherosFamilia.filter (f => f.name === opcion)[0];
             formDataOpcion.append(opcion, fileOpcion);
@@ -455,7 +455,7 @@ export class CrearFamiliaAvataresComponent implements OnInit {
             .subscribe(() => console.log('Imagen cargado'));
           });
 
-          this.familiaAvatares.Complemento3.forEach (opcion => {
+          this.familiaAvatares.complemento3.forEach (opcion => {
             const formDataOpcion = new FormData();
             const fileOpcion = this.ficherosFamilia.filter (f => f.name === opcion)[0];
             formDataOpcion.append(opcion, fileOpcion);
@@ -463,7 +463,7 @@ export class CrearFamiliaAvataresComponent implements OnInit {
             .subscribe(() => console.log('Imagen cargado'));
           });
 
-          this.familiaAvatares.Complemento4.forEach (opcion => {
+          this.familiaAvatares.complemento4.forEach (opcion => {
             const formDataOpcion = new FormData();
             const fileOpcion = this.ficherosFamilia.filter (f => f.name === opcion)[0];
             formDataOpcion.append(opcion, fileOpcion);

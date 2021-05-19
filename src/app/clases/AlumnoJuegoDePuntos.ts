@@ -1,6 +1,6 @@
 export class AlumnoJuegoDePuntos {
 
-  PuntosTotalesAlumno: number;
+  puntosTotalesAlumno: number;
   alumnoId: number;
   juegoDePuntosId: number;
   id: number;
@@ -11,7 +11,7 @@ export class AlumnoJuegoDePuntos {
     this.alumnoId = alumnoId;
     this.juegoDePuntosId = juegoDePuntosId;
     this.nivelId = nivelId;
-    this.PuntosTotalesAlumno = PuntosTotalesAlumno;
+    this.puntosTotalesAlumno = PuntosTotalesAlumno;
 
   }
 }

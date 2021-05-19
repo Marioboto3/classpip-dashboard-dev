@@ -127,7 +127,7 @@ export class CrearColeccionComponent implements OnInit {
     // this.profesorId = this.profesorService.RecibirProfesorIdDelServicio();
     this.profesorId = this.sesion.DameProfesor().id;
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
     // Constructor myForm
     this.myForm = this.formBuilder.group({
      nombreColeccion: ['', Validators.required]
@@ -223,7 +223,7 @@ export class CrearColeccionComponent implements OnInit {
           console.log('asignado correctamente');
           // Añadimos el cromo a la lista
           this.cromosAgregados.push(res);
-          this.cromosAgregados = this.cromosAgregados.filter(result => result.Nombre !== '');
+          this.cromosAgregados = this.cromosAgregados.filter(result => result.nombre !== '');
           // this.CromosAgregados(res);
 
           // Hago el POST de la imagen de delante SOLO si hay algo cargado.
@@ -265,9 +265,9 @@ export class CrearColeccionComponent implements OnInit {
       console.log('Cromo borrado correctamente');
 
     });
-    this.peticionesAPI.BorrarImagenCromo (cromo.ImagenDelante).subscribe();
-    if (cromo.ImagenDetras !== undefined) {
-      this.peticionesAPI.BorrarImagenCromo (cromo.ImagenDetras).subscribe();
+    this.peticionesAPI.BorrarImagenCromo (cromo.imagenDelante).subscribe();
+    if (cromo.imagenDetras !== undefined) {
+      this.peticionesAPI.BorrarImagenCromo (cromo.imagenDetras).subscribe();
     }
   }
 
@@ -460,12 +460,12 @@ export class CrearColeccionComponent implements OnInit {
 
         this.peticionesAPI.BorraColeccion(coleccion.id, coleccion.profesorId)
         .subscribe( () => { console.log ('Ya he borrado la coleccion');
-                            this.peticionesAPI.BorrarImagenColeccion(coleccion.ImagenColeccion).subscribe();
+                            this.peticionesAPI.BorrarImagenColeccion(coleccion.imagenColeccion).subscribe();
                             for (let i = 0; i < (this.cromosAgregados.length); i++) {
                                 this.peticionesAPI.BorrarCromo (this.cromosAgregados[i].id).subscribe();
-                                this.peticionesAPI.BorrarImagenCromo(this.cromosAgregados[i].ImagenDelante).subscribe();
-                                if (this.cromosAgregados[i].ImagenDetras !== undefined) {
-                                  this.peticionesAPI.BorrarImagenCromo(this.cromosAgregados[i].ImagenDetras).subscribe();
+                                this.peticionesAPI.BorrarImagenCromo(this.cromosAgregados[i].imagenDelante).subscribe();
+                                if (this.cromosAgregados[i].imagenDetras !== undefined) {
+                                  this.peticionesAPI.BorrarImagenCromo(this.cromosAgregados[i].imagenDetras).subscribe();
                                 }
                             }
                             obs.next();

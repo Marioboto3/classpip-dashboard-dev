@@ -59,11 +59,11 @@ export class AsignacionPuntoJuegoComponent implements OnInit {
     .subscribe(puntos => {
 
       // ME guardo el tipo de punto aleatorio para añadirlo al final
-      this.puntoAleatorio = puntos.filter (p => p.Nombre === 'Aleatorio')[0];
+      this.puntoAleatorio = puntos.filter (p => p.nombre === 'Aleatorio')[0];
 
       // Elimino el tipo de punto aleatorio para que no salga entre los asignables
       // porque ese tipo de punto se asigna al juego de forma automática
-      this.tiposPuntos = puntos.filter (p => p.Nombre !== 'Aleatorio');
+      this.tiposPuntos = puntos.filter (p => p.nombre !== 'Aleatorio');
 
 
       this.seleccionados = Array(this.tiposPuntos.length).fill(false);

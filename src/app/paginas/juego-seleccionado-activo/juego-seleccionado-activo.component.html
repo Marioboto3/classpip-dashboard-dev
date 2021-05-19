@@ -1,52 +1,52 @@
 
-<div class="titulo">{{juegoSeleccionado.NombreJuego}}</div>
-<div *ngIf = "juegoSeleccionado.Asignacion !== 'Individual'" class="subtitulo">{{juegoSeleccionado.Tipo}} {{juegoSeleccionado.Modo}}</div>
-<div *ngIf = "juegoSeleccionado.Asignacion === 'Individual'" class="subtitulo">{{juegoSeleccionado.Tipo}} {{juegoSeleccionado.Modo}} con asignación individual</div>
+<div class="titulo">{{juegoSeleccionado.nombreJuego}}</div>
+<div *ngIf = "juegoSeleccionado.asignacion !== 'Individual'" class="subtitulo">{{juegoSeleccionado.tipo}} {{juegoSeleccionado.modo}}</div>
+<div *ngIf = "juegoSeleccionado.asignacion === 'Individual'" class="subtitulo">{{juegoSeleccionado.tipo}} {{juegoSeleccionado.modo}} con asignación individual</div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 
-<div class="contenedor" *ngIf= "juegoSeleccionado.Tipo === 'Juego De Puntos'">
+<div class="contenedor" *ngIf= "juegoSeleccionado.tipo === 'Juego De Puntos'">
   <app-juego-de-puntos-seleccionado-activo></app-juego-de-puntos-seleccionado-activo>
 </div>
 
-<div class="contenedor" *ngIf= "juegoSeleccionado.Tipo === 'Juego De Colección'">
+<div class="contenedor" *ngIf= "juegoSeleccionado.tipo === 'Juego De Colección'">
   <app-juego-de-coleccion-seleccionado-activo></app-juego-de-coleccion-seleccionado-activo>
 </div>
 
-<div class="contenedor" *ngIf= "juegoSeleccionado.Tipo === 'Juego De Competición Liga'">
+<div class="contenedor" *ngIf= "juegoSeleccionado.tipo === 'Juego De Competición Liga'">
   <app-juego-de-competicion-seleccionado-activo></app-juego-de-competicion-seleccionado-activo>
 </div>
 
-<div class="contenedor" *ngIf= "juegoSeleccionado.Tipo === 'Juego De Competición Fórmula Uno'">
+<div class="contenedor" *ngIf= "juegoSeleccionado.tipo === 'Juego De Competición Fórmula Uno'">
   <app-juego-formula-uno-seleccionado-activo></app-juego-formula-uno-seleccionado-activo>
 </div>
 
 
-<div class="contenedor" *ngIf= "juegoSeleccionado.Tipo === 'Juego De Avatar'">
+<div class="contenedor" *ngIf= "juegoSeleccionado.tipo === 'Juego De Avatar'">
   <app-juego-de-avatar-seleccionado-activo></app-juego-de-avatar-seleccionado-activo>
 </div>
 <div>
 
-<div class="contenedor" *ngIf= "juegoSeleccionado.Tipo === 'Juego De Cuestionario' && juegoSeleccionado.Modalidad === 'Test clasico'">
+<div class="contenedor" *ngIf= "juegoSeleccionado.tipo === 'Juego De Cuestionario' && juegoSeleccionado.modalidad === 'Test clasico'">
   <app-juego-de-cuestionario-seleccionado-activo></app-juego-de-cuestionario-seleccionado-activo>
 </div>
  
-<div class="contenedor" *ngIf= "juegoSeleccionado.Tipo === 'Juego De Cuestionario' && juegoSeleccionado.Modalidad === 'Kahoot'">
+<div class="contenedor" *ngIf= "juegoSeleccionado.tipo === 'Juego De Cuestionario' && juegoSeleccionado.modalidad === 'Kahoot'">
   <app-juego-de-cuestionario-kahoot-seleccionado-activo></app-juego-de-cuestionario-kahoot-seleccionado-activo>
 </div> 
 
-<div class="contenedor" *ngIf= "juegoSeleccionado.Tipo === 'Juego De Geocaching'">
+<div class="contenedor" *ngIf= "juegoSeleccionado.tipo === 'Juego De Geocaching'">
   <app-juego-de-geocaching-seleccionado-activo></app-juego-de-geocaching-seleccionado-activo>
 </div>
 
-<div class="contenedor" *ngIf= "juegoSeleccionado.Tipo === 'Juego De Votación Uno A Todos'">
+<div class="contenedor" *ngIf= "juegoSeleccionado.tipo === 'Juego De Votación Uno A Todos'">
   <app-juego-de-votacion-uno-atodos-seleccionado-activo></app-juego-de-votacion-uno-atodos-seleccionado-activo>
 </div>
 
-<div class="contenedor" *ngIf= "juegoSeleccionado.Tipo === 'Juego De Votación Todos A Uno'">
+<div class="contenedor" *ngIf= "juegoSeleccionado.tipo === 'Juego De Votación Todos A Uno'">
   <app-juego-de-votacion-todos-auno-seleccionado-activo></app-juego-de-votacion-todos-auno-seleccionado-activo>
 </div>
 
-<div class="contenedor" *ngIf= "juegoSeleccionado.Tipo === 'Juego De Cuestionario de Satisfacción'">
+<div class="contenedor" *ngIf= "juegoSeleccionado.tipo === 'Juego De Cuestionario de Satisfacción'">
   <app-juego-de-cuestionario-satisfaccion-activo></app-juego-de-cuestionario-satisfaccion-activo>
 </div>
 

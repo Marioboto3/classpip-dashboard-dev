@@ -1,12 +1,12 @@
 export class TablaPuntosFormulaUno {
 
-  Posicion: number;
-  Puntuacion: number;
+  posicion: number;
+  puntuacion: number;
 
   constructor(Posicion?: number, Puntuacion?: number) {
 
-    this.Posicion = Posicion;
-    this.Puntuacion = Puntuacion;
+    this.posicion = Posicion;
+    this.puntuacion = Puntuacion;
 
   }
 }

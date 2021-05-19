@@ -138,7 +138,7 @@ export class SesionesClaseComponent implements OnInit {
       this.sesiones = sesiones;
       console.log ('ya tengo las sesiones');
       console.log (this.sesiones);
-      this.sesiones.sort((a, b) => (a.Dia < b.Dia ? -1 : 1));
+      this.sesiones.sort((a, b) => (a.dia < b.dia ? -1 : 1));
       this.PrepararDatos();
     });
 
@@ -157,7 +157,7 @@ export class SesionesClaseComponent implements OnInit {
       const asis = [];
       this.sesiones.forEach (sesion => {
         // Para cada sesión busco en la lista de asistencias a esa sesión la que corresponde al alumno
-        const t = sesion.Asistencia.filter (a => a.alumnoId === al.id)[0].tiempo;
+        const t = sesion.asistencia.filter (a => a.alumnoId === al.id)[0].tiempo;
         asis.push ({
           sesionId: sesion.id,
           tiempo: t
@@ -378,7 +378,7 @@ PreparaPorcentajesAsistencia() {
           this.horaSesion = null;
           this.descripcionSesion = null;
           this.sesiones.push (this.nuevaSesion);
-          this.sesiones.sort((a, b) => (a.Dia < b.Dia ? -1 : 1));
+          this.sesiones.sort((a, b) => (a.dia < b.dia ? -1 : 1));
           this.PrepararDatos();
         } else {
           console.log('Fallo en la creación');
@@ -486,7 +486,7 @@ RegistrarAsistencia() {
     });
   });
   let mensaje;
-  this.nuevaSesion.Asistencia = asistenciasNuevaSesion;
+  this.nuevaSesion.asistencia = asistenciasNuevaSesion;
   console.log ('tengo las nuevas asistencias');
   console.log (asistenciasNuevaSesion);
   if (!this.marca.some (m => m !== undefined)) {
@@ -519,7 +519,7 @@ RegistrarAsistencia() {
     const elegido = Math.floor(Math.random() * numeroAlumnos);
     const alumnoElegido = this.alumnosDelGrupo[elegido];
     console.log ('Hemos elegido a ' + elegido);
-    Swal.fire(alumnoElegido.Nombre + ' ' + alumnoElegido.PrimerApellido, 'Enhorabuena', 'success');
+    Swal.fire(alumnoElegido.nombre + ' ' + alumnoElegido.primerApellido, 'Enhorabuena', 'success');
 
   }
 
@@ -547,10 +547,10 @@ RegistrarAsistencia() {
       showCancelButton: true
     }).then((result) => {
       if (result.value) {
-        if (sesion.Observaciones === undefined) {
-          sesion.Observaciones = [];
+        if (sesion.observaciones === undefined) {
+          sesion.observaciones = [];
         }
-        sesion.Observaciones.push (result.value);
+        sesion.observaciones.push (result.value);
         this.peticionesAPI.ModificaSesionClase (sesion)
         .subscribe ();
       }
@@ -567,7 +567,7 @@ RegistrarAsistencia() {
       confirmButtonText: 'Si, estoy seguro'
     }).then((result) => {
       if (result.value) {
-        sesion.Observaciones.splice (i, 1);
+        sesion.observaciones.splice (i, 1);
         this.peticionesAPI.ModificaSesionClase (sesion)
         .subscribe ();
       }
@@ -599,12 +599,12 @@ RegistrarAsistencia() {
   EditarObservacion(sesion: SesionClase, i: number)  {
     Swal.fire({
       title: "Modifica la observación",
-      inputValue: sesion.Observaciones[i],
+      inputValue: sesion.observaciones[i],
       input: 'textarea',
       showCancelButton: true
     }).then((result) => {
       if (result.value) {
-        sesion.Observaciones[i] = result.value;
+        sesion.observaciones[i] = result.value;
         this.peticionesAPI.ModificaSesionClase (sesion)
         .subscribe ();
       }

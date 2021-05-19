@@ -5,54 +5,54 @@
   <div class = "enColumna">
 
         <mat-card class= "cardBorder">
-          <mat-card-content *ngIf = "preguntaEditar.Tipo === 'Cuatro opciones'">
+          <mat-card-content *ngIf = "preguntaEditar.tipo === 'Cuatro opciones'">
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Titulo</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.Titulo">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.titulo">
             </mat-form-field>
             <br>
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Pregunta</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.Pregunta">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.pregunta">
             </mat-form-field>
             <br>
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Temática</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.Tematica">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.tematica">
             </mat-form-field>
             <br>
 
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Respuesta correcta</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.RespuestaCorrecta">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.respuestaCorrecta">
             </mat-form-field>
             <br>
 
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Respuesta incorrecta 1</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.RespuestaIncorrecta1">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.respuestaIncorrecta1">
             </mat-form-field>
             <br>
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Respuesta incorrecta 2</strong></mat-label>
-              <input  (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.RespuestaIncorrecta2">
+              <input  (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.respuestaIncorrecta2">
             </mat-form-field>
             <br>
 
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Respuesta incorrecta 3</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.RespuestaIncorrecta3">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.respuestaIncorrecta3">
             </mat-form-field>
             <br>
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Feedback correcto</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.FeedbackCorrecto">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.feedbackCorrecto">
             </mat-form-field>
             <br>
 
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Feedback incorrecto</strong> </mat-label>
-              <input (keyup)="ActivarGuardar()"  matInput [(ngModel)]="preguntaEditar.FeedbackIncorrecto">
+              <input (keyup)="ActivarGuardar()"  matInput [(ngModel)]="preguntaEditar.feedbackIncorrecto">
             </mat-form-field>
             <br>
             <div>
@@ -74,39 +74,39 @@
               <button [disabled]="!hayCambios" mat-raised-button class="btn Aceptar" style="margin: 5px" (click) = "GuardarPregunta();"> Guardar </button>
             </div>
           </mat-card-content>
-          <mat-card-content *ngIf = "preguntaEditar.Tipo === 'Respuesta abierta'">
+          <mat-card-content *ngIf = "preguntaEditar.tipo === 'Respuesta abierta'">
 
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Titulo</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.Titulo">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.titulo">
             </mat-form-field>
             <br>
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Pregunta</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.Pregunta">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.pregunta">
             </mat-form-field>
             <br>
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Temática</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.Tematica">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.tematica">
             </mat-form-field>
             <br>
 
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Respuesta correcta</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.RespuestaCorrecta">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.respuestaCorrecta">
             </mat-form-field>
             <br>
 
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Feedback correcto</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.FeedbackCorrecto">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.feedbackCorrecto">
             </mat-form-field>
             <br>
 
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Feedback incorrecto</strong> </mat-label>
-              <input (keyup)="ActivarGuardar()"  matInput [(ngModel)]="preguntaEditar.FeedbackIncorrecto">
+              <input (keyup)="ActivarGuardar()"  matInput [(ngModel)]="preguntaEditar.feedbackIncorrecto">
             </mat-form-field>
             <br>
             <br>
@@ -130,38 +130,38 @@
               <button [disabled]="!hayCambios" mat-raised-button class="btn Aceptar" style="margin: 5px" (click) = "GuardarPregunta();"> Guardar </button>
             </div>
           </mat-card-content>
-          <mat-card-content *ngIf = "preguntaEditar.Tipo === 'Verdadero o falso'">
+          <mat-card-content *ngIf = "preguntaEditar.tipo === 'Verdadero o falso'">
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Titulo</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.Titulo">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.titulo">
             </mat-form-field>
             <br>
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Pregunta</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.Pregunta">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.pregunta">
             </mat-form-field>
             <br>
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Temática</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.Tematica">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.tematica">
             </mat-form-field>
             <br>
 
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Respuesta</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.RespuestaCorrecta">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.respuestaCorrecta">
             </mat-form-field>
             <br>
 
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Feedback correcto</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.FeedbackCorrecto">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.feedbackCorrecto">
             </mat-form-field>
             <br>
 
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Feedback incorrecto</strong> </mat-label>
-              <input (keyup)="ActivarGuardar()"  matInput [(ngModel)]="preguntaEditar.FeedbackIncorrecto">
+              <input (keyup)="ActivarGuardar()"  matInput [(ngModel)]="preguntaEditar.feedbackIncorrecto">
             </mat-form-field>
             <br>
              <br>
@@ -184,27 +184,27 @@
               <button [disabled]="!hayCambios" mat-raised-button class="btn Aceptar" style="margin: 5px" (click) = "GuardarPregunta();"> Guardar </button>
             </div>
           </mat-card-content>
-          <mat-card-content *ngIf = "preguntaEditar.Tipo === 'Emparejamiento'">
+          <mat-card-content *ngIf = "preguntaEditar.tipo === 'Emparejamiento'">
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Titulo</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.Titulo">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.titulo">
             </mat-form-field>
             <br>
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Pregunta</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.Pregunta">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.pregunta">
             </mat-form-field>
             <br>
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Temática</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.Tematica">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.tematica">
             </mat-form-field>
             <br>
 
 
             <mat-label style = "font-size: smaller;"><strong>Emparejamientos</strong></mat-label>
 
-            <div *ngFor = "let pareja of preguntaEditar.Emparejamientos; let i= index ">
+            <div *ngFor = "let pareja of preguntaEditar.emparejamientos; let i= index ">
 
               <mat-form-field style=  "width: 40%;">
                 <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="pareja.l">
@@ -224,13 +224,13 @@
 
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Feedback correcto</strong></mat-label>
-              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.FeedbackCorrecto">
+              <input (keyup)="ActivarGuardar()" matInput [(ngModel)]="preguntaEditar.feedbackCorrecto">
             </mat-form-field>
             <br>
 
             <mat-form-field style = "width: 80%">
               <mat-label><strong>Feedback incorrecto</strong> </mat-label>
-              <input (keyup)="ActivarGuardar()"  matInput [(ngModel)]="preguntaEditar.FeedbackIncorrecto">
+              <input (keyup)="ActivarGuardar()"  matInput [(ngModel)]="preguntaEditar.feedbackIncorrecto">
             </mat-form-field>
             <br>
             <div>

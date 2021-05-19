@@ -17,29 +17,29 @@ export class InformacionJuegoDeCuestionarioDialogComponent implements OnInit {
   juegoSeleccionado: Juego;
 
   // Propiedades del juego
-  NombreJuego: string;
-  PuntuacionCorrecta: number;
-  PuntuacionIncorrecta: number;
-  Presentacion: string;
-  JuegoActivo: boolean;
-  JuegoTerminado: boolean;
+  nombreJuego: string;
+  puntuacionCorrecta: number;
+  puntuacionIncorrecta: number;
+  presentacion: string;
+  juegoActivo: boolean;
+  juegoTerminado: boolean;
   cuestionarioId: number;
   profesorId: number;
-  Tipo: string;
-  Modalidad: string;
+  tipo: string;
+  modalidad: string;
 
   // Se usará para el selector de modo de asignación de ganadores
-  Presentaciones: string[] = ['Mismo orden para todos',
+  presentaciones: string[] = ['Mismo orden para todos',
   'Preguntas desordenadas',
   'Preguntas y respuestas desordenadas'
   ];
 
   //Se usará para el selector de modo de asignación de modalidad
-  Modalidades: string[] = ['Test clásico',
+  modalidades: string[] = ['Test clásico',
   'Kahoot'
   ];
 
-  TituloCuestionario: string;
+  tituloCuestionario: string;
 
   myForm: FormGroup;
 
@@ -59,16 +59,16 @@ export class InformacionJuegoDeCuestionarioDialogComponent implements OnInit {
 
   ngOnInit() {
     this.juegoSeleccionado = this.sesion.DameJuego();
-    this.NombreJuego = this.juegoSeleccionado.NombreJuego;
-    this.Tipo = this.juegoSeleccionado.Tipo;
-    this.PuntuacionCorrecta = this.juegoSeleccionado.PuntuacionCorrecta;
-    this.PuntuacionIncorrecta = this.juegoSeleccionado.PuntuacionIncorrecta;
-    this.Presentacion = this.juegoSeleccionado.Presentacion;
-    this.JuegoActivo = this.juegoSeleccionado.JuegoActivo;
-    this.JuegoTerminado = this.juegoSeleccionado.JuegoTerminado;
+    this.nombreJuego = this.juegoSeleccionado.NombreJuego;
+    this.tipo = this.juegoSeleccionado.Tipo;
+    this.puntuacionCorrecta = this.juegoSeleccionado.PuntuacionCorrecta;
+    this.puntuacionIncorrecta = this.juegoSeleccionado.PuntuacionIncorrecta;
+    this.presentacion = this.juegoSeleccionado.Presentacion;
+    this.juegoActivo = this.juegoSeleccionado.JuegoActivo;
+    this.juegoTerminado = this.juegoSeleccionado.JuegoTerminado;
     this.cuestionarioId = this.juegoSeleccionado.cuestionarioId;
     this.profesorId = this.juegoSeleccionado.profesorId;
-    this.Modalidad = this.juegoSeleccionado.Modalidad;
+    this.modalidad = this.juegoSeleccionado.Modalidad;
     this.myForm = this._formBuilder.group({
       NombreJuego: ['', Validators.required],
       PuntuacionCorrecta: ['', Validators.required],
@@ -78,21 +78,21 @@ export class InformacionJuegoDeCuestionarioDialogComponent implements OnInit {
 
     this.peticionesAPI.DameCuestionario(this.cuestionarioId)
     .subscribe(res => {
-      this.TituloCuestionario = res.Titulo;
+      this.tituloCuestionario = res.titulo;
     });
   }
 
   // COGEMOS LOS VALORES NUEVOS Y LOS GUARDAMOS EN EL JUEGO
   GuardarCambios() {
-    this.peticionesAPI.ModificaJuegoDeCuestionario(new JuegoDeCuestionario(this.NombreJuego, this.Tipo, this.Modalidad, this.PuntuacionCorrecta,
-      this.PuntuacionIncorrecta, this.Presentacion, this.JuegoActivo, this.JuegoTerminado,
+    this.peticionesAPI.ModificaJuegoDeCuestionario(new JuegoDeCuestionario(this.nombreJuego, this.tipo, this.modalidad, this.puntuacionCorrecta,
+      this.puntuacionIncorrecta, this.presentacion, this.juegoActivo, this.juegoTerminado,
       this.profesorId, this.juegoSeleccionado.grupoId, this.cuestionarioId), this.juegoSeleccionado.id, this.juegoSeleccionado.grupoId)
       .subscribe(res => {
-        this.juegoSeleccionado.NombreJuego = res.NombreJuego;
-        this.juegoSeleccionado.PuntuacionCorrecta = res.PuntuacionCorrecta;
-        this.juegoSeleccionado.PuntuacionIncorrecta = res.PuntuacionIncorrecta;
-        this.juegoSeleccionado.Presentacion = res.Presentacion;
-        this.juegoSeleccionado.Modalidad = res.Modalidad;
+        this.juegoSeleccionado.nombreJuego = res.nombreJuego;
+        this.juegoSeleccionado.puntuacionCorrecta = res.puntuacionCorrecta;
+        this.juegoSeleccionado.puntuacionIncorrecta = res.puntuacionIncorrecta;
+        this.juegoSeleccionado.presentacion = res.presentacion;
+        this.juegoSeleccionado.modalidad = res.modalidad;
         this.sesion.TomaJuego(this.juegoSeleccionado);
         this.goBack();
       });

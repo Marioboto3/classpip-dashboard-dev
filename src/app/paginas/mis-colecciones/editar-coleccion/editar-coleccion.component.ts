@@ -66,7 +66,7 @@ export class EditarColeccionComponent implements OnInit {
 
   ngOnInit() {
     this.coleccion = this.sesion.DameColeccion();
-    this.nombreColeccion = this.coleccion.Nombre;
+    this.nombreColeccion = this.coleccion.nombre;
     this.cromosColeccion = this.sesion.DameCromos();
     console.log ('cromos');
     console.log (this.cromosColeccion);
@@ -80,8 +80,8 @@ export class EditarColeccionComponent implements OnInit {
   EditarColeccion() {
     console.log('Entro a editar');
     // Borramos la imagen anterior
-    if (this.coleccion.ImagenColeccion !== undefined) {
-      this.peticionesAPI.BorrarImagenColeccion (this.coleccion.ImagenColeccion).subscribe();
+    if (this.coleccion.imagenColeccion !== undefined) {
+      this.peticionesAPI.BorrarImagenColeccion (this.coleccion.imagenColeccion).subscribe();
     }
     // tslint:disable-next-line:max-line-length
     this.peticionesAPI.ModificaColeccion(new Coleccion(this.nombreColeccion, this.nombreImagenColeccion), this.coleccion.profesorId, this.coleccion.id)
@@ -113,8 +113,8 @@ export class EditarColeccionComponent implements OnInit {
     for (let i = 0; i < this.cromosColeccion.length; i++) {
 
       this.cromo = this.cromosColeccion[i];
-      this.imagenesCromosDelante[i] = URL.ImagenesCromo + this.cromo.ImagenDelante;
-      this.imagenesCromosDetras[i] = URL.ImagenesCromo + this.cromo.ImagenDetras;
+      this.imagenesCromosDelante[i] = URL.ImagenesCromo + this.cromo.imagenDelante;
+      this.imagenesCromosDetras[i] = URL.ImagenesCromo + this.cromo.imagenDetras;
 
     }
   }
@@ -213,7 +213,7 @@ export class EditarColeccionComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: cromo.Nombre,
+        nombre: cromo.nombre,
       }
     });
 
@@ -222,7 +222,7 @@ export class EditarColeccionComponent implements OnInit {
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.BorrarCromo(cromo);
-        Swal.fire('Eliminado', cromo.Nombre + ' eliminado correctamente', 'success');
+        Swal.fire('Eliminado', cromo.nombre + ' eliminado correctamente', 'success');
 
       }
     });
@@ -241,14 +241,14 @@ export class EditarColeccionComponent implements OnInit {
       }
     );
     console.log (this.cromosColeccion);
-    this.peticionesAPI.BorrarImagenCromo(cromo.ImagenDelante).subscribe( () => {
+    this.peticionesAPI.BorrarImagenCromo(cromo.imagenDelante).subscribe( () => {
         // tslint:disable-next-line:max-line-length
         const nueva = this.imagenesCromosDelante.slice(0, posicion).concat(this.imagenesCromosDelante.slice(posicion + 1, this.imagenesCromosDelante.length));
         this.imagenesCromosDelante = nueva;
       }
     );
-    if (cromo.ImagenDetras !== undefined) {
-      this.peticionesAPI.BorrarImagenCromo(cromo.ImagenDelante).subscribe( () => {
+    if (cromo.imagenDetras !== undefined) {
+      this.peticionesAPI.BorrarImagenCromo(cromo.imagenDelante).subscribe( () => {
         // tslint:disable-next-line:max-line-length
         const nueva = this.imagenesCromosDetras.slice(0, posicion).concat(this.imagenesCromosDetras.slice(posicion + 1, this.imagenesCromosDetras.length));
         this.imagenesCromosDelante = nueva;
@@ -265,11 +265,11 @@ export class EditarColeccionComponent implements OnInit {
  TraeImagenColeccion(coleccion: Coleccion) {
 
   console.log('entro a buscar cromos y foto');
-  console.log(coleccion.ImagenColeccion);
+  console.log(coleccion.imagenColeccion);
   // Si la coleccion tiene una foto (recordemos que la foto no es obligatoria)
-  if (coleccion.ImagenColeccion !== undefined) {
+  if (coleccion.imagenColeccion !== undefined) {
 
-    this.imagenColeccion = URL.ImagenesColeccion + coleccion.ImagenColeccion ;
+    this.imagenColeccion = URL.ImagenesColeccion + coleccion.imagenColeccion ;
 
     // Sino la imagenColeccion será undefined para que no nos pinte la foto de otro equipo préviamente seleccionado
   } else {
@@ -281,7 +281,7 @@ export class EditarColeccionComponent implements OnInit {
   console.log('voy a mostrar los cromos de la coleccion ' + coleccion.id);
 
   // Ordena los cromos por nombre. Asi si tengo algun cromo repetido, salen juntos
-  this.cromosColeccion.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
+  this.cromosColeccion.sort((a, b) => a.nombre.localeCompare(b.nombre));
   this.TraeImagenesCromos();
 
   }

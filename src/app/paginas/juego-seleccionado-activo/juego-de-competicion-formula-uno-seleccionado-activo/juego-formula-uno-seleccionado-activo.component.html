@@ -13,7 +13,7 @@
   <br>
 
   <!-- ////////////////////////////////////// CLASIFICACIÓN INDIVIDUAL ////////////////////////////////////////////////////-->
-  <form style="width: 100%"  *ngIf="juegoSeleccionado.Modo === 'Individual'">
+  <form style="width: 100%"  *ngIf="juegoSeleccionado.modo === 'Individual'">
     <div class="filter"  style="width: 60%">
       <mat-form-field style="width: 95% !Important;">
         <input matInput (keyup)="applyFilter($event.target.value)"  placeholder="Filtro para buscar alumno...">
@@ -96,7 +96,7 @@
 
 
   <!-- ////////////////////////////////////// CLASIFICACIÓN EQUIPOS ////////////////////////////////////////////////////-->
-  <form style=" width: 100%" *ngIf="juegoSeleccionado.Modo != 'Individual'">
+  <form style=" width: 100%" *ngIf="juegoSeleccionado.modo != 'Individual'">
     <div class="filter"  style="width: 60%">
       <mat-form-field style="width: 95% !Important;">
         <input matInput (keyup)="applyFilterEquipo($event.target.value)" placeholder="Filtro para buscar equipo...">
@@ -140,7 +140,7 @@
                     <mat-card-content>
                         <mat-list>
                             <mat-list-item *ngFor="let alumno of alumnosDelEquipo">
-                                <p class="md-body-1" mat-line>{{alumno.Nombre}} {{alumno.PrimerApellido}} {{alumno.SegundoApellido}}</p>
+                                <p class="md-body-1" mat-line>{{alumno.nombre}} {{alumno.primerApellido}} {{alumno.segundoApellido}}</p>
                             </mat-list-item>
                         </mat-list>
                     </mat-card-content>

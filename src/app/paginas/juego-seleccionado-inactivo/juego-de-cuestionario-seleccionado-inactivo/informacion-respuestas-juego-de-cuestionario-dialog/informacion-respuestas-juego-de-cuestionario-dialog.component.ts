@@ -98,21 +98,21 @@ export class InformacionRespuestasJuegoDeCuestionarioDialogComponent implements 
                         // voy a contar los aciertos de este alumno
                         respuestas.forEach (respuesta => {
                           const pregunta = this.preguntas.filter (p => p.id === respuesta.preguntaId)[0];
-                          if (pregunta.Tipo === 'Emparejamiento') {
-                            if (respuesta.Respuesta !== undefined) {
+                          if (pregunta.tipo === 'Emparejamiento') {
+                            if (respuesta.respuesta !== undefined) {
                               let n = 0;
-                              for (let i = 0; i < pregunta.Emparejamientos.length; i++) {
-                                if (pregunta.Emparejamientos[i].r === respuesta.Respuesta[i]) {
+                              for (let i = 0; i < pregunta.emparejamientos.length; i++) {
+                                if (pregunta.emparejamientos[i].r === respuesta.respuesta[i]) {
                                   n++;
                                 }
                               }
-                              if (n === pregunta.Emparejamientos.length) {
+                              if (n === pregunta.emparejamientos.length) {
                                 aciertos++;
                               }
                             }
 
                           } else {
-                            if (pregunta.RespuestaCorrecta === respuesta.Respuesta[0]) {
+                            if (pregunta.respuestaCorrecta === respuesta.respuesta[0]) {
                               aciertos++;
                             }
                           }
@@ -146,45 +146,45 @@ export class InformacionRespuestasJuegoDeCuestionarioDialogComponent implements 
       miDonut = [];
       // preparo los datos del donut
       // primero meto el tipo de pregunta
-      miDonut.push ( { tipo: pregunta.Tipo});
-      if (pregunta.Tipo === 'Cuatro opciones') {
-        miDonut.push ( { respuesta: pregunta.RespuestaCorrecta, cont: 0});
-        miDonut.push ( { respuesta: pregunta.RespuestaIncorrecta1, cont: 0});
-        miDonut.push ( { respuesta: pregunta.RespuestaIncorrecta2, cont: 0});
-        miDonut.push ( { respuesta: pregunta.RespuestaIncorrecta3, cont: 0});
+      miDonut.push ( { tipo: pregunta.tipo});
+      if (pregunta.tipo === 'Cuatro opciones') {
+        miDonut.push ( { respuesta: pregunta.respuestaCorrecta, cont: 0});
+        miDonut.push ( { respuesta: pregunta.respuestaIncorrecta1, cont: 0});
+        miDonut.push ( { respuesta: pregunta.respuestaIncorrecta2, cont: 0});
+        miDonut.push ( { respuesta: pregunta.respuestaIncorrecta3, cont: 0});
         // esto es para el caso de respuesta en blando
         miDonut.push ( { respuesta: '-', cont: 0});
         // ahora cuento las veces que aparece cada una de las respuestas
         respuestas.forEach (respuesta =>
-          miDonut.filter (entrada => entrada.respuesta === respuesta.Respuesta[0])[0].cont++
+          miDonut.filter (entrada => entrada.respuesta === respuesta.respuesta[0])[0].cont++
         );
 
-      } else if (pregunta.Tipo === 'Respuesta abierta') {
-        miDonut.push ( { respuesta: pregunta.RespuestaCorrecta, cont: 0});
+      } else if (pregunta.tipo === 'Respuesta abierta') {
+        miDonut.push ( { respuesta: pregunta.respuestaCorrecta, cont: 0});
         miDonut.push ( { respuesta: 'Otras respuestas', cont: 0});
         // esto es para el caso de respuesta en blando
         miDonut.push ( { respuesta: '-', cont: 0});
         // ahora cuento las veces que aparece cada una de las respuestas
         respuestas.forEach (respuesta => {
-          if (respuesta.Respuesta[0] === pregunta.RespuestaCorrecta) {
-            miDonut.filter (entrada => entrada.respuesta === pregunta.RespuestaCorrecta)[0].cont++;
-          } else if (respuesta.Respuesta[0] === '-') {
+          if (respuesta.respuesta[0] === pregunta.respuestaCorrecta) {
+            miDonut.filter (entrada => entrada.respuesta === pregunta.respuestaCorrecta)[0].cont++;
+          } else if (respuesta.respuesta[0] === '-') {
             miDonut.filter (entrada => entrada.respuesta === '-')[0].cont++;
           } else {
             miDonut.filter (entrada => entrada.respuesta === 'Otras respuestas')[0].cont++;
           }
         });
 
-      } else if (pregunta.Tipo === 'Verdadero o falso') {
-        miDonut.push ( { respuesta: pregunta.RespuestaCorrecta, cont: 0});
+      } else if (pregunta.tipo === 'Verdadero o falso') {
+        miDonut.push ( { respuesta: pregunta.respuestaCorrecta, cont: 0});
         miDonut.push ( { respuesta: 'Mal', cont: 0});
         // esto es para el caso de respuesta en blando
         miDonut.push ( { respuesta: '-', cont: 0});
         // ahora cuento las veces que aparece cada una de las respuestas
         respuestas.forEach (respuesta => {
-          if (respuesta.Respuesta[0] === pregunta.RespuestaCorrecta) {
-            miDonut.filter (entrada => entrada.respuesta === pregunta.RespuestaCorrecta)[0].cont++;
-          } else if (respuesta.Respuesta[0] === '-') {
+          if (respuesta.respuesta[0] === pregunta.respuestaCorrecta) {
+            miDonut.filter (entrada => entrada.respuesta === pregunta.respuestaCorrecta)[0].cont++;
+          } else if (respuesta.respuesta[0] === '-') {
             miDonut.filter (entrada => entrada.respuesta === '-')[0].cont++;
           } else {
             miDonut.filter (entrada => entrada.respuesta === 'Mal')[0].cont++;
@@ -198,16 +198,16 @@ export class InformacionRespuestasJuegoDeCuestionarioDialogComponent implements 
         miDonut.push ( { respuesta: '-', cont: 0});
         // ahora cuento las veces que aparece cada una de las respuestas
         respuestas.forEach (respuesta => {
-          if (respuesta.Respuesta === undefined) {
+          if (respuesta.respuesta === undefined) {
             miDonut.filter (entrada => entrada.respuesta === '-')[0].cont++;
           } else {
             let n = 0;
-            for (let i = 0; i < pregunta.Emparejamientos.length; i++) {
-              if (pregunta.Emparejamientos[i].r === respuesta.Respuesta[i]) {
+            for (let i = 0; i < pregunta.emparejamientos.length; i++) {
+              if (pregunta.emparejamientos[i].r === respuesta.respuesta[i]) {
                 n++;
               }
             }
-            if (n === pregunta.Emparejamientos.length) {
+            if (n === pregunta.emparejamientos.length) {
               miDonut.filter (entrada => entrada.respuesta === 'Emparejamientos correctos')[0].cont++;
             } else {
               miDonut.filter (entrada => entrada.respuesta ===  'Otros emparejamientos incorrectos')[0].cont++;

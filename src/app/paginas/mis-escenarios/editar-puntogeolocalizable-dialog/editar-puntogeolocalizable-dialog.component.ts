@@ -56,11 +56,11 @@ export class EditarPuntoGeolocalizableDialogComponent implements OnInit {
   ngOnInit() {
     this.puntogeolocalizable = this.data.pg;
     console.log(this.puntogeolocalizable);
-    this.nombrePuntoGeolocalizable = this.puntogeolocalizable.Nombre;
-    this.latitudPuntoGeolocalizable = this.puntogeolocalizable.Latitud;
-    this.longitudPuntoGeolocalizable = this.puntogeolocalizable.Longitud;
-    this.pistafacilPuntoGeolocalizable = this.puntogeolocalizable.PistaFacil;
-    this.pistadificilPuntoGeolocalizable = this.puntogeolocalizable.PistaDificil;
+    this.nombrePuntoGeolocalizable = this.puntogeolocalizable.nombre;
+    this.latitudPuntoGeolocalizable = this.puntogeolocalizable.latitud;
+    this.longitudPuntoGeolocalizable = this.puntogeolocalizable.longitud;
+    this.pistafacilPuntoGeolocalizable = this.puntogeolocalizable.pistaFacil;
+    this.pistadificilPuntoGeolocalizable = this.puntogeolocalizable.pistaDificil;
     this.puntosgeolocalizablesEscenario = this.sesion.DamePuntosGeolocalizables();
 
     console.log(this.puntogeolocalizable);

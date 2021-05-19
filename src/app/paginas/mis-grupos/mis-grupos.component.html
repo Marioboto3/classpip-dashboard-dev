@@ -13,13 +13,13 @@
     <!-- Nombre Column -->
     <ng-container matColumnDef="nombre">
       <th mat-header-cell  *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre  </th>
-      <td mat-cell style= "text-align: left"  *matCellDef="let grupo" (click)="EntrarGrupo(grupo)"> {{grupo.Nombre}} </td>
+      <td mat-cell style= "text-align: left"  *matCellDef="let grupo" (click)="EntrarGrupo(grupo)"> {{grupo.nombre}} </td>
     </ng-container>
 
     <!-- Descripcion Column -->
     <ng-container matColumnDef="descripcion">
       <th mat-header-cell  *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Descripción </th>
-      <td mat-cell style= "text-align: left"  *matCellDef="let grupo" (click)="EntrarGrupo(grupo)"> {{grupo.Descripcion}} </td>
+      <td mat-cell style= "text-align: left"  *matCellDef="let grupo" (click)="EntrarGrupo(grupo)"> {{grupo.descripcion}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

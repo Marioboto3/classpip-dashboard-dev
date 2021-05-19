@@ -1,19 +1,19 @@
 export class SesionClase {
-  Dia: string;
-  Hora: string;
-  Descripcion: string;
+  dia: string;
+  hora: string;
+  descripcion: string;
   id: number;
   grupoId: number;
-  Asistencia: any[];
-  Observaciones: string[];
+  asistencia: any[];
+  observaciones: string[];
 
   constructor(Dia?: string, Hora?: string,  Descripcion?: string, Asistencia?: any[]) {
 
-    this.Dia = Dia;
-    this.Hora = Hora;
-    this.Descripcion = Descripcion;
-    this.Asistencia = Asistencia;
-    this.Observaciones = [];
+    this.dia = Dia;
+    this.hora = Hora;
+    this.descripcion = Descripcion;
+    this.asistencia = Asistencia;
+    this.observaciones = [];
   }
 
 }

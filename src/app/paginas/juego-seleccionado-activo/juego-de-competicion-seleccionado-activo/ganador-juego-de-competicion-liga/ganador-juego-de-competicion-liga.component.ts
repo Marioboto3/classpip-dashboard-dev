@@ -172,7 +172,7 @@ export class GanadorJuegoDeCompeticionLigaComponent implements OnInit {
 
 
   Disputada(jornadaId): boolean {
-      return this.JornadasCompeticion.filter (jornada => jornada.id === Number(jornadaId))[0].Disputada;
+      return this.JornadasCompeticion.filter (jornada => jornada.id === Number(jornadaId))[0].disputada;
   }
 
   ConstruirTablaElegirGanador() {
@@ -181,11 +181,11 @@ export class GanadorJuegoDeCompeticionLigaComponent implements OnInit {
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.EnfrentamientosJornadaSeleccionada.length; i++) {
         // tslint:disable-next-line:max-line-length
-        const JugadorUno = this.listaAlumnosClasificacion.filter (alumno => alumno.id === this.EnfrentamientosJornadaSeleccionada[i].JugadorUno )[0];
+        const JugadorUno = this.listaAlumnosClasificacion.filter (alumno => alumno.id === this.EnfrentamientosJornadaSeleccionada[i].jugadorUno )[0];
         // tslint:disable-next-line:max-line-length
         this.EnfrentamientosJornadaSeleccionada[i].nombreJugadorUno = JugadorUno.nombre + ' ' + JugadorUno.primerApellido + ' ' + JugadorUno.segundoApellido;
         // tslint:disable-next-line:max-line-length
-        const JugadorDos = this.listaAlumnosClasificacion.filter (alumno => alumno.id === this.EnfrentamientosJornadaSeleccionada[i].JugadorDos)[0];
+        const JugadorDos = this.listaAlumnosClasificacion.filter (alumno => alumno.id === this.EnfrentamientosJornadaSeleccionada[i].jugadorDos)[0];
         // tslint:disable-next-line:max-line-length
         this.EnfrentamientosJornadaSeleccionada[i].nombreJugadorDos = JugadorDos.nombre + ' ' + JugadorDos.primerApellido + ' ' + JugadorDos.segundoApellido;
       }
@@ -200,11 +200,11 @@ export class GanadorJuegoDeCompeticionLigaComponent implements OnInit {
       if (this.Disputada (this.jornadaId)) {
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < this.EnfrentamientosJornadaSeleccionada.length; i++) {
-          if (this.EnfrentamientosJornadaSeleccionada[i].Ganador === this.EnfrentamientosJornadaSeleccionada[i].JugadorUno) {
+          if (this.EnfrentamientosJornadaSeleccionada[i].ganador === this.EnfrentamientosJornadaSeleccionada[i].jugadorUno) {
             this.selectionUno.select(this.dataSourceTablaGanadorIndividual.data[i]);
-          } else if (this.EnfrentamientosJornadaSeleccionada[i].Ganador === this.EnfrentamientosJornadaSeleccionada[i].JugadorDos) {
+          } else if (this.EnfrentamientosJornadaSeleccionada[i].ganador === this.EnfrentamientosJornadaSeleccionada[i].jugadorDos) {
             this.selectionDos.select(this.dataSourceTablaGanadorIndividual.data[i]);
-          } else if (this.EnfrentamientosJornadaSeleccionada[i].Ganador === 0) {
+          } else if (this.EnfrentamientosJornadaSeleccionada[i].ganador === 0) {
             this.selectionTres.select(this.dataSourceTablaGanadorIndividual.data[i]);
           }
         }
@@ -215,11 +215,11 @@ export class GanadorJuegoDeCompeticionLigaComponent implements OnInit {
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.EnfrentamientosJornadaSeleccionada.length; i++) {
          // tslint:disable-next-line:max-line-length
-         const EquipoUno = this.listaEquiposClasificacion.filter (equipo => equipo.id === this.EnfrentamientosJornadaSeleccionada[i].JugadorUno )[0];
+         const EquipoUno = this.listaEquiposClasificacion.filter (equipo => equipo.id === this.EnfrentamientosJornadaSeleccionada[i].jugadorUno )[0];
          // tslint:disable-next-line:max-line-length
          this.EnfrentamientosJornadaSeleccionada[i].nombreJugadorUno = EquipoUno.nombre;
          // tslint:disable-next-line:max-line-length
-         const EquipoDos = this.listaEquiposClasificacion.filter (equipo => equipo.id === this.EnfrentamientosJornadaSeleccionada[i].JugadorDos)[0];
+         const EquipoDos = this.listaEquiposClasificacion.filter (equipo => equipo.id === this.EnfrentamientosJornadaSeleccionada[i].jugadorDos)[0];
          // tslint:disable-next-line:max-line-length
          this.EnfrentamientosJornadaSeleccionada[i].nombreJugadorDos = EquipoDos.nombre;
       }
@@ -230,11 +230,11 @@ export class GanadorJuegoDeCompeticionLigaComponent implements OnInit {
       if (this.Disputada (this.jornadaId)) {
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < this.EnfrentamientosJornadaSeleccionada.length; i++) {
-          if (this.EnfrentamientosJornadaSeleccionada[i].Ganador === this.EnfrentamientosJornadaSeleccionada[i].JugadorUno) {
+          if (this.EnfrentamientosJornadaSeleccionada[i].ganador === this.EnfrentamientosJornadaSeleccionada[i].jugadorUno) {
             this.selectionUno.select(this.dataSourceTablaGanadorEquipo.data[i]);
-          } else if (this.EnfrentamientosJornadaSeleccionada[i].Ganador === this.EnfrentamientosJornadaSeleccionada[i].JugadorDos) {
+          } else if (this.EnfrentamientosJornadaSeleccionada[i].ganador === this.EnfrentamientosJornadaSeleccionada[i].jugadorDos) {
             this.selectionDos.select(this.dataSourceTablaGanadorEquipo.data[i]);
-          } else if (this.EnfrentamientosJornadaSeleccionada[i].Ganador === 0) {
+          } else if (this.EnfrentamientosJornadaSeleccionada[i].ganador === 0) {
             this.selectionTres.select(this.dataSourceTablaGanadorEquipo.data[i]);
           }
         }
@@ -246,7 +246,7 @@ export class GanadorJuegoDeCompeticionLigaComponent implements OnInit {
   ActualizarTablaClasificacion() {
     console.log('Estoy en ActualizarTablaClasificacion()');
     const jornadaActualizada = this.JornadasCompeticion.filter (jornada => jornada.id === Number(this.jornadaId))[0];
-    jornadaActualizada.Disputada = true;
+    jornadaActualizada.disputada = true;
     for (let i = 0; i < this.JornadasCompeticion.length; i++) {
       if (this.JornadasCompeticion[i].id === Number(this.jornadaId)) {
         this.JornadasCompeticion[i] = jornadaActualizada;
@@ -498,15 +498,15 @@ export class GanadorJuegoDeCompeticionLigaComponent implements OnInit {
           // tslint:disable-next-line:max-line-length
 
           // tslint:disable-next-line:max-line-length
-          const JugadorUno = this.listaAlumnosJuegoDePuntos.filter (a => a.alumnoId === Number (this.EnfrentamientosJornadaSeleccionada[i].JugadorUno))[0];
+          const JugadorUno = this.listaAlumnosJuegoDePuntos.filter (a => a.alumnoId === Number (this.EnfrentamientosJornadaSeleccionada[i].jugadorUno))[0];
           // tslint:disable-next-line:max-line-length
-          const JugadorDos = this.listaAlumnosJuegoDePuntos.filter (a => a.alumnoId === Number (this.EnfrentamientosJornadaSeleccionada[i].JugadorDos))[0];
+          const JugadorDos = this.listaAlumnosJuegoDePuntos.filter (a => a.alumnoId === Number (this.EnfrentamientosJornadaSeleccionada[i].jugadorDos))[0];
 
-          if (JugadorUno.PuntosTotalesAlumno > JugadorDos.PuntosTotalesAlumno) {
+          if (JugadorUno.puntosTotalesAlumno > JugadorDos.puntosTotalesAlumno) {
             resultados.push (1);
             this.selectionUno.select(this.dataSourceTablaGanadorIndividual.data[i]);
 
-          } else  if (JugadorUno.PuntosTotalesAlumno < JugadorDos.PuntosTotalesAlumno) {
+          } else  if (JugadorUno.puntosTotalesAlumno < JugadorDos.puntosTotalesAlumno) {
             resultados.push (2);
             this.selectionDos.select(this.dataSourceTablaGanadorIndividual.data[i]);
 
@@ -521,15 +521,15 @@ export class GanadorJuegoDeCompeticionLigaComponent implements OnInit {
 
           // Saco al jugador uno de la lista de participantes del juego de puntos
           // tslint:disable-next-line:max-line-length
-          const equipoUno = this.listaEquiposJuegoDePuntos.filter (a => a.equipoId === this.EnfrentamientosJornadaSeleccionada[i].JugadorUno)[0];
+          const equipoUno = this.listaEquiposJuegoDePuntos.filter (a => a.equipoId === this.EnfrentamientosJornadaSeleccionada[i].jugadorUno)[0];
           // tslint:disable-next-line:max-line-length
-          const equipoDos = this.listaEquiposJuegoDePuntos.filter (a => a.equipoId === this.EnfrentamientosJornadaSeleccionada[i].JugadorDos)[0];
+          const equipoDos = this.listaEquiposJuegoDePuntos.filter (a => a.equipoId === this.EnfrentamientosJornadaSeleccionada[i].jugadorDos)[0];
 
-          if (equipoUno.PuntosTotalesEquipo > equipoDos.PuntosTotalesEquipo) {
+          if (equipoUno.puntosTotalesEquipo > equipoDos.puntosTotalesEquipo) {
             resultados.push (1);
             this.selectionUno.select(this.dataSourceTablaGanadorEquipo.data[i]);
 
-          } else  if (equipoUno.PuntosTotalesEquipo < equipoDos.PuntosTotalesEquipo) {
+          } else  if (equipoUno.puntosTotalesEquipo < equipoDos.puntosTotalesEquipo) {
             resultados.push (2);
             this.selectionDos.select(this.dataSourceTablaGanadorEquipo.data[i]);
 
@@ -548,15 +548,15 @@ export class GanadorJuegoDeCompeticionLigaComponent implements OnInit {
         // tslint:disable-next-line:max-line-length
 
         // tslint:disable-next-line:max-line-length
-        const JugadorUno = this.listaAlumnosJuegoDeCuestionario.filter (a => a.alumnoId === Number (this.EnfrentamientosJornadaSeleccionada[i].JugadorUno))[0];
+        const JugadorUno = this.listaAlumnosJuegoDeCuestionario.filter (a => a.alumnoId === Number (this.EnfrentamientosJornadaSeleccionada[i].jugadorUno))[0];
         // tslint:disable-next-line:max-line-length
-        const JugadorDos = this.listaAlumnosJuegoDeCuestionario.filter (a => a.alumnoId === Number (this.EnfrentamientosJornadaSeleccionada[i].JugadorDos))[0];
+        const JugadorDos = this.listaAlumnosJuegoDeCuestionario.filter (a => a.alumnoId === Number (this.EnfrentamientosJornadaSeleccionada[i].jugadorDos))[0];
 
-        if (JugadorUno.Nota > JugadorDos.Nota) {
+        if (JugadorUno.nota > JugadorDos.nota) {
           resultados.push (1);
           this.selectionUno.select(this.dataSourceTablaGanadorIndividual.data[i]);
 
-        } else  if (JugadorUno.Nota < JugadorDos.Nota) {
+        } else  if (JugadorUno.nota < JugadorDos.nota) {
           resultados.push (2);
           this.selectionDos.select(this.dataSourceTablaGanadorIndividual.data[i]);
 
@@ -573,9 +573,9 @@ export class GanadorJuegoDeCompeticionLigaComponent implements OnInit {
           // tslint:disable-next-line:max-line-length
 
           // tslint:disable-next-line:max-line-length
-          const JugadorUno = this.listaAlumnosJuegoDeVotacionUnoATodos.filter (a => a.alumnoId === Number (this.EnfrentamientosJornadaSeleccionada[i].JugadorUno))[0];
+          const JugadorUno = this.listaAlumnosJuegoDeVotacionUnoATodos.filter (a => a.alumnoId === Number (this.EnfrentamientosJornadaSeleccionada[i].jugadorUno))[0];
           // tslint:disable-next-line:max-line-length
-          const JugadorDos = this.listaAlumnosJuegoDeVotacionUnoATodos.filter (a => a.alumnoId === Number (this.EnfrentamientosJornadaSeleccionada[i].JugadorDos))[0];
+          const JugadorDos = this.listaAlumnosJuegoDeVotacionUnoATodos.filter (a => a.alumnoId === Number (this.EnfrentamientosJornadaSeleccionada[i].jugadorDos))[0];
 
           console.log (JugadorUno.alumnoId + ' versus ' + JugadorDos.alumnoId);
           console.log (JugadorUno.puntosTotales + ' versus ' + JugadorDos.puntosTotales);

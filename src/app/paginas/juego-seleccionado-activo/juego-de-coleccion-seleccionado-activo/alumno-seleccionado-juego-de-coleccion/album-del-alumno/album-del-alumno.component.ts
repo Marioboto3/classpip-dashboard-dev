@@ -61,7 +61,7 @@ export class AlbumDelAlumnoComponent implements OnInit {
     .subscribe(res => {
       if (res[0] !== undefined) {
         this.cromosColeccion = res;
-        this.cromosColeccion.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
+        this.cromosColeccion.sort((a, b) => a.nombre.localeCompare(b.nombre));
         this.GET_ImagenesCromos();
         this.PreparaAlbum();
         console.log(res);
@@ -85,8 +85,8 @@ export class AlbumDelAlumnoComponent implements OnInit {
       cromo = this.cromosColeccion[i];
 
 
-      if (cromo.ImagenDelante !== undefined ) {
-        this.imagenCromoDelante[i] = URL.ImagenesCromo + cromo.ImagenDelante;
+      if (cromo.imagenDelante !== undefined ) {
+        this.imagenCromoDelante[i] = URL.ImagenesCromo + cromo.imagenDelante;
         // Busca en la base de datos la imágen con el nombre registrado en equipo.FotoEquipo y la recupera
         // this.peticionesAPI.DameImagenCromo (cromo.ImagenDelante)
         // .subscribe(response => {
@@ -105,8 +105,8 @@ export class AlbumDelAlumnoComponent implements OnInit {
         // });
       }
 
-      if (cromo.ImagenDetras !== undefined ) {
-        this.imagenCromoDetras[i] = URL.ImagenesCromo + cromo.ImagenDetras;
+      if (cromo.imagenDetras !== undefined ) {
+        this.imagenCromoDetras[i] = URL.ImagenesCromo + cromo.imagenDetras;
         console.log ('vamos a por las imagenes de detras');
         // Busca en la base de datos la imágen con el nombre registrado en equipo.FotoEquipo y la recupera
         // this.peticionesAPI.DameImagenCromo (cromo.ImagenDetras)
@@ -135,16 +135,16 @@ export class AlbumDelAlumnoComponent implements OnInit {
 
 
       if (this.cromo !== undefined) {
-        console.log('Tengo ' + this.cromo.Nombre);
-        this.AlbumDelAlumno[i] = new ParaAlbum(this.cromosColeccion[i].Nombre,
+        console.log('Tengo ' + this.cromo.nombre);
+        this.AlbumDelAlumno[i] = new ParaAlbum(this.cromosColeccion[i].nombre,
           // tslint:disable-next-line:max-line-length
-          this.cromosColeccion[i].Probabilidad, this.cromosColeccion[i].Nivel, true, this.cromosColeccion[i].ImagenDelante, this.cromosColeccion[i].ImagenDetras);
+          this.cromosColeccion[i].probabilidad, this.cromosColeccion[i].nivel, true, this.cromosColeccion[i].imagenDelante, this.cromosColeccion[i].imagenDetras);
 
       } else {
-        console.log('No tengo ' + this.cromosColeccion[i].Nombre);
-        this.AlbumDelAlumno[i] = new ParaAlbum(this.cromosColeccion[i].Nombre,
+        console.log('No tengo ' + this.cromosColeccion[i].nombre);
+        this.AlbumDelAlumno[i] = new ParaAlbum(this.cromosColeccion[i].nombre,
           // tslint:disable-next-line:max-line-length
-          this.cromosColeccion[i].Probabilidad, this.cromosColeccion[i].Nivel, false, this.cromosColeccion[i].ImagenDelante, this.cromosColeccion[i].ImagenDetras);
+          this.cromosColeccion[i].probabilidad, this.cromosColeccion[i].nivel, false, this.cromosColeccion[i].imagenDelante, this.cromosColeccion[i].imagenDetras);
       }
     }
   }

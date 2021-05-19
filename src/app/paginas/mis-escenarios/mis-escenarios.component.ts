@@ -55,8 +55,8 @@ export class MisEscenariosComponent implements OnInit {
     this.profesorId = this.sesion.DameProfesor().id;
     this.profesor = this.sesion.DameProfesor();
     console.log(this.profesorId);
-    this.varTitulo = "titulo" + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
     this.TraeEscenariosDelProfesor();
     console.log(this.escenariosProfesor);
 
@@ -122,14 +122,14 @@ export class MisEscenariosComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: escenario.Mapa,
+        nombre: escenario.mapa,
       }
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.BorrarEscenario(escenario);
-        Swal.fire('Eliminado', escenario.Mapa + ' eliminado correctamente', 'success');
+        Swal.fire('Eliminado', escenario.mapa + ' eliminado correctamente', 'success');
       }
     });
   }
@@ -145,12 +145,12 @@ export class MisEscenariosComponent implements OnInit {
       puntosGeolocalizables = puntos;
       // Ahora creo el escenario
 
-      this.peticionesAPI.CreaEscenario (new Escenario(escenario.Mapa + '(copia)', escenario.Descripcion), this.profesorId)
+      this.peticionesAPI.CreaEscenario (new Escenario(escenario.mapa + '(copia)', escenario.descripcion), this.profesorId)
       .subscribe (copia => {
         // ahora tengo que crear copias de los puntos geolocalizables
         puntosGeolocalizables.forEach (punto => {
           this.peticionesAPI.PonPuntoGeolocalizableEscenario(
-            new PuntoGeolocalizable (punto.Nombre, punto.Latitud, punto.Longitud, punto.PistaFacil, punto.PistaDificil),
+            new PuntoGeolocalizable (punto.nombre, punto.latitud, punto.longitud, punto.pistaFacil, punto.pistaDificil),
             copia.id)
             .subscribe();
         });

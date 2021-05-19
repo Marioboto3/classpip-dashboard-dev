@@ -38,79 +38,102 @@ export class PeticionesAPIService {
   // private host = 'http://localhost';
   private host = URL.host;
 
-
-  private APIUrlProfesores = this.host + ':3000/api/Profesores';
+  private APIUrlAlbum = this.host + ':3000/api/Albumes';
+  private APIUrlAlbumEquipo = this.host + ':3000/api/AlbumesEquipo';
   private APIUrlAlumnos = this.host + ':3000/api/Alumnos';
-  private APIUrlGrupos = this.host + ':3000/api/Grupos';
-  private APIUrlMatriculas = this.host + ':3000/api/Matriculas';
-  private APIUrlEquipos = this.host + ':3000/api/Equipos';
+  private APIUrlAlumnoJuegoDeAvatar = this.host + ':3000/api/AlumnosJuegoAvatar';
+  private APIUrlAlumnoJuegoDeColeccion = this.host + ':3000/api/AlumnosJuegoDeColeccion';
+  private APIUrlAlumnoJuegoDeCompeticionFormulaUno = this.host + ':3000/api/AlumnosJuegoDeCompeticionFormulaUno';
+  private APIUrlAlumnoJuegoDeCompeticionLiga = this.host + ':3000/api/AlumnosJuegoDeCompeticionLiga';
+  private APIUrlAlumnoJuegoDeCuestionario = this.host + ':3000/api/AlumnosJuegoDeCuestionario';
+  private APIUrlAlumnoJuegoDeCuestionarioSatisfaccion = this.host + ':3000/api/AlumnosJuegoDeCuestionarioSatisfaccion';
+  private APIUrlAlumnoJuegoDeEscapeRoom = this.host + ':3000/api/AlumnosJuegoDeEscapeRoom';
+  private APIURLAlumnoJuegoEvaluado = this.host + ':3000/api/alumnosJuegoEvaluado'; //Alumno Juego De Evaluacion ???
+  private APIUrlAlumnoJuegoDeGeocaching = this.host + ':3000/api/AlumnosJuegoDeGeocaching';
+  private APIUrlAlumnoJuegoDePuntos = this.host + ':3000/api/AlumnosJuegosDePuntos';
+  private APIUrlAlumnoJuegoDeVotacionTodosAUno = this.host + ':3000/api/AlumnosJuegoDeVotacionTodosAUno';
+  private APIUrlAlumnoJuegoDeVotacionUnoATodos = this.host + ':3000/api/AlumnosJuegoDeVotacionUnoATodos';
+  //AsignacionEquipo
+  private APIUrlPuntosJuego = this.host + ':3000/api/AsignacionesPuntoJuego';
+  private APIUrlAsistenciasClase = this.host + ':3000/api/AsistenciasClase';
   private APIUrlColecciones = this.host + ':3000/api/Colecciones';
   private APIUrlCromos = this.host + ':3000/api/Cromos';
-  private APIUrlPreguntas = this.host + ':3000/api/Preguntas';
   private APIUrlCuestionarios = this.host + ':3000/api/Cuestionarios';
-  private APIUrlPreguntaDelCuestionario = this.host + ':3000/api/PreguntasDelCuestionario';
-  private APIUrlAlumnoJuegoDeCuestionario = this.host + ':3000/api/AlumnosJuegoDeCuestionario';
-  private APIUrlJuegoDeCuestionario = this.host + ':3000/api/JuegosDeCuestionario';
-  private APIUrlRespuestasJuegoDeCuestionario = this.host + ':3000/api/respuestasJuegoDeCuestionario';
-
-
-  private APIUrlJuegoDePuntos = this.host + ':3000/api/JuegosDePuntos';
-  private APIUrlAlumnoJuegoDePuntos = this.host + ':3000/api/AlumnoJuegosDePuntos';
-  private APIUrlEquipoJuegoDePuntos = this.host + ':3000/api/EquiposJuegosDePuntos';
-  private APIUrlPuntosJuego = this.host + ':3000/api/AsignacionPuntosJuego';
-  private APIUrlNiveles = this.host + ':3000/api/Niveles';
+  private APIUrlEnfrentamientosLiga = this.host + ':3000/api/EnfrentamientosLiga';
+  private APIUrlEquipos = this.host + ':3000/api/Equipos';
+  private APIUrlEquipoJuegoDeColeccion = this.host + ':3000/api/EquiposJuegoDeColeccion';
+  private APIUrlEquipoJuegoDeCompeticionFormulaUno = this.host + ':3000/api/EquiposJuegoDeCompeticionFormulaUno';
+  private APIUrlEquipoJuegoDeCompeticionLiga = this.host + ':3000/api/EquiposJuegoDeCompeticionLiga';
+  private APIUrlEquipoJuegoDePuntos = this.host + ':3000/api/EquiposJuegoDePuntos';
+  //EquipoJuegoDeVotacionUnoATodos
+  //Escena
+  private APIUrlEscenarios = this.host + ':3000/api/Escenarios';
+  private APIUrlFamiliarAvatares = this.host + ':3000/api/FamiliasAvatares';
+  //FamiliaImagenesPerfil
+  //Frame
+  private APIUrlGrupos = this.host + ':3000/api/Grupos';
   private APIUrlHistorialPuntosAlumno = this.host + ':3000/api/HistorialesPuntosAlumno';
   private APIUrlHistorialPuntosEquipo = this.host + ':3000/api/HistorialesPuntosEquipo';
-  private APIUrlJuegoDeColeccion = this.host + ':3000/api/JuegosDeColeccion';
-  private APIUrlAlumnoJuegoDeColeccion = this.host + ':3000/api/AlumnosJuegoDeColeccion';
-  private APIUrlEquipoJuegoDeColeccion = this.host + ':3000/api/EquiposJuegoDeColeccion';
-  private APIUrlAlbum = this.host + ':3000/api/Albumes';
-  private APIUrlAlbumEquipo = this.host + ':3000/api/albumsEquipo';
-  private APIUrlJuegoDeCompeticionLiga = this.host + ':3000/api/JuegosDeCompeticionLiga';
-  private APIUrlAlumnoJuegoDeCompeticionLiga = this.host + ':3000/api/AlumnosJuegoDeCompeticionLiga';
-  private APIUrlEquipoJuegoDeCompeticionLiga = this.host + ':3000/api/EquiposJuegoDeCompeticionLiga';
-  private APIUrlJornadasJuegoDeCompeticionLiga = this.host + ':3000/api/JornadasDeCompeticionLiga';
-  private APIUrlEnfrentamientosLiga = this.host + ':3000/api/EnfrentamientosLiga';
-  private APIUrlJuegoDeCompeticionFormulaUno = this.host + ':3000/api/JuegosDecompeticionFormulaUno';
-  private APIUrlAlumnoJuegoDeCompeticionFormulaUno = this.host + ':3000/api/AlumnosJuegoDeCompeticionFormulaUno';
-  private APIUrlEquipoJuegoDeCompeticionFormulaUno = this.host + ':3000/api/EquiposJuegoDeCompeticionFormulaUno';
+  private APIUrlImagenInsignia = this.host + ':3000/api/imagenes/Insignias';
+  //Jornada
   private APIUrlJornadasJuegoDeCompeticionFormulaUno = this.host + ':3000/api/JornadasDeCompeticionFormulaUno';
+  private APIUrlJornadasJuegoDeCompeticionLiga = this.host + ':3000/api/JornadasDeCompeticionLiga';
+  private APIUrlJuegoDeAvatar = this.host + ':3000/api/JuegosDeAvatar';
+  private APIUrlJuegoDeCogerTurnoRapido = this.host + ':3000/api/JuegosDeCogerTurnoRapido';
+  private APIUrlJuegoDeColeccion = this.host + ':3000/api/JuegosDeColeccion';
+  private APIUrlJuegoDeCompeticionFormulaUno = this.host + ':3000/api/JuegosDeCompeticionFormulaUno';
+  private APIUrlJuegoDeCompeticionLiga = this.host + ':3000/api/JuegosDeCompeticionLiga';
+  private APIUrlJuegoDeCuestionario = this.host + ':3000/api/JuegosDeCuestionario';
+  private APIUrlJuegoDeCuestionarioRapido = this.host + ':3000/api/JuegosDeCuestionarioRapido';
+  private APIUrlJuegoDeCuestionarioSatisfaccion = this.host + ':3000/api/JuegosDeCuestionarioSatisfaccion';
+  private APIUrlJuegoDeEncuestaRapida = this.host + ':3000/api/JuegosDeEncuestaRapida';
+  private APIURLJuegoDeEvaluacion = this.host + ':3000/api/JuegosDeEvaluacion';
   private APIUrlJuegoDeGeocaching = this.host + ':3000/api/JuegosDeGeocaching';
-
-  private APIUrlAsistenciasClase = this.host + ':3000/api/AsistenciasClase';
+  //JuegoDeGeocachingPregunta
+  //JuegosDeLibro
+  private APIUrlJuegoDePuntos = this.host + ':3000/api/JuegosDePuntos';
+  private APIUrlJuegoDeVotacionRapida = this.host + ':3000/api/juegosDeVotacionRapida';
+  private APIUrlJuegoDeVotacionTodosAUno = this.host + ':3000/api/JuegosDeVotacionTodosAUno';
+  private APIUrlJuegoDeVotacionUnoATodos = this.host + ':3000/api/JuegosDeVotacionUnoATodos';
+  //JuegoLibroConcurso
+  //Libro
+  //Liga
+  private APIUrlMatriculas = this.host + ':3000/api/Matriculas';
+  private APIUrlNiveles = this.host + ':3000/api/Niveles';
+  //Partidos
+  private APIUrlPreguntas = this.host + ':3000/api/Preguntas';
+  private APIUrlPreguntaDelCuestionario = this.host + ':3000/api/PreguntasDelCuestionario';
+  private APIUrlProfesores = this.host + ':3000/api/Profesores';
+  //Prueba
+  //Punto
+  private APIUrlPuntosGeolocalizables = this.host + ':3000/api/PuntosGeolocalizables';
+  //RecursosJuegoLibro
+  //RecursosLibro
+  //ReglaAutomaticaColeccion
+  //ReglaAutomaticaCompetion
+  //ReglaManualColeccion
+  //ReglaManualCompeticion
+  private APIUrlRespuestasJuegoDeCuestionario = this.host + ':3000/api/RespuestasJuegoDeCuestionario';
+  //Rubrica
   private APIUrlSesionesClase = this.host + ':3000/api/SesionesClase';
 
-  private APIUrlFamiliarAvatares = this.host + ':3000/api/familiasAvatares';
-  private APIUrlAlumnoJuegoDeGeocaching = this.host + ':3000/api/AlumnosJuegoDeGeocaching';
-  private APIUrlAlumnoJuegoDeEscapeRoom = this.host + ':3000/api/AlumnoJuegoDeEscapeRooms';
-
+  //OTRAS
 
   // Para cargar y descargar imagenes
   private APIUrlImagenAlumno = this.host + ':3000/api/imagenes/imagenAlumno';
   private APIUrlImagenColeccion = this.host + ':3000/api/imagenes/ImagenColeccion';
   private APIUrlImagenCromo = this.host + ':3000/api/imagenes/ImagenCromo';
   private APIUrlImagenNivel = this.host + ':3000/api/imagenes/imagenNivel';
-  private APIUrlImagenInsignia = this.host + ':3000/api/imagenes/ImagenInsignia';
   private APIUrlLogosEquipos = this.host + ':3000/api/imagenes/LogosEquipos';
 
   private APIUrlImagenesAvatares = this.host + ':3000/api/imagenes/ImagenesAvatares';
-  private APIUrlJuegoDeAvatar = this.host + ':3000/api/juegosDeAvatar';
-  private APIUrlAlumnoJuegoDeAvatar = this.host + ':3000/api/alumnosJuegoAvatar';
   private APIUrlAudiosAvatares = this.host + ':3000/api/imagenes/AudiosAvatares';
 
 
-  private APIUrlEscenarios = this.host + ':3000/api/Escenarios';
-  private APIUrlPuntosGeolocalizables = this.host + ':3000/api/PuntosGeolocalizables';
 
-  private APIURLJuegoDeEvaluacion = this.host + ':3000/api/juegosDeEvaluacion';
   private APIURLEquiposJuegoEvaluado = this.host + ':3000/api/equiposJuegoEvaluado';
-  private APIURLAlumnoJuegoEvaluado = this.host + ':3000/api/alumnosJuegoEvaluado';
 
-  private APIUrlJuegoDeVotacionUnoATodos = this.host + ':3000/api/JuegosDeVotacionUnoATodos';
-  private APIUrlAlumnoJuegoDeVotacionUnoATodos = this.host + ':3000/api/alumnosJuegoDeVotacionUnoATodos';
 
-  private APIUrlJuegoDeVotacionTodosAUno = this.host + ':3000/api/JuegosDeVotacionTodosAUno';
-  private APIUrlAlumnoJuegoDeVotacionTodosAUno = this.host + ':3000/api/alumnosJuegoDeVotacionTodosAUno';
 
   private APIUrlFamiliasDeImagenesDePerfil = this.host + ':3000/api/familiasImagenesPerfil';
 
@@ -120,12 +143,6 @@ export class PeticionesAPIService {
 
   private APIUrlImagenesPreguntas = this.host + ':3000/api/imagenes/ImagenesPreguntas';
 
-  private APIUrlJuegoDeCuestionarioSatisfaccion = this.host + ':3000/api/juegosDeCuestionarioSatisfaccion';
-  private APIUrlAlumnoJuegoDeCuestionarioSatisfaccion = this.host + ':3000/api/alumnosJuegoDeCuestionarioSatisfaccion';
-  private APIUrlJuegoDeEncuestaRapida = this.host + ':3000/api/juegosDeEncuestaRapida';
-  private APIUrlJuegoDeVotacionRapida = this.host + ':3000/api/juegosDeVotacionRapida';
-  private APIUrlJuegoDeCuestionarioRapido = this.host + ':3000/api/juegosDeCuestionarioRapido';
-  private APIUrlJuegoDeCogerTurnoRapido = this.host + ':3000/api/juegosDeCogerTurnoRapido';
 
   constructor(
     private http: HttpClient,
@@ -220,9 +237,9 @@ export class PeticionesAPIService {
   }
 
   public DameAlumnoConcreto(alumno: Alumno, ProfesorId: number): Observable<Alumno> {
-    console.log('Entro a buscar a ' + alumno.Nombre + ' ' + alumno.PrimerApellido + ' ' + alumno.SegundoApellido);
-    return this.http.get<Alumno>(this.APIUrlProfesores + '/' + ProfesorId + '/alumnos?filter[where][Nombre]=' + alumno.Nombre +
-      '&filter[where][PrimerApellido]=' + alumno.PrimerApellido + '&filter[where][SegundoApellido]=' + alumno.SegundoApellido);
+    console.log('Entro a buscar a ' + alumno.nombre + ' ' + alumno.primerApellido + ' ' + alumno.segundoApellido);
+    return this.http.get<Alumno>(this.APIUrlProfesores + '/' + ProfesorId + '/alumnos?filter[where][Nombre]=' + alumno.nombre +
+      '&filter[where][PrimerApellido]=' + alumno.primerApellido + '&filter[where][SegundoApellido]=' + alumno.segundoApellido);
 
   }
 

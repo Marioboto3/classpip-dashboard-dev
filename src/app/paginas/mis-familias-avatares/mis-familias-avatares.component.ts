@@ -64,8 +64,8 @@ export class MisFamiliasAvataresComponent implements OnInit {
     this.DameFamiliasDeAvataresPublicas();
     this.profesor = this.sesion.DameProfesor();
     console.log(this.profesorId);
-    this.varTitulo = "titulo" + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
   }
 
 
@@ -85,7 +85,7 @@ export class MisFamiliasAvataresComponent implements OnInit {
           .subscribe ( profesores => {
             this.familiasPublicas.forEach (familia => {
               const propietario = profesores.filter (p => p.id === familia.profesorId)[0];
-              this.propietarios.push (propietario.Nombre + ' ' + propietario.PrimerApellido);
+              this.propietarios.push (propietario.nombre + ' ' + propietario.primerApellido);
             });
           });
         }
@@ -220,7 +220,7 @@ export class MisFamiliasAvataresComponent implements OnInit {
    this.familiaCargada = false;
    this.familiaElegida = this.listaFamilias.filter (familia => familia.id === Number(this.familiaId))[0];
     // Traigo la imagen de la silueta
-   this.peticionesAPI.DameImagenAvatar (this.familiaElegida.Silueta)
+   this.peticionesAPI.DameImagenAvatar (this.familiaElegida.silueta)
     .subscribe(response => {
       const blob = new Blob([response.blob()], { type: 'image/jpg'});
 
@@ -251,7 +251,7 @@ export class MisFamiliasAvataresComponent implements OnInit {
       }
     }
     let cont1 = 0;
-    this.familiaElegida.Complemento1.forEach (imagenComplemento => {
+    this.familiaElegida.complemento1.forEach (imagenComplemento => {
       this.peticionesAPI.DameImagenAvatar (imagenComplemento)
       .subscribe(response => {
         const blob = new Blob([response.blob()], { type: 'image/jpg'});
@@ -280,7 +280,7 @@ export class MisFamiliasAvataresComponent implements OnInit {
     }
 
     let cont2 = 0;
-    this.familiaElegida.Complemento2.forEach (imagenComplemento => {
+    this.familiaElegida.complemento2.forEach (imagenComplemento => {
        this.peticionesAPI.DameImagenAvatar (imagenComplemento)
        .subscribe(response => {
          const blob = new Blob([response.blob()], { type: 'image/jpg'});
@@ -306,7 +306,7 @@ export class MisFamiliasAvataresComponent implements OnInit {
        }
      }
     let cont3 = 0;
-    this.familiaElegida.Complemento3.forEach (imagenComplemento => {
+    this.familiaElegida.complemento3.forEach (imagenComplemento => {
         this.peticionesAPI.DameImagenAvatar (imagenComplemento)
         .subscribe(response => {
           const blob = new Blob([response.blob()], { type: 'image/jpg'});
@@ -331,7 +331,7 @@ export class MisFamiliasAvataresComponent implements OnInit {
       }
     }
     let cont4 = 0;
-    this.familiaElegida.Complemento4.forEach (imagenComplemento => {
+    this.familiaElegida.complemento4.forEach (imagenComplemento => {
          this.peticionesAPI.DameImagenAvatar (imagenComplemento)
          .subscribe(response => {
            const blob = new Blob([response.blob()], { type: 'image/jpg'});
@@ -365,15 +365,15 @@ export class MisFamiliasAvataresComponent implements OnInit {
       confirmButtonText: 'Si, estoy seguro'
     }).then((result) => {
       if (result.value) {
-        familia.Complemento1.forEach (imagenComplemento =>
+        familia.complemento1.forEach (imagenComplemento =>
           this.peticionesAPI.BorrarImagenAvatar (imagenComplemento).subscribe());
-        familia.Complemento2.forEach (imagenComplemento =>
+        familia.complemento2.forEach (imagenComplemento =>
           this.peticionesAPI.BorrarImagenAvatar (imagenComplemento).subscribe());
-        familia.Complemento3.forEach (imagenComplemento =>
+        familia.complemento3.forEach (imagenComplemento =>
           this.peticionesAPI.BorrarImagenAvatar (imagenComplemento).subscribe());
-        familia.Complemento4.forEach (imagenComplemento =>
+        familia.complemento4.forEach (imagenComplemento =>
           this.peticionesAPI.BorrarImagenAvatar (imagenComplemento).subscribe());
-        this.peticionesAPI.BorrarImagenAvatar (familia.Silueta).subscribe();
+        this.peticionesAPI.BorrarImagenAvatar (familia.silueta).subscribe();
         this.peticionesAPI.BorraFamiliaAvatares (familia.id).subscribe(() => {
           this.listaFamilias = this.listaFamilias.filter (f => f.id !== Number(familia.id));
           this.dataSource = new MatTableDataSource(this.listaFamilias);
@@ -395,13 +395,13 @@ export class MisFamiliasAvataresComponent implements OnInit {
   }
 
   HazPublica(familia: FamiliaAvatares) {
-    familia.Publica = true;
+    familia.publica = true;
     this.peticionesAPI.ModificaFamiliaAvatares (familia).subscribe();
   }
 
 
   HazPrivada(familia: FamiliaAvatares) {
-    familia.Publica = false;
+    familia.publica = false;
     this.peticionesAPI.ModificaFamiliaAvatares (familia).subscribe();
   }
 

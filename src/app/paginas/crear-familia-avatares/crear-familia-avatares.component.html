@@ -15,10 +15,10 @@
         con el contenido mostrado en el siguiente ejemplo.
 
         {{'{'}}
-          "NombreFamilia": "Chica",
-          "Silueta": "chica1_silueta.png",
-          "NombreComplemento1": "caras",
-          "Complemento1": ["chica1_cara1.png","chica1_cara2.png","chica1_cara3.png","chica1_cara4.png"],
+          "nombreFamilia": "Chica",
+          "silueta": "chica1_silueta.png",
+          "nombreComplemento1": "caras",
+          "complemento1": ["chica1_cara1.png","chica1_cara2.png","chica1_cara3.png","chica1_cara4.png"],
 
           ... otros 3 complementos ...
 
@@ -44,12 +44,12 @@
           <h3>Datos de la familia</h3>
           <div class = "enFila" style = "width: 90%">
             <div>
-              <p> Nombre de la familia: <strong>{{infoFamilia.NombreFamilia}}</strong></p>
+              <p> Nombre de la familia: <strong>{{infoFamilia.nombreFamilia}}</strong></p>
               <br>
-              <p> {{infoFamilia.NombreComplemento1}} <strong>{{infoFamilia.Complemento1.length}}</strong> opciones</p>
-              <p> {{infoFamilia.NombreComplemento2}} <strong>{{infoFamilia.Complemento2.length}}</strong> opciones</p>
-              <p> {{infoFamilia.NombreComplemento3}} <strong>{{infoFamilia.Complemento3.length}}</strong> opciones</p>
-              <p> {{infoFamilia.NombreComplemento4}} <strong>{{infoFamilia.Complemento4.length}}</strong> opciones</p>
+              <p> {{infoFamilia.nombreComplemento1}} <strong>{{infoFamilia.complemento1.length}}</strong> opciones</p>
+              <p> {{infoFamilia.nombreComplemento2}} <strong>{{infoFamilia.complemento2.length}}</strong> opciones</p>
+              <p> {{infoFamilia.nombreComplemento3}} <strong>{{infoFamilia.complemento3.length}}</strong> opciones</p>
+              <p> {{infoFamilia.nombreComplemento4}} <strong>{{infoFamilia.complemento4.length}}</strong> opciones</p>
             </div>
           </div>
           <div class = "enFila" style = "width:50%">
@@ -151,7 +151,7 @@
                       </div>
                   </div>
                   <div  class = "enColumna" style = "width: 80%">
-                    <div style = "color: green; font-size: larger;">{{familiaAvatares.NombreComplemento1}}</div>
+                    <div style = "color: green; font-size: larger;">{{familiaAvatares.nombreComplemento1}}</div>
                     <br>
                     <div id="complementos1">
 
@@ -165,7 +165,7 @@
                     Atrás <i class="material-icons">
                         navigate_before</i></button>
                     <!-- El botón de avanzar se habilita en cuanto se haya cargado una imagen para el complemento -->
-                  <button  [disabled]="familiaAvatares && familiaAvatares.Complemento1.length === 0" mat-raised-button class="btn Next" style="margin: 5px" matStepperNext>
+                  <button  [disabled]="familiaAvatares && familiaAvatares.complemento1.length === 0" mat-raised-button class="btn Next" style="margin: 5px" matStepperNext>
                     Siguiente <i class="material-icons">
                         navigate_next</i>
                   </button>
@@ -202,7 +202,7 @@
                       </div>
                   </div>
                   <div  class = "enColumna" style = "width: 80%">
-                    <div style = "color: green; font-size: larger;">{{familiaAvatares.NombreComplemento2}}</div>
+                    <div style = "color: green; font-size: larger;">{{familiaAvatares.nombreComplemento2}}</div>
                     <br>
                     <div id="complementos2">
                       <!-- En este bloque se colocarán las imagenes de las diferentes opciones del complemento -->
@@ -216,7 +216,7 @@
                     Atrás <i class="material-icons">
                         navigate_before</i></button>
                     <!-- El botón de avanzar se habilita en cuanto se haya cargado una imagen para el complemento -->
-                  <button  [disabled]="familiaAvatares && familiaAvatares.Complemento2.length === 0" mat-raised-button class="btn Next" style="margin: 5px" matStepperNext>
+                  <button  [disabled]="familiaAvatares && familiaAvatares.complemento2.length === 0" mat-raised-button class="btn Next" style="margin: 5px" matStepperNext>
                     Siguiente <i class="material-icons">
                         navigate_next</i>
                   </button>
@@ -252,7 +252,7 @@
                       </div>
                   </div>
                   <div  class = "enColumna" style = "width: 80%">
-                    <div style = "color: green; font-size: larger;">{{familiaAvatares.NombreComplemento3}}</div>
+                    <div style = "color: green; font-size: larger;">{{familiaAvatares.nombreComplemento3}}</div>
                     <br>
                     <div id="complementos3">
                       <!-- En este bloque se colocarán las imagenes de las diferentes opciones del complemento -->
@@ -266,7 +266,7 @@
                     Atrás <i class="material-icons">
                         navigate_before</i></button>
                     <!-- El botón de avanzar se habilita en cuanto se haya cargado una imagen para el complemento -->
-                  <button  [disabled]="familiaAvatares && familiaAvatares.Complemento3.length === 0" mat-raised-button class="btn Next" style="margin: 5px" matStepperNext>
+                  <button  [disabled]="familiaAvatares && familiaAvatares.complemento3.length === 0" mat-raised-button class="btn Next" style="margin: 5px" matStepperNext>
                     Siguiente <i class="material-icons">
                         navigate_next</i>
                   </button>
@@ -302,7 +302,7 @@
                       </div>
                   </div>
                   <div  class = "enColumna" style = "width: 80%">
-                    <div style = "color: green; font-size: larger;">{{familiaAvatares.NombreComplemento4}}</div>
+                    <div style = "color: green; font-size: larger;">{{familiaAvatares.nombreComplemento4}}</div>
                     <br>
                     <div id="complementos4">
                       <!-- En este bloque se colocarán las imagenes de las diferentes opciones del complemento -->
@@ -316,7 +316,7 @@
                     Atrás <i class="material-icons">
                         navigate_before</i></button>
                     <!-- El botón de avanzar se habilita en cuanto se haya cargado una imagen para el complemento -->
-                  <button  [disabled]="familiaAvatares && familiaAvatares.Complemento4.length === 0" mat-raised-button class="btn Next" style="margin: 5px" matStepperNext>
+                  <button  [disabled]="familiaAvatares && familiaAvatares.complemento4.length === 0" mat-raised-button class="btn Next" style="margin: 5px" matStepperNext>
                     Siguiente <i class="material-icons">
                         navigate_next</i>
                   </button>

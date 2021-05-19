@@ -37,17 +37,17 @@ export class EditarInsigniaComponent implements OnInit {
 
   ngOnInit() {
     this.insignia = this.sesion.DameInsignia();
-    this.nombreInsignia = this.insignia.Nombre;
-    this.descripcionInsignia = this.insignia.Descripcion;
+    this.nombreInsignia = this.insignia.nombre;
+    this.descripcionInsignia = this.insignia.descripcion;
     // Cargo el logo
     this.GET_Imagen();
   }
 
   EditarInsignia() {
     console.log('Entro a editar');
-    this.insignia.Nombre = this.nombreImagen;
-    this.insignia.Descripcion = this.descripcionInsignia;
-    this.insignia.Imagen = this.imagenInsignia;
+    this.insignia.nombre = this.nombreImagen;
+    this.insignia.descripcion = this.descripcionInsignia;
+    this.insignia.imagen = this.imagenInsignia;
 
     // tslint:disable-next-line:max-line-length
     this.peticionesAPI.ModificaInsignia(new Insignia(this.nombreInsignia, this.descripcionInsignia, this.nombreImagen), this.insignia.profesorId, this.insignia.id)
@@ -74,9 +74,9 @@ export class EditarInsigniaComponent implements OnInit {
   // Busca el logo que tiene el nombre del equipo.FotoEquipo y lo carga en imagenLogo
   GET_Imagen() {
 
-    if (this.insignia.Imagen !== undefined ) {
+    if (this.insignia.imagen !== undefined ) {
       // Busca en la base de datos la imágen con el nombre registrado en equipo.FotoEquipo y la recupera
-      this.peticionesAPI.DameImagenInsignia (this.insignia.Imagen)
+      this.peticionesAPI.DameImagenInsignia (this.insignia.imagen)
       .subscribe(response => {
         const blob = new Blob([response.blob()], { type: 'image/jpg'});
 

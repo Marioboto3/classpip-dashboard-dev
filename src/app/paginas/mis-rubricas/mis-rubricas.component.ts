@@ -30,7 +30,7 @@ export class MisRubricasComponent implements OnInit {
       console.log (this.listaRubricas);
     });
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
   }
   MuestraRubrica() {
     this.rubricaElegida = this.listaRubricas.filter (rubrica => rubrica.id === Number(this.rubricaId))[0]

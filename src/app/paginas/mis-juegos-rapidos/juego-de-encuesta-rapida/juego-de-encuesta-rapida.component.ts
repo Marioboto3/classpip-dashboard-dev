@@ -120,8 +120,8 @@ export class JuegoDeEncuestaRapidaComponent implements OnInit {
 
   PreparaInformacion() {
 
-    this.respuestasAfirmaciones = Array(this.cuestionario.Afirmaciones.length).fill (0);
-    this.respuestasPreguntasAbiertas = Array(this.cuestionario.PreguntasAbiertas.length);
+    this.respuestasAfirmaciones = Array(this.cuestionario.afirmaciones.length).fill (0);
+    this.respuestasPreguntasAbiertas = Array(this.cuestionario.preguntasAbiertas.length);
     let i: number;
     for ( i = 0; i < this.respuestasPreguntasAbiertas.length; i++) {
       this.respuestasPreguntasAbiertas[i] = [];
@@ -150,10 +150,10 @@ export class JuegoDeEncuestaRapidaComponent implements OnInit {
     for ( i = 0; i < this.respuestasAfirmaciones.length; i++) {
       const media =  this.respuestasAfirmaciones[i] / this.numeroRespuestas;
       this.afirmaciones.push ({
-        Texto: this.cuestionario.Afirmaciones[i],
+        Texto: this.cuestionario.afirmaciones[i],
         Media: media
       });
-      this.datosGrafico.push ( [this.cuestionario.Afirmaciones[i], media]);
+      this.datosGrafico.push ( [this.cuestionario.afirmaciones[i], media]);
     }
 
 
@@ -247,7 +247,7 @@ export class JuegoDeEncuestaRapidaComponent implements OnInit {
       doc.setFontSize(18);
       doc.setTextColor("blue");
 
-      doc.text(this.cuestionario.PreguntasAbiertas [i], margenIzquierdo,  margenSuperior);
+      doc.text(this.cuestionario.preguntasAbiertas [i], margenIzquierdo,  margenSuperior);
       doc.line(margenIzquierdo, margenSuperior + 5, margenIzquierdo + 150, margenSuperior + 5);
       let cont = interlineado * 4;
       let j;

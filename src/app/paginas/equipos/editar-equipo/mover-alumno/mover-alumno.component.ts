@@ -82,7 +82,7 @@ export class MoverAlumnoComponent implements OnInit {
   AbrirDialogoConfirmacionMoverAlumno(): void {
 
     // Busco el nombre del equipo seleccionado
-    this.equipoSeleccionadoNombre = this.listaEquipos.filter(equipo => equipo.id === Number(this.equipoSeleccionadoId))[0].Nombre;
+    this.equipoSeleccionadoNombre = this.listaEquipos.filter(equipo => equipo.id === Number(this.equipoSeleccionadoId))[0].nombre;
 
     const dialogRef = this.dialog.open(DialogoConfirmacionComponent, {
       height: '150px',
@@ -113,15 +113,15 @@ export class MoverAlumnoComponent implements OnInit {
                 alumno = row;
                 this.peticionesAPI.DameAsignacionEquipoAlumno(alumno.id, this.equipo.id, this.equipo.grupoId)
                 .subscribe(asignacion => {
-                  console.log('Doy la asignacion de ' + alumno.Nombre);
+                  console.log('Doy la asignacion de ' + alumno.nombre);
                   console.log(asignacion[0]);
                   const nuevaAsignacion = new AsignacionEquipo(alumno.id, this.equipoSeleccionadoId);
 
                   this.peticionesAPI.ModificaAsignacionEquipoAlumno( nuevaAsignacion, this.equipo.grupoId, asignacion[0].id)
                   .subscribe(asig => {
-                    console.log('Doy la nueva asignacion de ' + alumno.Nombre);
+                    console.log('Doy la nueva asignacion de ' + alumno.nombre);
                     console.log(asig);
-                    this.alumnosEquipo = this.alumnosEquipo.filter(al => al.Nombre !== alumno.Nombre);
+                    this.alumnosEquipo = this.alumnosEquipo.filter(al => al.nombre !== alumno.nombre);
                     this.dataSource = new MatTableDataSource (this.alumnosEquipo);
                   });
                 });

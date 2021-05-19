@@ -52,18 +52,18 @@ export class InformacionJuegoDeGeocachingDialogComponent implements OnInit {
 
   ngOnInit() {
     this.juegoSeleccionado = this.sesion.DameJuego();
-    this.NombreJuego = this.juegoSeleccionado.NombreJuego;
-    this.PuntuacionCorrecta = this.juegoSeleccionado.PuntuacionCorrecta;
-    this.PuntuacionIncorrecta = this.juegoSeleccionado.PuntuacionIncorrecta;
-    this.PuntuacionCorrectaBonus = this.juegoSeleccionado.PuntuacionCorrectaBonus;
-    this.PuntuacionIncorrectaBonus = this.juegoSeleccionado.PuntuacionIncorrectaBonus;
-    this.PreguntasBasicas = this.juegoSeleccionado.PreguntasBasicas;
-    this.PreguntasBonus = this.juegoSeleccionado.PreguntasBonus;
-    this.JuegoActivo = this.juegoSeleccionado.JuegoActivo;
-    this.JuegoTerminado = this.juegoSeleccionado.JuegoTerminado;
+    this.NombreJuego = this.juegoSeleccionado.nombreJuego;
+    this.PuntuacionCorrecta = this.juegoSeleccionado.puntuacionCorrecta;
+    this.PuntuacionIncorrecta = this.juegoSeleccionado.puntuacionIncorrecta;
+    this.PuntuacionCorrectaBonus = this.juegoSeleccionado.puntuacionCorrectaBonus;
+    this.PuntuacionIncorrectaBonus = this.juegoSeleccionado.puntuacionIncorrectaBonus;
+    this.PreguntasBasicas = this.juegoSeleccionado.preguntasBasicas;
+    this.PreguntasBonus = this.juegoSeleccionado.preguntasBonus;
+    this.JuegoActivo = this.juegoSeleccionado.juegoActivo;
+    this.JuegoTerminado = this.juegoSeleccionado.juegoTerminado;
     this.idescenario = this.juegoSeleccionado.idescenario;
     this.profesorId = this.juegoSeleccionado.profesorId;
-    this.Tipo = this.juegoSeleccionado.Tipo;
+    this.Tipo = this.juegoSeleccionado.tipo;
 
     this.myForm = this._formBuilder.group({
       NombreJuego: ['', Validators.required],
@@ -75,7 +75,7 @@ export class InformacionJuegoDeGeocachingDialogComponent implements OnInit {
 
     this.peticionesAPI.DameEscenario(this.idescenario)
     .subscribe(res => {
-      this.TituloEscenario = res.Mapa;
+      this.TituloEscenario = res.mapa;
     });
   }
 

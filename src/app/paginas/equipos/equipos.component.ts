@@ -154,7 +154,7 @@ export class EquiposComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: equipo.Nombre,
+        nombre: equipo.nombre,
       }
     });
 
@@ -163,7 +163,7 @@ export class EquiposComponent implements OnInit {
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.EliminarEquipo(equipo);
-        Swal.fire('Eliminado', equipo.Nombre + ' eliminado correctamente', 'success');
+        Swal.fire('Eliminado', equipo.nombre + ' eliminado correctamente', 'success');
 
 
       }
@@ -288,8 +288,8 @@ export class EquiposComponent implements OnInit {
     let nombreEquipo: string;
 
     nombreEquipo = this.myForm.value.nombreEquipo;
-    this.equipoCreado.Nombre = this.myForm.value.nombreEquipo;
-    this.equipoCreado.FotoEquipo = URL.LogosEquipos + this.nombreLogo;
+    this.equipoCreado.nombre = this.myForm.value.nombreEquipo;
+    this.equipoCreado.fotoEquipo = URL.LogosEquipos + this.nombreLogo;
 
     this.peticionesAPI.ModificaEquipo(this.equipoCreado)
     .subscribe((res) => {
@@ -297,7 +297,7 @@ export class EquiposComponent implements OnInit {
 
         this.equipoCreado = res;
         // Modifico el nombre del equipo en la lista que se muestra en pantalla
-        this.listaEquipos.filter (eq => eq.id === res.id)[0].Nombre = res.Nombre;
+        this.listaEquipos.filter (eq => eq.id === res.id)[0].nombre = res.nombre;
 
         // Hago el POST de la imagen SOLO si hay algo cargado
         if (this.logoCargado === true) {
@@ -419,7 +419,7 @@ export class EquiposComponent implements OnInit {
       .subscribe((equipo) => {
         if (equipo != null) {
           this.listaEquipos.push (equipo);
-          const k = Number(equipo.Nombre.split('_')[1]);
+          const k = Number(equipo.nombre.split('_')[1]);
           // tslint:disable-next-line:prefer-for-of
           for (let j = 0; j < equipos[k].length ; j++) {
             this.peticionesAPI.PonAlumnoEquipo(new AsignacionEquipo(equipos[k][j].id, equipo.id), equipo.grupoId)

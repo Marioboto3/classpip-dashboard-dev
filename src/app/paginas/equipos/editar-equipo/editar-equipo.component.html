@@ -43,19 +43,19 @@ R
       <!-- Nombre Alumno Column -->
       <ng-container matColumnDef="nombreAlumno">
         <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla" style="width: 25%"> Nombre </th>
-        <td mat-cell style= "text-align: left" *matCellDef="let alumno"> {{alumno.Nombre}} </td>
+        <td mat-cell style= "text-align: left" *matCellDef="let alumno"> {{alumno.nombre}} </td>
       </ng-container>
 
       <!-- Primer Apellido Column -->
       <ng-container matColumnDef="primerApellido">
         <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla" style="width: 25%"> Primer Apellido </th>
-        <td mat-cell style= "text-align: left" *matCellDef="let alumno"> {{alumno.PrimerApellido}} </td>
+        <td mat-cell style= "text-align: left" *matCellDef="let alumno"> {{alumno.primerApellido}} </td>
       </ng-container>
 
       <!-- Segundo Apellido Column -->
       <ng-container matColumnDef="segundoApellido">
         <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla" style="width: 25%"> Segundo Apellido </th>
-        <td mat-cell style= "text-align: left" *matCellDef="let alumno"> {{alumno.SegundoApellido}} </td>
+        <td mat-cell style= "text-align: left" *matCellDef="let alumno"> {{alumno.segundoApellido}} </td>
       </ng-container>
 
       <!-- alumnoId Column -->
@@ -68,7 +68,7 @@ R
       <ng-container matColumnDef=" ">
         <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"></th>
         <td mat-cell style= "text-align: left" *matCellDef="let alumno">
-            <button (click) = "BorrarAlumnoEquipo(alumno)" mat-icon-button matTooltip="Borrar a {{alumno.Nombre}} del equipo">
+            <button (click) = "BorrarAlumnoEquipo(alumno)" mat-icon-button matTooltip="Borrar a {{alumno.nombre}} del equipo">
               <i class="material-icons red md-36">delete</i>
             </button>
         </td>

@@ -128,8 +128,8 @@ export class CalculosService {
                     this.peticionesAPI.DameNivelesJuego (juego.id)
                     .subscribe ( niveles => niveles.forEach (nivel => {
                         this.peticionesAPI.BorraNivel (nivel.id).subscribe();
-                        if (nivel.Imagen !== undefined) {
-                          this.peticionesAPI.BorraImagenNivel (nivel.Imagen).subscribe();
+                        if (nivel.imagen !== undefined) {
+                          this.peticionesAPI.BorraImagenNivel (nivel.imagen).subscribe();
                         }
                     }));
                     // Ahora borramos el juego
@@ -611,11 +611,11 @@ export class CalculosService {
                       console.log(juegosVotacionUnoATodos);
                       // tslint:disable-next-line:prefer-for-of
                       for (let i = 0; i < juegosVotacionUnoATodos.length; i++) {
-                        if (juegosVotacionUnoATodos[i].JuegoActivo === true) {
-                          juegosVotacionUnoATodos[i].Tipo = 'Juego De Votación Uno A Todos';
+                        if (juegosVotacionUnoATodos[i].juegoActivo === true) {
+                          juegosVotacionUnoATodos[i].tipo = 'Juego De Votación Uno A Todos';
                           juegosActivos.push(juegosVotacionUnoATodos[i]);
                         } else {
-                          juegosVotacionUnoATodos[i].Tipo = 'Juego De Votación Uno A Todos';
+                          juegosVotacionUnoATodos[i].tipo = 'Juego De Votación Uno A Todos';
                           juegosInactivos.push(juegosVotacionUnoATodos[i]);
                         }
                       }
@@ -626,11 +626,11 @@ export class CalculosService {
                         console.log(juegosVotacioTodosAUno);
                         // tslint:disable-next-line:prefer-for-of
                         for (let i = 0; i < juegosVotacioTodosAUno.length; i++) {
-                          if (juegosVotacioTodosAUno[i].JuegoActivo === true) {
-                            juegosVotacioTodosAUno[i].Tipo = 'Juego De Votación Todos A Uno';
+                          if (juegosVotacioTodosAUno[i].juegoActivo === true) {
+                            juegosVotacioTodosAUno[i].tipo = 'Juego De Votación Todos A Uno';
                             juegosActivos.push(juegosVotacioTodosAUno[i]);
                           } else {
-                            juegosVotacioTodosAUno[i].Tipo = 'Juego De Votación Todos A Uno';
+                            juegosVotacioTodosAUno[i].tipo = 'Juego De Votación Todos A Uno';
                             juegosInactivos.push(juegosVotacioTodosAUno[i]);
                           }
                         }
@@ -641,7 +641,7 @@ export class CalculosService {
                           console.log(juegosCuestionarioSatisfaccion);
                           // tslint:disable-next-line:prefer-for-of
                           for (let i = 0; i < juegosCuestionarioSatisfaccion.length; i++) {
-                            if (juegosCuestionarioSatisfaccion[i].JuegoActivo === true) {
+                            if (juegosCuestionarioSatisfaccion[i].juegoActivo === true) {
                               juegosActivos.push(juegosCuestionarioSatisfaccion[i]);
                             } else {
                               juegosInactivos.push(juegosCuestionarioSatisfaccion[i]);
@@ -760,11 +760,11 @@ export class CalculosService {
         }
 
         if (nivel !== undefined) {
-          rankingJuegoDePuntos[i] = new TablaAlumnoJuegoDePuntos (i + 1, alumno.Nombre, alumno.PrimerApellido, alumno.SegundoApellido,
-            listaAlumnosOrdenadaPorPuntos[i].PuntosTotalesAlumno, nivel.Nombre);
+          rankingJuegoDePuntos[i] = new TablaAlumnoJuegoDePuntos (i + 1, alumno.nombre, alumno.primerApellido, alumno.segundoApellido,
+            listaAlumnosOrdenadaPorPuntos[i].PuntosTotalesAlumno, nivel.nombre);
 
         } else {
-          rankingJuegoDePuntos[i] = new TablaAlumnoJuegoDePuntos (i + 1, alumno.Nombre, alumno.PrimerApellido, alumno.SegundoApellido,
+          rankingJuegoDePuntos[i] = new TablaAlumnoJuegoDePuntos (i + 1, alumno.nombre, alumno.primerApellido, alumno.segundoApellido,
             listaAlumnosOrdenadaPorPuntos[i].PuntosTotalesAlumno);
         }
       }
@@ -804,15 +804,15 @@ export class CalculosService {
           let puntos = 0;
           // tslint:disable-next-line:prefer-for-of
           for (let j = 0; j < historial.length; j ++) {
-            puntos = puntos + historial[j].ValorPunto;
+            puntos = puntos + historial[j].valorPunto;
           }
 
 
           if (nivel !== undefined) {
-            rankingEquiposJuegoDePuntos[i] = new TablaEquipoJuegoDePuntos (i + 1, equipo.Nombre, equipo.id,
-              puntos, nivel.Nombre);
+            rankingEquiposJuegoDePuntos[i] = new TablaEquipoJuegoDePuntos (i + 1, equipo.nombre, equipo.id,
+              puntos, nivel.nombre);
           } else {
-            rankingEquiposJuegoDePuntos[i] = new TablaEquipoJuegoDePuntos (i + 1, equipo.Nombre, equipo.id,
+            rankingEquiposJuegoDePuntos[i] = new TablaEquipoJuegoDePuntos (i + 1, equipo.nombre, equipo.id,
               puntos);
           }
 
@@ -850,7 +850,7 @@ export class CalculosService {
 
         // Busco al alumno
         alumno = alumnosDelJuego.filter(res => res.id === listaAlumnosOrdenadaPorPuntos[i].alumnoId)[0];
-        console.log ('nombre ' + alumno.Nombre);
+        console.log ('nombre ' + alumno.nombre);
 
         if (listaAlumnosOrdenadaPorPuntos[i].nivelId !== undefined) {
           console.log(listaAlumnosOrdenadaPorPuntos[i].alumnoId);
@@ -861,20 +861,20 @@ export class CalculosService {
         this.peticionesAPI.DameHistorialDeUnPunto(listaAlumnosOrdenadaPorPuntos[i].id, puntoSeleccionadoId)
         .subscribe(historial => {
           let puntos = 0;
-          console.log (alumno.Nombre + ' tieme ' + historial.length + 'asignaciones');
+          console.log (alumno.nombre + ' tieme ' + historial.length + 'asignaciones');
           // tslint:disable-next-line:prefer-for-of
           for (let j = 0; j < historial.length; j ++) {
-            puntos = puntos + historial[j].ValorPunto;
+            puntos = puntos + historial[j].valorPunto;
           }
           console.log ('Puntos ' + puntos);
 
           if (nivel !== undefined) {
             // tslint:disable-next-line:max-line-length
-            rankingJuegoDePuntos[i] = new TablaAlumnoJuegoDePuntos (i + 1, alumno.Nombre, alumno.PrimerApellido, alumno.SegundoApellido,
-              puntos, nivel.Nombre);
+            rankingJuegoDePuntos[i] = new TablaAlumnoJuegoDePuntos (i + 1, alumno.nombre, alumno.primerApellido, alumno.segundoApellido,
+              puntos, nivel.nombre);
           } else {
             // tslint:disable-next-line:max-line-length
-            rankingJuegoDePuntos[i] = new TablaAlumnoJuegoDePuntos (i + 1, alumno.Nombre, alumno.PrimerApellido, alumno.SegundoApellido,
+            rankingJuegoDePuntos[i] = new TablaAlumnoJuegoDePuntos (i + 1, alumno.nombre, alumno.primerApellido, alumno.segundoApellido,
               puntos);
           }
 
@@ -951,7 +951,7 @@ export class CalculosService {
   let i = 0;
   let encontrado = false;
   while ((i < nivelesDelJuego.length) && !encontrado) {
-    if (nivelesDelJuego[i].PuntosAlcanzar > puntos) {
+    if (nivelesDelJuego[i].puntosAlcanzar > puntos) {
           encontrado = true;
           console.log ('encontrado');
     } else {
@@ -1239,13 +1239,13 @@ export class CalculosService {
     }
 
     if (nivel !== undefined) {
-        rankingEquiposJuegoDePuntos[i] = new TablaEquipoJuegoDePuntos (i + 1, equipo.Nombre, equipo.id,
-          listaEquiposOrdenadaPorPuntos[i].PuntosTotalesEquipo, nivel.Nombre);
+        rankingEquiposJuegoDePuntos[i] = new TablaEquipoJuegoDePuntos (i + 1, equipo.nombre, equipo.id,
+          listaEquiposOrdenadaPorPuntos[i].PuntosTotalesEquipo, nivel.nombre);
 
         // rankingEquiposJuegoDePuntosTotal[i] = new TablaEquipoJuegoDePuntos (i + 1, equipo.Nombre, equipo.id,
         //     listaEquiposOrdenadaPorPuntos[i].PuntosTotalesEquipo, nivel.Nombre);
     } else {
-        rankingEquiposJuegoDePuntos[i] = new TablaEquipoJuegoDePuntos (i + 1, equipo.Nombre, equipo.id,
+        rankingEquiposJuegoDePuntos[i] = new TablaEquipoJuegoDePuntos (i + 1, equipo.nombre, equipo.id,
             listaEquiposOrdenadaPorPuntos[i].PuntosTotalesEquipo);
 
         // rankingEquiposJuegoDePuntosTotal[i] = new TablaEquipoJuegoDePuntos (i + 1, equipo.Nombre, equipo.id,
@@ -1266,9 +1266,9 @@ export class CalculosService {
     puntosNuevos: any,
     puntoSeleccionadoId: any,
   ) {
-        alumno.PuntosTotalesAlumno = alumno.PuntosTotalesAlumno + puntosNuevos;
+        alumno.puntosTotalesAlumno = alumno.puntosTotalesAlumno + puntosNuevos;
         if (nivelesDelJuego.length > 0 ) {
-          const nivelId = this.DameNivelId (nivelesDelJuego, alumno.PuntosTotalesAlumno );
+          const nivelId = this.DameNivelId (nivelesDelJuego, alumno.puntosTotalesAlumno );
           alumno.nivelId = nivelId;
         }
         this.peticionesAPI.PonPuntosJuegoDePuntos(alumno, alumno.id).
@@ -1289,9 +1289,9 @@ export class CalculosService {
     puntoSeleccionadoId: any,
   ) {
 
-        equipo.PuntosTotalesEquipo = equipo.PuntosTotalesEquipo + puntosNuevos;
+        equipo.puntosTotalesEquipo = equipo.puntosTotalesEquipo + puntosNuevos;
         if (nivelesDelJuego.length > 0 ) {
-          const nivelId = this.DameNivelId (nivelesDelJuego, equipo.PuntosTotalesEquipo );
+          const nivelId = this.DameNivelId (nivelesDelJuego, equipo.puntosTotalesEquipo );
           equipo.nivelId = nivelId;
         }
         this.peticionesAPI.PonPuntosEquiposJuegoDePuntos(equipo, equipo.id).
@@ -1322,7 +1322,7 @@ export class CalculosService {
             const punto = tiposPuntosDelJuego.filter(res => res.id === his[i].puntoId)[0];
 
             historial[i] = new TablaHistorialPuntosEquipo (punto.Nombre,
-            punto.Descripcion, his[i].ValorPunto, his[i].fecha,
+            punto.Descripcion, his[i].valorPunto, his[i].fecha,
             his[i].equipoJuegoDePuntosId, his[i].id, his[i].puntoId);
           }
         } else {
@@ -1440,8 +1440,8 @@ export class CalculosService {
     const listaCromosSinRepetidos: any [] = [];
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < listaCromos.length; i++) {
-      const n = listaCromos.filter (cromo => cromo.Nombre === listaCromos[i].Nombre).length;
-      if (listaCromosSinRepetidos.filter (res => res.cromo.Nombre === listaCromos[i].Nombre).length === 0) {
+      const n = listaCromos.filter (cromo => cromo.nombre === listaCromos[i].nombre).length;
+      if (listaCromosSinRepetidos.filter (res => res.cromo.Nombre === listaCromos[i].nombre).length === 0) {
         listaCromosSinRepetidos.push ({rep: n, cromo: listaCromos[i]});
       }
     }
@@ -1770,25 +1770,25 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
       jornada = jornadas.filter(res => res.id === jornadaId)[0];
 
       console.log('Ganadores de la jornada:');
-      console.log(jornada.GanadoresFormulaUno);
+      console.log(jornada.ganadoresFormulaUno);
       console.log('Fecha de la jornada');
-      console.log(jornada.Fecha);
+      console.log(jornada.fecha);
       if (juegoSeleccionado.Tipo === 'Juego De Competición Fórmula Uno') {
 
-        if (jornada.Fecha === undefined && jornada.GanadoresFormulaUno === undefined) {
+        if (jornada.fecha === undefined && jornada.ganadoresFormulaUno === undefined) {
           const Disputada = false;
-          TablaJornada[i] = new TablaJornadas (i + 1, jornada.Fecha, jornada.CriterioGanador, jornada.id, undefined, undefined, Disputada);
+          TablaJornada[i] = new TablaJornadas (i + 1, jornada.fecha, jornada.criterioGanador, jornada.id, undefined, undefined, Disputada);
 
-        } else if (jornada.Fecha === undefined && jornada.GanadoresFormulaUno !== undefined) {
+        } else if (jornada.fecha === undefined && jornada.ganadoresFormulaUno !== undefined) {
           const GanadoresFormulaUno = this.ObtenerNombreGanadoresFormulaUno(juegoSeleccionado, jornada, alumnoJuegoDeCompeticionFormulaUno,
                                                                               equipoJuegoDeCompeticionFormulaUno);
           const Disputada = true;
-          TablaJornada[i] = new TablaJornadas (i + 1, jornada.Fecha, jornada.CriterioGanador, jornada.id, GanadoresFormulaUno.nombre,
+          TablaJornada[i] = new TablaJornadas (i + 1, jornada.fecha, jornada.criterioGanador, jornada.id, GanadoresFormulaUno.nombre,
                                                GanadoresFormulaUno.id, Disputada);
 
-          } else  if (jornada.Fecha !== undefined && jornada.GanadoresFormulaUno === undefined) {
+          } else  if (jornada.fecha !== undefined && jornada.ganadoresFormulaUno === undefined) {
             const Disputada = false;
-            TablaJornada[i] = new TablaJornadas (i + 1, jornada.Fecha, jornada.CriterioGanador, jornada.id,
+            TablaJornada[i] = new TablaJornadas (i + 1, jornada.fecha, jornada.criterioGanador, jornada.id,
                                                  undefined, undefined, Disputada);
 
           } else {
@@ -1796,7 +1796,7 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                                                                               alumnoJuegoDeCompeticionFormulaUno,
                                                                               equipoJuegoDeCompeticionFormulaUno);
             const Disputada = true;
-            TablaJornada[i] = new TablaJornadas (i + 1, jornada.Fecha, jornada.CriterioGanador, jornada.id, GanadoresFormulaUno.nombre,
+            TablaJornada[i] = new TablaJornadas (i + 1, jornada.fecha, jornada.criterioGanador, jornada.id, GanadoresFormulaUno.nombre,
                                                 GanadoresFormulaUno.id, Disputada);
           }
         }
@@ -1816,14 +1816,14 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
       enfrentamientosJuego[i].forEach(enfrentamientoDeLaJornada => {
         console.log ('%%%%%%%%%%');
         console.log (enfrentamientoDeLaJornada);
-        if (enfrentamientoDeLaJornada.JornadaDeCompeticionLigaId === jornadaId) {
+        if (enfrentamientoDeLaJornada.jornadaDeCompeticionLigaId === jornadaId) {
           enfrentamientosJornada.push(enfrentamientoDeLaJornada);
         }
       });
       console.log('Los enfrentamientosJornada con id ' + jornadaId + ' son:');
       console.log(enfrentamientosJornada);
       const Disputada: boolean = this.JornadaFinalizadaLiga(jornada, enfrentamientosJornada);
-      TablaJornada[i] = new TablaJornadas (i + 1, jornada.Fecha, jornada.CriterioGanador, jornada.id, undefined, undefined, Disputada);
+      TablaJornada[i] = new TablaJornadas (i + 1, jornada.fecha, jornada.criterioGanador, jornada.id, undefined, undefined, Disputada);
     }
     return TablaJornada;
   }
@@ -1831,10 +1831,10 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
   public JornadaFinalizadaLiga(jornadaSeleccionada: Jornada, EnfrentamientosJornada: EnfrentamientoLiga[]) {
     let HayGanador = true;
     let jornadaFinalizada = true;
-    if (jornadaSeleccionada.id === EnfrentamientosJornada[0].JornadaDeCompeticionLigaId) {
+    if (jornadaSeleccionada.id === EnfrentamientosJornada[0].jornadaDeCompeticionLigaId) {
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < EnfrentamientosJornada.length; i++) {
-        if (EnfrentamientosJornada[i].Ganador === undefined) {
+        if (EnfrentamientosJornada[i].ganador === undefined) {
           HayGanador = false;
         }
       }
@@ -1921,14 +1921,14 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
             if (res[0] !== undefined){
               //Comparamos cada una de las imágenes con la que queremos eliminar.
               res.forEach( pregunta => {
-                if (pregunta.Imagen == this.sesion.DamePregunta().Imagen) {
+                if (pregunta.imagen == this.sesion.DamePregunta().imagen) {
                   contador ++;
                 }
               });
 
               //Si el contador es dos o más, la imagen se usa en más de una Pregunta y, por lo tanto, no se puede borrar.
               if (contador < 2){
-                this.peticionesAPI.BorrarImagenPregunta(this.sesion.DamePregunta().Imagen).subscribe();
+                this.peticionesAPI.BorrarImagenPregunta(this.sesion.DamePregunta().imagen).subscribe();
                 console.log ("IMAGEN ELIMINADA");
               }
             }
@@ -1987,7 +1987,7 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
       for (let j = 0; j < numPartidosPorRonda; j ++) {
 
             this.rondas[i][j] = new EnfrentamientoLiga();
-            this.rondas[i][j].JugadorUno = k;
+            this.rondas[i][j].jugadorUno = k;
 
             k ++;
 
@@ -2001,10 +2001,10 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
 
 
         if (i % 2 === 0) {
-            this.rondas[i][0].JugadorDos = numEquipos - 1;
+            this.rondas[i][0].jugadorDos = numEquipos - 1;
         } else {
-            this.rondas[i][0].JugadorDos = this.rondas[i][0].JugadorUno;
-            this.rondas[i][0].JugadorUno = numEquipos - 1;
+            this.rondas[i][0].jugadorDos = this.rondas[i][0].jugadorUno;
+            this.rondas[i][0].jugadorUno = numEquipos - 1;
         }
     }
 
@@ -2015,7 +2015,7 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
 
 
         for (let j = 1; j < numPartidosPorRonda; j ++) {
-            this.rondas[i][j].JugadorDos = k;
+            this.rondas[i][j].jugadorDos = k;
 
             k --;
 
@@ -2056,21 +2056,21 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
       for (let j = 0; j < numPartidosPorRonda; j ++) {
         // tslint:disable-next-line:prefer-const
         let EnfrentamientoLigaa: EnfrentamientoLiga;
-        if (rondas[i][j].JugadorUno === participantes.length) {
-          EnfrentamientoLigaa = new EnfrentamientoLiga(participantes[rondas[i][j].JugadorDos].id,
-            participantes[rondas[i][j].JugadorDos].id, undefined, jornadas[i].id);
+        if (rondas[i][j].jugadorUno === participantes.length) {
+          EnfrentamientoLigaa = new EnfrentamientoLiga(participantes[rondas[i][j].jugadorDos].id,
+            participantes[rondas[i][j].jugadorDos].id, undefined, jornadas[i].id);
 
-        } else if (rondas[i][j].JugadorDos === participantes.length) {
-          EnfrentamientoLigaa = new EnfrentamientoLiga(participantes[rondas[i][j].JugadorUno].id,
-            participantes[rondas[i][j].JugadorUno].id, undefined, jornadas[i].id);
+        } else if (rondas[i][j].jugadorDos === participantes.length) {
+          EnfrentamientoLigaa = new EnfrentamientoLiga(participantes[rondas[i][j].jugadorUno].id,
+            participantes[rondas[i][j].jugadorUno].id, undefined, jornadas[i].id);
 
         } else {
-          EnfrentamientoLigaa = new EnfrentamientoLiga(participantes[rondas[i][j].JugadorUno].id,
-            participantes[rondas[i][j].JugadorDos].id, undefined, jornadas[i].id);
+          EnfrentamientoLigaa = new EnfrentamientoLiga(participantes[rondas[i][j].jugadorUno].id,
+            participantes[rondas[i][j].jugadorDos].id, undefined, jornadas[i].id);
         }
         console.log('mostramos enrentamiento');
         // console.log(EnfrentamientoLigaa);
-        if (EnfrentamientoLigaa.JugadorUno !== EnfrentamientoLigaa.JugadorDos) {
+        if (EnfrentamientoLigaa.jugadorUno !== EnfrentamientoLigaa.jugadorDos) {
           this.peticionesAPI.CrearEnrentamientoLiga(EnfrentamientoLigaa, jornadas[i].id)
           .subscribe(enfrentamientocreado => {
           console.log('enfrentamiento creado');
@@ -2093,7 +2093,7 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
 
   public JornadaFinalizada(juegoSeleccionado: Juego, jornadaSeleccionada: TablaJornadas) {
     let jornadaFinalizada = false;
-    if (jornadaSeleccionada.Disputada === true) {
+    if (jornadaSeleccionada.disputada === true) {
       jornadaFinalizada = true;
     }
     return jornadaFinalizada;
@@ -2148,10 +2148,10 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
     // tslint:disable-next-line:prefer-for-oF
     for (let i = 0; i < listaAlumnosOrdenadaPorPuntos.length; i++) {
       let alumno: Alumno;
-      const alumnoId = listaAlumnosOrdenadaPorPuntos[i].AlumnoId;
+      const alumnoId = listaAlumnosOrdenadaPorPuntos[i].alumnoId;
       alumno = alumnosDelJuego.filter(res => res.id === alumnoId)[0];
-      rankingJuegoDeCompeticion[i] = new TablaAlumnoJuegoDeCompeticion(i + 1, alumno.Nombre, alumno.PrimerApellido, alumno.SegundoApellido,
-                                                                       listaAlumnosOrdenadaPorPuntos[i].PuntosTotalesAlumno, alumnoId);
+      rankingJuegoDeCompeticion[i] = new TablaAlumnoJuegoDeCompeticion(i + 1, alumno.nombre, alumno.primerApellido, alumno.segundoApellido,
+                                                                       listaAlumnosOrdenadaPorPuntos[i].puntosTotalesAlumno, alumnoId);
     }
     const individual = true;
     const informacionPartidos = this.ObtenerInformaciónPartidos(listaAlumnosOrdenadaPorPuntos, jornadasDelJuego,
@@ -2173,10 +2173,10 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < listaEquiposOrdenadaPorPuntos.length; i++) {
       let equipo: Equipo;
-      const EquipoId = listaEquiposOrdenadaPorPuntos[i].EquipoId;
+      const EquipoId = listaEquiposOrdenadaPorPuntos[i].equipoId;
       equipo = equiposDelJuego.filter(res => res.id === EquipoId)[0];
-      rankingJuegoDeCompeticion[i] = new TablaEquipoJuegoDeCompeticion(i + 1, equipo.Nombre,
-                                                                       listaEquiposOrdenadaPorPuntos[i].PuntosTotalesEquipo, EquipoId);
+      rankingJuegoDeCompeticion[i] = new TablaEquipoJuegoDeCompeticion(i + 1, equipo.nombre,
+                                                                       listaEquiposOrdenadaPorPuntos[i].puntosTotalesEquipo, EquipoId);
     }
     const individual = false;
     const informacionPartidos = this.ObtenerInformaciónPartidos(listaEquiposOrdenadaPorPuntos, jornadasDelJuego,
@@ -2200,30 +2200,30 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
       for (let i = 0; i < EnfrentamientosJornadaSeleccionada.length; i++) {
         // tslint:disable-next-line:prefer-for-of
         for (let j = 0; j < listaAlumnosClasificacion.length; j++) {
-          if (EnfrentamientosJornadaSeleccionada[i].JugadorUno === listaAlumnosClasificacion[j].id) {
+          if (EnfrentamientosJornadaSeleccionada[i].jugadorUno === listaAlumnosClasificacion[j].id) {
               EnfrentamientosJornadaSeleccionada[i].nombreJugadorUno = listaAlumnosClasificacion[j].nombre + ' ' +
                                                                        listaAlumnosClasificacion[j].primerApellido + ' ' +
                                                                        listaAlumnosClasificacion[j].segundoApellido;
-              if (EnfrentamientosJornadaSeleccionada[i].Ganador === listaAlumnosClasificacion[j].id) {
+              if (EnfrentamientosJornadaSeleccionada[i].ganador === listaAlumnosClasificacion[j].id) {
                 EnfrentamientosJornadaSeleccionada[i].nombreGanador = listaAlumnosClasificacion[j].nombre + ' ' +
                                                                       listaAlumnosClasificacion[j].primerApellido + ' ' +
                                                                       listaAlumnosClasificacion[j].segundoApellido;
-            } else if (EnfrentamientosJornadaSeleccionada[i].Ganador === 0) {
+            } else if (EnfrentamientosJornadaSeleccionada[i].ganador === 0) {
                EnfrentamientosJornadaSeleccionada[i].nombreGanador = 'Empate';
-            } else if (EnfrentamientosJornadaSeleccionada[i].Ganador === undefined) {
+            } else if (EnfrentamientosJornadaSeleccionada[i].ganador === undefined) {
                EnfrentamientosJornadaSeleccionada[i].nombreGanador = '-';
             }
-          } else if (EnfrentamientosJornadaSeleccionada[i].JugadorDos === listaAlumnosClasificacion[j].id) {
+          } else if (EnfrentamientosJornadaSeleccionada[i].jugadorDos === listaAlumnosClasificacion[j].id) {
               EnfrentamientosJornadaSeleccionada[i].nombreJugadorDos = listaAlumnosClasificacion[j].nombre + ' ' +
                                                                        listaAlumnosClasificacion[j].primerApellido + ' ' +
                                                                        listaAlumnosClasificacion[j].segundoApellido;
-              if (EnfrentamientosJornadaSeleccionada[i].Ganador === listaAlumnosClasificacion[j].id) {
+              if (EnfrentamientosJornadaSeleccionada[i].ganador === listaAlumnosClasificacion[j].id) {
                 EnfrentamientosJornadaSeleccionada[i].nombreGanador = listaAlumnosClasificacion[j].nombre + ' ' +
                                                                       listaAlumnosClasificacion[j].primerApellido + ' ' +
                                                                       listaAlumnosClasificacion[j].segundoApellido;
-              } else if (EnfrentamientosJornadaSeleccionada[i].Ganador === 0) {
+              } else if (EnfrentamientosJornadaSeleccionada[i].ganador === 0) {
                          EnfrentamientosJornadaSeleccionada[i].nombreGanador = 'Empate';
-              } else if (EnfrentamientosJornadaSeleccionada[i].Ganador === undefined) {
+              } else if (EnfrentamientosJornadaSeleccionada[i].ganador === undefined) {
                   EnfrentamientosJornadaSeleccionada[i].nombreGanador = '-';
               }
           }
@@ -2236,22 +2236,22 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
       for (let i = 0; i < EnfrentamientosJornadaSeleccionada.length; i++) {
         // tslint:disable-next-line:prefer-for-of
         for (let j = 0; j < listaEquiposClasificacion.length; j++) {
-          if (EnfrentamientosJornadaSeleccionada[i].JugadorUno === listaEquiposClasificacion[j].id) {
+          if (EnfrentamientosJornadaSeleccionada[i].jugadorUno === listaEquiposClasificacion[j].id) {
             EnfrentamientosJornadaSeleccionada[i].nombreJugadorUno = listaEquiposClasificacion[j].nombre;
-            if (EnfrentamientosJornadaSeleccionada[i].Ganador === listaEquiposClasificacion[j].id) {
+            if (EnfrentamientosJornadaSeleccionada[i].ganador === listaEquiposClasificacion[j].id) {
               EnfrentamientosJornadaSeleccionada[i].nombreGanador = listaEquiposClasificacion[j].nombre;
-            } else if (EnfrentamientosJornadaSeleccionada[i].Ganador === 0) {
+            } else if (EnfrentamientosJornadaSeleccionada[i].ganador === 0) {
                 EnfrentamientosJornadaSeleccionada[i].nombreGanador = 'Empate';
-            } else if (EnfrentamientosJornadaSeleccionada[i].Ganador === undefined) {
+            } else if (EnfrentamientosJornadaSeleccionada[i].ganador === undefined) {
                 EnfrentamientosJornadaSeleccionada[i].nombreGanador = '-';
             }
-          } else if (EnfrentamientosJornadaSeleccionada[i].JugadorDos === listaEquiposClasificacion[j].id) {
+          } else if (EnfrentamientosJornadaSeleccionada[i].jugadorDos === listaEquiposClasificacion[j].id) {
               EnfrentamientosJornadaSeleccionada[i].nombreJugadorDos = listaEquiposClasificacion[j].nombre;
-              if (EnfrentamientosJornadaSeleccionada[i].Ganador === listaEquiposClasificacion[j].id) {
+              if (EnfrentamientosJornadaSeleccionada[i].ganador === listaEquiposClasificacion[j].id) {
                 EnfrentamientosJornadaSeleccionada[i].nombreGanador = listaEquiposClasificacion[j].nombre;
-              } else if (EnfrentamientosJornadaSeleccionada[i].Ganador === 0) {
+              } else if (EnfrentamientosJornadaSeleccionada[i].ganador === 0) {
                   EnfrentamientosJornadaSeleccionada[i].nombreGanador = 'Empate';
-              } else if (EnfrentamientosJornadaSeleccionada[i].Ganador === undefined) {
+              } else if (EnfrentamientosJornadaSeleccionada[i].ganador === undefined) {
                   EnfrentamientosJornadaSeleccionada[i].nombreGanador = '-';
               }
           }
@@ -2358,16 +2358,16 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
     if (individual === false) {
       // tslint:disable-next-line:prefer-for-of
       for (let contEnfrentamiento = 0; contEnfrentamiento < listaEnfrentamientosDelJuego.length; contEnfrentamiento++) {
-        if (listaParticipantesOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorUno ||
-            listaParticipantesOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorDos) {
+        if (listaParticipantesOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorUno ||
+            listaParticipantesOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorDos) {
               partidosTotales++;
         }
       }
     } else if (individual === true) {
       // tslint:disable-next-line:prefer-for-of
       for (let contEnfrentamiento = 0; contEnfrentamiento < listaEnfrentamientosDelJuego.length; contEnfrentamiento++) {
-        if (listaParticipantesOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorUno ||
-            listaParticipantesOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorDos) {
+        if (listaParticipantesOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorUno ||
+            listaParticipantesOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorDos) {
               partidosTotales++;
         }
       }
@@ -2381,10 +2381,10 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
     if (individual === false) {
       // tslint:disable-next-line:prefer-for-of
       for (let contEnfrentamiento = 0; contEnfrentamiento < listaEnfrentamientosDelJuego.length; contEnfrentamiento++) {
-        if (listaParticipantesOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorUno ||
-            listaParticipantesOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorDos) {
+        if (listaParticipantesOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorUno ||
+            listaParticipantesOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorDos) {
 
-            if (listaEnfrentamientosDelJuego[contEnfrentamiento].Ganador !== undefined) {
+            if (listaEnfrentamientosDelJuego[contEnfrentamiento].ganador !== undefined) {
               partidosJugados++;
             }
         }
@@ -2392,10 +2392,10 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
     } else if (individual === true) {
       // tslint:disable-next-line:prefer-for-of
       for (let contEnfrentamiento = 0; contEnfrentamiento < listaEnfrentamientosDelJuego.length; contEnfrentamiento++) {
-        if (listaParticipantesOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorUno ||
-            listaParticipantesOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorDos) {
+        if (listaParticipantesOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorUno ||
+            listaParticipantesOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorDos) {
 
-            if (listaEnfrentamientosDelJuego[contEnfrentamiento].Ganador !== undefined) {
+            if (listaEnfrentamientosDelJuego[contEnfrentamiento].ganador !== undefined) {
               partidosJugados++;
             }
         }
@@ -2410,10 +2410,10 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
     if (individual === false) {
       // tslint:disable-next-line:prefer-for-of
       for (let contEnfrentamiento = 0; contEnfrentamiento < listaEnfrentamientosDelJuego.length; contEnfrentamiento++) {
-        if (listaEquiposOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorUno ||
-            listaEquiposOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorDos) {
+        if (listaEquiposOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorUno ||
+            listaEquiposOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorDos) {
 
-            if (listaEquiposOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].Ganador) {
+            if (listaEquiposOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].ganador) {
               partidosGanados++;
             }
         }
@@ -2421,10 +2421,10 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
     } else if (individual === true) {
       // tslint:disable-next-line:prefer-for-of
       for (let contEnfrentamiento = 0; contEnfrentamiento < listaEnfrentamientosDelJuego.length; contEnfrentamiento++) {
-        if (listaEquiposOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorUno ||
-            listaEquiposOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorDos) {
+        if (listaEquiposOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorUno ||
+            listaEquiposOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorDos) {
 
-            if (listaEquiposOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].Ganador) {
+            if (listaEquiposOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].ganador) {
               partidosGanados++;
             }
         }
@@ -2440,10 +2440,10 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
     if (individual === false) {
       // tslint:disable-next-line:prefer-for-of
       for (let contEnfrentamiento = 0; contEnfrentamiento < listaEnfrentamientosDelJuego.length; contEnfrentamiento++) {
-        if (listaParticipantesOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorUno ||
-        listaParticipantesOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorDos) {
+        if (listaParticipantesOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorUno ||
+        listaParticipantesOrdenadaPorPuntos[participante].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorDos) {
 
-          if (listaEnfrentamientosDelJuego[contEnfrentamiento].Ganador === 0) {
+          if (listaEnfrentamientosDelJuego[contEnfrentamiento].ganador === 0) {
             partidosEmpatados++;
           }
         }
@@ -2451,10 +2451,10 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
     } else if (individual === true) {
       // tslint:disable-next-line:prefer-for-of
       for (let contEnfrentamiento = 0; contEnfrentamiento < listaEnfrentamientosDelJuego.length; contEnfrentamiento++) {
-        if (listaParticipantesOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorUno ||
-        listaParticipantesOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorDos) {
+        if (listaParticipantesOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorUno ||
+        listaParticipantesOrdenadaPorPuntos[participante].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorDos) {
 
-          if (listaEnfrentamientosDelJuego[contEnfrentamiento].Ganador === 0) {
+          if (listaEnfrentamientosDelJuego[contEnfrentamiento].ganador === 0) {
             partidosEmpatados++;
           }
         }
@@ -2469,12 +2469,12 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
     if (individual === false) {
       // tslint:disable-next-line:prefer-for-of
       for (let contEnfrentamiento = 0; contEnfrentamiento < listaEnfrentamientosDelJuego.length; contEnfrentamiento++) {
-        if (listaParticipantesOrdenadaPorPuntos[contEquipo].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorUno ||
-        listaParticipantesOrdenadaPorPuntos[contEquipo].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorDos) {
+        if (listaParticipantesOrdenadaPorPuntos[contEquipo].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorUno ||
+        listaParticipantesOrdenadaPorPuntos[contEquipo].EquipoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorDos) {
 
-          if ((listaEnfrentamientosDelJuego[contEnfrentamiento].Ganador !== 0 &&
-              listaEnfrentamientosDelJuego[contEnfrentamiento].Ganador !== undefined) &&
-              listaEnfrentamientosDelJuego[contEnfrentamiento].Ganador !== listaParticipantesOrdenadaPorPuntos[contEquipo].EquipoId) {
+          if ((listaEnfrentamientosDelJuego[contEnfrentamiento].ganador !== 0 &&
+              listaEnfrentamientosDelJuego[contEnfrentamiento].ganador !== undefined) &&
+              listaEnfrentamientosDelJuego[contEnfrentamiento].ganador !== listaParticipantesOrdenadaPorPuntos[contEquipo].EquipoId) {
             partidosPerdidos++;
           }
         }
@@ -2482,12 +2482,12 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
     } else if (individual === true) {
       // tslint:disable-next-line:prefer-for-of
       for (let contEnfrentamiento = 0; contEnfrentamiento < listaEnfrentamientosDelJuego.length; contEnfrentamiento++) {
-        if (listaParticipantesOrdenadaPorPuntos[contEquipo].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorUno ||
-        listaParticipantesOrdenadaPorPuntos[contEquipo].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].JugadorDos) {
+        if (listaParticipantesOrdenadaPorPuntos[contEquipo].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorUno ||
+        listaParticipantesOrdenadaPorPuntos[contEquipo].AlumnoId === listaEnfrentamientosDelJuego[contEnfrentamiento].jugadorDos) {
 
-          if ((listaEnfrentamientosDelJuego[contEnfrentamiento].Ganador !== 0 &&
-              listaEnfrentamientosDelJuego[contEnfrentamiento].Ganador !== undefined) &&
-              listaEnfrentamientosDelJuego[contEnfrentamiento].Ganador !== listaParticipantesOrdenadaPorPuntos[contEquipo].AlumnoId) {
+          if ((listaEnfrentamientosDelJuego[contEnfrentamiento].ganador !== 0 &&
+              listaEnfrentamientosDelJuego[contEnfrentamiento].ganador !== undefined) &&
+              listaEnfrentamientosDelJuego[contEnfrentamiento].ganador !== listaParticipantesOrdenadaPorPuntos[contEquipo].AlumnoId) {
             partidosPerdidos++;
           }
         }
@@ -2591,15 +2591,15 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
               // tslint:disable-next-line:max-line-length
               enfrentamientosJornadaSeleccionada[k].nombreJugadorDos === enfrentamientosSeleccionadosColumna[i].nombreJugadorDos) {
                 console.log('Ya estoy en el el enfrentamiento que quiero');
-                if (enfrentamientosJornadaSeleccionada[k].Ganador === undefined) {
+                if (enfrentamientosJornadaSeleccionada[k].ganador === undefined) {
                   console.log('Este enfrentamiento no tiene ganador asignado:');
                   console.log(enfrentamientosJornadaSeleccionada[k]);
                   // Tengo que actualizar el ganador en EnfrentamientoLiga
-                  enfrentamientosJornadaSeleccionada[k].Ganador = enfrentamientosSeleccionadosColumna[i].JugadorDos;
-                  const enfrentamiento = new EnfrentamientoLiga(enfrentamientosJornadaSeleccionada[k].JugadorUno,
-                                                                enfrentamientosJornadaSeleccionada[k].JugadorDos,
-                                                                enfrentamientosJornadaSeleccionada[k].Ganador,
-                                                                enfrentamientosJornadaSeleccionada[k].JornadaDeCompeticionLigaId,
+                  enfrentamientosJornadaSeleccionada[k].ganador = enfrentamientosSeleccionadosColumna[i].jugadorDos;
+                  const enfrentamiento = new EnfrentamientoLiga(enfrentamientosJornadaSeleccionada[k].jugadorUno,
+                                                                enfrentamientosJornadaSeleccionada[k].jugadorDos,
+                                                                enfrentamientosJornadaSeleccionada[k].ganador,
+                                                                enfrentamientosJornadaSeleccionada[k].jornadaDeCompeticionLigaId,
                                                                 undefined, undefined,
                                                                 enfrentamientosJornadaSeleccionada[k].id);
                   this.peticionesAPI.PonGanadorDelEnfrentamiento(enfrentamiento).
@@ -2619,7 +2619,7 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                   console.log('el id del equipo es: ' + EquipoId);
                    // tslint:disable-next-line:prefer-for-of
                   for (let m = 0; m < equiposJuegoDeCompeticionLiga.length; m++) {
-                    if (equiposJuegoDeCompeticionLiga[m].EquipoId === EquipoId) {
+                    if (equiposJuegoDeCompeticionLiga[m].equipoId === EquipoId) {
                       this.EquipoJuegoDeCompeticionLigaId = equiposJuegoDeCompeticionLiga[m].id;
                     }
                   }
@@ -2628,8 +2628,8 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                                                                          listaEquiposClasificacion[j].puntos,
                                                                          this.EquipoJuegoDeCompeticionLigaId);
                   console.log(equipoGanador);
-                  console.log('El id del alumno es: ' + equipoGanador.EquipoId + ' y los puntos actualizados son: '
-                              + equipoGanador.PuntosTotalesEquipo);
+                  console.log('El id del alumno es: ' + equipoGanador.equipoId + ' y los puntos actualizados son: '
+                              + equipoGanador.puntosTotalesEquipo);
                   this.peticionesAPI.PonPuntosEquipoGanadorJuegoDeCompeticionLiga(equipoGanador).
                   subscribe(res => console.log(res));
                 } else {
@@ -2652,15 +2652,15 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
               // tslint:disable-next-line:max-line-length
               enfrentamientosJornadaSeleccionada[k].nombreJugadorDos === enfrentamientosSeleccionadosColumna[i].nombreJugadorDos) {
                 console.log('Ya estoy en el el enfrentamiento que quiero');
-                if (enfrentamientosJornadaSeleccionada[k].Ganador === undefined) {
+                if (enfrentamientosJornadaSeleccionada[k].ganador === undefined) {
                   console.log('Este enfrentamiento no tiene ganador asignado:');
                   console.log(enfrentamientosJornadaSeleccionada[k]);
                   // Tengo que actualizar el ganador en EnfrentamientoLiga
-                  enfrentamientosJornadaSeleccionada[k].Ganador = enfrentamientosSeleccionadosColumna[i].JugadorUno;
-                  const enfrentamiento = new EnfrentamientoLiga(enfrentamientosJornadaSeleccionada[k].JugadorUno,
-                                                                enfrentamientosJornadaSeleccionada[k].JugadorDos,
-                                                                enfrentamientosJornadaSeleccionada[k].Ganador,
-                                                                enfrentamientosJornadaSeleccionada[k].JornadaDeCompeticionLigaId,
+                  enfrentamientosJornadaSeleccionada[k].ganador = enfrentamientosSeleccionadosColumna[i].jugadorUno;
+                  const enfrentamiento = new EnfrentamientoLiga(enfrentamientosJornadaSeleccionada[k].jugadorUno,
+                                                                enfrentamientosJornadaSeleccionada[k].jugadorDos,
+                                                                enfrentamientosJornadaSeleccionada[k].ganador,
+                                                                enfrentamientosJornadaSeleccionada[k].jornadaDeCompeticionLigaId,
                                                                 undefined, undefined,
                                                                 enfrentamientosJornadaSeleccionada[k].id);
                   this.peticionesAPI.PonGanadorDelEnfrentamiento(enfrentamiento).
@@ -2680,7 +2680,7 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                   console.log('el id del equipo es: ' + EquipoId);
                    // tslint:disable-next-line:prefer-for-of
                   for (let m = 0; m < equiposJuegoDeCompeticionLiga.length; m++) {
-                    if (equiposJuegoDeCompeticionLiga[m].EquipoId === EquipoId) {
+                    if (equiposJuegoDeCompeticionLiga[m].equipoId === EquipoId) {
                       this.EquipoJuegoDeCompeticionLigaId = equiposJuegoDeCompeticionLiga[m].id;
                     }
                   }
@@ -2689,8 +2689,8 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                                                                          listaEquiposClasificacion[j].puntos,
                                                                          this.EquipoJuegoDeCompeticionLigaId);
                   console.log(equipoGanador);
-                  console.log('El id del alumno es: ' + equipoGanador.EquipoId + ' y los puntos actualizados son: '
-                              + equipoGanador.PuntosTotalesEquipo);
+                  console.log('El id del alumno es: ' + equipoGanador.equipoId + ' y los puntos actualizados son: '
+                              + equipoGanador.puntosTotalesEquipo);
                   this.peticionesAPI.PonPuntosEquipoGanadorJuegoDeCompeticionLiga(equipoGanador).
                   subscribe(res => console.log(res));
                 } else {
@@ -2732,15 +2732,15 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                 // tslint:disable-next-line:max-line-length
                 enfrentamientosJornadaSeleccionada[k].nombreJugadorDos === enfrentamientosSeleccionadosColumna[i].nombreJugadorDos) {
               console.log('Ya estoy en el el enfrentamiento que quiero');
-              if (enfrentamientosJornadaSeleccionada[k].Ganador === undefined) {
+              if (enfrentamientosJornadaSeleccionada[k].ganador === undefined) {
                 console.log('Este enfrentamiento no tiene ganador asignado:');
                 console.log(enfrentamientosJornadaSeleccionada[k]);
                 // Tengo que actualizar el ganador en EnfrentamientoLiga
-                enfrentamientosJornadaSeleccionada[k].Ganador = enfrentamientosSeleccionadosColumna[i].JugadorDos;
-                const enfrentamiento = new EnfrentamientoLiga(enfrentamientosJornadaSeleccionada[k].JugadorUno,
-                                                              enfrentamientosJornadaSeleccionada[k].JugadorDos,
-                                                              enfrentamientosJornadaSeleccionada[k].Ganador,
-                                                              enfrentamientosJornadaSeleccionada[k].JornadaDeCompeticionLigaId,
+                enfrentamientosJornadaSeleccionada[k].ganador = enfrentamientosSeleccionadosColumna[i].jugadorDos;
+                const enfrentamiento = new EnfrentamientoLiga(enfrentamientosJornadaSeleccionada[k].jugadorUno,
+                                                              enfrentamientosJornadaSeleccionada[k].jugadorDos,
+                                                              enfrentamientosJornadaSeleccionada[k].ganador,
+                                                              enfrentamientosJornadaSeleccionada[k].jornadaDeCompeticionLigaId,
                                                               undefined, undefined,
                                                               enfrentamientosJornadaSeleccionada[k].id);
                 this.peticionesAPI.PonGanadorDelEnfrentamiento(enfrentamiento).
@@ -2760,7 +2760,7 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                 console.log('el id del alumno es: ' + AlumnoId);
                 // tslint:disable-next-line:prefer-for-of
                 for (let m = 0; m < alumnosJuegoDeCompeticionLiga.length; m++) {
-                  if (alumnosJuegoDeCompeticionLiga[m].AlumnoId === AlumnoId) {
+                  if (alumnosJuegoDeCompeticionLiga[m].alumnoId === AlumnoId) {
                     this.AlumnoJuegoDeCompeticionLigaId = alumnosJuegoDeCompeticionLiga[m].id;
                   }
                 }
@@ -2769,8 +2769,8 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                                                                        listaAlumnosClasificacion[j].puntos,
                                                                        this.AlumnoJuegoDeCompeticionLigaId);
                 console.log(alumnoGanador);
-                console.log('El id del alumno es: ' + alumnoGanador.AlumnoId + ' y los puntos actualizados son: '
-                            + alumnoGanador.PuntosTotalesAlumno);
+                console.log('El id del alumno es: ' + alumnoGanador.alumnoId + ' y los puntos actualizados son: '
+                            + alumnoGanador.puntosTotalesAlumno);
                 this.peticionesAPI.PonPuntosAlumnoGanadorJuegoDeCompeticionLiga(alumnoGanador).
                 subscribe(res => console.log(res));
               } else {
@@ -2794,15 +2794,15 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                 // tslint:disable-next-line:max-line-length
                 enfrentamientosJornadaSeleccionada[k].nombreJugadorDos === enfrentamientosSeleccionadosColumna[i].nombreJugadorDos) {
               console.log('Ya estoy en el el enfrentamiento que quiero');
-              if (enfrentamientosJornadaSeleccionada[k].Ganador === undefined) {
+              if (enfrentamientosJornadaSeleccionada[k].ganador === undefined) {
                 console.log('Este enfrentamiento no tiene ganador asignado:');
                 console.log(enfrentamientosJornadaSeleccionada[k]);
                 // Tengo que actualizar el ganador en EnfrentamientoLiga
-                enfrentamientosJornadaSeleccionada[k].Ganador = enfrentamientosSeleccionadosColumna[i].JugadorUno;
-                const enfrentamiento = new EnfrentamientoLiga(enfrentamientosJornadaSeleccionada[k].JugadorUno,
-                                                              enfrentamientosJornadaSeleccionada[k].JugadorDos,
-                                                              enfrentamientosJornadaSeleccionada[k].Ganador,
-                                                              enfrentamientosJornadaSeleccionada[k].JornadaDeCompeticionLigaId,
+                enfrentamientosJornadaSeleccionada[k].ganador = enfrentamientosSeleccionadosColumna[i].jugadorUno;
+                const enfrentamiento = new EnfrentamientoLiga(enfrentamientosJornadaSeleccionada[k].jugadorUno,
+                                                              enfrentamientosJornadaSeleccionada[k].jugadorDos,
+                                                              enfrentamientosJornadaSeleccionada[k].ganador,
+                                                              enfrentamientosJornadaSeleccionada[k].jornadaDeCompeticionLigaId,
                                                               undefined, undefined,
                                                               enfrentamientosJornadaSeleccionada[k].id);
                 this.peticionesAPI.PonGanadorDelEnfrentamiento(enfrentamiento).
@@ -2822,7 +2822,7 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                 console.log('el id del alumno es: ' + AlumnoId);
                 // tslint:disable-next-line:prefer-for-of
                 for (let m = 0; m < alumnosJuegoDeCompeticionLiga.length; m++) {
-                  if (alumnosJuegoDeCompeticionLiga[m].AlumnoId === AlumnoId) {
+                  if (alumnosJuegoDeCompeticionLiga[m].alumnoId === AlumnoId) {
                     this.AlumnoJuegoDeCompeticionLigaId = alumnosJuegoDeCompeticionLiga[m].id;
                   }
                 }
@@ -2831,8 +2831,8 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                                                                        listaAlumnosClasificacion[j].puntos,
                                                                        this.AlumnoJuegoDeCompeticionLigaId);
                 console.log(alumnoGanador);
-                console.log('El id del alumno es: ' + alumnoGanador.AlumnoId + ' y los puntos actualizados son: '
-                            + alumnoGanador.PuntosTotalesAlumno);
+                console.log('El id del alumno es: ' + alumnoGanador.alumnoId + ' y los puntos actualizados son: '
+                            + alumnoGanador.puntosTotalesAlumno);
                 this.peticionesAPI.PonPuntosAlumnoGanadorJuegoDeCompeticionLiga(alumnoGanador).
                 subscribe(res => console.log(res));
               } else {
@@ -2878,7 +2878,7 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                 // tslint:disable-next-line:max-line-length
                 enfrentamientosJornadaSeleccionada[k].nombreJugadorDos === enfrentamientosSeleccionadosColumna[i].nombreJugadorDos) {
               console.log('Ya estoy en el el enfrentamiento que quiero');
-              if (enfrentamientosJornadaSeleccionada[k].Ganador === undefined) {
+              if (enfrentamientosJornadaSeleccionada[k].ganador === undefined) {
                 console.log('Este enfrentamiento no tiene ganador asignado:');
                 // Ahora tengo que actualizar los dos AlumnoJuegoDeCompeticionLiga del enfrentamiento con los nuevos puntos
                 listaAlumnosClasificacion[j].puntos = listaAlumnosClasificacion[j].puntos + 1;
@@ -2889,7 +2889,7 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                 const AlumnoId = listaAlumnosClasificacion[j].id;
                 // tslint:disable-next-line:prefer-for-of
                 for (let m = 0; m < alumnosJuegoDeCompeticionLiga.length; m++) {
-                  if (alumnosJuegoDeCompeticionLiga[m].AlumnoId === AlumnoId) {
+                  if (alumnosJuegoDeCompeticionLiga[m].alumnoId === AlumnoId) {
                     this.AlumnoJuegoDeCompeticionLigaId = alumnosJuegoDeCompeticionLiga[m].id;
                   }
                 }
@@ -2898,8 +2898,8 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                                                                       listaAlumnosClasificacion[j].puntos,
                                                                       this.AlumnoJuegoDeCompeticionLigaId);
                 console.log(alumnoGanador);
-                console.log('El id del alumno es: ' + alumnoGanador.AlumnoId + ' y los puntos son: '
-                            + alumnoGanador.PuntosTotalesAlumno);
+                console.log('El id del alumno es: ' + alumnoGanador.alumnoId + ' y los puntos son: '
+                            + alumnoGanador.puntosTotalesAlumno);
                 alumnosConPuntosSumados++;
                 this.peticionesAPI.PonPuntosAlumnoGanadorJuegoDeCompeticionLiga(alumnoGanador).
                 subscribe(res => console.log(res));
@@ -2907,12 +2907,12 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                 if (alumnosConPuntosSumados === 2 && enfrentamientoEmpateRegistrado === false) {
                   alumnosConPuntosSumados = 0;
                   enfrentamientoEmpateRegistrado = true;
-                  enfrentamientosJornadaSeleccionada[k].Ganador = 0;
+                  enfrentamientosJornadaSeleccionada[k].ganador = 0;
                   console.log(enfrentamientosJornadaSeleccionada[k]);
-                  const enfrentamiento = new EnfrentamientoLiga(enfrentamientosJornadaSeleccionada[k].JugadorUno,
-                                                                enfrentamientosJornadaSeleccionada[k].JugadorDos,
-                                                                enfrentamientosJornadaSeleccionada[k].Ganador,
-                                                                enfrentamientosJornadaSeleccionada[k].JornadaDeCompeticionLigaId,
+                  const enfrentamiento = new EnfrentamientoLiga(enfrentamientosJornadaSeleccionada[k].jugadorUno,
+                                                                enfrentamientosJornadaSeleccionada[k].jugadorDos,
+                                                                enfrentamientosJornadaSeleccionada[k].ganador,
+                                                                enfrentamientosJornadaSeleccionada[k].jornadaDeCompeticionLigaId,
                                                                 undefined, undefined,
                                                                 enfrentamientosJornadaSeleccionada[k].id);
                   this.peticionesAPI.PonGanadorDelEnfrentamiento(enfrentamiento).
@@ -2965,7 +2965,7 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                 // tslint:disable-next-line:max-line-length
                 enfrentamientosJornadaSeleccionada[k].nombreJugadorDos === enfrentamientosSeleccionadosColumna[i].nombreJugadorDos) {
               console.log('Ya estoy en el el enfrentamiento que quiero');
-              if (enfrentamientosJornadaSeleccionada[k].Ganador === undefined) {
+              if (enfrentamientosJornadaSeleccionada[k].ganador === undefined) {
                 console.log('Este enfrentamiento no tiene ganador asignado:');
                 // Ahora tengo que actualizar los dos AlumnoJuegoDeCompeticionLiga del enfrentamiento con los nuevos puntos
                 listaEquiposClasificacion[j].puntos = listaEquiposClasificacion[j].puntos + 1;
@@ -2976,7 +2976,7 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                 const EquipoId = listaEquiposClasificacion[j].id;
                 // tslint:disable-next-line:prefer-for-of
                 for (let m = 0; m < equiposJuegoDeCompeticionLiga.length; m++) {
-                  if (equiposJuegoDeCompeticionLiga[m].EquipoId === EquipoId) {
+                  if (equiposJuegoDeCompeticionLiga[m].equipoId === EquipoId) {
                     this.EquipoJuegoDeCompeticionLigaId = equiposJuegoDeCompeticionLiga[m].id;
                   }
                 }
@@ -2985,8 +2985,8 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                                                                         listaEquiposClasificacion[j].puntos,
                                                                         this.EquipoJuegoDeCompeticionLigaId);
                 console.log(equipoEmpatado);
-                console.log('El id del equipo es: ' + equipoEmpatado.EquipoId + ' y los puntos son: '
-                            + equipoEmpatado.PuntosTotalesEquipo);
+                console.log('El id del equipo es: ' + equipoEmpatado.equipoId + ' y los puntos son: '
+                            + equipoEmpatado.puntosTotalesEquipo);
                 equiposConPuntosSumados++;
                 this.peticionesAPI.PonPuntosEquipoGanadorJuegoDeCompeticionLiga(equipoEmpatado).
                 subscribe(res => console.log(res));
@@ -2994,12 +2994,12 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                 if (equiposConPuntosSumados === 2 && enfrentamientoEmpateRegistrado === false) {
                   equiposConPuntosSumados = 0;
                   enfrentamientoEmpateRegistrado = true;
-                  enfrentamientosJornadaSeleccionada[k].Ganador = 0;
+                  enfrentamientosJornadaSeleccionada[k].ganador = 0;
                   console.log(enfrentamientosJornadaSeleccionada[k]);
-                  const enfrentamiento = new EnfrentamientoLiga(enfrentamientosJornadaSeleccionada[k].JugadorUno,
-                                                                enfrentamientosJornadaSeleccionada[k].JugadorDos,
-                                                                enfrentamientosJornadaSeleccionada[k].Ganador,
-                                                                enfrentamientosJornadaSeleccionada[k].JornadaDeCompeticionLigaId,
+                  const enfrentamiento = new EnfrentamientoLiga(enfrentamientosJornadaSeleccionada[k].jugadorUno,
+                                                                enfrentamientosJornadaSeleccionada[k].jugadorDos,
+                                                                enfrentamientosJornadaSeleccionada[k].ganador,
+                                                                enfrentamientosJornadaSeleccionada[k].jornadaDeCompeticionLigaId,
                                                                 undefined, undefined,
                                                                 enfrentamientosJornadaSeleccionada[k].id);
                   this.peticionesAPI.PonGanadorDelEnfrentamiento(enfrentamiento).
@@ -3047,8 +3047,8 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
           // Si el enfrentamiento no tenía ganadores
           // --> actualizar enfrentamiento con los ganadores seleccionados y actualizar puntos de los particupantes
           console.log('numeroEnfrentamiento' + numeroEnfrentamiento);
-          console.log('ganador = ' + enfrentamientosJornadaSeleccionada[indexEnfrentamientos].Ganador);
-          if (enfrentamientosJornadaSeleccionada[indexEnfrentamientos].Ganador === undefined) {
+          console.log('ganador = ' + enfrentamientosJornadaSeleccionada[indexEnfrentamientos].ganador);
+          if (enfrentamientosJornadaSeleccionada[indexEnfrentamientos].ganador === undefined) {
 
             // Actualizamos el ganador en EnfrentamientoLiga
             this.GuardarGanadorEnfrentamiento(enfrentamientosJornadaSeleccionada[indexEnfrentamientos],
@@ -3171,19 +3171,19 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
     let enfrentamientoActualizado: EnfrentamientoLiga;
 
     if (resultado === 1) {
-      enfrentamiento.Ganador = enfrentamiento.JugadorUno;
+      enfrentamiento.ganador = enfrentamiento.jugadorUno;
     } else if (resultado === 2) {
-      enfrentamiento.Ganador = enfrentamiento.JugadorDos;
+      enfrentamiento.ganador = enfrentamiento.jugadorDos;
     } else if (resultado === 0) {
-      enfrentamiento.Ganador = 0;
+      enfrentamiento.ganador = 0;
     } else if (resultado === -1) {
     }
 
     if (resultado === 1 || resultado === 2 || resultado === 0) {
-      enfrentamientoActualizado = new EnfrentamientoLiga(enfrentamiento.JugadorUno,
-                                                         enfrentamiento.JugadorDos,
-                                                         enfrentamiento.Ganador,
-                                                         enfrentamiento.JornadaDeCompeticionLigaId,
+      enfrentamientoActualizado = new EnfrentamientoLiga(enfrentamiento.jugadorUno,
+                                                         enfrentamiento.jugadorDos,
+                                                         enfrentamiento.ganador,
+                                                         enfrentamiento.jornadaDeCompeticionLigaId,
                                                          undefined, undefined,
                                                          enfrentamiento.id);
       console.log('enfrentamientoActualizado');
@@ -3203,13 +3203,13 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
       this.peticionesAPI.DameInscripcionesAlumnoJuegoDeCompeticionLiga(juego.id)
       .subscribe(alumnosJuegoLiga => {
         if (resultado === 1 || resultado === 2) {
-          alumnoGanador = alumnosJuegoLiga.filter(alumno => alumno.AlumnoId === enfrentamiento.Ganador);
-          alumnoGanador[0].PuntosTotalesAlumno = alumnoGanador[0].PuntosTotalesAlumno + 3;
+          alumnoGanador = alumnosJuegoLiga.filter(alumno => alumno.alumnoId === enfrentamiento.ganador);
+          alumnoGanador[0].puntosTotalesAlumno = alumnoGanador[0].puntosTotalesAlumno + 3;
         } else if (resultado === 0) {
-          alumnoGanador.push(alumnosJuegoLiga.filter (alumno => alumno.AlumnoId === enfrentamiento.JugadorUno)[0]);
-          alumnoGanador.push(alumnosJuegoLiga.filter (alumno => alumno.AlumnoId === enfrentamiento.JugadorDos)[0]);
+          alumnoGanador.push(alumnosJuegoLiga.filter (alumno => alumno.alumnoId === enfrentamiento.jugadorUno)[0]);
+          alumnoGanador.push(alumnosJuegoLiga.filter (alumno => alumno.alumnoId === enfrentamiento.jugadorDos)[0]);
           alumnoGanador.forEach(alumno => {
-            alumno.PuntosTotalesAlumno = alumno.PuntosTotalesAlumno + 1;
+            alumno.puntosTotalesAlumno = alumno.puntosTotalesAlumno + 1;
           });
         }
         console.log('alumnoGanador:');
@@ -3226,13 +3226,13 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
       this.peticionesAPI.DameInscripcionesEquipoJuegoDeCompeticionLiga(juego.id)
       .subscribe(equiposJuegoLiga => {
         if (resultado === 1 || resultado === 2) {
-          equipoGanador = equiposJuegoLiga.filter(equipo => equipo.EquipoId === enfrentamiento.Ganador);
-          equipoGanador[0].PuntosTotalesEquipo = equipoGanador[0].PuntosTotalesEquipo + 3;
+          equipoGanador = equiposJuegoLiga.filter(equipo => equipo.equipoId === enfrentamiento.ganador);
+          equipoGanador[0].puntosTotalesEquipo = equipoGanador[0].puntosTotalesEquipo + 3;
         } else if (resultado === 0) {
-          equipoGanador.push(equiposJuegoLiga.filter (equipo => equipo.EquipoId === enfrentamiento.JugadorUno)[0]);
-          equipoGanador.push(equiposJuegoLiga.filter (equipo => equipo.EquipoId === enfrentamiento.JugadorDos)[0]);
+          equipoGanador.push(equiposJuegoLiga.filter (equipo => equipo.equipoId === enfrentamiento.jugadorUno)[0]);
+          equipoGanador.push(equiposJuegoLiga.filter (equipo => equipo.equipoId === enfrentamiento.jugadorDos)[0]);
           equipoGanador.forEach(equipo => {
-            equipo.PuntosTotalesEquipo = equipo.PuntosTotalesEquipo + 1;
+            equipo.puntosTotalesEquipo = equipo.puntosTotalesEquipo + 1;
           });
         }
         console.log('equipoGanador:');
@@ -3274,9 +3274,9 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                 console.log('enfrentamiento para el que no se ha seleccionado ganador');
               } else {  // resultados[indexEnfrentamientos] === 1 || resultados[indexEnfrentamientos] === 2
                 const alumnoGanador = alumnos.filter(alumno => alumno.id ===
-                                                    enfrentamientosJornadaSeleccionada[indexEnfrentamientos].Ganador)[0];
-                Mensaje.buenos = Mensaje.buenos + '\n' + 'Ganador: ' + alumnoGanador.Nombre + ' ' + alumnoGanador.PrimerApellido + ' ' +
-                                alumnoGanador.SegundoApellido;
+                                                    enfrentamientosJornadaSeleccionada[indexEnfrentamientos].ganador)[0];
+                Mensaje.buenos = Mensaje.buenos + '\n' + 'Ganador: ' + alumnoGanador.nombre + ' ' + alumnoGanador.primerApellido + ' ' +
+                                alumnoGanador.segundoApellido;
               }
             } else {
               const numeroEnfrentamiento = indexEnfrentamientosConResultadosPreviamente[posicion] + 1;
@@ -3311,8 +3311,8 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
                 // enfrentamiento para el que no se ha seleccionado ganador
               } else {  // resultados[indexEnfrentamientos] === 1 || resultados[indexEnfrentamientos] === 2
                 const equipoGanador = equipos.filter(alumno => alumno.id ===
-                                                    enfrentamientosJornadaSeleccionada[indexEnfrentamientos].Ganador)[0];
-                Mensaje.buenos = Mensaje.buenos + '\n' + 'Ganador: ' + equipoGanador.Nombre;
+                                                    enfrentamientosJornadaSeleccionada[indexEnfrentamientos].ganador)[0];
+                Mensaje.buenos = Mensaje.buenos + '\n' + 'Ganador: ' + equipoGanador.nombre;
               }
             } else {
               const numeroEnfrentamiento = indexEnfrentamientosConResultadosPreviamente[posicion] + 1;
@@ -3345,7 +3345,7 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
       alumno = alumnosDelJuego.filter(res => res.id === alumnoId)[0];
       // tslint:disable-next-line:max-line-length
 
-      const elem = new TablaAlumnoJuegoDeVotacionUnoATodos(i + 1, alumno.Nombre, alumno.PrimerApellido, alumno.SegundoApellido,
+      const elem = new TablaAlumnoJuegoDeVotacionUnoATodos(i + 1, alumno.nombre, alumno.primerApellido, alumno.segundoApellido,
         0, alumnoId);
       rankingJuegoDeVotacion[i] = elem;
     }
@@ -3354,14 +3354,14 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
     // como que ya han votado
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < listaAlumnosOrdenadaPorPuntos.length; i++) {
-      if (listaAlumnosOrdenadaPorPuntos[i].Votos) {
+      if (listaAlumnosOrdenadaPorPuntos[i].votos) {
         // Este alumno ya ha votado
         const alumno = listaAlumnosOrdenadaPorPuntos[i];
         // Asigno los puntos a los destinatorios
         // tslint:disable-next-line:prefer-for-of
-        for (let j = 0; j < alumno.Votos.length; j++) {
-          const votado = rankingJuegoDeVotacion.filter (al => al.id === alumno.Votos[j].alumnoId)[0];
-          votado.puntos = votado.puntos + alumno.Votos[j].puntos;
+        for (let j = 0; j < alumno.votos.length; j++) {
+          const votado = rankingJuegoDeVotacion.filter (al => al.id === alumno.votos[j].alumnoId)[0];
+          votado.puntos = votado.puntos + alumno.votos[j].puntos;
         }
         // Marque que el alumno ya ha votado
         rankingJuegoDeVotacion.filter (al => al.id === alumno.alumnoId)[0].votado = true;
@@ -3382,7 +3382,7 @@ public PrepararTablaRankingIndividualVotacionUnoATodosAcabado(listaAlumnosOrdena
       alumno = alumnosDelJuego.filter(res => res.id === alumnoId)[0];
       // tslint:disable-next-line:max-line-length
 
-      const elem = new TablaAlumnoJuegoDeVotacionUnoATodos(i + 1, alumno.Nombre, alumno.PrimerApellido, alumno.SegundoApellido,
+      const elem = new TablaAlumnoJuegoDeVotacionUnoATodos(i + 1, alumno.nombre, alumno.primerApellido, alumno.segundoApellido,
         listaAlumnosOrdenadaPorPuntos[i].puntosTotales, alumnoId);
       rankingJuegoDeVotacion[i] = elem;
     }
@@ -3403,14 +3403,14 @@ public PrepararTablaRankingIndividualVotacionTodosAUno(listaAlumnosOrdenadaPorPu
     alumno = alumnosDelJuego.filter(res => res.id === alumnoId)[0];
     // tslint:disable-next-line:max-line-length
 
-    const elem = new TablaAlumnoJuegoDeVotacionTodosAUno(i + 1, alumno.Nombre, alumno.PrimerApellido, alumno.SegundoApellido,
+    const elem = new TablaAlumnoJuegoDeVotacionTodosAUno(i + 1, alumno.nombre, alumno.primerApellido, alumno.segundoApellido,
     0, alumnoId);
-    if (listaAlumnosOrdenadaPorPuntos[i].VotosEmitidos.length === listaAlumnosOrdenadaPorPuntos.length - 1) {
+    if (listaAlumnosOrdenadaPorPuntos[i].votosEmitidos.length === listaAlumnosOrdenadaPorPuntos.length - 1) {
       elem.votado = true;
     } else {
       elem.votado = false;
     }
-    elem.conceptos = Array(juego.Conceptos.length).fill (0);
+    elem.conceptos = Array(juego.conceptos.length).fill (0);
     rankingJuegoDeVotacion[i] = elem;
   }
 
@@ -3418,9 +3418,9 @@ public PrepararTablaRankingIndividualVotacionTodosAUno(listaAlumnosOrdenadaPorPu
 
   // tslint:disable-next-line:prefer-for-of
   for (let i = 0; i < listaAlumnosOrdenadaPorPuntos.length; i++) {
-    if (listaAlumnosOrdenadaPorPuntos[i].VotosEmitidos) {
+    if (listaAlumnosOrdenadaPorPuntos[i].votosEmitidos) {
       // Este alumno ha emitido algunos votos
-      listaAlumnosOrdenadaPorPuntos[i].VotosEmitidos.forEach (votoEmitido => {
+      listaAlumnosOrdenadaPorPuntos[i].votosEmitidos.forEach (votoEmitido => {
         // busco al alumno que ha recibido estos votos
         // tslint:disable-next-line:no-shadowed-variable
         const alumnoVotado = rankingJuegoDeVotacion.filter (alumno => alumno.id === votoEmitido.alumnoId)[0];
@@ -3443,7 +3443,7 @@ public PrepararTablaRankingIndividualVotacionTodosAUno(listaAlumnosOrdenadaPorPu
       let nota = 0;
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < alumno.conceptos.length; i++) {
-        nota = nota + (alumno.conceptos[i] * juego.Pesos[i]) / 100;
+        nota = nota + (alumno.conceptos[i] * juego.pesos[i]) / 100;
       }
       alumno.nota = nota / alumno.votosRecibidos;
     }
@@ -3464,11 +3464,11 @@ public PrepararTablaRankingIndividualVotacionTodosAUnoAcabado(listaAlumnosOrdena
     // tslint:disable-next-line:max-line-length
 
 
-    const elem = new TablaAlumnoJuegoDeVotacionTodosAUno(i + 1, alumno.Nombre, alumno.PrimerApellido, alumno.SegundoApellido,
-      listaAlumnosOrdenadaPorPuntos[i].PuntosTotales, alumnoId);
+    const elem = new TablaAlumnoJuegoDeVotacionTodosAUno(i + 1, alumno.nombre, alumno.primerApellido, alumno.segundoApellido,
+      listaAlumnosOrdenadaPorPuntos[i].puntosTotales, alumnoId);
     console.log ('elemento');
     console.log (elem);
-    elem.conceptos = Array(juego.Conceptos.length).fill (0);
+    elem.conceptos = Array(juego.conceptos.length).fill (0);
     rankingJuegoDeVotacion[i] = elem;
   }
 
@@ -3476,9 +3476,9 @@ public PrepararTablaRankingIndividualVotacionTodosAUnoAcabado(listaAlumnosOrdena
 
   // tslint:disable-next-line:prefer-for-of
   for (let i = 0; i < listaAlumnosOrdenadaPorPuntos.length; i++) {
-    if (listaAlumnosOrdenadaPorPuntos[i].VotosEmitidos) {
+    if (listaAlumnosOrdenadaPorPuntos[i].votosEmitidos) {
       // Este alumno ha emitido algunos votos
-      listaAlumnosOrdenadaPorPuntos[i].VotosEmitidos.forEach (votoEmitido => {
+      listaAlumnosOrdenadaPorPuntos[i].votosEmitidos.forEach (votoEmitido => {
       // busco al alumno que ha recibido estos votos
       // tslint:disable-next-line:no-shadowed-variable
       const alumnoVotado = rankingJuegoDeVotacion.filter (alumno => alumno.id === votoEmitido.alumnoId)[0];
@@ -3505,10 +3505,10 @@ public PrepararTablaRankingIndividualVotacionTodosAUnoAcabado(listaAlumnosOrdena
     // tslint:disable-next-line:prefer-for-oF
     for (let i = 0; i < listaAlumnosOrdenadaPorPuntos.length; i++) {
     let alumno: Alumno;
-    const alumnoId = listaAlumnosOrdenadaPorPuntos[i].AlumnoId;
+    const alumnoId = listaAlumnosOrdenadaPorPuntos[i].alumnoId;
     alumno = alumnosDelJuego.filter(res => res.id === alumnoId)[0];
-    rankingJuegoDeCompeticion[i] = new TablaAlumnoJuegoDeCompeticion(i + 1, alumno.Nombre, alumno.PrimerApellido, alumno.SegundoApellido,
-                            listaAlumnosOrdenadaPorPuntos[i].PuntosTotalesAlumno, alumnoId);
+    rankingJuegoDeCompeticion[i] = new TablaAlumnoJuegoDeCompeticion(i + 1, alumno.nombre, alumno.primerApellido, alumno.segundoApellido,
+                            listaAlumnosOrdenadaPorPuntos[i].puntosTotalesAlumno, alumnoId);
     }
     return rankingJuegoDeCompeticion;
 }
@@ -3522,10 +3522,10 @@ public PrepararTablaRankingIndividualVotacionTodosAUnoAcabado(listaAlumnosOrdena
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < listaEquiposOrdenadaPorPuntos.length; i++) {
     let equipo: Equipo;
-    const EquipoId = listaEquiposOrdenadaPorPuntos[i].EquipoId;
+    const EquipoId = listaEquiposOrdenadaPorPuntos[i].equipoId;
     equipo = equiposDelJuego.filter(res => res.id === EquipoId)[0];
-    rankingJuegoDeCompeticion[i] = new TablaEquipoJuegoDeCompeticion(i + 1, equipo.Nombre,
-                            listaEquiposOrdenadaPorPuntos[i].PuntosTotalesEquipo, EquipoId);
+    rankingJuegoDeCompeticion[i] = new TablaEquipoJuegoDeCompeticion(i + 1, equipo.nombre,
+                            listaEquiposOrdenadaPorPuntos[i].puntosTotalesEquipo, EquipoId);
     }
     return rankingJuegoDeCompeticion;
   }
@@ -3556,8 +3556,8 @@ public PrepararTablaRankingIndividualVotacionTodosAUnoAcabado(listaAlumnosOrdena
       // Si la jornada no tenía ganadores (en principio tadas las jornadas que llegan a esta función es porque no tenían ganadores)
       // --> actualizar jornada con los ganadores seleccionados y actualizar puntos de los particupantes
       console.log('jornadaId: ' + jornada.id);
-      console.log('ganador = ' + jornada.GanadoresFormulaUno);
-      if (jornada.GanadoresFormulaUno === undefined) {
+      console.log('ganador = ' + jornada.ganadoresFormulaUno);
+      if (jornada.ganadoresFormulaUno === undefined) {
 
         // Actualizamos el ganador en JornadaDeCompeticionFormulaUno
         this.GuardarGanadorJornada(jornada, participantesPuntuan);
@@ -3585,7 +3585,7 @@ public PrepararTablaRankingIndividualVotacionTodosAUnoAcabado(listaAlumnosOrdena
     const jornadaActualizada: Jornada = jornada;
     console.log('jornada NO actualizada');
     console.log(jornadaActualizada);
-    jornadaActualizada.GanadoresFormulaUno = participantesPuntuan;
+    jornadaActualizada.ganadoresFormulaUno = participantesPuntuan;
     console.log('jornada actualizada');
     console.log(jornadaActualizada);
     this.peticionesAPI.PonGanadoresJornadasDeCompeticionFormulaUno(jornadaActualizada)
@@ -3606,10 +3606,10 @@ public PrepararTablaRankingIndividualVotacionTodosAUnoAcabado(listaAlumnosOrdena
         console.log(alumnosJuegoF1);
         console.log('participantePuntua');
         console.log(participantePuntua);
-        alumnoPuntua = alumnosJuegoF1.filter(alumno => alumno.AlumnoId === participantePuntua)[0];
+        alumnoPuntua = alumnosJuegoF1.filter(alumno => alumno.alumnoId === participantePuntua)[0];
         console.log('alumnoGanador NO actualizado:');
         console.log(alumnoPuntua);
-        alumnoPuntua.PuntosTotalesAlumno = alumnoPuntua.PuntosTotalesAlumno + puntuacionDelParticipantePuntua;
+        alumnoPuntua.puntosTotalesAlumno = alumnoPuntua.puntosTotalesAlumno + puntuacionDelParticipantePuntua;
         console.log('alumnoGanador actualizado:');
         console.log(alumnoPuntua);
         this.peticionesAPI.PonPuntosAlumnoGanadorJornadasDeCompeticionFormulaUno(alumnoPuntua)
@@ -3625,10 +3625,10 @@ public PrepararTablaRankingIndividualVotacionTodosAUnoAcabado(listaAlumnosOrdena
         console.log(equiposJuegoF1);
         console.log('participantePuntua');
         console.log(participantePuntua);
-        equipoPuntua = equiposJuegoF1.filter(alumno => alumno.EquipoId === participantePuntua)[0];
+        equipoPuntua = equiposJuegoF1.filter(alumno => alumno.equipoId === participantePuntua)[0];
         console.log('equipoPuntua NO actualizado:');
         console.log(equipoPuntua);
-        equipoPuntua.PuntosTotalesEquipo = equipoPuntua.PuntosTotalesEquipo + puntuacionDelParticipantePuntua;
+        equipoPuntua.puntosTotalesEquipo = equipoPuntua.puntosTotalesEquipo + puntuacionDelParticipantePuntua;
         console.log('equipoPuntua actualizado:');
         console.log(equipoPuntua);
         this.peticionesAPI.PonPuntosEquipoGanadorJornadasDeCompeticionFormulaUno(equipoPuntua)
@@ -3640,7 +3640,7 @@ public PrepararTablaRankingIndividualVotacionTodosAUnoAcabado(listaAlumnosOrdena
   public JornadaF1TieneGanadores(jornadaId: number, jornadasDelJuego: Jornada[]) {
     let jornadaTieneGanadores = false;
     jornadasDelJuego.forEach(jornada => {
-      if (jornada.id === Number(jornadaId) && jornada.GanadoresFormulaUno !== undefined) {
+      if (jornada.id === Number(jornadaId) && jornada.ganadoresFormulaUno !== undefined) {
         jornadaTieneGanadores = true;
       }
     });
@@ -3666,9 +3666,9 @@ public PrepararTablaRankingIndividualVotacionTodosAUnoAcabado(listaAlumnosOrdena
     let alumno: Alumno;
     const alumnoId = listaAlumnosOrdenadaPorPuntos[i].alumnoId;
     alumno = alumnosDelJuego.filter(res => res.id === alumnoId)[0];
-    rankingJuegoDeCompeticion[i] = new TablaAlumnoJuegoDeCuestionario(alumno.Nombre, alumno.PrimerApellido, alumno.SegundoApellido,
+    rankingJuegoDeCompeticion[i] = new TablaAlumnoJuegoDeCuestionario(alumno.nombre, alumno.primerApellido, alumno.segundoApellido,
     // tslint:disable-next-line:max-line-length
-    listaAlumnosOrdenadaPorPuntos[i].Nota, listaAlumnosOrdenadaPorPuntos[i].Contestado, alumnoId, listaAlumnosOrdenadaPorPuntos[i].TiempoEmpleado);
+    listaAlumnosOrdenadaPorPuntos[i].nota, listaAlumnosOrdenadaPorPuntos[i].contestado, alumnoId, listaAlumnosOrdenadaPorPuntos[i].tiempoEmpleado);
     }
     return rankingJuegoDeCompeticion;
   }
@@ -3745,8 +3745,8 @@ for (let i = 0; i < listaAlumnosOrdenadaPorPuntos.length; i++) {
 let alumno: Alumno;
 const AlumnoId = listaAlumnosOrdenadaPorPuntos[i].alumnoId;
 alumno = alumnosDelJuego.filter(res => res.id === AlumnoId)[0];
-rankingJuegoDeCompeticion[i] = new TablaAlumnoJuegoDeGeocaching(alumno.Nombre, alumno.PrimerApellido, alumno.SegundoApellido,
-listaAlumnosOrdenadaPorPuntos[i].Puntuacion, listaAlumnosOrdenadaPorPuntos[i].Etapa, AlumnoId);
+rankingJuegoDeCompeticion[i] = new TablaAlumnoJuegoDeGeocaching(alumno.nombre, alumno.primerApellido, alumno.segundoApellido,
+listaAlumnosOrdenadaPorPuntos[i].puntuacion, listaAlumnosOrdenadaPorPuntos[i].etapa, AlumnoId);
 }
 return rankingJuegoDeCompeticion;
 }
@@ -3791,17 +3791,17 @@ public VerificarFicherosFamilia(familia: FamiliaAvatares): any {
   const listaFicherosObservable = new Observable ( obs => {
     const lista: string [] = [];
     let cont = 0;
-    const numeroFicheros =  familia.Complemento1.length +
-                            familia.Complemento2.length +
-                            familia.Complemento3.length +
-                            familia.Complemento4.length +
+    const numeroFicheros =  familia.complemento1.length +
+                            familia.complemento2.length +
+                            familia.complemento3.length +
+                            familia.complemento4.length +
                             1;
 
-    this.peticionesAPI.DameImagenAvatar (familia.Silueta)
+    this.peticionesAPI.DameImagenAvatar (familia.silueta)
     .subscribe (
       (imagen) => {
 
-        lista.push (familia.Silueta);
+        lista.push (familia.silueta);
         cont++;
         if (cont === numeroFicheros) {
           obs.next (lista);
@@ -3813,7 +3813,7 @@ public VerificarFicherosFamilia(familia: FamiliaAvatares): any {
           obs.next (lista);
         }
     });
-    familia.Complemento1.forEach (nombreFichero => {
+    familia.complemento1.forEach (nombreFichero => {
       this.peticionesAPI.DameImagenAvatar (nombreFichero)
       .subscribe (
         (imagen) => {
@@ -3831,7 +3831,7 @@ public VerificarFicherosFamilia(familia: FamiliaAvatares): any {
           }
       });
     });
-    familia.Complemento2.forEach (nombreFichero => {
+    familia.complemento2.forEach (nombreFichero => {
       this.peticionesAPI.DameImagenAvatar (nombreFichero)
       .subscribe (
         (imagen) => {
@@ -3849,7 +3849,7 @@ public VerificarFicherosFamilia(familia: FamiliaAvatares): any {
           }
       });
     });
-    familia.Complemento3.forEach (nombreFichero => {
+    familia.complemento3.forEach (nombreFichero => {
       this.peticionesAPI.DameImagenAvatar (nombreFichero)
       .subscribe (
         (imagen) => {
@@ -3867,7 +3867,7 @@ public VerificarFicherosFamilia(familia: FamiliaAvatares): any {
           }
       });
     });
-    familia.Complemento4.forEach (nombreFichero => {
+    familia.complemento4.forEach (nombreFichero => {
       this.peticionesAPI.DameImagenAvatar (nombreFichero)
       .subscribe (
         (imagen) => {

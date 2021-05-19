@@ -45,10 +45,10 @@ export class IntroducirAlumnosComponent implements OnInit {
     this.peticionesAPI.DameTodosLosAlumnos()
     .subscribe (alumnos => this.alumnosEnClasspip = alumnos);
 
-    this.varTitulo = 'titulo' + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = 'titulo' + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
     
-    this.varPanel = "panel" + this.profesor.Estacion;
+    this.varPanel = "panel" + this.profesor.estacion;
     console.log("this.panel: " + this.varPanel);
   }
 
@@ -92,7 +92,7 @@ export class IntroducirAlumnosComponent implements OnInit {
 
   BorrarAlumno(alumno: Alumno) {
     // tslint:disable-next-line:max-line-length
-    this.nuevosAlumnos = this.nuevosAlumnos.filter (a => a.Nombre !== alumno.Nombre && a.PrimerApellido !== alumno.PrimerApellido && a.SegundoApellido !== alumno.SegundoApellido);
+    this.nuevosAlumnos = this.nuevosAlumnos.filter (a => a.nombre !== alumno.nombre && a.primerApellido !== alumno.primerApellido && a.segundoApellido !== alumno.segundoApellido);
     this.dataSource = new MatTableDataSource (this.nuevosAlumnos);
   }
   RegistraAlumnos() {
@@ -132,7 +132,7 @@ export class IntroducirAlumnosComponent implements OnInit {
 
   UsernameUsado(username: string) {
 
-    return this.alumnosEnClasspip.some (alumno => alumno.Username === username);
+    return this.alumnosEnClasspip.some (alumno => alumno.username === username);
 
 
   }

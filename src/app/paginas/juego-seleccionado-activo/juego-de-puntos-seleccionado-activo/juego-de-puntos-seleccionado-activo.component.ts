@@ -142,7 +142,7 @@ export class JuegoDePuntosSeleccionadoActivoComponent implements OnInit {
       // ordena la lista por puntos
       // tslint:disable-next-line:only-arrow-functions
       this.listaAlumnosOrdenadaPorPuntos = this.listaAlumnosOrdenadaPorPuntos.sort(function(obj1, obj2) {
-        return obj2.PuntosTotalesAlumno - obj1.PuntosTotalesAlumno;
+        return obj2.puntosTotalesAlumno - obj1.puntosTotalesAlumno;
       });
       console.log ('ya tengo las inscripciones');
       // this.OrdenarPorPuntos();
@@ -163,7 +163,7 @@ export class JuegoDePuntosSeleccionadoActivoComponent implements OnInit {
       // ordenamos por puntos
       // tslint:disable-next-line:only-arrow-functions
       this.listaEquiposOrdenadaPorPuntos = this.listaEquiposOrdenadaPorPuntos.sort(function(obj1, obj2) {
-        return obj2.PuntosTotalesEquipo - obj1.PuntosTotalesEquipo;
+        return obj2.puntosTotalesEquipo - obj1.puntosTotalesEquipo;
       });
       console.log ('ya tengo las inscripciones');
       this.TablaClasificacionTotal();
@@ -225,8 +225,8 @@ export class JuegoDePuntosSeleccionadoActivoComponent implements OnInit {
 
   AccederAlumno(alumno: TablaAlumnoJuegoDePuntos) {
 
-    const alumnoSeleccionado = this.alumnosDelJuego.filter(res => res.Nombre === alumno.nombre &&
-      res.PrimerApellido === alumno.primerApellido && res.SegundoApellido === alumno.segundoApellido)[0];
+    const alumnoSeleccionado = this.alumnosDelJuego.filter(res => res.nombre === alumno.nombre &&
+      res.primerApellido === alumno.primerApellido && res.segundoApellido === alumno.segundoApellido)[0];
 
     const posicion = this.rankingJuegoDePuntos.filter(res => res.nombre === alumno.nombre &&
       res.primerApellido === alumno.primerApellido && res.segundoApellido === alumno.segundoApellido)[0].posicion;
@@ -244,7 +244,7 @@ export class JuegoDePuntosSeleccionadoActivoComponent implements OnInit {
 
   AccederEquipo(equipo: TablaEquipoJuegoDePuntos) {
 
-    const equipoSeleccionado = this.equiposDelJuego.filter(res => res.Nombre === equipo.nombre)[0];
+    const equipoSeleccionado = this.equiposDelJuego.filter(res => res.nombre === equipo.nombre)[0];
 
 
     const posicion = this.rankingEquiposJuegoDePuntos.filter(res => res.nombre === equipo.nombre)[0].posicion;

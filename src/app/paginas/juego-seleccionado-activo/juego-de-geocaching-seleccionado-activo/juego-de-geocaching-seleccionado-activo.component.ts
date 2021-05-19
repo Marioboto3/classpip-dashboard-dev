@@ -68,7 +68,7 @@ export class JuegoDeGeocachingSeleccionadoActivoComponent implements OnInit {
       this.listaAlumnosOrdenadaPorPuntuacion = inscripciones;
       // tslint:disable-next-line:only-arrow-functions
       this.listaAlumnosOrdenadaPorPuntuacion = this.listaAlumnosOrdenadaPorPuntuacion.sort(function(a, b) {
-        return b.Puntuacion - a.Puntuacion;
+        return b.puntuacion - a.puntuacion;
       });
       this.TablaClasificacionTotal();
     });
@@ -82,9 +82,9 @@ export class JuegoDeGeocachingSeleccionadoActivoComponent implements OnInit {
 
   DesactivarJuego() {
     // tslint:disable-next-line:max-line-length
-    this.peticionesAPI.ModificaJuegoDeGeocaching(new JuegoDeGeocaching(this.juegoSeleccionado.NombreJuego, this.juegoSeleccionado.Tipo, this.juegoSeleccionado.PuntuacionCorrecta,
+    this.peticionesAPI.ModificaJuegoDeGeocaching(new JuegoDeGeocaching(this.juegoSeleccionado.nombreJuego, this.juegoSeleccionado.tipo, this.juegoSeleccionado.puntuacionCorrecta,
       // tslint:disable-next-line:max-line-length
-      this.juegoSeleccionado.PuntuacionIncorrecta, this.juegoSeleccionado.PuntuacionCorrectaBonus, this.juegoSeleccionado.PuntuacionIncorrectaBonus, this.juegoSeleccionado.PreguntasBasicas, this.juegoSeleccionado.PreguntasBonus, false, this.juegoSeleccionado.JuegoTerminado,
+      this.juegoSeleccionado.puntuacionIncorrecta, this.juegoSeleccionado.puntuacionCorrectaBonus, this.juegoSeleccionado.puntuacionIncorrectaBonus, this.juegoSeleccionado.preguntasBasicas, this.juegoSeleccionado.preguntasBonus, false, this.juegoSeleccionado.juegoTerminado,
       // tslint:disable-next-line:max-line-length
       this.juegoSeleccionado.profesorId, this.juegoSeleccionado.grupoId, this.juegoSeleccionado.idescenario), this.juegoSeleccionado.id, this.juegoSeleccionado.grupoId)
       .subscribe(res => {
@@ -98,23 +98,23 @@ export class JuegoDeGeocachingSeleccionadoActivoComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: this.juegoSeleccionado.Tipo,
+        nombre: this.juegoSeleccionado.tipo,
       }
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.DesactivarJuego();
-        Swal.fire('Desactivado', this.juegoSeleccionado.Tipo + ' Desactivado correctamente', 'success');
+        Swal.fire('Desactivado', this.juegoSeleccionado.tipo + ' Desactivado correctamente', 'success');
       }
     });
   }
 
   FinalizarJuego() {
     // tslint:disable-next-line:max-line-length
-    this.peticionesAPI.ModificaJuegoDeGeocaching(new JuegoDeGeocaching(this.juegoSeleccionado.NombreJuego, this.juegoSeleccionado.Tipo, this.juegoSeleccionado.PuntuacionCorrecta,
+    this.peticionesAPI.ModificaJuegoDeGeocaching(new JuegoDeGeocaching(this.juegoSeleccionado.nombreJuego, this.juegoSeleccionado.tipo, this.juegoSeleccionado.puntuacionCorrecta,
       // tslint:disable-next-line:max-line-length
-      this.juegoSeleccionado.PuntuacionIncorrecta, this.juegoSeleccionado.PuntuacionCorrectaBonus, this.juegoSeleccionado.PuntuacionIncorrectaBonus, this.juegoSeleccionado.PreguntasBasicas, this.juegoSeleccionado.PreguntasBonus, false, true,
+      this.juegoSeleccionado.puntuacionIncorrecta, this.juegoSeleccionado.puntuacionCorrectaBonus, this.juegoSeleccionado.puntuacionIncorrectaBonus, this.juegoSeleccionado.preguntasBasicas, this.juegoSeleccionado.preguntasBonus, false, true,
       // tslint:disable-next-line:max-line-length
       this.juegoSeleccionado.profesorId, this.juegoSeleccionado.grupoId, this.juegoSeleccionado.idescenario), this.juegoSeleccionado.id, this.juegoSeleccionado.grupoId)
       .subscribe(res => {
@@ -128,14 +128,14 @@ export class JuegoDeGeocachingSeleccionadoActivoComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensajeFinalizar,
-        nombre: this.juegoSeleccionado.Tipo,
+        nombre: this.juegoSeleccionado.tipo,
       }
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.FinalizarJuego();
-        Swal.fire('Finalizado', this.juegoSeleccionado.Tipo + ' Finalizado correctamente', 'success');
+        Swal.fire('Finalizado', this.juegoSeleccionado.tipo + ' Finalizado correctamente', 'success');
       }
     });
   }

@@ -1,5 +1,5 @@
 <div class="titulo">Pantalla para asignar el Ganador</div>
-<div class="subtitulo">{{juegoSeleccionado.NombreJuego}}: {{juegoSeleccionado.Tipo}}  {{juegoSeleccionado.Modo}}</div>
+<div class="subtitulo">{{juegoSeleccionado.nombreJuego}}: {{juegoSeleccionado.tipo}}  {{juegoSeleccionado.nodo}}</div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 
 <div class="contenedor">
@@ -46,7 +46,7 @@
         <mat-label>Juegos</mat-label>
         <select matNativeControl [(ngModel)]="juegoDisponibleSeleccionadoID" (change) = "TraerJuegoDisponibleSeleccionado()">
           <option *ngFor="let juego of juegosDisponibles" [value]="juego.id">
-            {{juego.NombreJuego}}
+            {{juego.nombreJuego}}
           </option>
         </select>
       </mat-form-field>
@@ -116,7 +116,7 @@
 
     </table>
 
-    <table style="width: 80%" align="center" *ngIf= "(juegoSeleccionado.Modo !== 'Individual') && (Disputada (jornadaId) || !Disputada(jornadaId) && (modoAsignacionId != 1))" mat-table [dataSource]="dataSourceJornada" class="mat-elevation-z8">
+    <table style="width: 80%" align="center" *ngIf= "(juegoSeleccionado.modo !== 'Individual') && (Disputada (jornadaId) || !Disputada(jornadaId) && (modoAsignacionId != 1))" mat-table [dataSource]="dataSourceJornada" class="mat-elevation-z8">
       <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
 
@@ -155,13 +155,13 @@
 
               <mat-card-content>
                 <div class="form-group">
-                  <label  *ngIf="juegoSeleccionado.Modo === 'Individual'" for="inputNombres">Pega/escribe aquí, linea a linea, nombre y dos apellidos (separados por blancos) de los {{juegoSeleccionado.NumeroParticipantesPuntuan}} alumnos que puntúan (como en el ejemplo), de mayor puntuación a menor (como en el ejemplo)</label>
-                  <label *ngIf="juegoSeleccionado.Modo !== 'Individual'" for="inputNombres">Pega/escribe aquí, linea a linea, el nombre de los {{juegoSeleccionado.NumeroParticipantesPuntuan}} equipos que puntúan (como en el ejemplo), de mayor puntuación a menor</label>
-                  <textarea *ngIf="juegoSeleccionado.Modo === 'Individual'" rows="5" autofocus (keyup)="DisabledTexto()" matInput class="form-control" placeholder=
+                  <label  *ngIf="juegoSeleccionado.modo === 'Individual'" for="inputNombres">Pega/escribe aquí, linea a linea, nombre y dos apellidos (separados por blancos) de los {{juegoSeleccionado.numeroParticipantesPuntuan}} alumnos que puntúan (como en el ejemplo), de mayor puntuación a menor (como en el ejemplo)</label>
+                  <label *ngIf="juegoSeleccionado.modo !== 'Individual'" for="inputNombres">Pega/escribe aquí, linea a linea, el nombre de los {{juegoSeleccionado.numeroParticipantesPuntuan}} equipos que puntúan (como en el ejemplo), de mayor puntuación a menor</label>
+                  <textarea *ngIf="juegoSeleccionado.modo === 'Individual'" rows="5" autofocus (keyup)="DisabledTexto()" matInput class="form-control" placeholder=
                             "Àngels Català Sebastià
 Alejandro Gimeno Marés"
                             requiered [(ngModel)]="textoParticipantesPuntuan"></textarea>
-                  <textarea *ngIf="juegoSeleccionado.Modo !== 'Individual'" rows="5" autofocus (keyup)="DisabledTexto()" matInput class="form-control" placeholder=
+                  <textarea *ngIf="juegoSeleccionado.modo !== 'Individual'" rows="5" autofocus (keyup)="DisabledTexto()" matInput class="form-control" placeholder=
                             "Los Leones
 Los Elefantes"
                             requiered [(ngModel)]="textoParticipantesPuntuan"></textarea>
@@ -180,7 +180,7 @@ Los Elefantes"
       <mat-tab label="Seleccionar participantes que puntúan de la lista">
 
         <!-- Hay un form para cada modo (individual o equipo) porque las columnas de las tablas son diferentes -->
-        <form *ngIf="juegoSeleccionado.Modo == 'Individual'" style="width: 100%">
+        <form *ngIf="juegoSeleccionado.modo == 'Individual'" style="width: 100%">
           <br>
           <div class="subtitulo"> Alumnos que han puntuado en esta jornada</div>
           <br>

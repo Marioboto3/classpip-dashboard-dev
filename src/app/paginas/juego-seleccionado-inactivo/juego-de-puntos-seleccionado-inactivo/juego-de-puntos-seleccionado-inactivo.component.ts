@@ -78,7 +78,7 @@ export class JuegoDePuntosSeleccionadoInactivoComponent implements OnInit {
     this.TraeTiposPuntosDelJuego();
     this.NivelesDelJuego();
 
-    if (this.juegoSeleccionado.Modo === 'Individual') {
+    if (this.juegoSeleccionado.modo === 'Individual') {
       this.AlumnosDelJuego();
     } else {
       this.EquiposDelJuego();
@@ -148,7 +148,7 @@ export class JuegoDePuntosSeleccionadoInactivoComponent implements OnInit {
       // Ordenamos por puntos
       // tslint:disable-next-line:only-arrow-functions
       this.listaAlumnosOrdenadaPorPuntos = this.listaAlumnosOrdenadaPorPuntos.sort(function(obj1, obj2) {
-        return obj2.PuntosTotalesAlumno - obj1.PuntosTotalesAlumno;
+        return obj2.puntosTotalesAlumno - obj1.puntosTotalesAlumno;
       });
       this.TablaClasificacionTotal();
     });
@@ -166,7 +166,7 @@ export class JuegoDePuntosSeleccionadoInactivoComponent implements OnInit {
       // Ordenamos por puntos
       // tslint:disable-next-line:only-arrow-functions
       this.listaEquiposOrdenadaPorPuntos = this.listaEquiposOrdenadaPorPuntos.sort(function(obj1, obj2) {
-        return obj2.PuntosTotalesEquipo - obj1.PuntosTotalesEquipo;
+        return obj2.puntosTotalesEquipo - obj1.puntosTotalesEquipo;
       });
       this.TablaClasificacionTotal();
     });
@@ -176,7 +176,7 @@ export class JuegoDePuntosSeleccionadoInactivoComponent implements OnInit {
   // Y NO COMPRENDO BIEN LA NECESIDAD DE LAS DOS
   TablaClasificacionTotal() {
 
-    if (this.juegoSeleccionado.Modo === 'Individual') {
+    if (this.juegoSeleccionado.modo === 'Individual') {
       this.rankingJuegoDePuntos = this.calculos.PrepararTablaRankingIndividual (
         this.listaAlumnosOrdenadaPorPuntos,
         this.alumnosDelJuego,
@@ -230,8 +230,8 @@ export class JuegoDePuntosSeleccionadoInactivoComponent implements OnInit {
   }
   AccederAlumno(alumno: TablaAlumnoJuegoDePuntos) {
 
-    const alumnoSeleccionado = this.alumnosDelJuego.filter(res => res.Nombre === alumno.nombre &&
-      res.PrimerApellido === alumno.primerApellido && res.SegundoApellido === alumno.segundoApellido)[0];
+    const alumnoSeleccionado = this.alumnosDelJuego.filter(res => res.nombre === alumno.nombre &&
+      res.primerApellido === alumno.primerApellido && res.segundoApellido === alumno.segundoApellido)[0];
 
     const posicion = this.rankingJuegoDePuntos.filter(res => res.nombre === alumno.nombre &&
       res.primerApellido === alumno.primerApellido && res.segundoApellido === alumno.segundoApellido)[0].posicion;
@@ -248,7 +248,7 @@ export class JuegoDePuntosSeleccionadoInactivoComponent implements OnInit {
 
   AccederEquipo(equipo: TablaEquipoJuegoDePuntos) {
 
-    const equipoSeleccionado = this.equiposDelJuego.filter(res => res.Nombre === equipo.nombre)[0];
+    const equipoSeleccionado = this.equiposDelJuego.filter(res => res.nombre === equipo.nombre)[0];
 
 
     const posicion = this.rankingEquiposJuegoDePuntos.filter(res => res.nombre === equipo.nombre)[0].posicion;
@@ -313,10 +313,10 @@ export class JuegoDePuntosSeleccionadoInactivoComponent implements OnInit {
 
   ReactivarJuego() {
     console.log(this.juegoSeleccionado);
-    this.peticionesAPI.CambiaEstadoJuegoDePuntos(new Juego (this.juegoSeleccionado.Tipo, this.juegoSeleccionado.Modo,
-      this.juegoSeleccionado.Asignacion,
-      undefined, true, this.juegoSeleccionado.NumeroTotalJornadas, this.juegoSeleccionado.TipoJuegoCompeticion,
-      this.juegoSeleccionado.NumeroParticipantesPuntuan, this.juegoSeleccionado.Puntos, this.juegoSeleccionado.NombreJuego),
+    this.peticionesAPI.CambiaEstadoJuegoDePuntos(new Juego (this.juegoSeleccionado.tipo, this.juegoSeleccionado.modo,
+      this.juegoSeleccionado.asignacion,
+      undefined, true, this.juegoSeleccionado.numeroTotalJornadas, this.juegoSeleccionado.tipoJuegoCompeticion,
+      this.juegoSeleccionado.numeroParticipantesPuntuan, this.juegoSeleccionado.puntos, this.juegoSeleccionado.nombreJuego),
       this.juegoSeleccionado.id, this.juegoSeleccionado.grupoId).subscribe(res => {
         if (res !== undefined) {
           console.log(res);
@@ -332,14 +332,14 @@ export class JuegoDePuntosSeleccionadoInactivoComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: this.juegoSeleccionado.Tipo,
+        nombre: this.juegoSeleccionado.tipo,
       }
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.ReactivarJuego();
-        Swal.fire('Reactivado', this.juegoSeleccionado.Tipo + ' reactivado correctamente', 'success');
+        Swal.fire('Reactivado', this.juegoSeleccionado.tipo + ' reactivado correctamente', 'success');
       }
     });
   }
@@ -358,14 +358,14 @@ export class JuegoDePuntosSeleccionadoInactivoComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensajeBorrar,
-        nombre: this.juegoSeleccionado.Tipo,
+        nombre: this.juegoSeleccionado.tipo,
       }
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.EliminarJuego();
-        Swal.fire('Eliminado', this.juegoSeleccionado.Tipo + ' eliminado correctamente', 'success');
+        Swal.fire('Eliminado', this.juegoSeleccionado.tipo + ' eliminado correctamente', 'success');
       }
     });
   }

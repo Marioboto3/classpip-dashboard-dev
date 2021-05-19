@@ -1,4 +1,4 @@
-<div class="titulo">{{juegoSeleccionado.Tipo}}</div>
+<div class="titulo">{{juegoSeleccionado.tipo}}</div>
 <div class="subtitulo">Información del jugador</div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 
@@ -13,11 +13,11 @@
     <div>
     <p style="font-size: 110%">
       <span style="font-weight: bold;">Nombre:</span>
-      {{alumnoSeleccionado.Nombre}} {{alumnoSeleccionado.PrimerApellido}} {{alumnoSeleccionado.SegundoApellido}}
+      {{alumnoSeleccionado.nombre}} {{alumnoSeleccionado.primerApellido}} {{alumnoSeleccionado.segundoApellido}}
     </p>
     <p style="font-size: 110%">
       <span style="font-weight: bold;">Puntos:</span>
-      {{alumnoJuegoDePuntos.PuntosTotalesAlumno}}
+      {{alumnoJuegoDePuntos.puntosTotalesAlumno}}
     </p>
     <p style="font-size: 110%">
       <span style="font-weight: bold;">Posición Total:</span>
@@ -27,10 +27,10 @@
     <div   *ngIf="nivelesDelJuego[0]">
 
         <div *ngIf="nivel"  style="font-size: 110%">
-          <span style="font-weight: bold; ">Nivel: </span> {{nivel.Nombre}}
+          <span style="font-weight: bold; ">Nivel: </span> {{nivel.nombre}}
         </div>
         <div *ngIf="siguienteNivel"  style="font-size: 110%">
-            <span style="font-weight: bold; ">Puntos que te faltan para el siguiente nivel: </span> {{siguienteNivel.PuntosAlcanzar - alumnoJuegoDePuntos.PuntosTotalesAlumno}}
+            <span style="font-weight: bold; ">Puntos que te faltan para el siguiente nivel: </span> {{siguienteNivel.puntosAlcanzar - alumnoJuegoDePuntos.puntosTotalesAlumno}}
         </div>
         <div *ngIf="siguienteNivel === undefined"  style="font-size: 110%">
             <span style="font-weight: bold; ">Estas en el máximo nivel</span>
@@ -58,7 +58,7 @@
   <br>
   <select matNativeControl [(ngModel)]="puntoSeleccionadoId" name="punto" (change) = "MostrarHistorialSeleccionado()">
     <option *ngFor="let punto of listaSeleccionable" [value]="punto.id">
-      {{punto.Nombre}}
+      {{punto.nombre}}
     </option>
   </select>
 </mat-form-field>

@@ -63,7 +63,7 @@ export class JuegoDeGeocachingSeleccionadoInactivoComponent implements OnInit {
       this.listaAlumnosOrdenadaPorPuntuacion = inscripciones;
       // tslint:disable-next-line:only-arrow-functions
       this.listaAlumnosOrdenadaPorPuntuacion = this.listaAlumnosOrdenadaPorPuntuacion.sort(function(a, b) {
-        return b.Puntuacion - a.Puntuacion;
+        return b.puntuacion - a.puntuacion;
       });
       this.TablaClasificacionTotal();
     });

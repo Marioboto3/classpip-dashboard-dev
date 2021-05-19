@@ -47,7 +47,7 @@ export class MisAlumnosComponent implements OnInit {
     this.profesor = this.sesion.DameProfesor();
     this.DameTodosMisAlumnos();
     
-    this.varTitulo = 'titulo' + this.profesor.Estacion;
+    this.varTitulo = 'titulo' + this.profesor.estacion;
   }
 
   DameTodosMisAlumnos() {
@@ -123,7 +123,7 @@ export class MisAlumnosComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: alumno.Nombre,
+        nombre: alumno.nombre,
       }
     });
 
@@ -132,7 +132,7 @@ export class MisAlumnosComponent implements OnInit {
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.EliminarAlumno(alumno);
-        Swal.fire('Eliminado', alumno.Nombre + ' eliminado correctamente', 'success');
+        Swal.fire('Eliminado', alumno.nombre + ' eliminado correctamente', 'success');
       }
     });
   }
@@ -156,7 +156,7 @@ export class MisAlumnosComponent implements OnInit {
 
     this.misAlumnos.forEach(alumno => {
       if (this.selection.isSelected(alumno)) {
-        alumno.ImagenPerfil = undefined;
+        alumno.imagenPerfil = undefined;
         this.peticionesAPI.ModificaAlumno (alumno)
         .subscribe(al => {
           console.log ('he modificado');
@@ -173,8 +173,8 @@ export class MisAlumnosComponent implements OnInit {
         if (this.selection.isSelected(alumno)) {
           // Elijo la primera imagen que no haya sido asignada a ningun otro alumno
           // tslint:disable-next-line:max-line-length
-          const imagen = familia.Imagenes.filter(img => !this.misAlumnos.some(a => a.ImagenPerfil === URL.ImagenesPerfil + img))[0];
-          alumno.ImagenPerfil = URL.ImagenesPerfil + imagen;
+          const imagen = familia.imagenes.filter(img => !this.misAlumnos.some(a => a.imagenPerfil === URL.ImagenesPerfil + img))[0];
+          alumno.imagenPerfil = URL.ImagenesPerfil + imagen;
 
           this.peticionesAPI.ModificaAlumno (alumno).subscribe();
           // Para mostrar la imagen de perfil necesitamos añadir la URL
@@ -201,7 +201,7 @@ export class MisAlumnosComponent implements OnInit {
 
     this.misAlumnos.forEach(alumno => {
       if (this.selection.isSelected(alumno)) {
-        alumno.PermisoCambioImagenPerfil =  !alumno.PermisoCambioImagenPerfil ;
+        alumno.permisoCambioImagenPerfil =  !alumno.permisoCambioImagenPerfil ;
         console.log ('voy a cambiar permiso de ');
         console.log (alumno);
         this.peticionesAPI.ModificaAlumno (alumno)

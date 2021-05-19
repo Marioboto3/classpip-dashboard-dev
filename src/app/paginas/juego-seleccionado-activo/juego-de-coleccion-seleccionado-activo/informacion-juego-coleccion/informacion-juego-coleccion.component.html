@@ -20,16 +20,16 @@
       [style.background]="white">
 
         <mat-card class="cromo" [ngClass]="{
-          'Diamante' : cromo.Nivel === 'Diamante',
-          'Platino' : cromo.Nivel === 'Platino',
-          'Oro' : cromo.Nivel === 'Oro',
-          'Plata' : cromo.Nivel === 'Plata',
-          'Bronce' : cromo.Nivel === 'Bronce'}">
+          'Diamante' : cromo.nivel === 'Diamante',
+          'Platino' : cromo.nivel === 'Platino',
+          'Oro' : cromo.nivel === 'Oro',
+          'Plata' : cromo.nivel === 'Plata',
+          'Bronce' : cromo.nivel === 'Bronce'}">
           <div class= "enColumna">
           <mat-card-header style = "margin-top: 20%;">
             <!-- <div style="display: flex; justify-content:space-between; width: 250px "> -->
-              <mat-card-title align = "center">{{cromo.Nombre}}</mat-card-title>
-              <mat-card-subtitle align = "center">{{cromo.Probabilidad}}</mat-card-subtitle>
+              <mat-card-title align = "center">{{cromo.nombre}}</mat-card-title>
+              <mat-card-subtitle align = "center">{{cromo.probabilidad}}</mat-card-subtitle>
 
           </mat-card-header>
           <!-- <mat-card-content style="display: flex; align-items: center;justify-content: center;"> -->
@@ -45,11 +45,11 @@
                 <i  class="material-icons">delete </i>
               </button>
             </div>
-              <div *ngIf = "!coleccion.DosCaras" class="posicionImagen">
+              <div *ngIf = "!coleccion.dosCaras" class="posicionImagen">
                 <img class ="imagenCromo" *ngIf="imagenCromoDelante[i]"  mat-card-image [src]="imagenCromoDelante[i]" >
               </div>
 
-              <div  *ngIf = "coleccion.DosCaras"  class="flip-box">
+              <div  *ngIf = "coleccion.dosCaras"  class="flip-box">
                   <div class="flip-box-inner">
                     <div class="flip-box-front">
                       <div class="posicionImagen" >

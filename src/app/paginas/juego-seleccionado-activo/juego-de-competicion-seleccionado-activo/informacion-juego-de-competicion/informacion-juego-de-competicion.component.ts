@@ -127,8 +127,8 @@ export class InformacionJuegoDeCompeticionComponent implements OnInit {
       let encontrado = false;
       // tslint:disable-next-line:prefer-for-of
       for (let k = 0; k < enfrentamientosJornadaSeleccionada.length; k++) {
-        if (enfrentamientosJornadaSeleccionada[k].JugadorUno === participantes[i].id ||
-            enfrentamientosJornadaSeleccionada[k].JugadorDos === participantes[i].id) {
+        if (enfrentamientosJornadaSeleccionada[k].jugadorUno === participantes[i].id ||
+            enfrentamientosJornadaSeleccionada[k].jugadorDos === participantes[i].id) {
               encontrado = true;
         }
       }

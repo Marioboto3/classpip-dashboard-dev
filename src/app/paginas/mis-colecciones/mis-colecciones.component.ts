@@ -68,8 +68,8 @@ export class MisColeccionesComponent implements OnInit {
     this.profesorId = this.sesion.DameProfesor().id;
     this.profesor = this.sesion.DameProfesor();
     console.log(this.profesorId);
-    this.varTitulo = "titulo" + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
     this.TraeColeccionesDelProfesor();
     this.DameTodasLasColeccionesPublicas();
 
@@ -116,7 +116,7 @@ export class MisColeccionesComponent implements OnInit {
           .subscribe ( profesores => {
             this.coleccionesPublicas.forEach (coleccion => {
               const propietario = profesores.filter (p => p.id === coleccion.profesorId)[0];
-              this.propietarios.push (propietario.Nombre + ' ' + propietario.PrimerApellido);
+              this.propietarios.push (propietario.nombre + ' ' + propietario.primerApellido);
             });
           });
         }
@@ -167,7 +167,7 @@ Mostrar(coleccion: Coleccion) {
     console.log ('Vamos a eliminar la colección');
 
 
-    this.peticionesAPI.BorrarImagenColeccion(coleccion.ImagenColeccion).subscribe();
+    this.peticionesAPI.BorrarImagenColeccion(coleccion.imagenColeccion).subscribe();
 
     this.peticionesAPI.DameCromosColeccion(coleccion.id)
     .subscribe(res => {
@@ -181,9 +181,9 @@ Mostrar(coleccion: Coleccion) {
       if (this.cromosColeccion !==  undefined) {
         for (let i = 0; i < (this.cromosColeccion.length); i++) {
           this.peticionesAPI.BorrarCromo (this.cromosColeccion[i].id).subscribe();
-          this.peticionesAPI.BorrarImagenCromo(this.cromosColeccion[i].ImagenDelante).subscribe();
-          if (this.cromosColeccion[i].ImagenDetras !== undefined) {
-            this.peticionesAPI.BorrarImagenCromo(this.cromosColeccion[i].ImagenDetras).subscribe();
+          this.peticionesAPI.BorrarImagenCromo(this.cromosColeccion[i].imagenDelante).subscribe();
+          if (this.cromosColeccion[i].imagenDetras !== undefined) {
+            this.peticionesAPI.BorrarImagenCromo(this.cromosColeccion[i].imagenDetras).subscribe();
           }
         }
       }
@@ -204,7 +204,7 @@ Mostrar(coleccion: Coleccion) {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: coleccion.Nombre,
+        nombre: coleccion.nombre,
       }
     });
 
@@ -213,23 +213,23 @@ Mostrar(coleccion: Coleccion) {
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.BorrarColeccion(coleccion);
-        Swal.fire('Eliminado', coleccion.Nombre + ' eliminado correctamente', 'success');
+        Swal.fire('Eliminado', coleccion.nombre + ' eliminado correctamente', 'success');
       }
     });
   }
 
   HazPublica(coleccion: Coleccion) {
-    coleccion.Publica = true;
+    coleccion.publica = true;
     this.peticionesAPI.ModificaColeccion  (coleccion, this.profesorId, coleccion.id).subscribe();
   }
 
 
   HazPrivada(coleccion: Coleccion) {
-    coleccion.Publica = false;
+    coleccion.publica = false;
     this.peticionesAPI.ModificaColeccion  (coleccion, this.profesorId, coleccion.id).subscribe();
   }
   TraeCromosEImagenesColeccion(coleccion: Coleccion) {
-    this.peticionesAPI.DameImagenColeccion (coleccion.ImagenColeccion)
+    this.peticionesAPI.DameImagenColeccion (coleccion.imagenColeccion)
     .subscribe (imagen => this.imagenColeccionFile = imagen);
     this.peticionesAPI.DameCromosColeccion (coleccion.id)
     .subscribe ( cromos => {

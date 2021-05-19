@@ -14,7 +14,7 @@
             <mat-expansion-panel-header>
 
               <mat-panel-title>
-                {{punto.Nombre}}
+                {{punto.nombre}}
               </mat-panel-title>
             </mat-expansion-panel-header>
               <div class="enColumna">
@@ -23,7 +23,7 @@
                   <br>
                   <br>
                   <p style="font-size: 1.5em;">
-                    {{punto.Descripcion}}
+                    {{punto.descripcion}}
                   </p>
                   </div>
                   <div class="enColumna" style="margin-right: 2% ">
@@ -55,7 +55,7 @@
             <mat-expansion-panel *ngFor="let insignia of insignias" (click) = "ImagenDelaInsignia(insignia)">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  {{insignia.Nombre}}
+                  {{insignia.nombre}}
                 </mat-panel-title>
               </mat-expansion-panel-header>
                 <div class="enColumna">
@@ -67,7 +67,7 @@
                     <br>
                     <br>
                     <p style="font-size: 1.5em;">
-                      {{insignia.Descripcion}}
+                      {{insignia.descripcion}}
                     </p>
                     </div>
                     <div class="enColumna" style="margin-right: 2% ">

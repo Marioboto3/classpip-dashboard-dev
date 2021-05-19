@@ -34,15 +34,15 @@ export class ModificarPerfilComponent implements OnInit {
 
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = 'titulo' + this.profesor.Estacion;
-    this.nombre = this.profesor.Nombre;
-    this.primerApellido = this.profesor.PrimerApellido;
-    this.segundoApellido = this.profesor.SegundoApellido;
-    this.username = this.profesor.NombreUsuario;
+    this.varTitulo = 'titulo' + this.profesor.estacion;
+    this.nombre = this.profesor.nombre;
+    this.primerApellido = this.profesor.primerApellido;
+    this.segundoApellido = this.profesor.segundoApellido;
+    this.username = this.profesor.nombreUsuario;
     this.email = this.profesor.email;
-    this.contrasena = this.profesor.Password;
-    this.identificador = this.profesor.Identificador;
-    this.imagenPerfil = this.profesor.ImagenPerfil;
+    this.contrasena = this.profesor.password;
+    this.identificador = this.profesor.identificador;
+    this.imagenPerfil = this.profesor.imagenPerfil;
   }
   Volver() {
     this.router.navigate(['/inicio/' + this.profesor.id]);
@@ -70,14 +70,14 @@ export class ModificarPerfilComponent implements OnInit {
           confirmButtonText: 'Si, estoy seguro'
         }).then((result) => {
           if (result.value) {
-              this.profesor.Nombre = this.nombre,
-              this.profesor.PrimerApellido = this.primerApellido,
-              this.profesor.SegundoApellido = this.segundoApellido,
-              this.profesor.NombreUsuario = this.username,
+              this.profesor.nombre = this.nombre,
+              this.profesor.primerApellido = this.primerApellido,
+              this.profesor.segundoApellido = this.segundoApellido,
+              this.profesor.nombreUsuario = this.username,
               this.profesor.email = this.email,
-              this.profesor.Password = this.contrasena,
-              this.profesor.Identificador = this.identificador,
-              this.profesor.ImagenPerfil = this.imagenPerfil,
+              this.profesor.password = this.contrasena,
+              this.profesor.identificador = this.identificador,
+              this.profesor.imagenPerfil = this.imagenPerfil,
               console.log ('voy a modificar profesor');
               console.log (this.profesor);
 

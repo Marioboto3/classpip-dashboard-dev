@@ -50,7 +50,7 @@ export class CrearCuestionarioComponent implements OnInit {
     // Cogemos el ID del Profesor de la URL
     this.profesor = this.sesion.DameProfesor();
     this.profesorId = this.sesion.DameProfesor().id;
-    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
     this.URLVueltaInicio = this.route.snapshot.queryParams.URLVueltaInicio || '/inicio';
 
     this.myForm = this._formBuilder.group({

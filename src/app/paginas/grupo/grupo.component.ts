@@ -52,11 +52,11 @@ export class GrupoComponent implements OnInit {
 
 
     this.profesor=this.sesion.DameProfesor();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
     // Recupero de la sesión el grupo y el id del profesor (que está en el grupo)
     this.grupo = this.sesion.DameGrupo();
     this.profesorId = this.grupo.profesorId;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
 
     // PEDIMOS LA LISTA DE ALUMNOS CUANDO INICIAMOS EL COMPONENTE
     this.AlumnosDelGrupo();
@@ -105,7 +105,7 @@ export class GrupoComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: this.grupo.Nombre,
+        nombre: this.grupo.nombre,
       }
     });
 

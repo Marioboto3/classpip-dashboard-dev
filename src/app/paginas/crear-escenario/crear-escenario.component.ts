@@ -81,7 +81,7 @@ export class CrearEscenarioComponent implements OnInit {
     console.log(this.sesion.DameProfesor());
     this.profesorId = this.sesion.DameProfesor().id;
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
 
     this.myForm = this.formBuilder.group({
      descripcionEscenario: ['', Validators.required],
@@ -164,7 +164,7 @@ export class CrearEscenarioComponent implements OnInit {
       if (res != null) {
         console.log('asignado correctamente');
         this.puntosgeolocalizablesAgregados.push(res);
-        this.puntosgeolocalizablesAgregados = this.puntosgeolocalizablesAgregados.filter(result => result.Latitud !== '');
+        this.puntosgeolocalizablesAgregados = this.puntosgeolocalizablesAgregados.filter(result => result.latitud !== '');
         this.LimpiarCampos();
       } else {
         console.log('fallo en la asignación');

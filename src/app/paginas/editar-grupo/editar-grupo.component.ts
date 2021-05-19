@@ -76,8 +76,8 @@ export class EditarGrupoComponent implements OnInit {
 
 
     // Inicio los parámetros de los inputs con los valores actuales
-    this.nombreGrupo = this.grupoSeleccionado.Nombre;
-    this.descripcionGrupo = this.grupoSeleccionado.Descripcion;
+    this.nombreGrupo = this.grupoSeleccionado.nombre;
+    this.descripcionGrupo = this.grupoSeleccionado.descripcion;
   }
 
   // Filtro para buscar alumnos de la tabla
@@ -171,7 +171,7 @@ export class EditarGrupoComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: this.grupoSeleccionado.Nombre,
+        nombre: this.grupoSeleccionado.nombre,
       }
     });
 
@@ -195,7 +195,7 @@ export class EditarGrupoComponent implements OnInit {
                     this.peticionesAPI.BorraMatricula (matricula[0].id)
                     .subscribe(result => {
                       // Despues de borrar actualizo la lista que se muestra en la tabla
-                      this.alumnosGrupoSeleccionado = this.alumnosGrupoSeleccionado.filter (al => al.Nombre !== alumno.Nombre);
+                      this.alumnosGrupoSeleccionado = this.alumnosGrupoSeleccionado.filter (al => al.nombre !== alumno.Nombre);
                       this.dataSource = new MatTableDataSource(this.alumnosGrupoSeleccionado);
                     });
                   });

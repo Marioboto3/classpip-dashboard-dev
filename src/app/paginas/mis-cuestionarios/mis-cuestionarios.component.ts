@@ -42,8 +42,8 @@ export class MisCuestionariosComponent implements OnInit {
     this.profesor = this.sesion.DameProfesor();
     this.DameTodosMisCuestionarios();
     this.DameTodosLosCuestionariosPublicos();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
   }
 
   //Dame todos los cuestionarios del profesor para rellenar la tabla
@@ -76,7 +76,7 @@ export class MisCuestionariosComponent implements OnInit {
           .subscribe ( profesores => {
             this.cuestionariosPublicos.forEach (cuestionario => {
               const propietario = profesores.filter (p => p.id === cuestionario.profesorId)[0];
-              this.propietarios.push (propietario.Nombre + ' ' + propietario.PrimerApellido);
+              this.propietarios.push (propietario.nombre + ' ' + propietario.primerApellido);
             });
           });
         }
@@ -94,12 +94,12 @@ export class MisCuestionariosComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        titulo: cuestionario.Titulo,
+        titulo: cuestionario.titulo,
       }
     });
     dialogRef.afterClosed().subscribe((confirmed:boolean) => {
       this.EliminarCuestionario(cuestionario);
-      Swal.fire('Eliminado', 'Cuestionario: ' + cuestionario.Titulo + ' eliminado correctamente', 'success');
+      Swal.fire('Eliminado', 'Cuestionario: ' + cuestionario.titulo + ' eliminado correctamente', 'success');
     });
   }
 
@@ -129,7 +129,7 @@ export class MisCuestionariosComponent implements OnInit {
     this.peticionesAPI.DamePreguntasCuestionario (cuestionario.id)
     .subscribe ( res => {
       preguntas = res;
-      this.peticionesAPI.CreaCuestionario(new Cuestionario(cuestionario.Titulo + '(copia)', cuestionario.Descripcion), this.profesor.id)
+      this.peticionesAPI.CreaCuestionario(new Cuestionario(cuestionario.titulo + '(copia)', cuestionario.descripcion), this.profesor.id)
       .subscribe (copia => {
         // ahora tengo que asignar las mismas preguntas al cuestionario copia
         preguntas.forEach (pregunta => {
@@ -146,21 +146,21 @@ export class MisCuestionariosComponent implements OnInit {
   }
 
   HazPublico(cuestionario: Cuestionario) {
-    cuestionario.Publico = true;
+    cuestionario.publico = true;
     this.peticionesAPI.ModificaCuestionario (cuestionario, this.profesor.id, cuestionario.id).subscribe();
   }
 
 
   HazPrivado(cuestionario: Cuestionario) {
-    cuestionario.Publico = false;
+    cuestionario.publico = false;
     this.peticionesAPI.ModificaCuestionario (cuestionario, this.profesor.id, cuestionario.id).subscribe();
   }
 
   CrearCopiaPrivada(cuestionario: Cuestionario) {
 
     const copia = new Cuestionario (
-      cuestionario.Titulo + '(copia)',
-      cuestionario.Descripcion,
+      cuestionario.titulo + '(copia)',
+      cuestionario.descripcion,
       this.profesor.id
     );
     console.log ('voy a crear copia privada');

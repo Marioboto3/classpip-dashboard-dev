@@ -38,7 +38,7 @@ export class JuegoDeVotacionUnoATodosSeleccionadoActivoComponent implements OnIn
     this.juegoSeleccionado = this.sesion.DameJuego();
     console.log(this.juegoSeleccionado);
 
-    if (this.juegoSeleccionado.Modo === 'Individual') {
+    if (this.juegoSeleccionado.modo === 'Individual') {
       this.AlumnosDelJuego();
     } else {
       console.log ('aun no funciona la modalidad por equipos');
@@ -50,11 +50,11 @@ export class JuegoDeVotacionUnoATodosSeleccionadoActivoComponent implements OnIn
         console.log (res.votacion);
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < res.votacion.Votos.length; i++) {
-          const votado = this.rankingIndividualJuegoDeVotacionUnoATodos.filter (al => al.id === res.votacion.Votos[i].alumnoId)[0];
+          const votado = this.rankingIndividualJuegoDeVotacionUnoATodos.filter (al => al.id === res.votacion.votos[i].alumnoId)[0];
           console.log ('votado');
           console.log (votado);
-          votado.puntos = votado.puntos + res.votacion.Votos[i].puntos;
-          votado.incremento = res.votacion.Votos[i].puntos;
+          votado.puntos = votado.puntos + res.votacion.votos[i].puntos;
+          votado.incremento = res.votacion.votos[i].puntos;
         }
         // Tomo nota de que el alumno ya ha votado
         this.rankingIndividualJuegoDeVotacionUnoATodos.filter (al => al.id === res.votacion.alumnoId)[0].votado = true;

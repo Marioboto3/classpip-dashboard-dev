@@ -69,8 +69,8 @@ export class CrearGrupoComponent implements OnInit {
     // this.profesorId = this.profesorService.RecibirProfesorIdDelServicio();
     this.profesorId = this.sesion.DameProfesor().id;
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
-    this.varPanel = "panel" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varPanel = "panel" + this.profesor.estacion;
     console.log(this.varPanel);
     // tslint:disable-next-line:no-string-literal
     this.URLVueltaInicio = this.route.snapshot.queryParams['URLVueltaInicio'] || '/inicio';

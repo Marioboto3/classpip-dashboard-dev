@@ -67,13 +67,13 @@ export class CrearPuntoComponent implements OnInit {
     // this.profesorId = this.profesorService.RecibirProfesorIdDelServicio();
     this.profesorId = Number (this.route.snapshot.paramMap.get('id'));
     this.profesor = this.sesion.DameProfesor();
-    this.varTitulo = "titulo" + this.profesor.Estacion;
-    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.Estacion;
+    this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
 
     // Primero me aseguro de que el tipo de puntos aleatorio está creado. Si no es asi, lo creo
     this.peticionesAPI.DameTiposDePuntos (this.profesorId)
     .subscribe ( puntos => {
-      if (puntos.filter (p => p.Nombre === 'Aleatorio').length === 0) {
+      if (puntos.filter (p => p.nombre === 'Aleatorio').length === 0) {
         this.nombrePunto = 'Aleatorio';
         this.descripcionPunto = 'Asignado de forma aleatoria (se crea automáticamente)';
         this.CrearPunto();
@@ -92,7 +92,7 @@ export class CrearPuntoComponent implements OnInit {
         Swal.fire(this.nombrePunto , 'Creado correctamente', 'success');
         // añadimos el punto a la lista que se muestra al usuario
         this.puntosAgregados.push(res);
-        this.puntosAgregados = this.puntosAgregados.filter(punto => punto.Nombre !== '');
+        this.puntosAgregados = this.puntosAgregados.filter(punto => punto.nombre !== '');
         // limpiamos los campos del formulario
         this.nombrePunto = undefined;
         this.descripcionPunto = undefined;
@@ -174,7 +174,7 @@ export class CrearPuntoComponent implements OnInit {
         }
         // Ponemos la insignia en la lista que ve el usuario
         this.insigniasAgregadas.push(insignia);
-        this.insigniasAgregadas = this.insigniasAgregadas.filter(res => res.Nombre !== '');
+        this.insigniasAgregadas = this.insigniasAgregadas.filter(res => res.nombre !== '');
         // Limpiamos los campos del formulario
         this.nombreInsignia = undefined;
         this.descripcionInsignia = undefined;

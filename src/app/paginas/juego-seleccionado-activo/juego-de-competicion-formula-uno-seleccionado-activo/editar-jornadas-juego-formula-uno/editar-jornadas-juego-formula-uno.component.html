@@ -1,5 +1,5 @@
 <div class="titulo">Pantalla para Editar Juego</div>
-<div class="subtitulo">{{juegoSeleccionado.NombreJuego}}: {{juegoSeleccionado.Tipo}}  {{juegoSeleccionado.Modo}}</div>
+<div class="subtitulo">{{juegoSeleccionado.nombreJuego}}: {{juegoSeleccionado.tipo}}  {{juegoSeleccionado.modo}}</div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 
 <div class="contenedor">
@@ -57,7 +57,7 @@
               <!-- NumeroDeJornada Column -->
               <ng-container matColumnDef="NumeroDeJornada">
                 <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla" style="width: 10%"  align="left"> Jornada </th>
-                <td mat-cell *matCellDef="let jornada"  align="center"> {{jornada.NumeroDeJornada}} </td>
+                <td mat-cell *matCellDef="let jornada"  align="center"> {{jornada.numeroDeJornada}} </td>
               </ng-container>
 
               <!-- Fecha Column -->
@@ -69,15 +69,15 @@
                   <td mat-cell *matCellDef="let jornada; "> {{jornada.Fecha  | date: 'dd-MM-yyyy' }} </td>
                 </div> -->
 
-                <div *ngIf="(JornadasCompeticion.Fecha !== 'Fecha por Determinar')">
-                  <td mat-cell *matCellDef="let jornada; " align="left"> {{jornada.Fecha | date: 'dd-MM-yyyy' }} </td>
+                <div *ngIf="(JornadasCompeticion.fecha !== 'Fecha por Determinar')">
+                  <td mat-cell *matCellDef="let jornada; " align="left"> {{jornada.fecha | date: 'dd-MM-yyyy' }} </td>
                 </div>
               </ng-container>
 
               <!-- CriterioGanador Column -->
               <ng-container matColumnDef="CriterioGanador">
                 <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla" style="width: 60%"  align="left"> Criterio Ganador </th>
-                <td mat-cell *matCellDef="let jornada"  align="left"> {{jornada.CriterioGanador}} </td>
+                <td mat-cell *matCellDef="let jornada"  align="left"> {{jornada.criterioGanador}} </td>
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumnsJornada"></tr>
@@ -130,13 +130,13 @@
             <!-- Posicion Column -->
             <ng-container matColumnDef="Posicion">
               <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla" align="center"> Posición  </th>
-              <td mat-cell style= "text-align: center" *matCellDef="let tablaPuntuacion" align="center"> {{tablaPuntuacion.Posicion}} </td>
+              <td mat-cell style= "text-align: center" *matCellDef="let tablaPuntuacion" align="center"> {{tablaPuntuacion.posicion}} </td>
             </ng-container>
 
             <!-- Puntos Column -->
             <ng-container matColumnDef="Puntos">
               <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla" align="center">  Puntos </th>
-              <td mat-cell *matCellDef="let tablaPuntuacion; " align="center"> {{tablaPuntuacion.Puntuacion}} </td>
+              <td mat-cell *matCellDef="let tablaPuntuacion; " align="center"> {{tablaPuntuacion.puntuacion}} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumnsTablaPuntuacion"></tr>

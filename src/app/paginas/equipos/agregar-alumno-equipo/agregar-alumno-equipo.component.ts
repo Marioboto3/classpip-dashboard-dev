@@ -95,7 +95,7 @@ export class AgregarAlumnoEquipoComponent implements OnInit {
             this.alumnosSinEquipo.push(alumno);
             // Hacemos esto para que nos actualice la tabla. No se sabe por que al hacer el push actualiza la lista pero no la
             // tabla. Asi que hacemos un filtrado que nos devuelve la lista excepto el alumno con nombre '' (cosa que no puede pasar)
-            this.alumnosSinEquipo = this.alumnosSinEquipo.filter(result => result.Nombre !== '');
+            this.alumnosSinEquipo = this.alumnosSinEquipo.filter(result => result.nombre !== '');
             console.log(this.alumnosSinEquipo);
           } else {
             console.log('No se ha podido eliminar');

@@ -66,13 +66,13 @@ export class InformacionJuegoDeCompeticionFormulaUnoComponent implements OnInit 
 
   ObtenerEnfrentamientosDeCadaJornada(jornadaSeleccionada: TablaJornadas) {
     console.log('El id de la jornada seleccionada es: ' + jornadaSeleccionada.id);
-    if (jornadaSeleccionada.GanadoresFormulaUno === undefined) {
+    if (jornadaSeleccionada.ganadoresFormulaUno === undefined) {
       this.datosClasificacionJornada = this.calculos.ClasificacionJornada(this.juegoSeleccionado, this.listaAlumnosClasificacion,
                                                      this.listaEquiposClasificacion, undefined, undefined);
     } else {
       this.datosClasificacionJornada = this.calculos.ClasificacionJornada(this.juegoSeleccionado, this.listaAlumnosClasificacion,
-                                                     this.listaEquiposClasificacion, jornadaSeleccionada.GanadoresFormulaUno.nombre,
-                                                     jornadaSeleccionada.GanadoresFormulaUno.id);
+                                                     this.listaEquiposClasificacion, jornadaSeleccionada.ganadoresFormulaUno.nombre,
+                                                     jornadaSeleccionada.ganadoresFormulaUno.id);
     }
     // console.log(this.datosClasificaciónJornada.participante);
     // console.log(this.datosClasificaciónJornada.puntos);

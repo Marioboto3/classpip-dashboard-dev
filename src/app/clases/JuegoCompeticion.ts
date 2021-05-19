@@ -1,16 +1,17 @@
 export class JuegoDeCompeticion {
-  NumeroTotalJornadas: number;
-  Tipo: string;
-  Modo: string;
-  JuegoActivo: boolean;
+
+  numeroTotalJornadas: number;
+  tipo: string;
+  modo: string;
+  juegoActivo: boolean;
   grupoId: number;
   id: number;
 
   constructor(NumeroTotalJornas?: number, Tipo?: string, Modo?: string, JuegoActivo?: boolean) {
 
-    this.Tipo = Tipo;
-    this.Modo = Modo;
-    this.JuegoActivo = JuegoActivo;
-    this.NumeroTotalJornadas = NumeroTotalJornas;
+    this.tipo = Tipo;
+    this.modo = Modo;
+    this.juegoActivo = JuegoActivo;
+    this.numeroTotalJornadas = NumeroTotalJornas;
   }
 }

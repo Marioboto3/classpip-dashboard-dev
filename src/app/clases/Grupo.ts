@@ -1,13 +1,14 @@
 export class Grupo {
-  Nombre: string;
-  Descripcion: string;
+
+  nombre: string;
+  descripcion: string;
   id: number;
   profesorId: number;
 
   constructor(nombre?: string, Descripcion?: string) {
 
-    this.Nombre = nombre;
-    this.Descripcion = Descripcion;
+    this.nombre = nombre;
+    this.descripcion = Descripcion;
   }
 
 }

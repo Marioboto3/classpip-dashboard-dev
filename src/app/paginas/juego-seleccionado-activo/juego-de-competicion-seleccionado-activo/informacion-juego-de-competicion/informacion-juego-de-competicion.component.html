@@ -1,5 +1,5 @@
 <div  class="titulo">Información del Juego</div>
-<div class="subtitulo">Jornadas de {{juegoSeleccionado.NombreJuego}}: {{juegoSeleccionado.Tipo}}  {{juegoSeleccionado.Modo}}</div>
+<div class="subtitulo">Jornadas de {{juegoSeleccionado.nombreJuego}}: {{juegoSeleccionado.tipo}}  {{juegoSeleccionado.modo}}</div>
 <mat-divider class="lineaDivisoria"></mat-divider>
 
 <div  class="enColumna">
@@ -16,14 +16,14 @@
                     <mat-icon *ngIf="JornadaFinalizada(jornada) === true" mat-list-icon><i class="material-icons green">check_circle_outline</i></mat-icon>
                     <mat-icon *ngIf="JornadaFinalizada(jornada) === false" mat-list-icon><i class="material-icons red">history</i></mat-icon>
                     &nbsp;&nbsp;&nbsp;
-                    Jornada {{jornada.NumeroDeJornada}}:    {{jornada.Fecha | date: 'dd-MM-yyyy'}}
+                    Jornada {{jornada.numeroDeJornada}}:    {{jornada.fecha | date: 'dd-MM-yyyy'}}
                   </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="enFila">
                   <!-- <div style="margin-right: 15%; border: 15px; width: 60%;"> -->
                   <div style="margin-left: 20px; font-size: 130%; width: 100%;">
                       <br>
-                      <span style="margin-left: 65px;font-size: 80%;"><strong>Criterio: </strong> {{jornada.CriterioGanador}}</span>
+                      <span style="margin-left: 65px;font-size: 80%;"><strong>Criterio: </strong> {{jornada.criterioGanador}}</span>
                       <br>
                       <br>
                       <br>
@@ -69,7 +69,7 @@
                       </form>
 
                       <!-- ///////////////////////////////////// TABLA ENFRENTAMIENTOS INDIVIDUAL ////////////////////////////////////// -->
-                      <form style=" width: 100%" *ngIf="juegoSeleccionado.Modo == 'Individual'">
+                      <form style=" width: 100%" *ngIf="juegoSeleccionado.modo == 'Individual'">
                         <table style="margin-left: 65px; width: 80%" align="center" mat-table [dataSource]="dataSourceEnfrentamientoIndividual" class="example-container mat-elevation-z8">
                           <!--- Note that these columns can be defined in any order.
                                 The actual rendered columns are set as a property on the row definition" -->

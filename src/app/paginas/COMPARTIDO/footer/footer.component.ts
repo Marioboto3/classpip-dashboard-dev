@@ -20,7 +20,7 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
     console.log("SOY FOOTER");  
-    this.varFooter = "contenedorFooter" + this.profesor.Estacion;
+    this.varFooter = "contenedorFooter" + this.profesor.estacion;
     
   }
 }
