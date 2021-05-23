@@ -54,7 +54,7 @@ export class AgregarAlumnoDialogComponent implements OnInit {
     this.peticionesAPI.DameTodosMisAlumnos (this.profesorId )
     .subscribe ( res => {
                           this.misAlumnos = res;
-                          this.misAlumnos.sort((a, b) => a.PrimerApellido.localeCompare(b.PrimerApellido));
+                          this.misAlumnos.sort((a, b) => a.primerApellido.localeCompare(b.primerApellido));
 
                           this.dataSourceMisAlumnos = new MatTableDataSource (this.misAlumnos);
 
@@ -64,7 +64,7 @@ export class AgregarAlumnoDialogComponent implements OnInit {
     this.peticionesAPI.DameAlumnosGrupo (this.grupoId)
     .subscribe ( res => {
                           this.alumnosDelGrupo = res;
-                          this.alumnosDelGrupo.sort((a, b) => a.PrimerApellido.localeCompare(b.PrimerApellido));
+                          this.alumnosDelGrupo.sort((a, b) => a.primerApellido.localeCompare(b.primerApellido));
 
                           this.dataSourceAlumnosDelGrupo = new MatTableDataSource (this.alumnosDelGrupo);
 
@@ -74,7 +74,7 @@ export class AgregarAlumnoDialogComponent implements OnInit {
                             // Me quedo solo con los alumnos del profesor que no están ya en elgrupo
                             this.misAlumnos = alumnos.filter (al => !this.alumnosDelGrupo.some (a => a.id === al.id));
 
-                            this.misAlumnos.sort((a, b) => a.PrimerApellido.localeCompare(b.PrimerApellido));
+                            this.misAlumnos.sort((a, b) => a.primerApellido.localeCompare(b.primerApellido));
 
                             this.dataSourceMisAlumnos = new MatTableDataSource (this.misAlumnos);
 
@@ -109,7 +109,7 @@ export class AgregarAlumnoDialogComponent implements OnInit {
       // AQUI ESTOY DANDO POR SENTADO QUE LA MATRICULACION SE PUEDE HACER
       // ESTO HABRA QUE REVISARLO SI CONTROLAMOS QUE NO SE PUEDA ASIGNAR UN ALUMNO QUE YA ESTA
       this.alumnosDelGrupo.push (alumno);
-      this.alumnosDelGrupo.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
+      this.alumnosDelGrupo.sort((a, b) => a.nombre.localeCompare(b.nombre));
       this.dataSourceAlumnosDelGrupo = new MatTableDataSource (this.alumnosDelGrupo);
 
       // tslint:disable-next-line:max-line-length
@@ -130,7 +130,7 @@ export class AgregarAlumnoDialogComponent implements OnInit {
       height: '150px',
       data: {
         mensaje: this.mensaje,
-        nombre: alumno.Nombre,
+        nombre: alumno.nombre,
       }
     });
 
@@ -156,7 +156,7 @@ export class AgregarAlumnoDialogComponent implements OnInit {
             this.alumnosDelGrupo = this.alumnosDelGrupo.filter (a => a.id !== alumno.id);
             this.dataSourceAlumnosDelGrupo = new MatTableDataSource (this.alumnosDelGrupo);
             this.misAlumnos.push (alumno);
-            this.misAlumnos.sort((a, b) => a.PrimerApellido.localeCompare(b.PrimerApellido));
+            this.misAlumnos.sort((a, b) => a.primerApellido.localeCompare(b.primerApellido));
             this.dataSourceMisAlumnos = new MatTableDataSource (this.misAlumnos);
         }
         );
