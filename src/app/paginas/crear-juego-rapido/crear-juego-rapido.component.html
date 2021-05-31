@@ -61,52 +61,6 @@
 
           </mat-step>
 
-          <!--/////////////////////// SI ESCOGEMOS EL JUEGO DE TIPO ESCAPE ROOM//////////////////////////////////-->
-
-          <!-- escoger escenario-->
-
-        <div *ngIf="tipoDeJuegoSeleccionado === 'Juego De Escape Room'">
-          <mat-step>
-          <div class = "colorsChips">
-              <ng-template matStepLabel><div>Escoger escenario</div></ng-template>
-            <label class = "LabelStepper">Selecciona el escenario principal:</label>
-            <mat-chip-list class="mat-chip-list-stacked">
-                <mat-chip  style = 'width: 300px' *ngFor="let tipo of seleccionEscenario; let i = index" selected [color]="tipo.color"  selected="{{seleccionTipoJuego[i].selected}}"
-                (click)="TipoDeEscenarioSeleccionado(seleccionEscenario[i])" [value]="tipo.nombre" [selectable]="true">
-                  {{tipo.nombre}}
-                  <i class="material-icons" style='margin-left: 10px; margin-bottom: 9px;' (click)="verEscenario(tipo.nombre)">
-                    visibility </i>
-                </mat-chip>
-              
-            </mat-chip-list>
-            <span style = "font-weight: bold;color:green;" color = "secundary">Has elegido ... {{tipoDeJuegoSeleccionado}} </span>
-          </div>
-          <div class="btnCambiarStep">
-              <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
-              <button [disabled]="!tengoTipo" type="button" class="btn Next" matStepperNext>Siguiente</button>
-          </div>
-        </mat-step>
-
-         <!-- asignar alumno-->
-          
-        <mat-step>
-          <div class = "colorsChips">
-              <ng-template matStepLabel><div>Asignar alumno</div></ng-template>
-            <label class = "LabelStepper">Selecciona el alumno / la alumna:</label>
-            <mat-chip-list class="mat-chip-list-stacked">
-                <mat-chip  style = 'width: 300px' *ngFor="let tipo of seleccionEscenario; let i = index" selected [color]="tipo.color"  selected="{{seleccionTipoJuego[i].selected}}"
-                (click)="TipoDeEscenarioSeleccionado(seleccionEscenario[i])" [value]="tipo.nombre" [selectable]="true">
-                  {{tipo.nombre}}
-                </mat-chip>
-            </mat-chip-list>
-          </div>
-          
-          <div class="btnCambiarStep">
-              <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
-              <button [disabled]="!tengoTipo" type="button" class="btn Next" matStepperNext>Siguiente</button>
-          </div>
-        </mat-step>
-        </div>
           <!--/////////////////////// SI ESCOGEMOS EL JUEGO DE TIPO CUESTIONARIO RAPIDO//////////////////////////////////-->
           <div *ngIf="tipoDeJuegoSeleccionado === 'Juego De Cuestionario Rápido'">
 
@@ -244,13 +198,13 @@
                   <table style="width: 100%" align="left" mat-table [dataSource]="dataSourceConceptos"  class="mat-elevation-z8">
 
                     <ng-container matColumnDef="concepto" style= "width: 40%">
-                      <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Concepto </th>
+                      <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Concepto </th>
                       <td mat-cell  *matCellDef="let concepto"> {{concepto}} </td>
                       <td mat-footer-cell *matFooterCellDef></td>
                     </ng-container>
 
                     <ng-container matColumnDef="iconos">
-                      <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"></th>
+                      <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"></th>
                       <td mat-cell *matCellDef="let concepto">
                         <button (click) = "BorraConcepto(concepto)" mat-icon-button>
                           <i class="material-icons red md-36">delete</i>
@@ -337,7 +291,7 @@
                         <form style="width: 100%">
                               <table style="width: 100%" align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                                 <ng-container matColumnDef="select">
-                                  <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla">
+                                  <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">
                                     <mat-checkbox
                                                   (change)="$event ? MasterToggle() : null;"
                                                   [checked]="selection.hasValue() && IsAllSelected()"
@@ -357,13 +311,13 @@
 
                                 <!-- Posicion Column -->
                                 <ng-container matColumnDef="Posicion">
-                                  <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Posición </th>
+                                  <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Posición </th>
                                   <td mat-cell style= "text-align: center" *matCellDef="let tablaPuntuacion"> {{tablaPuntuacion.posicion}} </td>
                                 </ng-container>
 
                                 <!-- Puntos Column -->
                                 <ng-container matColumnDef="Puntos">
-                                  <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Puntos </th>
+                                  <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Puntos </th>
                                   <td mat-cell *matCellDef="let tablaPuntuacion; "> {{tablaPuntuacion.puntuacion}} </td>
                                 </ng-container>
 
@@ -450,18 +404,18 @@
                     <table style="width: 100%" align="left" mat-table [dataSource]="dataSourceTurnos"  class="mat-elevation-z8">
 
                       <ng-container matColumnDef="dia" style= "width: 60%">
-                        <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Dia </th>
+                        <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Dia </th>
                         <td mat-cell  *matCellDef="let turno"> {{turno.dia | date: 'dd-MM-yyyy'}} </td>
                         <td mat-footer-cell *matFooterCellDef></td>
                       </ng-container>
                       <ng-container matColumnDef="hora" style= "width: 60%">
-                        <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Hora </th>
+                        <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Hora </th>
                         <td mat-cell  *matCellDef="let turno"> {{turno.hora}} </td>
                         <td mat-footer-cell *matFooterCellDef></td>
                       </ng-container>
 
                       <ng-container matColumnDef="iconos" style= "width: 20%; text-align: right;">
-                        <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"></th>
+                        <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"></th>
                         <td mat-cell *matCellDef="let turno">
                           <button (click) = "BorraTurno(turno)" mat-icon-button>
                             <i class="material-icons red md-36">delete</i>

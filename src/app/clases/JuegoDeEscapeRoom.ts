@@ -1,6 +1,8 @@
 import { Escenario } from "./Escenario";
+import { Mochila } from "./Mochila";
+import { ObjetoEscape } from "./ObjetoEscape";
 
-export class JuegoEscapeRoom {
+export class JuegoDeEscapeRoom {
   
     id: number;
     grupoId: number;
@@ -10,6 +12,7 @@ export class JuegoEscapeRoom {
     juegoActivo: boolean;
     tipo: string;
     estado: boolean;
+    mochila: Mochila = new Mochila([], 0);
   
   
     constructor( modo?: string, grupoId?: number, nombreJuego?: string, escenario?: Escenario, juegoActivo?: boolean, tipo?: string) {
@@ -20,5 +23,6 @@ export class JuegoEscapeRoom {
       this.juegoActivo=juegoActivo;
       this.tipo = tipo;
       this.estado = false;
+      this.mochila.idJuegoDeEscapeRoom = 0;
     }
   }

@@ -40,6 +40,7 @@ export class CrearJuegoRapidoComponent implements OnInit {
   profesorId: number;
   profesor: Profesor;
   varTitulo: string;
+  varTituloColumnaTabla: string;
 
   // tslint:disable-next-line:ban-types
   juegoCreado: Boolean = false;
@@ -70,8 +71,7 @@ export class CrearJuegoRapidoComponent implements OnInit {
     {nombre: 'Juego De Encuesta Rápida', color: 'primary'},
     {nombre: 'Juego De Cuestionario Rápido', color: 'accent'},
     {nombre: 'Juego De Votación Rápida', color: 'warn'},
-    {nombre: 'Juego De Coger Turno Rápido', color: 'primary'},
-    {nombre: 'Juego De Escape Room', color: 'warn'}
+    {nombre: 'Juego De Coger Turno Rápido', color: 'primary'}
   ];
 
   // Información para el juego de cuestionario de satisfacción
@@ -141,6 +141,7 @@ export class CrearJuegoRapidoComponent implements OnInit {
   ngOnInit() {
     this.profesor = this.sesion.DameProfesor();
     this.varTitulo = 'titulo' + this.profesor.estacion;
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
     this.profesorId = this.sesion.DameProfesor().id;
     this.myForm = this._formBuilder.group({
       NombreDelJuego: ['', Validators.required],
@@ -171,11 +172,6 @@ export class CrearJuegoRapidoComponent implements OnInit {
       this.creandoJuego = true; // empiezo el proceso de creacion del juego
     }
   }
-
-  TipoDeEscenarioSeleccionado(tipo: ChipColor) {
-    this.tipoDeJuegoSeleccionado = tipo.nombre;
-    this.tengoTipo = true;
-}
 
   TipoDeJuegoSeleccionado(tipo: ChipColor) {
       this.tipoDeJuegoSeleccionado = tipo.nombre;
@@ -365,16 +361,6 @@ CrearJuegoDeVotacionRapida() {
     dialogRef.afterClosed().subscribe(() => {
       this.cuestionario = this.sesion.DameCuestionario();
       this.tengoCuestionario = true;
-    });
-  }
-
-  verEscenario(imagen){
-    console.log("imagen: ", imagen);
-    Swal.fire({
-      title: imagen,
-      imageUrl: 'https://unsplash.it/400/200',
-      imageWidth: 400,
-      imageHeight: 200,
     });
   }
 

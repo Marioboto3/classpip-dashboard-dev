@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
 import { SesionService, PeticionesAPIService } from '../../../servicios/index';
-import { CuestionarioSatisfaccion} from 'src/app/clases/index';
+import { CuestionarioSatisfaccion, Profesor} from 'src/app/clases/index';
 import { MatTableDataSource } from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 
@@ -18,6 +18,7 @@ export class AsignarCuestionarioSatisfaccionComponent implements OnInit {
   misCuestionarios: CuestionarioSatisfaccion[];
   cuestionariosPublicos: CuestionarioSatisfaccion[];
   dataSource;
+  varTituloColumnaTabla: string;
 
 
   displayedColumns: string[] = ['select', 'titulo', 'descripcion'];
@@ -25,6 +26,7 @@ export class AsignarCuestionarioSatisfaccionComponent implements OnInit {
   // Para que al hacer click se quede la fila marcada
   selectedRowIndex = -1;
   muestroPublicos = false;
+  profesor: Profesor;
 
 
   constructor(
@@ -34,7 +36,10 @@ export class AsignarCuestionarioSatisfaccionComponent implements OnInit {
 
   ngOnInit() {
     this.profesorId = this.sesion.DameProfesor().id;
+    this.profesor = this.sesion.DameProfesor();
     this.TraeCuestionariosSatisfaccion();
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
+
   }
 
   // Para que al hacer click se quede la fila marcada

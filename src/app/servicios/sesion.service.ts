@@ -9,12 +9,15 @@ import { Escenario } from '../clases/Escenario';
 import { PuntoGeolocalizable } from '../clases/PuntoGeolocalizable';
 import { FieldsMapping } from '@syncfusion/ej2-angular-lists';
 import { ReplaySubject } from 'rxjs';
+import { ObjetoEnigma } from '../clases/ObjetoEnigma';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SesionService {
 
+
+  objetoEnigma: ObjetoEnigma;
   profesor: Profesor;
   profesorObservable = new ReplaySubject(1);
   grupo: Grupo;
@@ -99,8 +102,12 @@ export class SesionService {
     this.profesorObservable.next(profesor);
   }
 
-
-
+  public TomaObjetoEnigma(objeto: ObjetoEnigma){
+    this.objetoEnigma = objeto;
+  }
+  public DameObjetoEnigma(): ObjetoEnigma {
+    return this.objetoEnigma;
+  }
   public TomaGrupo(grupo: Grupo) {
     this.grupo = grupo;
   }

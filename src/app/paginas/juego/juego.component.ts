@@ -15,7 +15,7 @@ import {  Nivel, Alumno, Equipo, Juego, JuegoDeCompeticion, Punto, TablaPuntosFo
           EquipoJuegoDeCompeticionFormulaUno, Cuestionario, JuegoDeAvatar, FamiliaAvatares,
           AlumnoJuegoDeAvatar, AsignacionPuntosJuego, Coleccion, AlumnoJuegoDeColeccion,
           EquipoJuegoDeColeccion, Escenario, JuegoDeGeocaching, AlumnoJuegoDeGeocaching, PuntoGeolocalizable,
-          JuegoDeVotacionUnoATodos, AlumnoJuegoDeVotacionUnoATodos,
+          JuegoDeVotacionUnoATodos, AlumnoJuegoDeVotacionUnoATodos, Profesor,
           JuegoDeVotacionTodosAUno, AlumnoJuegoDeVotacionTodosAUno, CuestionarioSatisfaccion,
           JuegoDeCuestionarioSatisfaccion, AlumnoJuegoDeCuestionarioSatisfaccion, Rubrica } from '../../clases/index';
 
@@ -40,9 +40,12 @@ import {JuegoDeEvaluacion} from '../../clases/JuegoDeEvaluacion';
 import {log} from 'util';
 import {EquipoJuegoEvaluado} from '../../clases/EquipoJuegoEvaluado';
 import {AlumnoJuegoEvaluado} from '../../clases/AlumnoJuegoEvaluado';
-import { JuegoEscapeRoom } from 'src/app/clases/JuegoEscapeRoom';
+import { JuegoDeEscapeRoom } from 'src/app/clases/JuegoDeEscapeRoom';
 import { AlumnoJuegoEscapeRoom } from 'src/app/clases/AlumnoJuegoEscapeRoom';
 import { stringify } from '@angular/core/src/util';
+import { ObjetoEscape } from 'src/app/clases/ObjetoEscape';
+import { Mochila } from 'src/app/clases/Mochila';
+import { ObjetoEnigma } from 'src/app/clases/ObjetoEnigma';
 
 
 export interface OpcionSeleccionada {
@@ -70,6 +73,7 @@ export class JuegoComponent implements OnInit {
   ///////////////////////////////////// VARIABLE GENERALES PARA EL COMPONENTE ///////////////////////////////////
 
   profesorId: number;
+  profesor:Profesor;
   grupo: Grupo;
   alumnosGrupo: Alumno[];
   equiposGrupo: Equipo[];
@@ -78,11 +82,11 @@ export class JuegoComponent implements OnInit {
 
   // tslint:disable-next-line:ban-types
   juegoCreado: Boolean = false;
-
   // Usaré esta variable para determinar si debo advertir al usuario de
   // que está abandonando el proceso de creación del juego
   creandoJuego = false;
 
+  objetoEnigma: ObjetoEnigma;
   juego: any;
   juegoDeCuestionario: JuegoDeCuestionario;
   juegoDeCompeticion: JuegoDeCompeticion;
@@ -90,7 +94,8 @@ export class JuegoComponent implements OnInit {
   juegoDeGeocaching: JuegoDeGeocaching;
 
   varHelper: string;
-
+  objeto1: ObjetoEscape;
+  objeto2: ObjetoEscape;
   // Informacion para todos los juegos
   myForm: FormGroup;
   tipoDeEscenarioSeleccionado: string;
@@ -287,7 +292,8 @@ export class JuegoComponent implements OnInit {
   juegosInactivos: any[];
   juegosPreparados: any[];
 
-
+  varTitulo: string;
+  varLineaDivisoria: string;
   // tslint:disable-next-line:no-inferrable-types
   opcionSeleccionada: string = 'todosLosJuegos';
 
@@ -314,7 +320,12 @@ export class JuegoComponent implements OnInit {
     this.grupo = this.sesion.DameGrupo();
     console.log (' Grupo ' + this.grupo);
     this.alumnosGrupo = this.sesion.DameAlumnosGrupo();
+    this.profesor = this.sesion.DameProfesor();
     this.profesorId = this.sesion.DameProfesor().id;
+    this.varTitulo = 'titulo' + this.profesor.estacion;
+    this.varLineaDivisoria = 'lineaDivisoria' + this.profesor.estacion;
+    console.log("this.lineaDiv: ", this.varLineaDivisoria);
+
     // La lista de equipos del grupo no esta en el servicio sesión. Asi que hay que
     // ir a buscarla
     this.peticionesAPI.DameEquiposDelGrupo(this.grupo.id)
@@ -409,7 +420,15 @@ export class JuegoComponent implements OnInit {
   }
 
   //// ESCAPE ROOM
+  escogerObjeto(numeroObjeto){
+      if(numeroObjeto == 1){
+        this.objeto1 = new ObjetoEscape("botella",true,false,"objeto1");
+      }
+      if(numeroObjeto == 2){
+        this.objeto2 = new ObjetoEscape("vasoDeAgua",false,false,"objeto2");
 
+      }
+  }
   verEscenario(imagen){
     console.log("imagen: ", imagen);
     if (imagen == "Habitación"){
@@ -421,6 +440,10 @@ export class JuegoComponent implements OnInit {
     if (imagen == "Baño"){  
       this.varHelper = "baño";
     } 
+
+    //test
+    this.varHelper = "imagenBase";
+    imagen="imagenBase";
     Swal.fire({
       title: imagen,
       imageUrl: '../../../assets/'+ this.varHelper + '.jpg',
@@ -1029,20 +1052,65 @@ export class JuegoComponent implements OnInit {
 
     });
   }
-  pasarJuegoEscapeRoomToJuego(juegoEscape: JuegoEscapeRoom) {
-    this.juego = new Juego (juegoEscape.tipo, juegoEscape.modo, undefined, undefined, true, undefined, undefined, undefined, undefined, juegoEscape.nombreJuego, undefined, undefined, undefined, undefined, undefined, undefined, undefined, juegoEscape.escenario);
-  }
-  CrearJuegoDeEscapeRoom() {
-    this.peticionesAPI.CreaJuegoDeEscapeRoom(new JuegoEscapeRoom ( this.modoDeJuegoSeleccionado, this.grupo.id,
-     this.nombreDelJuego, new Escenario(this.tipoDeEscenarioSeleccionado, "test"),true,"Juego De Escape Room"), this.grupo.id)
-    .subscribe(juegoCreado => {
-      this.pasarJuegoEscapeRoomToJuego(juegoCreado);
-      console.log("MIRAR AQUI: ", this.juego);
-      console.log("MIRAR AQUI 2 : ", juegoCreado);
+  
+  escogerEnigma(){
+    
+    this.objetoEnigma = new ObjetoEnigma ("cajaFuerte", "","");
+    Swal.fire({
+      title: "Pregunta",
+      text: "¿Cual es la pregunta que tiene que responder el alumno para obtener el código?",
+      input:"text",
+      inputAttributes:{
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Asignar',
+      showLoaderOnConfirm: true,
+      cancelButtonText: 'Volver'
+    }).then((result) => {
+      if(result.value!=undefined)
+      {
+        this.objetoEnigma.pregunta = result.value;
 
+        Swal.fire({
+          title: "Respuesta",
+          text: "¿Cual es la respuesta correcta que tiene que dar el alumno para obtener el enigma?",
+          input:"text",
+          inputAttributes:{
+            autocapitalize: 'off'
+          },
+          showCancelButton: true,
+          confirmButtonText: 'Asignar',
+          showLoaderOnConfirm: true,
+          cancelButtonText: 'Volver'
+        }).then((result) => {
+          if(result.value!=undefined)
+          {
+            this.objetoEnigma.respuesta = result.value;
+
+            Swal.fire('Enigma creado correctamente', ' ', 'success');
+          }else{
+            Swal.fire('No se ha creado el enigma', ' ', 'info');
+          }
+        });
+      }else{
+        Swal.fire('No se ha creado el enigma', ' ', 'info');
+      }
+    });
+    this.sesion.TomaObjetoEnigma(this.objetoEnigma);
+    console.log("Dame objeto enigma: ", this.sesion.DameObjetoEnigma());
+  }
+
+  crearJuegoDeEscapeRoom() {
+    this.peticionesAPI.CreaJuegoDeEscapeRoom(new JuegoDeEscapeRoom ( this.modoDeJuegoSeleccionado, this.grupo.id,
+     this.nombreDelJuego, new Escenario(this.tipoDeEscenarioSeleccionado, "test", this.objeto1, this.objeto2, this.sesion.DameObjetoEnigma()),true,"Juego De Escape Room"), this.grupo.id)
+    .subscribe(juegoCreado => {
+      this.juego = juegoCreado;
       console.log('Juego creado correctamente');
+      this.juego.mochila.idJuegoDeEscapeRoom = juegoCreado.id;
       this.sesion.TomaJuego(this.juego);
       this.juegoCreado = true;
+      this.peticionesAPI.ModificaJuegoDeEscapeRoom(this.juego, this.grupo.id).subscribe(juego => {});
       // Asignamos a los participantes en el juego
       if (this.modoDeJuegoSeleccionado === 'Individual') {
         // tslint:disable-next-line:prefer-for-of

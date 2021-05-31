@@ -1,6 +1,6 @@
 
-<div class="titulo">Juegos</div>
-<mat-divider class="lineaDivisoria"></mat-divider>
+<div class="{{varTitulo}}">Juegos</div>
+<mat-divider class="{{varLineaDivisoria}}"></mat-divider>
 
 
 <div class="contenedor">
@@ -183,14 +183,14 @@
                   </div>
                 </div>
                 <div class="col-sm" style="text-align: center;">
-                <!-- <div class="btnCambiarStep">
-                    <button type="button" class="btn Peticion" style="margin-top:30px;"  (click)="CrearJuegoDeEscapeRoom()">Peticion</button>
-                  </div> !-->
+                    <button type="button" (click)="escogerObjeto(1)" class="btn Peticion">Escoger objeto 1</button>
+                    <button type="button" (click)="escogerObjeto(2)"class="btn Peticion">Escoger objeto 2</button>
+                    <button type="button" (click)="escogerEnigma()" class="btn Peticion">Escoger enigma</button>
                 </div>
               </div>
                 <div class="btnCambiarStep">
                   <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
-                  <button type="button" [disabled]="tipoDeEscenarioSeleccionado === null" (click)="CrearJuegoDeEscapeRoom()" class="btn Peticion">Crear</button>
+                  <button type="button" [disabled]="tipoDeEscenarioSeleccionado === null" (click)="crearJuegoDeEscapeRoom()" class="btn Peticion">Crear</button>
                 </div>
             </mat-step>
            </div>

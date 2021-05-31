@@ -87,7 +87,7 @@ mat-card-subtitle {
 
 input[type=text] {
   border: none;
-  color: white;
+  color: black;
   border-bottom: 1px solid rgb(63, 81, 181);
 }
 
@@ -431,9 +431,25 @@ table {
 
 //-----Extras
 
-.lineaDivisoria{
+.lineaDivisoriasummer{
   width: 70%;
   margin-left : 15% !important;
+  background-color: var(--main-color-summer);
+}
+.lineaDivisoriaautumn{
+  width: 70%;
+  margin-left : 15% !important;
+  background-color: var(--main-color-autumn);
+}
+.lineaDivisoriaspring{
+  width: 70%;
+  margin-left : 15% !important;
+  background-color: var(--main-color-spring);
+}
+.lineaDivisoriawinter{
+  width: 70%;
+  margin-left : 15% !important;
+  background-color: var(--main-color-winter);
 }
 
 

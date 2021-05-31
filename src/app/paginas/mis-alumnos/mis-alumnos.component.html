@@ -1,5 +1,5 @@
 <div class={{varTitulo}}>Mis Alumnos</div>
-<mat-divider class="lineaDivisoria"></mat-divider>
+<mat-divider class="{{varLineaDivisoria}}"></mat-divider>
 <br>
 <div class= "contenedor">
   <mat-tab-group>
@@ -31,7 +31,7 @@
 
           <!-- Checkbox Column -->
           <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef class="tituloColumnaTabla">
+            <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">
               <mat-checkbox
                             (change)="$event ? MasterToggle() : null; ActualizarBotonTabla ();"
                             [checked]="selection.hasValue() && IsAllSelected()"
@@ -55,41 +55,41 @@
 
           <!-- Nombre Alumno Column -->
           <ng-container matColumnDef="nombreAlumno">
-            <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Nombre </th>
+            <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre </th>
             <td mat-cell *matCellDef="let alumno"> {{alumno.nombre}} </td>
 
           </ng-container>
 
           <!-- Primer Apellido Column -->
           <ng-container matColumnDef="primerApellido">
-            <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Primer Apellido </th>
+            <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Primer Apellido </th>
             <td mat-cell *matCellDef="let alumno"> {{alumno.primerApellido}} </td>
 
           </ng-container>
 
           <!-- Segundo Apellido Column -->
           <ng-container  matColumnDef="segundoApellido">
-            <th style= "width: 15%" mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Segundo Apellido </th>
+            <th style= "width: 15%" mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Segundo Apellido </th>
             <td mat-cell *matCellDef="let alumno"> {{alumno.segundoApellido}} </td>
 
           </ng-container>
 
           <!-- alumnoId Column -->
           <ng-container matColumnDef="alumnoId">
-            <th style= "width: 5%" mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> ID </th>
+            <th style= "width: 5%" mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> ID </th>
             <td mat-cell *matCellDef="let alumno"> {{alumno.id}} </td>
 
           </ng-container>
 
           <ng-container matColumnDef="imagen">
-            <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Imagen de Perfil</th>
+            <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Imagen de Perfil</th>
             <td mat-cell *matCellDef="let alumno">
               <img  *ngIf = "alumno.imagenPerfil" style = "width:50px; height: 50px;" [src]="alumno.imagenPerfil">
             </td>
           </ng-container>
 
           <ng-container matColumnDef="permisoCambio">
-            <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"> Permiso cambio imagen</th>
+            <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Permiso cambio imagen</th>
             <td mat-cell *matCellDef="let alumno">
               <i  *ngIf = "alumno.permisoCambioImagenPerfil" class="material-icons green md-36">thumb_up_alt</i>
               <i  *ngIf = "!alumno.permisoCambioImagenPerfil" class="material-icons red md-36">not_interested</i>
@@ -100,7 +100,7 @@
 
 
           <ng-container matColumnDef=" ">
-              <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="tituloColumnaTabla"></th>
+              <th style= "width: 10%" mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"></th>
               <td mat-cell *matCellDef="let alumno">
                 <button (click) = "AbrirDialogoConfirmacionEliminarAlumno (alumno)" mat-icon-button matTooltip="Eliminar al alumno {{alumno.nombre}}">
                   <i class="material-icons red md-36">delete</i>

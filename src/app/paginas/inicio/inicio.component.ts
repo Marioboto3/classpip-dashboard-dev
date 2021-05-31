@@ -86,10 +86,10 @@ PreparaTabla() {
   console.log (this.juegosActivos);
   this.juegosActivos.forEach ( juego => {
     this.tabla.push ({
-                              nombre : juego.NombreJuego,
+                              nombre : juego.nombreJuego,
                               grupo : this.listaGrupos.filter (g => g.id === juego.grupoId)[0].nombre,
-                              tipo : juego.Tipo,
-                              modo : juego.Modo,
+                              tipo : juego.tipo,
+                              modo : juego.modo,
                               todoElJuego: juego
                     });
   });

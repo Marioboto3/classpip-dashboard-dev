@@ -4,11 +4,11 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { MatDialog, MatTabGroup } from '@angular/material';
 import Swal from 'sweetalert2';
 // Servicios
-import {PeticionesAPIService} from '../../../servicios/index';
+import {PeticionesAPIService, SesionService} from '../../../servicios/index';
 import { Location } from '@angular/common';
 
 // Clases
-import { Grupo, Alumno, Matricula } from '../../../clases/index';
+import { Grupo, Alumno, Profesor, Matricula } from '../../../clases/index';
 import {MatTableDataSource} from '@angular/material/table';
 import { DialogoConfirmacionComponent } from '../../COMPARTIDO/dialogo-confirmacion/dialogo-confirmacion.component';
 
@@ -30,14 +30,16 @@ export class AgregarAlumnoDialogComponent implements OnInit {
   alumnosDelGrupo: Alumno[] = [];
 
   alumno: Alumno;
-
+  varTituloColumnaTabla: string;  
   grupoId: number;
   profesorId: number;
+  profesor: Profesor;
   mensaje = 'Confirma que quieres quitar del grupo a ';
 
   constructor(
               public dialog: MatDialog,
               public location: Location,
+              private sesion: SesionService,
               private peticionesAPI: PeticionesAPIService,
               public dialogRef: MatDialogRef<AgregarAlumnoDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -49,7 +51,8 @@ export class AgregarAlumnoDialogComponent implements OnInit {
     // estamos usando el mecanismo de pasarle parametos, que es sencillo
     this.grupoId = this.data.grupoId;
     this.profesorId = this.data.profesorId;
-
+     this.profesor = this.sesion.DameProfesor();
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
 
     this.peticionesAPI.DameTodosMisAlumnos (this.profesorId )
     .subscribe ( res => {

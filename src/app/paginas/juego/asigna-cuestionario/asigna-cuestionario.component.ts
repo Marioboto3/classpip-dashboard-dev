@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource } from '@angular/material';
 import { Location } from '@angular/common';
 import { PeticionesAPIService, SesionService } from 'src/app/servicios';
-import { Cuestionario } from 'src/app/clases';
+import { Cuestionario, Profesor } from 'src/app/clases';
 import Swal from 'sweetalert2';
 import { DialogoConfirmacionComponent } from '../../COMPARTIDO/dialogo-confirmacion/dialogo-confirmacion.component';
 
@@ -22,6 +22,8 @@ export class AsignaCuestionarioComponent implements OnInit {
   profesorId: number;
   mensaje = 'Confirmar que quieres escoger el cuestionario: ';
   muestroPublicos = false;
+  varTituloColumnaTabla: string;
+  profesor: Profesor;
 
   constructor(public dialog: MatDialog,
               private sesion: SesionService,
@@ -33,6 +35,9 @@ export class AsignaCuestionarioComponent implements OnInit {
   ngOnInit() {
     this.profesorId = this.data.profesorId;
     this.DameTodosMisCuestionarios();
+    this.profesor = this.sesion.DameProfesor();
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
+
   }
 
 
@@ -90,5 +95,9 @@ export class AsignaCuestionarioComponent implements OnInit {
   QuitarPublicos() {
     this.muestroPublicos = false;
     this.dataSourceMisCuestionarios = new MatTableDataSource(this.misCuestionarios);
+  }
+
+  goBack(){
+    const dialogRef= this.dialog.closeAll;
   }
 }

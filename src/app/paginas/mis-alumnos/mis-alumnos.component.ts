@@ -24,7 +24,7 @@ import * as URL from '../../URLs/urls';
 export class MisAlumnosComponent implements OnInit {
  
   varTitulo: string;
-
+  varTituloColumnaTabla: string;
   misAlumnos: Alumno[];
   dataSource;
   profesor: Profesor;
@@ -32,7 +32,7 @@ export class MisAlumnosComponent implements OnInit {
   displayedColumns: string[] = ['select', 'nombreAlumno', 'primerApellido', 'segundoApellido', 'alumnoId', 'imagen' , 'permisoCambio' , ' '];
   selection = new SelectionModel<Alumno>(true, []);
   botonTablaDesactivado = true;
-
+  varLineaDivisoria: string;
   mensaje = 'Confirma que quieres eliminar a: ';
 
   constructor(
@@ -47,7 +47,10 @@ export class MisAlumnosComponent implements OnInit {
     this.profesor = this.sesion.DameProfesor();
     this.DameTodosMisAlumnos();
     
+    this.varTituloColumnaTabla = "tituloColumnaTabla" + this.profesor.estacion;
     this.varTitulo = 'titulo' + this.profesor.estacion;
+    this.varLineaDivisoria = 'lineaDivisoria' + this.profesor.estacion;
+
   }
 
   DameTodosMisAlumnos() {

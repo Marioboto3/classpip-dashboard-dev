@@ -25,7 +25,7 @@ import {EquipoJuegoEvaluado} from '../clases/EquipoJuegoEvaluado';
 import {AlumnoJuegoEvaluado} from '../clases/AlumnoJuegoEvaluado';
 // import {host} from '../URLs/urls';
 import * as URL from '../URLs/urls';
-import { JuegoEscapeRoom } from '../clases/JuegoEscapeRoom';
+import { JuegoDeEscapeRoom } from '../clases/JuegoDeEscapeRoom';
 import { AlumnoJuegoEscapeRoom } from '../clases/AlumnoJuegoEscapeRoom';
 
 @Injectable({
@@ -41,7 +41,7 @@ export class PeticionesAPIService {
   private APIUrlAlbum = this.host + ':3000/api/Albumes';
   private APIUrlAlbumEquipo = this.host + ':3000/api/AlbumesEquipo';
   private APIUrlAlumnos = this.host + ':3000/api/Alumnos';
-  private APIUrlAlumnoJuegoDeAvatar = this.host + ':3000/api/AlumnosJuegoAvatar';
+  private APIUrlAlumnoJuegoDeAvatar = this.host + ':3000/api/AlumnosJuegoDeAvatar';
   private APIUrlAlumnoJuegoDeColeccion = this.host + ':3000/api/AlumnosJuegoDeColeccion';
   private APIUrlAlumnoJuegoDeCompeticionFormulaUno = this.host + ':3000/api/AlumnosJuegoDeCompeticionFormulaUno';
   private APIUrlAlumnoJuegoDeCompeticionLiga = this.host + ':3000/api/AlumnosJuegoDeCompeticionLiga';
@@ -691,15 +691,18 @@ export class PeticionesAPIService {
 
 ///////////////////////////////////////// ESCAPE ROOM ////////////////////////////////////////////////////////////////////
 
-  public CreaJuegoDeEscapeRoom(juego: JuegoEscapeRoom, grupoId: number): Observable<JuegoEscapeRoom> {
-    return this.http.post<JuegoEscapeRoom>(this.APIUrlGrupos + '/' + grupoId + '/JuegosDeEscapeRoom', juego);
+  public CreaJuegoDeEscapeRoom(juego: JuegoDeEscapeRoom, grupoId: number): Observable<JuegoDeEscapeRoom> {
+    return this.http.post<JuegoDeEscapeRoom>(this.APIUrlGrupos + '/' + grupoId + '/JuegosDeEscapeRoom', juego);
+  }
+  public ModificaJuegoDeEscapeRoom(juego: JuegoDeEscapeRoom, grupoId: number): Observable<JuegoDeEscapeRoom> {
+    return this.http.put<JuegoDeEscapeRoom>(this.APIUrlGrupos + '/' + grupoId + '/JuegosDeEscapeRoom/' + juego.id, juego);
   }
   public InscribeAlumnoJuegoEscapeRoom(AlumnoJuegoEscapeRoom: AlumnoJuegoEscapeRoom) {
     return this.http.post<AlumnoJuegoEscapeRoom>(this.APIUrlAlumnoJuegoDeEscapeRoom, AlumnoJuegoEscapeRoom);
   }
 
-  public DameJuegosDeEscapeRoom(grupoId: number): Observable<JuegoEscapeRoom[]> {
-    return this.http.get<JuegoEscapeRoom[]>(this.APIUrlGrupos + '/' + grupoId + '/JuegosDeEscapeRoom');
+  public DameJuegosDeEscapeRoom(grupoId: number): Observable<JuegoDeEscapeRoom[]> {
+    return this.http.get<JuegoDeEscapeRoom[]>(this.APIUrlGrupos + '/' + grupoId + '/JuegosDeEscapeRoom');
   }
 ///////////////////////////////////////// GESTION DE JUEGO DE COLECCION //////////////////////////////////////////////////
 
@@ -1343,13 +1346,13 @@ export class PeticionesAPIService {
   }
 
   public DameJuegoDeAvatarGrupo(grupoId: number): Observable<Juego[]> {
-    return this.http.get<Juego[]>(this.APIUrlGrupos + '/' + grupoId + '/JuegoDeAvatar');
+    return this.http.get<Juego[]>(this.APIUrlGrupos + '/' + grupoId + '/JuegosDeAvatar');
   }
 
 
   public CambiaEstadoJuegoDeAvatar(juego: Juego): Observable<Juego> {
     // tslint:disable-next-line:max-line-length
-    return this.http.put<Juego>(this.APIUrlGrupos + '/' + juego.grupoId + '/JuegoDeAvatar/' + juego.id, juego);
+    return this.http.put<Juego>(this.APIUrlGrupos + '/' + juego.grupoId + '/JuegosDeAvatar/' + juego.id, juego);
   }
 
 

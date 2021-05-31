@@ -19,7 +19,7 @@ import { AlumnoJuegoDeCuestionario } from '../clases/AlumnoJuegoDeCuestionario';
 import { TablaAlumnoJuegoDeCuestionario } from '../clases/TablaAlumnoJuegoDeCuestionario';
 import { AlumnoJuegoDeGeocaching } from '../clases/AlumnoJuegoDeGeocaching';
 import { TablaAlumnoJuegoDeGeocaching } from '../clases/TablaAlumnoJuegoDeGeocaching';
-import { JuegoEscapeRoom } from '../clases/JuegoEscapeRoom';
+import { JuegoDeEscapeRoom } from '../clases/JuegoDeEscapeRoom';
 import { MaloJuegoEscapeRoom } from '../clases/MaloJuegoDeEscapeRoom';
 
 
@@ -656,12 +656,10 @@ export class CalculosService {
                             for (let i = 0; i < juegosEscapeRoom.length; i++) {
                               if (juegosEscapeRoom[i].juegoActivo === true) {
                                 //juegosEscapeRoom[i].Tipo = 'Juego De Votación Uno A Todos';
-                                this.pasarJuegoEscapeRoomToJuego(juegosEscapeRoom[i]);
-                                juegosActivos.push(this.juego);
+                                juegosActivos.push(juegosEscapeRoom[i]);
                               } else {
                                 //juegosVotacionUnoATodos[i].Tipo = 'Juego De Votación Uno A Todos';
-                                this.pasarJuegoEscapeRoomToJuego(juegosEscapeRoom[i]);
-                                juegosInactivos.push(this.juego);
+                                juegosInactivos.push(juegosEscapeRoom[i]);
                               }
                             }
                           const resultado = { activos: juegosActivos, inactivos: juegosInactivos, preparados: juegosPreparados};
@@ -4004,8 +4002,5 @@ public VerificarFicherosPreguntas(preguntas: any): any {
     });
   });
   return listaFicherosObservable;
-}
-pasarJuegoEscapeRoomToJuego(juegoEscape: JuegoEscapeRoom) {
-  this.juego = new MaloJuegoEscapeRoom (juegoEscape.modo, juegoEscape.grupoId, juegoEscape.nombreJuego, juegoEscape.escenario, true,  juegoEscape.tipo,  );
 }
 }
