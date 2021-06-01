@@ -10,12 +10,14 @@ export class Escenario {
     objeto1: ObjetoEscape;
     objeto2: ObjetoEscape;
     objetoEnigma: ObjetoEnigma;
+    objetoPista: ObjetoEscape;
 
-    constructor(mapa?: string, descripcion?: string, objeto1?: ObjetoEscape, objeto2?: ObjetoEscape, objetoEnigma?: ObjetoEnigma){
+    constructor(mapa?: string, descripcion?: string, objeto1?: ObjetoEscape, objeto2?: ObjetoEscape, objetoEnigma?: ObjetoEnigma, objetoPista?: ObjetoEscape){
         this.mapa = mapa;
         this.descripcion = descripcion;
         this.objeto1 = objeto1;
         this.objeto2 = objeto2;
         this.objetoEnigma = objetoEnigma;
+        this.objetoPista = objetoPista;
     }
 }

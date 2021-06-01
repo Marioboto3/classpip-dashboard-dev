@@ -105,6 +105,7 @@ export class JuegoComponent implements OnInit {
   tengoNombre = false;
   tengoTipo = false;
   tengoModo = false;
+  objetoPista: ObjetoEscape;
   seleccionTipoJuego: ChipColor[] = [
     {nombre: 'Juego De Puntos', color: 'primary'},
     {nombre: 'Juego De Colección', color: 'accent'},
@@ -425,9 +426,9 @@ export class JuegoComponent implements OnInit {
         this.objeto1 = new ObjetoEscape("botella",true,false,"objeto1");
       }
       if(numeroObjeto == 2){
-        this.objeto2 = new ObjetoEscape("vasoDeAgua",false,false,"objeto2");
-
+        this.objeto2 = new ObjetoEscape("vasoDeAgua",true,false,"objeto2");
       }
+      this.objetoPista = new ObjetoEscape("llave", true, false, "objetoPista");
   }
   verEscenario(imagen){
     console.log("imagen: ", imagen);
@@ -1055,7 +1056,7 @@ export class JuegoComponent implements OnInit {
   
   escogerEnigma(){
     
-    this.objetoEnigma = new ObjetoEnigma ("cajaFuerte", "","");
+    this.objetoEnigma = new ObjetoEnigma ("cajaFuerte", "","", false);
     Swal.fire({
       title: "Pregunta",
       text: "¿Cual es la pregunta que tiene que responder el alumno para obtener el código?",
@@ -1103,7 +1104,7 @@ export class JuegoComponent implements OnInit {
 
   crearJuegoDeEscapeRoom() {
     this.peticionesAPI.CreaJuegoDeEscapeRoom(new JuegoDeEscapeRoom ( this.modoDeJuegoSeleccionado, this.grupo.id,
-     this.nombreDelJuego, new Escenario(this.tipoDeEscenarioSeleccionado, "test", this.objeto1, this.objeto2, this.sesion.DameObjetoEnigma()),true,"Juego De Escape Room"), this.grupo.id)
+     this.nombreDelJuego, new Escenario(this.tipoDeEscenarioSeleccionado, "test", this.objeto1, this.objeto2, this.sesion.DameObjetoEnigma(),this.objetoPista),true,"Juego De Escape Room"), this.grupo.id)
     .subscribe(juegoCreado => {
       this.juego = juegoCreado;
       console.log('Juego creado correctamente');
