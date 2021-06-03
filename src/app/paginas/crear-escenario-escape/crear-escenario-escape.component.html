@@ -1,0 +1,68 @@
+<div class={{varTitulo}}>Crear Escenario</div>
+<mat-divider style="width: 70%; margin-left : 15%"></mat-divider>
+
+<div class="contenedor">
+  <!-- STEPPER -->
+
+    <mat-card class="panel" style= "width: 70%">
+
+      <mat-card-content>
+
+      <mat-horizontal-stepper #linearHorizontalStepper="matHorizontalStepper" [linear]="true" #stepper>
+
+
+      <!-- PRIMER PASO -->
+        <mat-step [stepControl]="myForm">
+
+         <form [formGroup]="myForm">
+          <ng-template matStepLabel>Nombre del escenario</ng-template>
+          <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombreEscenario" required>
+            <mat-error>Este campo es obligatorio</mat-error>
+          </mat-form-field>
+      
+          <div>
+            <mat-form-field>
+              <mat-label>Descripción</mat-label>
+              <input matInput formControlName="descripcionEscenario" required>
+              <mat-error>Este campo es obligatorio</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="btnCambiarStep">
+            <button *ngIf="escenarioYaCreado === false" class="btn Next"matStepperNext (click)= crearEscenario()>Siguiente</button>
+            <button *ngIf="escenarioYaCreado === true"  class="btn Next" matStepperNext (click)= EditarEscenario() >Siguiente</button>
+          </div>
+        </form>
+        </mat-step>
+   
+         <mat-step [stepControl]="myForm2">
+          <ng-template matStepLabel>Escenario base</ng-template>
+  
+            <div class="btnCambiarStep" style="margin-top:10px;">
+                <button type="button" class="btn Back"   matStepperPrevious>Atrás</button>
+                <button type="button" class="btn Next" matStepperNext (click) = "Finalizar()">Finalizar</button>
+            </div>
+
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Finalizar</ng-template>
+         <div>
+          <p> Escenario creado correctamente. </p>
+          <p> Haga click en "Finalizar" para guardar los cambios.</p>
+         </div>
+
+          <div class="btnCambiarStep">
+            <button  type="button" class="btn Back"  matStepperPrevious>Atrás</button>
+            <button  type="button" class="btn Aceptar" (click) = "Finalizar()">Finalizar</button>
+          </div>
+        </mat-step>
+
+
+      </mat-horizontal-stepper>
+    </mat-card-content>
+  </mat-card> 
+</div>
+

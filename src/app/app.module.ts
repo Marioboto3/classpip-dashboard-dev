@@ -251,6 +251,8 @@ import { MostrarCuestionarioComponent } from './paginas/mis-cuestionarios/mostra
 import { MostrarCuestionarioSatisfaccionComponent } from './paginas/mis-cuestionarios-satisfaccion/mostrar-cuestionario-satisfaccion/mostrar-cuestionario-satisfaccion.component';
 import { PortadaComponent } from './paginas/portada/portada.component';
 import { CambiarEstacionComponent } from './paginas/cambiar-estacion/cambiar-estacion.component';
+import { MisEscenariosEscapeRoomComponent } from './paginas/mis-escenarios-escape-room/mis-escenarios-escape-room.component';
+import { CrearEscenarioEscapeComponent } from './paginas/crear-escenario-escape/crear-escenario-escape.component';
 
 
 @NgModule({
@@ -398,7 +400,9 @@ import { CambiarEstacionComponent } from './paginas/cambiar-estacion/cambiar-est
     MostrarCuestionarioComponent,
     MostrarCuestionarioSatisfaccionComponent,
     PortadaComponent,
-    CambiarEstacionComponent
+    CambiarEstacionComponent,
+    MisEscenariosEscapeRoomComponent,
+    CrearEscenarioEscapeComponent
   ],
   imports: [
     BrowserModule,

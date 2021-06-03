@@ -46,6 +46,7 @@ import { stringify } from '@angular/core/src/util';
 import { ObjetoEscape } from 'src/app/clases/ObjetoEscape';
 import { Mochila } from 'src/app/clases/Mochila';
 import { ObjetoEnigma } from 'src/app/clases/ObjetoEnigma';
+import { EscenarioEscapeRoom } from 'src/app/clases/EscenarioEscapeRoom';
 
 
 export interface OpcionSeleccionada {
@@ -93,6 +94,7 @@ export class JuegoComponent implements OnInit {
   juegoDeAvatar: JuegoDeAvatar;
   juegoDeGeocaching: JuegoDeGeocaching;
 
+  objetos: ObjetoEscape [] = [];
   varHelper: string;
   objeto1: ObjetoEscape;
   objeto2: ObjetoEscape;
@@ -422,13 +424,34 @@ export class JuegoComponent implements OnInit {
 
   //// ESCAPE ROOM
   escogerObjeto(numeroObjeto){
-      if(numeroObjeto == 1){
-        this.objeto1 = new ObjetoEscape("botella",true,false,"objeto1");
-      }
-      if(numeroObjeto == 2){
-        this.objeto2 = new ObjetoEscape("vasoDeAgua",true,false,"objeto2");
-      }
-      this.objetoPista = new ObjetoEscape("llave", true, false, "objetoPista");
+
+    this.objetos[0] = new ObjetoEscape ("botella", false, true, "objeto1");
+    this.objetos[1] = new ObjetoEscape ("vasoDeAgua", false, true, "objeto2");
+    this.objetos[2] = new ObjetoEscape ("jarron", false, true, "objeto1");
+    this.objetos[3] = new ObjetoEscape ("lampara", false, true, "objeto2");
+
+    console.log("thhis.objetos: ", this.objetos);
+    if(numeroObjeto == 1){
+      Swal.fire({
+        title: 'Objetos para poner en la primera posición',
+        showCancelButton: true,
+        confirmButtonText: 'Escoger',
+        cancelButtonText: 'Volver'}).then((result) => {
+          if (result.value == true){
+            console.log("SELECCIONADO: ", this.tipoDeEscenarioSeleccionado);
+            Swal.fire('Guardado!', '', 'success');
+          } else if (result.value == undefined) {
+            Swal.fire('No se han guardado los cambios', '', 'info')
+          }
+        });
+    
+      this.objeto1 = new ObjetoEscape("botella",true,false,"objeto1");
+    }
+    if(numeroObjeto == 2){
+      this.objeto2 = new ObjetoEscape("vasoDeAgua",true,false,"objeto2");
+    }
+    this.objetoPista = new ObjetoEscape("llave", true, false, "objetoPista");
+
   }
   verEscenario(imagen){
     console.log("imagen: ", imagen);
@@ -1103,56 +1126,43 @@ export class JuegoComponent implements OnInit {
   }
 
   crearJuegoDeEscapeRoom() {
-    this.peticionesAPI.CreaJuegoDeEscapeRoom(new JuegoDeEscapeRoom ( this.modoDeJuegoSeleccionado, this.grupo.id,
-     this.nombreDelJuego, new Escenario(this.tipoDeEscenarioSeleccionado, "test", this.objeto1, this.objeto2, this.sesion.DameObjetoEnigma(),this.objetoPista),true,"Juego De Escape Room"), this.grupo.id)
-    .subscribe(juegoCreado => {
-      this.juego = juegoCreado;
-      console.log('Juego creado correctamente');
-      this.juego.mochila.idJuegoDeEscapeRoom = juegoCreado.id;
-      this.sesion.TomaJuego(this.juego);
-      this.juegoCreado = true;
-      this.peticionesAPI.ModificaJuegoDeEscapeRoom(this.juego, this.grupo.id).subscribe(juego => {});
-      // Asignamos a los participantes en el juego
-      if (this.modoDeJuegoSeleccionado === 'Individual') {
-        // tslint:disable-next-line:prefer-for-of
-        for (let i = 0; i < this.alumnosGrupo.length; i++) {
-          console.log("Alumno id, personaje y juegoId: ", this.alumnosGrupo[i].id, "moreno", this.juego.id); 
-          this.peticionesAPI.InscribeAlumnoJuegoEscapeRoom(new AlumnoJuegoEscapeRoom (this.alumnosGrupo[i].id, "moreno", juegoCreado.id))
-          .subscribe();
-        }
-      } 
-      /*else {
-        // tslint:disable-next-line:prefer-for-of
-        for (let i = 0; i < this.equiposGrupo.length; i++) {
-          this.peticionesAPI.InscribeEquipoJuegoDeColeccion(new EquipoJuegoDeColeccion(this.equiposGrupo[i].id, this.juego.id))
-          .subscribe();
-        }
-      }*/
-      Swal.fire('Juego de escape room creado correctamente', ' ', 'success');
+    let escenarioEscape = new EscenarioEscapeRoom;
+
+    this.peticionesAPI.DameEscenariosDelProfesorEscapeRoom(this.profesor.id).subscribe(listaEscenarios => {
+      if (listaEscenarios.length == 1){
+        this.peticionesAPI.CreaJuegoDeEscapeRoom(new JuegoDeEscapeRoom ( this.modoDeJuegoSeleccionado, this.grupo.id,
+          this.nombreDelJuego, listaEscenarios[0],true,"Juego De Escape Room", listaEscenarios[0].id), this.grupo.id)
+         .subscribe(juegoCreado => {
+           this.juego = juegoCreado;
+           console.log('Juego creado correctamente');
+           this.juego.mochila.idJuegoDeEscapeRoom = juegoCreado.id;
+           this.sesion.TomaJuego(this.juego);
+           this.juegoCreado = true;
+           this.peticionesAPI.ModificaJuegoDeEscapeRoom(this.juego, this.grupo.id).subscribe(juego => {});
+           // Asignamos a los participantes en el juego
+           if (this.modoDeJuegoSeleccionado === 'Individual') {
+             // tslint:disable-next-line:prefer-for-of
+             for (let i = 0; i < this.alumnosGrupo.length; i++) {
+               console.log("Alumno id, personaje y juegoId: ", this.alumnosGrupo[i].id, "moreno", this.juego.id); 
+               this.peticionesAPI.InscribeAlumnoJuegoEscapeRoom(new AlumnoJuegoEscapeRoom (this.alumnosGrupo[i].id, "moreno", juegoCreado.id))
+               .subscribe();
+             }
+           } 
+           Swal.fire('Juego de escape room creado correctamente', ' ', 'success');
+           
+           // El juego se ha creado como activo. Lo añadimos a la lista correspondiente
+           if (this.juegosActivos === undefined) {
+             // Si la lista aun no se ha creado no podre hacer el push
+                 this.juegosActivos = [];
+             }
+           this.juegosActivos.push (this.juego);
+           this.Limpiar();
+             // Regresamos a la lista de equipos (mat-tab con índice 0)
+           this.tabGroup.selectedIndex = 0;
       
-      // El juego se ha creado como activo. Lo añadimos a la lista correspondiente
-      if (this.juegosActivos === undefined) {
-        // Si la lista aun no se ha creado no podre hacer el push
-            this.juegosActivos = [];
-        }
-      this.juegosActivos.push (this.juego);
-      this.Limpiar();
-        // Regresamos a la lista de equipos (mat-tab con índice 0)
-      this.tabGroup.selectedIndex = 0;
-      // Notificación para los miembros del grupo
-      // console.log ('envio notificación los miembros del grupo');
-      // this.comService.EnviarNotificacionGrupo (
-      //      this.grupo.id,
-      //      'Nuevo juego de colección para el grupo ' + this.grupo.Nombre
-      // );
-      /*
-      console.log ('envio notificación los miembros del grupo');
-      this.comService.EnviarNotificacionGrupo (
-          this.grupo.id,
-          'Nuevo juego de colección para el grupo ' + this.grupo.Nombre
-      );
-      */
-    });
+         });
+      }
+    })
   }
 
   //// FUNCIONES PARA LA CREACION DE JUEGO DE CUESTIONARIO

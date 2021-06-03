@@ -154,6 +154,8 @@ import { MostrarCuestionarioComponent } from './paginas/mis-cuestionarios/mostra
 import { MostrarCuestionarioSatisfaccionComponent } from './paginas/mis-cuestionarios-satisfaccion/mostrar-cuestionario-satisfaccion/mostrar-cuestionario-satisfaccion.component';
 import { PortadaComponent } from './paginas/portada/portada.component';
 import { CambiarEstacionComponent } from './paginas/cambiar-estacion/cambiar-estacion.component';
+import { MisEscenariosEscapeRoomComponent } from './paginas/mis-escenarios-escape-room/mis-escenarios-escape-room.component';
+import { CrearEscenarioEscapeComponent } from './paginas/crear-escenario-escape/crear-escenario-escape.component';
 
 const routes: Routes = [
 
@@ -307,6 +309,10 @@ const routes: Routes = [
   { path: 'inicio/:id/crearEscenario', component: CrearEscenarioComponent, canDeactivate: [DeactivateGuardCrearEscenario] },
   { path: 'inicio/:id/misEscenarios', component: MisEscenariosComponent },
   { path: 'inicio/:id/misEscenarios/editarEscenario', component: EditarEscenarioComponent },
+
+  //escenariosEscapeRoom
+  { path: 'inicio/:id/crearEscenarioEscapeRoom', component: CrearEscenarioEscapeComponent },
+  { path: 'inicio/:id/misEscenariosEscapeRoom', component: MisEscenariosEscapeRoomComponent },
 
   // AVATARES
   { path: 'inicio/:id/misFamiliasAvatares', component: MisFamiliasAvataresComponent},
