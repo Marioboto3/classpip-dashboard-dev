@@ -14,7 +14,6 @@ import { SesionService, PeticionesAPIService } from '../../servicios/index';
 
 // Clases
 
-import { PuntoGeolocalizable } from 'src/app/clases/PuntoGeolocalizable';
 import { Escenario, Profesor } from 'src/app/clases';
 import { EscenarioEscapeRoom } from 'src/app/clases/EscenarioEscapeRoom';
 

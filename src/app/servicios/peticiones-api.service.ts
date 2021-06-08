@@ -28,6 +28,10 @@ import * as URL from '../URLs/urls';
 import { JuegoDeEscapeRoom } from '../clases/JuegoDeEscapeRoom';
 import { AlumnoJuegoEscapeRoom } from '../clases/AlumnoJuegoEscapeRoom';
 import { EscenarioEscapeRoom } from '../clases/EscenarioEscapeRoom';
+import { ObjetoEscape } from '../clases/objetoEscape';
+import { MisObjetosEscapeRoomComponent } from '../paginas/mis-objetos-escape-room/mis-objetos-escape-room.component';
+import { ObjetoEnigma } from '../clases/ObjetoEnigma';
+import { ObjetoGlobalEscape } from '../clases/ObjetoGlobalEscape';
 
 @Injectable({
   providedIn: 'root'
@@ -698,12 +702,30 @@ export class PeticionesAPIService {
   public ModificaJuegoDeEscapeRoom(juego: JuegoDeEscapeRoom, grupoId: number): Observable<JuegoDeEscapeRoom> {
     return this.http.put<JuegoDeEscapeRoom>(this.APIUrlGrupos + '/' + grupoId + '/JuegosDeEscapeRoom/' + juego.id, juego);
   }
+  public DameObjetosEscapeDelProfesorEscapeRoom(profesorId: number): Observable<ObjetoEscape[]> {
+    return this.http.get<ObjetoEscape[]>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEscape');
+  }
+  public DameObjetosEnigmaDelProfesorEscapeRoom(profesorId: number): Observable<ObjetoEnigma[]> {
+    return this.http.get<ObjetoEnigma[]>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEnigma');
+  }
   public CreaEscenarioEscapeRoom(escenario: EscenarioEscapeRoom, profesorId: number): Observable<EscenarioEscapeRoom> {
     console.log('Escenario: ' + escenario);
     return this.http.post<EscenarioEscapeRoom>(this.APIUrlProfesores + '/' + profesorId + '/EscenariosEscapeRoom', escenario);
   }
+  public CreaObjetoEscape(objetoEscape: ObjetoEscape, profesorId: number): Observable<ObjetoEscape> {
+    return this.http.post<ObjetoEscape>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEscape', objetoEscape);
+  }
+  public CreaObjetoEnigma(objetoEnigma: ObjetoEnigma, profesorId: number): Observable<ObjetoEnigma> {
+    return this.http.post<ObjetoEnigma>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEnigma', objetoEnigma);
+  }
+  public CreaObjetoGlobal(objetoGlobal: ObjetoGlobalEscape, profesorId: number): Observable<ObjetoGlobalEscape> {
+    return this.http.post<ObjetoGlobalEscape>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosGlobalEscape', objetoGlobal);
+  }
   public DameEscenariosDelProfesorEscapeRoom(profesorId: number): Observable<EscenarioEscapeRoom[]> {
     return this.http.get<EscenarioEscapeRoom[]>(this.APIUrlProfesores + '/' + profesorId + '/EscenariosEscapeRoom');
+  }
+  public DameObjetosDelProfesorEscapeRoom(profesorId: number): Observable<ObjetoGlobalEscape[]> {
+    return this.http.get<ObjetoGlobalEscape[]>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosGlobalEscape');
   }
   public InscribeAlumnoJuegoEscapeRoom(AlumnoJuegoEscapeRoom: AlumnoJuegoEscapeRoom) {
     return this.http.post<AlumnoJuegoEscapeRoom>(this.APIUrlAlumnoJuegoDeEscapeRoom, AlumnoJuegoEscapeRoom);

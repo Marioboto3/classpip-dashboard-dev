@@ -120,6 +120,7 @@ import {MenuRecursosComponent} from './paginas/menu-recursos/menu-recursos.compo
 import {CrearRubricaComponent } from './paginas/crear-rubrica/crear-rubrica.component';
 import { MisRubricasComponent } from './paginas/mis-rubricas/mis-rubricas.component';
 
+import {MisObjetosEscapeRoomComponent} from './paginas/mis-objetos-escape-room/mis-objetos-escape-room.component';
 
 import {CrearFamiliaImagenesPerfilComponent} from './paginas/crear-familia-imagenes-perfil/crear-familia-imagenes-perfil.component';
 import {MisFamiliasImagenesPerfilComponent} from './paginas/mis-familias-imagenes-perfil/mis-familias-imagenes-perfil.component';
@@ -156,6 +157,7 @@ import { PortadaComponent } from './paginas/portada/portada.component';
 import { CambiarEstacionComponent } from './paginas/cambiar-estacion/cambiar-estacion.component';
 import { MisEscenariosEscapeRoomComponent } from './paginas/mis-escenarios-escape-room/mis-escenarios-escape-room.component';
 import { CrearEscenarioEscapeComponent } from './paginas/crear-escenario-escape/crear-escenario-escape.component';
+import { CrearObjetoEscapeRoomComponent } from './paginas/crear-objeto-escape-room/crear-objeto-escape-room.component';
 
 const routes: Routes = [
 
@@ -313,6 +315,11 @@ const routes: Routes = [
   //escenariosEscapeRoom
   { path: 'inicio/:id/crearEscenarioEscapeRoom', component: CrearEscenarioEscapeComponent },
   { path: 'inicio/:id/misEscenariosEscapeRoom', component: MisEscenariosEscapeRoomComponent },
+
+  //Objetos del escape room
+
+  { path: 'inicio/:id/misObjetosEscapeRoom', component: MisObjetosEscapeRoomComponent},
+  { path: 'inicio/:id/crearObjetoEscapeRoom', component: CrearObjetoEscapeRoomComponent},
 
   // AVATARES
   { path: 'inicio/:id/misFamiliasAvatares', component: MisFamiliasAvataresComponent},

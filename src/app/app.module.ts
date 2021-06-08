@@ -253,6 +253,8 @@ import { PortadaComponent } from './paginas/portada/portada.component';
 import { CambiarEstacionComponent } from './paginas/cambiar-estacion/cambiar-estacion.component';
 import { MisEscenariosEscapeRoomComponent } from './paginas/mis-escenarios-escape-room/mis-escenarios-escape-room.component';
 import { CrearEscenarioEscapeComponent } from './paginas/crear-escenario-escape/crear-escenario-escape.component';
+import { MisObjetosEscapeRoomComponent } from './paginas/mis-objetos-escape-room/mis-objetos-escape-room.component';
+import { CrearObjetoEscapeRoomComponent } from './paginas/crear-objeto-escape-room/crear-objeto-escape-room.component';
 
 
 @NgModule({
@@ -402,7 +404,9 @@ import { CrearEscenarioEscapeComponent } from './paginas/crear-escenario-escape/
     PortadaComponent,
     CambiarEstacionComponent,
     MisEscenariosEscapeRoomComponent,
-    CrearEscenarioEscapeComponent
+    CrearEscenarioEscapeComponent,
+    MisObjetosEscapeRoomComponent,
+    CrearObjetoEscapeRoomComponent
   ],
   imports: [
     BrowserModule,

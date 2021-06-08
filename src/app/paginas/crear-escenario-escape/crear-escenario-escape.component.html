@@ -4,65 +4,207 @@
 <div class="contenedor">
   <!-- STEPPER -->
 
-    <mat-card class="panel" style= "width: 70%">
+  <mat-card class="panel" style="width: 70%">
 
-      <mat-card-content>
+    <mat-card-content>
 
       <mat-horizontal-stepper #linearHorizontalStepper="matHorizontalStepper" [linear]="true" #stepper>
 
 
-      <!-- PRIMER PASO -->
+        <!-- PRIMER PASO -->
         <mat-step [stepControl]="myForm">
 
-         <form [formGroup]="myForm">
-          <ng-template matStepLabel>Nombre del escenario</ng-template>
-          <mat-form-field>
-            <mat-label>Nombre</mat-label>
-            <input matInput formControlName="nombreEscenario" required>
-            <mat-error>Este campo es obligatorio</mat-error>
-          </mat-form-field>
-      
-          <div>
+          <form [formGroup]="myForm">
+            <ng-template matStepLabel>Nombre del escenario</ng-template>
             <mat-form-field>
-              <mat-label>Descripción</mat-label>
-              <input matInput formControlName="descripcionEscenario" required>
+              <mat-label>Nombre</mat-label>
+              <input matInput formControlName="nombreEscenario" required>
               <mat-error>Este campo es obligatorio</mat-error>
             </mat-form-field>
-          </div>
 
-          <div class="btnCambiarStep">
-            <button *ngIf="escenarioYaCreado === false" class="btn Next"matStepperNext (click)= crearEscenario()>Siguiente</button>
-            <button *ngIf="escenarioYaCreado === true"  class="btn Next" matStepperNext (click)= EditarEscenario() >Siguiente</button>
-          </div>
-        </form>
-        </mat-step>
-   
-         <mat-step [stepControl]="myForm2">
-          <ng-template matStepLabel>Escenario base</ng-template>
-  
-            <div class="btnCambiarStep" style="margin-top:10px;">
-                <button type="button" class="btn Back"   matStepperPrevious>Atrás</button>
-                <button type="button" class="btn Next" matStepperNext (click) = "Finalizar()">Finalizar</button>
+            <div>
+              <mat-form-field>
+                <mat-label>Descripción</mat-label>
+                <input matInput formControlName="descripcionEscenario" required>
+                <mat-error>Este campo es obligatorio</mat-error>
+              </mat-form-field>
             </div>
 
+            <div class="btnCambiarStep">
+              <button *ngIf="escenarioYaCreado === false" class="btn Next" matStepperNext>Siguiente</button>
+              <button *ngIf="escenarioYaCreado === true" class="btn Next" matStepperNext
+                (click)=EditarEscenario()>Siguiente</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="myForm2">
+          <form [formGroup]="myForm2">
+            <ng-template matStepLabel>Escenario base</ng-template>
+
+  
+              <mat-label>Escoge escenario base</mat-label>
+              <i class="material-icons green md-36" (click)="verImagenes(contenido)">check_circle_outline</i>
+ 
+
+            <div>
+                <mat-label>Escoge objetos</mat-label>
+                <i class="material-icons green md-36" (click)="verObjetos(objetos)">check_circle_outline</i>
+            </div>
+
+            <ng-template #contenido let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title">Imagenes</h4>
+                <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class='enColumna'>
+                  <form style='width: 100%' *ngIf="imagenes;else Aviso_no_cuestionarios">
+
+                    <div class="filter">
+                      <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)"
+                          placeholder="Filtro para buscar imagen...">
+                        <i class="material-icons" matSuffix>search</i>
+                      </mat-form-field>
+                    </div>
+                    <table align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                      <!-- Titulo Column -->
+                      <ng-container matColumnDef="nombre">
+                        <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre </th>
+                        <td mat-cell *matCellDef="let imagen"> {{imagen.nombre}} </td>
+
+                      </ng-container>
+
+                      <!-- Pregunta Column -->
+
+                      <ng-container matColumnDef="escoger">
+                        <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"></th>
+                        <td mat-cell *matCellDef="let imagen">
+                          <button (click)="escogerImagenBase(imagen)" mat-icon-button
+                            matTooltip="Editar la imagen {{imagen.nombre}}">
+                            <i class="material-icons green md-36">check_circle_outline</i>
+                          </button>
+                        </td>
+                      </ng-container>
+
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                      </tr>
+                    </table>
+                  </form>
+
+                  <div class="contenedor">
+                    <ng-template #Aviso_no_cuestionarios>
+                      <div class="texto">No tienes imagenes</div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
+              </div>
+            </ng-template>
+
+            <ng-template #objetos let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title">Objetos</h4>
+                <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class='enColumna'>
+                  <form style='width: 100%' *ngIf="objetosProfesor;else Aviso_no_objetos">
+
+                    <h4>Te quedan por escoger {{count}} objetos:</h4>
+                    <div class="filter">
+                      <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)"
+                          placeholder="Filtro para buscar objetos...">
+                        <i class="material-icons" matSuffix>search</i>
+                      </mat-form-field>
+                    </div>
+                    <table align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                      <!-- Titulo Column -->
+                      <ng-container matColumnDef="nombre">
+                        <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre </th>
+                        <td mat-cell *matCellDef="let objeto"> {{objeto.nombre}} </td>
+
+                      </ng-container>
+
+                      <!-- Pregunta Column -->
+                      <ng-container matColumnDef="tipoDeObjeto">
+                        <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Tipo
+                        </th>
+                        <td mat-cell *matCellDef="let objeto"> {{objeto.tipoDeObjeto}} </td>
+
+                      </ng-container>
+
+                      <ng-container matColumnDef="posicion">
+                        <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Posicion</th>
+                        <td mat-cell *matCellDef="let objeto">
+                          <button (click)="escogerPosicion(objeto)" mat-icon-button
+                            matTooltip="Editar la posicion del objeto {{objeto.nombre}}">
+                            <i class="material-icons green md-36">check_circle_outline</i>
+                          </button>
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="añadir">
+                        <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"></th>
+                        <td mat-cell *matCellDef="let objeto">
+                          <button (click)="escogerObjetoEscapeRoom(objeto)" mat-icon-button
+                            matTooltip="Editar el objeto {{objeto.nombre}}">
+                            <i class="material-icons green md-36">check_circle_outline</i>
+                          </button>
+                        </td>
+                      </ng-container>
+
+                      <tr mat-header-row *matHeaderRowDef="displayedColumnsObjetos"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumnsObjetos;">
+                      </tr>
+                    </table>
+                  </form>
+
+                  <div class="contenedor">
+                    <ng-template #Aviso_no_objetos>
+                      <div class="texto">No tienes objetos</div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
+              </div>
+            </ng-template>
+
+            <div class="btnCambiarStep" style="margin-top:10px;">
+              <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
+              <button type="button" class="btn Next" matStepperNext (click)="crearEscenario()">Finalizar</button>
+            </div>
+          </form>
         </mat-step>
 
         <mat-step>
           <ng-template matStepLabel>Finalizar</ng-template>
-         <div>
-          <p> Escenario creado correctamente. </p>
-          <p> Haga click en "Finalizar" para guardar los cambios.</p>
-         </div>
+          <div>
+            <p> Escenario creado correctamente. </p>
+            <p> Haga click en "Finalizar" para guardar los cambios.</p>
+          </div>
 
           <div class="btnCambiarStep">
-            <button  type="button" class="btn Back"  matStepperPrevious>Atrás</button>
-            <button  type="button" class="btn Aceptar" (click) = "Finalizar()">Finalizar</button>
+            <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
+            <button type="button" class="btn Aceptar" (click)="finalizar()">Finalizar</button>
           </div>
         </mat-step>
 
 
       </mat-horizontal-stepper>
     </mat-card-content>
-  </mat-card> 
+  </mat-card>
 </div>
-

@@ -79,7 +79,7 @@ mat-card-subtitle {
 }
  .material-icons.red { color: rgb(228, 8, 8); }
 
- .material-icons.md-36 { font-size: 36px; }
+ .material-icons.md-36 { font-size: 24px; }
 
 .material-icons.green { color: rgb(49, 151, 2); }
 .material-icons.margin { margin-top: 10 px; margin-left: 10 px;}
@@ -160,6 +160,9 @@ input[type=text] {
 //-----------
 
 // ---------- BOTONES
+.btn.EscogerEscenario{
+  background-color: blue;
+}
 .btn{
   margin: 5px;
   align-items: center;

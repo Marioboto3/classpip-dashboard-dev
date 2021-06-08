@@ -1,0 +1,111 @@
+<div class={{varTitulo}}>Crear Objeto</div>
+<mat-divider style="width: 70%; margin-left : 15%"></mat-divider>
+
+<div class="contenedor">
+  <!-- STEPPER -->
+
+    <mat-card class="panel" style= "width: 70%">
+
+      <mat-card-content>
+
+      <mat-horizontal-stepper #linearHorizontalStepper="matHorizontalStepper" [linear]="true" #stepper>
+
+
+      <!-- PRIMER PASO -->
+        <mat-step [stepControl]="myForm">
+
+         <form [formGroup]="myForm">
+          <ng-template matStepLabel>Nombre del objeto</ng-template>
+          <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombreObjeto" required>
+            <mat-error>Este campo es obligatorio</mat-error>
+          </mat-form-field>
+      
+          <div>
+            <mat-form-field>
+              <mat-label>Tipo de objeto</mat-label>
+              <input matInput formControlName="tipoObjeto" required>
+              <mat-error>Este campo es obligatorio</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="btnCambiarStep">
+            <button *ngIf="objetoYaCreado === false" class="btn Next"matStepperNext (click)="escogerNombreObjeto()">Siguiente</button>
+            <button *ngIf="objetoYaCreado === true"  class="btn Next" matStepperNext (click)= EditarObjeto() >Siguiente</button>
+          </div>
+        </form>
+        </mat-step>
+   
+         <mat-step [stepControl]="myForm2">
+          <form [formGroup]="myForm2">
+            <ng-template matStepLabel>Configuración del objeto</ng-template>
+
+              <div *ngIf="tipoObjetoEnigma; else templateEscape">
+
+                  <mat-form-field>
+                    <mat-label>Pregunta</mat-label>
+                    <input matInput formControlName="pregunta" required>
+                    <mat-error>Este campo es obligatorio</mat-error>
+                  </mat-form-field>
+              
+                  <div>
+                    <mat-form-field>
+                      <mat-label>Respuesta</mat-label>
+                      <input matInput formControlName="respuesta" required>
+                      <mat-error>Este campo es obligatorio</mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div>
+                    <mat-form-field>
+                      <mat-label>Imagen</mat-label>
+                      <input matInput formControlName="imagen" required>
+                      <mat-error>Este campo es obligatorio</mat-error>
+                    </mat-form-field>
+                  </div>
+      
+                  <div class="btnCambiarStep" style="margin-top:10px;">
+                      <button type="button" class="btn Back"   matStepperPrevious (click)="atras()">Atrás</button>
+                      <button type="button" class="btn Next" matStepperNext (click) = "crearObjeto()">Finalizar</button>
+                  </div>
+
+              </div>  
+              <ng-template #templateEscape>
+
+                <ng-template matStepLabel>Configuración del objeto</ng-template>
+            
+                        <mat-form-field>
+                          <mat-label>Imagen</mat-label>
+                          <input matInput formControlName="imagen" required>
+                          <mat-error>Este campo es obligatorio</mat-error>
+                        </mat-form-field>
+          
+                      <div class="btnCambiarStep" style="margin-top:10px;">
+                          <button type="button" class="btn Back"   matStepperPrevious (click)="atras()">Atrás</button>
+                          <button type="button" class="btn Next" matStepperNext (click) = "crearObjeto()">Finalizar</button>
+                      </div>
+
+             </ng-template>        
+         </form>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Finalizar</ng-template>
+         <div>
+          <p> Objeto creado correctamente. </p>
+          <p> Haga click en "Finalizar" para guardar los cambios.</p>
+         </div>
+
+          <div class="btnCambiarStep">
+            <button  type="button" class="btn Back"  matStepperPrevious>Atrás</button>
+            <button  type="button" class="btn Aceptar" (click) = "finalizar()">Finalizar</button>
+          </div>
+        </mat-step>
+
+
+      </mat-horizontal-stepper>
+    </mat-card-content>
+  </mat-card> 
+</div>
+

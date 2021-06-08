@@ -47,6 +47,8 @@ import { ObjetoEscape } from 'src/app/clases/ObjetoEscape';
 import { Mochila } from 'src/app/clases/Mochila';
 import { ObjetoEnigma } from 'src/app/clases/ObjetoEnigma';
 import { EscenarioEscapeRoom } from 'src/app/clases/EscenarioEscapeRoom';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ObjetoGlobalEscape } from 'src/app/clases/ObjetoGlobalEscape';
 
 
 export interface OpcionSeleccionada {
@@ -94,10 +96,11 @@ export class JuegoComponent implements OnInit {
   juegoDeAvatar: JuegoDeAvatar;
   juegoDeGeocaching: JuegoDeGeocaching;
 
-  objetos: ObjetoEscape [] = [];
   varHelper: string;
   objeto1: ObjetoEscape;
   objeto2: ObjetoEscape;
+  objetosProfesor: boolean = false;
+  
   // Informacion para todos los juegos
   myForm: FormGroup;
   tipoDeEscenarioSeleccionado: string;
@@ -231,6 +234,10 @@ export class JuegoComponent implements OnInit {
   TablaPuntuacion: TablaPuntosFormulaUno[];
   displayedColumnsTablaPuntuacion: string[] = ['select', 'Posicion', 'Puntos'];
 
+  displayedColumns: string[] = ['mapa', 'descripcion', 'añadir'];
+
+  mensaje: string = 'Estás seguro/a de que quieres eliminar el escenario llamado: ';
+  escenariosProfesor: EscenarioEscapeRoom[];
 
 
   // Informacion para juego de geocatching
@@ -300,6 +307,7 @@ export class JuegoComponent implements OnInit {
   // tslint:disable-next-line:no-inferrable-types
   opcionSeleccionada: string = 'todosLosJuegos';
 
+  escenarioEscapeRoom: EscenarioEscapeRoom;
   
   // criterioComplemento1: string;
 
@@ -315,7 +323,8 @@ export class JuegoComponent implements OnInit {
                private peticionesAPI: PeticionesAPIService,
                // tslint:disable-next-line:variable-name
                private _formBuilder: FormBuilder,
-               private router: Router
+               private router: Router,
+               private modal: NgbModal
                ) { }
 
 
@@ -423,36 +432,40 @@ export class JuegoComponent implements OnInit {
   }
 
   //// ESCAPE ROOM
-  escogerObjeto(numeroObjeto){
 
-    this.objetos[0] = new ObjetoEscape ("botella", false, true, "objeto1");
-    this.objetos[1] = new ObjetoEscape ("vasoDeAgua", false, true, "objeto2");
-    this.objetos[2] = new ObjetoEscape ("jarron", false, true, "objeto1");
-    this.objetos[3] = new ObjetoEscape ("lampara", false, true, "objeto2");
-
-    console.log("thhis.objetos: ", this.objetos);
-    if(numeroObjeto == 1){
-      Swal.fire({
-        title: 'Objetos para poner en la primera posición',
-        showCancelButton: true,
-        confirmButtonText: 'Escoger',
-        cancelButtonText: 'Volver'}).then((result) => {
-          if (result.value == true){
-            console.log("SELECCIONADO: ", this.tipoDeEscenarioSeleccionado);
-            Swal.fire('Guardado!', '', 'success');
-          } else if (result.value == undefined) {
-            Swal.fire('No se han guardado los cambios', '', 'info')
-          }
-        });
-    
-      this.objeto1 = new ObjetoEscape("botella",true,false,"objeto1");
-    }
-    if(numeroObjeto == 2){
-      this.objeto2 = new ObjetoEscape("vasoDeAgua",true,false,"objeto2");
-    }
-    this.objetoPista = new ObjetoEscape("llave", true, false, "objetoPista");
+  openModal(contenido, number: number){
+    this.modal.open(contenido,{centered: true, size:"lg"});
+    console.log("contenido", contenido);
+    if(number==1){
+    this.TraeEscenariosDelProfesor();}else{
+    this.TraeObjetosDelProfesor();}
+  }
+  TraeObjetosDelProfesor() {
 
   }
+ 
+  escogerEscenarioEscape(escenario){
+      console.log("Escenario: ", escenario);
+      this.escenarioEscapeRoom = escenario;
+  }
+  TraeEscenariosDelProfesor() {
+
+    this.peticionesAPI.DameEscenariosDelProfesorEscapeRoom(this.profesorId)
+    .subscribe(escenario => {
+      if (escenario[0] !== undefined) {
+        console.log('Voy a dar la lista de escenarios');
+        this.escenariosProfesor = escenario;
+        this.dataSource = new MatTableDataSource(this.escenariosProfesor);
+        console.log(this.escenariosProfesor);
+      } else {
+        this.escenariosProfesor = undefined;
+      }
+    });
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+ 
   verEscenario(imagen){
     console.log("imagen: ", imagen);
     if (imagen == "Habitación"){
@@ -1126,12 +1139,9 @@ export class JuegoComponent implements OnInit {
   }
 
   crearJuegoDeEscapeRoom() {
-    let escenarioEscape = new EscenarioEscapeRoom;
 
-    this.peticionesAPI.DameEscenariosDelProfesorEscapeRoom(this.profesor.id).subscribe(listaEscenarios => {
-      if (listaEscenarios.length == 1){
         this.peticionesAPI.CreaJuegoDeEscapeRoom(new JuegoDeEscapeRoom ( this.modoDeJuegoSeleccionado, this.grupo.id,
-          this.nombreDelJuego, listaEscenarios[0],true,"Juego De Escape Room", listaEscenarios[0].id), this.grupo.id)
+          this.nombreDelJuego, this.escenarioEscapeRoom,true,"Juego De Escape Room", this.escenarioEscapeRoom.id), this.grupo.id)
          .subscribe(juegoCreado => {
            this.juego = juegoCreado;
            console.log('Juego creado correctamente');
@@ -1159,9 +1169,7 @@ export class JuegoComponent implements OnInit {
            this.Limpiar();
              // Regresamos a la lista de equipos (mat-tab con índice 0)
            this.tabGroup.selectedIndex = 0;
-      
-         });
-      }
+
     })
   }
 
