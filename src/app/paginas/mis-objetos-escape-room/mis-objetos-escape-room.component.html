@@ -24,7 +24,7 @@
         <td mat-cell *matCellDef="let objeto">
           <button (click)="verObjeto(objeto)" mat-icon-button
             matTooltip="Ver el objeto {{objeto}}">
-            <i class="material-icons green md-36">check_circle_outline</i>
+            <i class="material-icons {{colorIcon}} md-36" style="text-align: center;">visibility</i>
           </button>
         </td>
       </ng-container>

@@ -16,6 +16,7 @@ import { SesionService, PeticionesAPIService } from '../../servicios/index';
 
 import { Escenario, Profesor } from 'src/app/clases';
 import { EscenarioEscapeRoom } from 'src/app/clases/EscenarioEscapeRoom';
+import { ObjetoGlobalEscape } from 'src/app/clases/ObjetoGlobalEscape';
 
 
 
@@ -32,9 +33,12 @@ export class MisEscenariosEscapeRoomComponent implements OnInit {
   escenariosProfesor: EscenarioEscapeRoom[];
   varTituloColumnaTabla: string;
 
+  listaObjetos: ObjetoGlobalEscape[] = [];
+  lista: string [] = [];
   dataSource;
 
-  displayedColumns: string[] = ['mapa', 'descripcion', 'edit', 'delete', 'copy'];
+  varHelp: boolean = false;
+  displayedColumns: string[] = ['mapa', 'descripcion', 'ver', 'delete'];
 
   mensaje: string = 'Estás seguro/a de que quieres eliminar el escenario llamado: ';
 
@@ -58,6 +62,9 @@ export class MisEscenariosEscapeRoomComponent implements OnInit {
     console.log(this.escenariosProfesor);
   }
 
+  reload(){
+    this.ngOnInit();
+  }
   TraeEscenariosDelProfesor() {
 
     this.peticionesAPI.DameEscenariosDelProfesorEscapeRoom(this.profesorId)
@@ -79,7 +86,7 @@ export class MisEscenariosEscapeRoomComponent implements OnInit {
   BorrarEscenario(escenario: Escenario) {
 
     console.log ('Vamos a eliminar la colección');
-    this.peticionesAPI.BorraEscenario(escenario.id, escenario.profesorId)
+    this.peticionesAPI.BorraEscenarioEscape(escenario.id, escenario.profesorId)
     .subscribe();
 
     console.log ('La saco de la lista');
@@ -100,12 +107,36 @@ export class MisEscenariosEscapeRoomComponent implements OnInit {
       if (confirmed) {
         this.BorrarEscenario(escenario);
         Swal.fire('Eliminado', escenario.mapa + ' eliminado correctamente', 'success');
+        this.reload();
       }
     });
   }
 
 
-  CrearCopia(escenario: Escenario) {
+  verEscenario(escenario: EscenarioEscapeRoom){
 
+    
+    console.log("objetos: ", escenario.objetos);
+
+    escenario.objetos.sort(function (a, b) {
+      // A va primero que B
+      if (a.posicion < b.posicion)
+        return 1;
+      // B va primero que A
+      else if (a.posicion > b.posicion)
+        return -1;
+      // A y B son iguales
+      else
+        return 0;
+    });
+
+    Swal.fire({
+      title: escenario.mapa,
+      imageUrl: '../../../assets/imagenBase.jpg',
+      imageWidth: 400,
+      imageHeight: 200,
+      html: 'Posicion 1: ' + escenario.objetos[4].nombre + ' - Posicion 2: ' + escenario.objetos[3].nombre + ' - Posicion 3: ' + escenario.objetos[2].nombre +' - Posicion 4: ' + escenario.objetos[1].nombre +' - Posicion 5: ' + escenario.objetos[0].nombre,
+      confirmButtonText: 'Volver',
+    }).then((result) => { });
   }
 }

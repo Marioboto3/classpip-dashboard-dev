@@ -31,6 +31,7 @@ export class CrearObjetoEscapeRoomComponent implements OnInit {
 
   objetoGlobalEscape: ObjetoGlobalEscape;
 
+  varPanel: string;
   varTitulo: string;
   profesor: Profesor;
   profesorId: number;
@@ -63,6 +64,8 @@ export class CrearObjetoEscapeRoomComponent implements OnInit {
     this.profesorId = this.sesion.DameProfesor().id;
     this.profesor = this.sesion.DameProfesor();
     this.varTitulo = "titulo" + this.profesor.estacion;
+    this.varPanel = "panel" + this.profesor.estacion;
+
 
     this.myForm = this.formBuilder.group({
       nombreObjeto: ['', Validators.required],
@@ -108,7 +111,7 @@ export class CrearObjetoEscapeRoomComponent implements OnInit {
           this.objetoCreadoGlobal = res;
 
           if (this.objetoGlobalEscape.tipoDeObjeto == "objetoEnigma") {
-            this.peticionesAPI.CreaObjetoEnigma(new ObjetoEnigma(this.objetoGlobalEscape.nombre, this.myForm2.value.pregunta, this.myForm2.value.respuesta, false, this.profesorId, this.objetoCreadoGlobal.id), this.profesorId)
+            this.peticionesAPI.CreaObjetoEnigma(new ObjetoEnigma(this.objetoGlobalEscape.nombre, this.myForm2.value.pregunta,  this.myForm2.value.respuesta, false, this.profesorId, false, this.objetoCreadoGlobal.id), this.profesorId)
               .subscribe((res) => {
                 if (res != null) {
                   console.log(res);
@@ -120,7 +123,7 @@ export class CrearObjetoEscapeRoomComponent implements OnInit {
               });
           }
           if (this.objetoGlobalEscape.tipoDeObjeto == "objetoEscape") {
-            this.peticionesAPI.CreaObjetoEscape(new ObjetoEscape(this.objetoGlobalEscape.nombre, true, false, "objeto1", 1, this.objetoCreadoGlobal.id), 1)
+            this.peticionesAPI.CreaObjetoEscape(new ObjetoEscape(this.objetoGlobalEscape.nombre, true, false, 1, this.objetoCreadoGlobal.id), 1)
               .subscribe((res) => {
                 if (res != null) {
                   console.log(res);

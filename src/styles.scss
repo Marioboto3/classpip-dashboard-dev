@@ -9,6 +9,7 @@
 }
 
 // ------------- Estilos para los paneles
+
 .panel{
   background-color: #8765aa;
   width: 600px;
@@ -82,6 +83,16 @@ mat-card-subtitle {
  .material-icons.md-36 { font-size: 24px; }
 
 .material-icons.green { color: rgb(49, 151, 2); }
+
+.material-icons.summer { color:var(--main-color-summer); }
+
+.material-icons.autumn { color:var(--main-color-autumn);}
+
+.material-icons.winter { color:var(--main-color-winter);}
+
+.material-icons.spring {  color:var(--main-color-spring);}
+
+
 .material-icons.margin { margin-top: 10 px; margin-left: 10 px;}
 
 

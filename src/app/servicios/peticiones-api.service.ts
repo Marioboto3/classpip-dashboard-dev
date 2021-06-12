@@ -699,6 +699,9 @@ export class PeticionesAPIService {
   public CreaJuegoDeEscapeRoom(juego: JuegoDeEscapeRoom, grupoId: number): Observable<JuegoDeEscapeRoom> {
     return this.http.post<JuegoDeEscapeRoom>(this.APIUrlGrupos + '/' + grupoId + '/JuegosDeEscapeRoom', juego);
   }
+  public BorraEscenarioEscape(idescenario: number, profesorId: number): Observable<any> {
+    return this.http.delete<any>(this.APIUrlProfesores + '/' + profesorId + '/EscenariosEscapeRoom/' + idescenario);
+  }
   public ModificaJuegoDeEscapeRoom(juego: JuegoDeEscapeRoom, grupoId: number): Observable<JuegoDeEscapeRoom> {
     return this.http.put<JuegoDeEscapeRoom>(this.APIUrlGrupos + '/' + grupoId + '/JuegosDeEscapeRoom/' + juego.id, juego);
   }
@@ -707,6 +710,10 @@ export class PeticionesAPIService {
   }
   public DameObjetosEnigmaDelProfesorEscapeRoom(profesorId: number): Observable<ObjetoEnigma[]> {
     return this.http.get<ObjetoEnigma[]>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEnigma');
+  }
+  public DameObjetoEnigmaDelProfesor(profesorId: number, idObjetoGlobal: number): Observable<ObjetoEnigma> {
+    return this.http.get<ObjetoEnigma>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEnigma' + '?filter[where][objetoId]='
+    + idObjetoGlobal);
   }
   public CreaEscenarioEscapeRoom(escenario: EscenarioEscapeRoom, profesorId: number): Observable<EscenarioEscapeRoom> {
     console.log('Escenario: ' + escenario);
@@ -717,6 +724,9 @@ export class PeticionesAPIService {
   }
   public CreaObjetoEnigma(objetoEnigma: ObjetoEnigma, profesorId: number): Observable<ObjetoEnigma> {
     return this.http.post<ObjetoEnigma>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEnigma', objetoEnigma);
+  }
+  public EditaObjetoEnigma(objetoEnigma: ObjetoEnigma, profesorId:number): Observable<ObjetoEnigma> {
+    return this.http.put<ObjetoEnigma>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEnigma/' + objetoEnigma.id, objetoEnigma);
   }
   public CreaObjetoGlobal(objetoGlobal: ObjetoGlobalEscape, profesorId: number): Observable<ObjetoGlobalEscape> {
     return this.http.post<ObjetoGlobalEscape>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosGlobalEscape', objetoGlobal);
