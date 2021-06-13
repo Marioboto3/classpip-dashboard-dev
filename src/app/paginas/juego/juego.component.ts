@@ -97,7 +97,7 @@ export class JuegoComponent implements OnInit {
   juegoDeCompeticion: JuegoDeCompeticion;
   juegoDeAvatar: JuegoDeAvatar;
   juegoDeGeocaching: JuegoDeGeocaching;
-
+  escenariosSecundariosProfesor: boolean = false;
   varHelper: string;
   objeto1: ObjetoEscape;
   objeto2: ObjetoEscape;
@@ -145,7 +145,7 @@ export class JuegoComponent implements OnInit {
   tengoColeccion = false;
   modoAsignacion;
 
-
+  configuradoEscenarioPrincipal: boolean = false;
   // información para crear un juego de cuestionario
   cuestionario: Cuestionario;
   tengoCuestionario = false;
@@ -228,6 +228,8 @@ export class JuegoComponent implements OnInit {
   jornadasLiga: Jornada[];
   jornadasFormulaUno: Jornada[];
 
+  objetosEnigmaModal: boolean = false;
+  
   nuevaPuntuacion: number;
   tengoNuevaPuntuacion = false;
   Puntuacion: number[] = [];
@@ -236,8 +238,10 @@ export class JuegoComponent implements OnInit {
   TablaPuntuacion: TablaPuntosFormulaUno[];
   displayedColumnsTablaPuntuacion: string[] = ['select', 'Posicion', 'Puntos'];
 
+  displayedColumnsEscenarioSecundario: string[] = ['mapa', 'descripcion', 'añadir'];
   displayedColumns: string[] = ['mapa', 'descripcion', 'verObjetos', 'añadir'];
   displayedColumnsObjetos: string[] = ['nombre', 'tipoDeObjeto', 'modificarObjeto', 'ver'];
+  displayedColumnsObjetosEnigma: string[] = ['nombre', 'pregunta', 'respuesta', 'escoger'];
 
   objetosProfesorModal: boolean = false;
   mensaje: string = 'Estás seguro/a de que quieres eliminar el escenario llamado: ';
@@ -315,6 +319,7 @@ export class JuegoComponent implements OnInit {
   opcionSeleccionada: string = 'todosLosJuegos';
 
   escenarioEscapeRoom: EscenarioEscapeRoom;
+  escenarioSecundarioEscapeRoom: EscenarioEscapeRoom;
 
   // criterioComplemento1: string;
 
@@ -453,13 +458,18 @@ export class JuegoComponent implements OnInit {
     console.log("contenido", contenido);
     if (number == 1) {
       this.TraeEscenariosDelProfesor();
-    } else {
+    } if (number == 2) {
+      this.TraeEscenariosSecundariosDelProfesor();
+    }if (number !=1 && number !=2) {
       this.TraeObjetosDelProfesor();
     }
   }
   TraeObjetosDelProfesor() {
   }
-
+  escogerEscenarioEscapeSecundario(escenario){
+    console.log("Escenario: ", escenario);
+    this.escenarioSecundarioEscapeRoom = escenario;
+  }
   verObjetosEscenario(escenario, objetos) {
     this.objetosProfesorModal = true;
     escenario.objetos.forEach(element => {
@@ -472,7 +482,6 @@ export class JuegoComponent implements OnInit {
     this.modal.open(objetos, { centered: true, size: "lg" });
     this.dataSource = new MatTableDataSource(escenario.objetos);
   }
-
   modificarObjeto() {
 
     console.log("objetoGlobal: ", this.objetoEnigmaModificarGlobal);
@@ -495,7 +504,7 @@ export class JuegoComponent implements OnInit {
       res[0].resuelta = false;
 
       console.log("objeto a enviar: ", res[0]);
-      this.peticionesAPI.EditaObjetoEnigma(res[0], this.profesorId)
+      this.peticionesAPI.EditaObjetoEnigma(res[0])
       .subscribe((resa) => {
         if (resa != null) {
           console.log(resa);
@@ -508,7 +517,44 @@ export class JuegoComponent implements OnInit {
     });
 
   }
+  escogerObjetoPrincipalModal(objetosEnigma){
+    this.objetosEnigmaModal = true;
+    console.log("this.objetosEnigma: ", this.objetosEnigma);
+    this.modal.open(objetosEnigma, { centered: true, size: "lg" });
+    this.dataSource = new MatTableDataSource(this.objetosEnigma);
+  }
+  escogerObjetoPrincipal(objetoEnigma: ObjetoEnigma){
 
+    let objetosEnigmaVariable: ObjetoEnigma [] = [];
+    let objetoEnigmaVariable: ObjetoEnigma;
+
+    console.log("ObjetoEnigma: ", objetoEnigma);
+    this.objetosEnigma.forEach(elemento => {
+      if (elemento[0].id == objetoEnigma[0].id){
+        elemento[0].principal = true;
+        objetoEnigmaVariable = new ObjetoEnigma (elemento[0].nombre, elemento[0].pregunta, elemento[0].respuesta, elemento[0].resuelta, elemento[0].profesorId, elemento[0].principal, elemento[0].objetoId);
+        objetoEnigmaVariable.id = elemento[0].id;
+        objetosEnigmaVariable.push(objetoEnigmaVariable);
+        this.peticionesAPI.EditaObjetoEnigma(objetoEnigmaVariable).subscribe(res => {
+          console.log("res: ", res);
+          Swal.fire("Perfect", "", "success");
+        });
+      }
+      else{
+        elemento[0].principal = false;
+        objetoEnigmaVariable = new ObjetoEnigma (elemento[0].nombre, elemento[0].pregunta, elemento[0].respuesta, elemento[0].resuelta, elemento[0].profesorId, elemento[0].principal, elemento[0].objetoId);
+        objetosEnigmaVariable.push(objetoEnigmaVariable);
+        objetoEnigmaVariable.id = elemento[0].id;
+        this.peticionesAPI.EditaObjetoEnigma(objetoEnigmaVariable).subscribe(res => {
+          console.log("res: ", res);
+          Swal.fire("Perfect", "", "success");
+        });
+      }
+    });
+    console.log("objetosEnigma: ", objetosEnigmaVariable);
+    this.configuradoEscenarioPrincipal = true;
+    this.escenariosSecundariosProfesor = true;
+  }
   verObj(objeto: ObjetoGlobalEscape){
     if(objeto.tipoDeObjeto == "objetoEscape"){
       Swal.fire({
@@ -535,7 +581,6 @@ export class JuegoComponent implements OnInit {
       })  
     }
   }
-
   editarObjetoEnigma(objeto, objetoModal) {
 
     this.tituloObjetoEnigma = objeto.nombre;
@@ -566,10 +611,23 @@ export class JuegoComponent implements OnInit {
         }
       });
   }
+  TraeEscenariosSecundariosDelProfesor() {
+
+    this.peticionesAPI.DameEscenariosSecundariosDelProfesorEscapeRoom(this.profesorId)
+      .subscribe(escenario => {
+        if (escenario[0] !== undefined) {
+          console.log('Voy a dar la lista de escenarios');
+          this.escenariosProfesor = escenario;
+          this.dataSource = new MatTableDataSource(this.escenariosProfesor);
+          console.log(this.escenariosProfesor);
+        } else {
+          this.escenariosProfesor = undefined;
+        }
+      });
+  }
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
   verEscenario(imagen) {
     console.log("imagen: ", imagen);
     if (imagen == "Habitación") {
@@ -631,6 +689,40 @@ export class JuegoComponent implements OnInit {
         Swal.fire('No se han guardado los cambios', '', 'info')
       }
     });
+  }
+  crearJuegoDeEscapeRoom() {
+
+    this.peticionesAPI.CreaJuegoDeEscapeRoom(new JuegoDeEscapeRoom(this.modoDeJuegoSeleccionado, this.grupo.id,
+      this.nombreDelJuego, this.escenarioEscapeRoom, true, "Juego De Escape Room", this.escenarioEscapeRoom.id,this.escenarioSecundarioEscapeRoom), this.grupo.id)
+      .subscribe(juegoCreado => {
+        this.juego = juegoCreado;
+        console.log('Juego creado correctamente');
+        this.juego.mochila.idJuegoDeEscapeRoom = juegoCreado.id;
+        this.sesion.TomaJuego(this.juego);
+        this.juegoCreado = true;
+        this.peticionesAPI.ModificaJuegoDeEscapeRoom(this.juego, this.grupo.id).subscribe(juego => { });
+        // Asignamos a los participantes en el juego
+        if (this.modoDeJuegoSeleccionado === 'Individual') {
+          // tslint:disable-next-line:prefer-for-of
+          for (let i = 0; i < this.alumnosGrupo.length; i++) {
+            console.log("Alumno id, personaje y juegoId: ", this.alumnosGrupo[i].id, "moreno", this.juego.id);
+            this.peticionesAPI.InscribeAlumnoJuegoEscapeRoom(new AlumnoJuegoEscapeRoom(this.alumnosGrupo[i].id, "moreno", juegoCreado.id))
+              .subscribe();
+          }
+        }
+        Swal.fire('Juego de escape room creado correctamente', ' ', 'success');
+
+        // El juego se ha creado como activo. Lo añadimos a la lista correspondiente
+        if (this.juegosActivos === undefined) {
+          // Si la lista aun no se ha creado no podre hacer el push
+          this.juegosActivos = [];
+        }
+        this.juegosActivos.push(this.juego);
+        this.Limpiar();
+        // Regresamos a la lista de equipos (mat-tab con índice 0)
+        this.tabGroup.selectedIndex = 0;
+
+      })
   }
   TipoDeEscenarioSeleccionado2(tipo: string) {
     this.tipoDeEscenarioSeleccionado = tipo;
@@ -1240,40 +1332,6 @@ export class JuegoComponent implements OnInit {
     console.log("Dame objeto enigma: ", this.sesion.DameObjetoEnigma());
   }
 
-  crearJuegoDeEscapeRoom() {
-
-    this.peticionesAPI.CreaJuegoDeEscapeRoom(new JuegoDeEscapeRoom(this.modoDeJuegoSeleccionado, this.grupo.id,
-      this.nombreDelJuego, this.escenarioEscapeRoom, true, "Juego De Escape Room", this.escenarioEscapeRoom.id), this.grupo.id)
-      .subscribe(juegoCreado => {
-        this.juego = juegoCreado;
-        console.log('Juego creado correctamente');
-        this.juego.mochila.idJuegoDeEscapeRoom = juegoCreado.id;
-        this.sesion.TomaJuego(this.juego);
-        this.juegoCreado = true;
-        this.peticionesAPI.ModificaJuegoDeEscapeRoom(this.juego, this.grupo.id).subscribe(juego => { });
-        // Asignamos a los participantes en el juego
-        if (this.modoDeJuegoSeleccionado === 'Individual') {
-          // tslint:disable-next-line:prefer-for-of
-          for (let i = 0; i < this.alumnosGrupo.length; i++) {
-            console.log("Alumno id, personaje y juegoId: ", this.alumnosGrupo[i].id, "moreno", this.juego.id);
-            this.peticionesAPI.InscribeAlumnoJuegoEscapeRoom(new AlumnoJuegoEscapeRoom(this.alumnosGrupo[i].id, "moreno", juegoCreado.id))
-              .subscribe();
-          }
-        }
-        Swal.fire('Juego de escape room creado correctamente', ' ', 'success');
-
-        // El juego se ha creado como activo. Lo añadimos a la lista correspondiente
-        if (this.juegosActivos === undefined) {
-          // Si la lista aun no se ha creado no podre hacer el push
-          this.juegosActivos = [];
-        }
-        this.juegosActivos.push(this.juego);
-        this.Limpiar();
-        // Regresamos a la lista de equipos (mat-tab con índice 0)
-        this.tabGroup.selectedIndex = 0;
-
-      })
-  }
 
   //// FUNCIONES PARA LA CREACION DE JUEGO DE CUESTIONARIO
   AbrirDialogoAgregarCuestionario(): void {

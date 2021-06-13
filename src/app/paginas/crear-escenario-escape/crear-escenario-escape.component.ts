@@ -44,6 +44,8 @@ export class CrearEscenarioEscapeComponent implements OnInit {
   imagenes: boolean = false;
   imagenesTest: ImagenEscenario[];
 
+  mapasSecundariosVariable: boolean = false;
+
   countEscape: number = 3;
   countEnigma: number = 2;
 
@@ -54,7 +56,6 @@ export class CrearEscenarioEscapeComponent implements OnInit {
   displayedColumns: string[] = ['nombre', 'escoger'];
   displayedColumnsObjetos: string[] = ['nombre', 'tipoDeObjeto', 'posicion', 'añadir'];
   displayedColumnsPosiciones: string[] = ['posicion', 'asignar'];
-
 
   escenarioCreado: EscenarioEscapeRoom;
 
@@ -86,7 +87,7 @@ export class CrearEscenarioEscapeComponent implements OnInit {
     });
 
   }
-
+  
   escogerImagenBase(imagen) {
     console.log("Imagen");
     this.imagenEscogida = imagen;
@@ -178,6 +179,7 @@ export class CrearEscenarioEscapeComponent implements OnInit {
         }
       });
   }
+  
   crearEscenario() {
     let nombreEscenario: string;
     let descripcionEscenario: string;
@@ -185,7 +187,7 @@ export class CrearEscenarioEscapeComponent implements OnInit {
     nombreEscenario = this.myForm.value.nombreEscenario;
     descripcionEscenario = this.myForm.value.descripcionEscenario;
 
-    this.peticionesAPI.CreaEscenarioEscapeRoom(new EscenarioEscapeRoom(nombreEscenario, descripcionEscenario, this.objetosGlobalesEscogidos, this.imagenEscogida), this.profesorId)
+    this.peticionesAPI.CreaEscenarioEscapeRoom(new EscenarioEscapeRoom(nombreEscenario, descripcionEscenario, this.objetosGlobalesEscogidos, this.imagenEscogida, "Principal"), this.profesorId)
       .subscribe((res) => {
         if (res != null) {
           console.log('ESCENARIO CREADO: ' + res.id);

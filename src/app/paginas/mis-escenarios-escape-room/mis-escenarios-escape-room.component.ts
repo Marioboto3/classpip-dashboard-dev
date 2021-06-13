@@ -38,7 +38,7 @@ export class MisEscenariosEscapeRoomComponent implements OnInit {
   dataSource;
 
   varHelp: boolean = false;
-  displayedColumns: string[] = ['mapa', 'descripcion', 'ver', 'delete'];
+  displayedColumns: string[] = ['mapa', 'descripcion', 'posicion', 'ver', 'delete'];
 
   mensaje: string = 'Estás seguro/a de que quieres eliminar el escenario llamado: ';
 

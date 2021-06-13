@@ -121,6 +121,7 @@ export class PeticionesAPIService {
   private APIUrlRespuestasJuegoDeCuestionario = this.host + ':3000/api/RespuestasJuegoDeCuestionario';
   //Rubrica
   private APIUrlSesionesClase = this.host + ':3000/api/SesionesClase';
+  private APIUrlObjetosEnigma = this.host + ':3000/api/ObjetosEnigma/';
 
   //OTRAS
 
@@ -725,14 +726,20 @@ export class PeticionesAPIService {
   public CreaObjetoEnigma(objetoEnigma: ObjetoEnigma, profesorId: number): Observable<ObjetoEnigma> {
     return this.http.post<ObjetoEnigma>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEnigma', objetoEnigma);
   }
-  public EditaObjetoEnigma(objetoEnigma: ObjetoEnigma, profesorId:number): Observable<ObjetoEnigma> {
-    return this.http.put<ObjetoEnigma>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEnigma/' + objetoEnigma.id, objetoEnigma);
+  public EditaObjetoEnigma(objetoEnigma: ObjetoEnigma): Observable<ObjetoEnigma> {
+    return this.http.put<ObjetoEnigma>(this.APIUrlObjetosEnigma + objetoEnigma.id, objetoEnigma);
+  }
+  public EditaObjetosEnigma(objetosEnigma: ObjetoEnigma[], profesorId:number): Observable<ObjetoEnigma[]> {
+    return this.http.put<ObjetoEnigma[]>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEnigma' , objetosEnigma);
   }
   public CreaObjetoGlobal(objetoGlobal: ObjetoGlobalEscape, profesorId: number): Observable<ObjetoGlobalEscape> {
     return this.http.post<ObjetoGlobalEscape>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosGlobalEscape', objetoGlobal);
   }
   public DameEscenariosDelProfesorEscapeRoom(profesorId: number): Observable<EscenarioEscapeRoom[]> {
-    return this.http.get<EscenarioEscapeRoom[]>(this.APIUrlProfesores + '/' + profesorId + '/EscenariosEscapeRoom');
+    return this.http.get<EscenarioEscapeRoom[]>(this.APIUrlProfesores + '/' + profesorId + '/EscenariosEscapeRoom' + '?filter[where][posicion]=Principal');
+  }
+  public DameEscenariosSecundariosDelProfesorEscapeRoom(profesorId: number): Observable<EscenarioEscapeRoom[]> {
+    return this.http.get<EscenarioEscapeRoom[]>(this.APIUrlProfesores + '/' + profesorId + '/EscenariosEscapeRoom' + '?filter[where][posicion]=Secundario');
   }
   public DameObjetosDelProfesorEscapeRoom(profesorId: number): Observable<ObjetoGlobalEscape[]> {
     return this.http.get<ObjetoGlobalEscape[]>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosGlobalEscape');

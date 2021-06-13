@@ -186,10 +186,9 @@
                     <div class="col-sm">
                       <div class="colorsChips">
                         <ng-template matStepLabel>
-                          <div>Escoger escenario</div>
+                          <div>Escoger escenario principal</div>
                         </ng-template>
-                        <h1>Escenario</h1>
-                        <hr>
+
                         <ng-template #contenido let-modal>
                           <div class="modal-header">
                             <h4 class="modal-title">Escenarios</h4>
@@ -342,6 +341,80 @@
                             <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
                           </div>
                         </ng-template>
+
+                        <!--OTRO MODAL-->
+
+                        <ng-template #objetosEnigma let-modal>
+                          <div class="modal-header">
+                            <h4 class="modal-title">Objetos enigma</h4>
+                            <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class='enColumna'>
+                              <form style='width: 100%' *ngIf="objetosEnigmaModal;else Aviso_no_objetosEnigma">
+
+                                <div class="filter">
+                                  <mat-form-field>
+                                    <input matInput (keyup)="applyFilter($event.target.value)"
+                                      placeholder="Filtro para buscar objetos...">
+                                    <i class="material-icons" matSuffix>search</i>
+                                  </mat-form-field>
+                                </div>
+                                <table align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                                  <!-- Titulo Column -->
+                                  <ng-container matColumnDef="nombre">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre
+                                    </th>
+                                    <td mat-cell *matCellDef="let objeto"> {{objeto[0].nombre}} </td>
+
+                                  </ng-container>
+
+                                  <!-- Pregunta Column -->
+                                  <ng-container matColumnDef="pregunta">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Pregunta
+                                    </th>
+                                    <td mat-cell *matCellDef="let objeto"> {{objeto[0].pregunta}} </td>
+
+                                  </ng-container>
+                                  <ng-container matColumnDef="respuesta">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Respuesta
+                                    </th>
+                                    <td mat-cell *matCellDef="let objeto"> {{objeto[0].respuesta}} </td>
+
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="escoger">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">Escoger
+                                      objeto</th>
+                                    <td mat-cell *matCellDef="let objeto">
+                                      <button (click)="escogerObjetoPrincipal(objeto)" mat-icon-button
+                                        matTooltip="Escoger el objeto">
+                                        <i class="material-icons green md-36">check_circle_outline</i>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+
+                                  <tr mat-header-row *matHeaderRowDef="displayedColumnsObjetosEnigma"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: displayedColumnsObjetosEnigma;">
+                                  </tr>
+                                </table>
+                              </form>
+
+                              <div class="contenedor">
+                                <ng-template #Aviso_no_objetosEnigma>
+                                  <div class="texto">No tiene objetos</div>
+                                </ng-template>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
+                          </div>
+                        </ng-template>
+
                         <!--OTRO MODAL-->
 
                         <ng-template #editarObjeto let-modal>
@@ -354,16 +427,17 @@
                           <div class="modal-body">
                             <div class='enColumna'>
 
-                              <form style='width: 100%' [formGroup]="editObject" *ngIf="editarObjetoEnigmaVar;else Aviso_no_editarObjeto">
+                              <form style='width: 100%' [formGroup]="editObject"
+                                *ngIf="editarObjetoEnigmaVar;else Aviso_no_editarObjeto">
 
                                 <ng-template>Configuración del objeto</ng-template>
-                                
+
                                 <mat-form-field>
                                   <mat-label>Pregunta</mat-label>
                                   <input matInput formControlName="pregunta" required>
                                   <mat-error>Este campo es obligatorio</mat-error>
                                 </mat-form-field>
-                            
+
                                 <div>
                                   <mat-form-field>
                                     <mat-label>Respuesta</mat-label>
@@ -371,12 +445,14 @@
                                     <mat-error>Este campo es obligatorio</mat-error>
                                   </mat-form-field>
                                 </div>
-                                
+
                                 <div class="btnCambiarStep" style="margin-top:10px;">
-                                  <button type="button" class="btn Back"   matStepperPrevious (click)="atras()">Atrás</button>
-                                  <button type="button" class="btn Next" matStepperNext (click) = "modificarObjeto()">Modificar</button>
-                              </div>
-            
+                                  <button type="button" class="btn Back" matStepperPrevious
+                                    (click)="atras()">Atrás</button>
+                                  <button type="button" class="btn Next" matStepperNext
+                                    (click)="modificarObjeto()">Modificar</button>
+                                </div>
+
                               </form>
 
                               <div class="contenedor">
@@ -394,18 +470,13 @@
                         <div>
                           <button type="button" class="btn EscogerEscenario" (click)="openModal(contenido,1)">Escoger
                             escenario</button>
-
                         </div>
-                        <!--<label class="LabelStepper">Selecciona el escenario principal:</label>
-                        <mat-chip-list class="mat-chip-list-stacked">
-                          <mat-chip style='width: 300px' *ngFor="let tipo of seleccionEscenario; let i = index" selected
-                            [color]="tipo.color" selected="{{seleccionTipoJuego[i].selected}}"
-                            (click)="verEscenario(tipo.nombre)" [value]="tipo.nombre" [selectable]="true">
-                            {{tipo.nombre}}
+                        <div>
+                          <button type="button" class="btn btn Peticion"
+                            (click)="escogerObjetoPrincipalModal(objetosEnigma)">Escoger
+                            objeto Enigma principal</button>
+                        </div>
 
-                          </mat-chip>
-                        </mat-chip-list>
-                      -->
                         <span style="font-weight: bold;color:green;" color="secundary">Has elegido ...
                           {{tipoDeJuegoSeleccionado}} </span>
                       </div>
@@ -413,10 +484,93 @@
                   </div>
                   <div class="btnCambiarStep">
                     <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
-                    <button type="button" (click)="crearJuegoDeEscapeRoom()" class="btn Peticion">Crear</button>
-                    <!-- <button type="button" [disabled]="tipoDeEscenarioSeleccionado === null"
-                      (click)="crearJuegoDeEscapeRoom()" class="btn Peticion">Crear</button> -->
+                    <button type="button" class="btn Next" [disabled]="!configuradoEscenarioPrincipal"
+                      matStepperNext>Siguiente</button>
                   </div>
+                </mat-step>
+
+                <mat-step>
+                  <div class="row">
+                    <div class="col-sm">
+                      <div class="colorsChips">
+                        <ng-template matStepLabel>
+                          <div>Escoger escenario secundario</div>
+                        </ng-template>
+                        <ng-template #contenidoSecundario let-modal>
+                          <div class="modal-header">
+                            <h4 class="modal-title">Escenarios secundarios</h4>
+                            <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class='enColumna'>
+                              <form style='width: 100%'
+                                *ngIf="escenariosSecundariosProfesor;else Aviso_no_escenariosSecundarios">
+
+                                <div class="filter">
+                                  <mat-form-field>
+                                    <input matInput (keyup)="applyFilter($event.target.value)"
+                                      placeholder="Filtro para buscar escenario...">
+                                    <i class="material-icons" matSuffix>search</i>
+                                  </mat-form-field>
+                                </div>
+                                <table align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                                  <!-- Titulo Column -->
+                                  <ng-container matColumnDef="mapa">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Mapa </th>
+                                    <td mat-cell *matCellDef="let escenario"> {{escenario.mapa}} </td>
+
+                                  </ng-container>
+
+                                  <!-- Pregunta Column -->
+                                  <ng-container matColumnDef="descripcion">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Descripcion
+                                    </th>
+                                    <td mat-cell *matCellDef="let escenario"> {{escenario.descripcion}} </td>
+
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="añadir">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">Escoger</th>
+                                    <td mat-cell *matCellDef="let escenario">
+                                      <button (click)="escogerEscenarioEscapeSecundario(escenario)" mat-icon-button
+                                        matTooltip="Escoger el escenario {{escenario.mapa}}">
+                                        <i class="material-icons green md-36">check_circle_outline</i>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+
+                                  <tr mat-header-row *matHeaderRowDef="displayedColumnsEscenarioSecundario"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: displayedColumnsEscenarioSecundario;">
+                                  </tr>
+                                </table>
+                              </form>
+
+                              <div class="contenedor">
+                                <ng-template #Aviso_no_escenariosSecundarios>
+                                  <div class="texto">No tienes escenarios</div>
+                                </ng-template>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
+                          </div>
+                        </ng-template>
+                        <div>
+                          <button type="button" class="btn EscogerEscenario"
+                            (click)="openModal(contenidoSecundario,2)">Escoger
+                            escenario secundario</button>
+                        </div>
+                      </div>
+                      </div>
+                      </div>
+                      <div class="btnCambiarStep">
+                        <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
+                        <button type="button" (click)="crearJuegoDeEscapeRoom()" class="btn Peticion">Crear</button>
+                      </div>
                 </mat-step>
               </div>
               <!-- ////////////////////////////SI ESCOGEMOS EL JUEGO DE TIPO DE PUNTOS ////////////////////////////////-->

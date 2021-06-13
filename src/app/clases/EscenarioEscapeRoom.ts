@@ -11,11 +11,14 @@ export class EscenarioEscapeRoom {
     id: number;
     objetos: ObjetoGlobalEscape [];
     imagen: ImagenEscenario;
+    posicion: string;
 
-    constructor(mapa?: string, descripcion?: string,  objetos?: ObjetoGlobalEscape[], imagen?: ImagenEscenario){
+    constructor(mapa?: string, descripcion?: string,  objetos?: ObjetoGlobalEscape[], imagen?: ImagenEscenario, posicion?: string){
         this.mapa = mapa;
         this.descripcion = descripcion;
         this.objetos = objetos;
         this.imagen = imagen;
+        this.posicion = posicion;
+     
     }
 }
