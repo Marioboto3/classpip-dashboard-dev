@@ -1,24 +1,16 @@
 import { ImagenEscenario } from "./ImagenEscenario";
-import { ObjetoEnigma } from "./ObjetoEnigma";
-import { ObjetoEscape } from "./objetoEscape";
-import { ObjetoGlobalEscape } from "./ObjetoGlobalEscape";
-
 export class EscenarioEscapeRoom {
 
     mapa: string;
     descripcion: string;
     profesorId: number;
     id: number;
-    objetos: ObjetoGlobalEscape [];
-    imagen: ImagenEscenario;
-    posicion: string;
+    imagenId: number;
 
-    constructor(mapa?: string, descripcion?: string,  objetos?: ObjetoGlobalEscape[], imagen?: ImagenEscenario, posicion?: string){
+    constructor(mapa?: string, descripcion?: string, profesorId?: number, imagenId?: number){
         this.mapa = mapa;
         this.descripcion = descripcion;
-        this.objetos = objetos;
-        this.imagen = imagen;
-        this.posicion = posicion;
-     
+        this.profesorId = profesorId;
+        this.imagenId = imagenId;
     }
 }

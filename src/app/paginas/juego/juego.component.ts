@@ -18,7 +18,7 @@ import {
   EquipoJuegoDeColeccion, Escenario, JuegoDeGeocaching, AlumnoJuegoDeGeocaching, PuntoGeolocalizable,
   JuegoDeVotacionUnoATodos, AlumnoJuegoDeVotacionUnoATodos, Profesor,
   JuegoDeVotacionTodosAUno, AlumnoJuegoDeVotacionTodosAUno, CuestionarioSatisfaccion,
-  JuegoDeCuestionarioSatisfaccion, AlumnoJuegoDeCuestionarioSatisfaccion, Rubrica
+  JuegoDeCuestionarioSatisfaccion, AlumnoJuegoDeCuestionarioSatisfaccion, Rubrica, FamiliaDeImagenesDePerfil
 } from '../../clases/index';
 
 
@@ -229,7 +229,7 @@ export class JuegoComponent implements OnInit {
   jornadasFormulaUno: Jornada[];
 
   objetosEnigmaModal: boolean = false;
-  
+
   nuevaPuntuacion: number;
   tengoNuevaPuntuacion = false;
   Puntuacion: number[] = [];
@@ -242,6 +242,7 @@ export class JuegoComponent implements OnInit {
   displayedColumns: string[] = ['mapa', 'descripcion', 'verObjetos', 'añadir'];
   displayedColumnsObjetos: string[] = ['nombre', 'tipoDeObjeto', 'modificarObjeto', 'ver'];
   displayedColumnsObjetosEnigma: string[] = ['nombre', 'pregunta', 'respuesta', 'escoger'];
+  displayedColumnsObjetosEscapePeso: string[] = ['nombre', 'peso', 'añadir']
 
   objetosProfesorModal: boolean = false;
   mensaje: string = 'Estás seguro/a de que quieres eliminar el escenario llamado: ';
@@ -296,7 +297,7 @@ export class JuegoComponent implements OnInit {
   conceptosAsignados = false;
   displayedColumnsConceptos: string[] = ['nombreConcepto', 'pesoConcepto', ' '];
 
-
+  objetosEscapePeso: ObjetoEscape[] = [];
   // Información para el juego de cuestionario de satisfacción
   cuestionarioSatisfaccion: CuestionarioSatisfaccion;
   tengoCuestionarioSatisfaccion = false;
@@ -320,7 +321,12 @@ export class JuegoComponent implements OnInit {
 
   escenarioEscapeRoom: EscenarioEscapeRoom;
   escenarioSecundarioEscapeRoom: EscenarioEscapeRoom;
+  escogidoEscenarioSecundario: boolean = false;
 
+  objetosEscapePrimerEscenario: ObjetoEscape[] = [];
+  objetosEscapePrimerEscenarioVar: boolean = false;
+
+  varBool: boolean = false;
   // criterioComplemento1: string;
 
   //////////////////////////////////// PARÁMETROS PARA PÁGINA DE CREAR JUEGO //////////////////////////////////////
@@ -460,15 +466,53 @@ export class JuegoComponent implements OnInit {
       this.TraeEscenariosDelProfesor();
     } if (number == 2) {
       this.TraeEscenariosSecundariosDelProfesor();
-    }if (number !=1 && number !=2) {
+    } if (number != 1 && number != 2) {
       this.TraeObjetosDelProfesor();
     }
   }
   TraeObjetosDelProfesor() {
   }
-  escogerEscenarioEscapeSecundario(escenario){
-    console.log("Escenario: ", escenario);
+
+  escogerEscenarioEscapeSecundario(escenario) {
+   
     this.escenarioSecundarioEscapeRoom = escenario;
+    this.escogidoEscenarioSecundario = true;
+  /*  this.escenarioEscapeRoom.objetos.forEach(objeto => {
+      console.log("Objeto en escoger escenario: ", objeto);
+      if (objeto.tipoDeObjeto == "objetoEscape") {
+        this.peticionesAPI.DameObjetoEscapeDelProfesor(this.profesorId, objeto.id).subscribe(res => {
+          console.log("RES EN ESCENARIO: ", res);
+          this.objetosEscapePrimerEscenario.push(res);
+        })
+      }
+    });*/
+    console.log("OBJETOS ESCAPE PRIMER ESCENARIO: ", this.objetosEscapePrimerEscenario);
+    this.objetosEscapePrimerEscenarioVar = true;
+
+  }
+  anadirPeso(objeto: ObjetoEscape) {
+
+    if (this.objetosEscapePeso != null && this.objetosEscapePeso != undefined) {
+      this.objetosEscapePeso.forEach(elemento => {
+        if (elemento.nombre == objeto.nombre) {
+          this.varBool = true;
+        }
+      });
+      if (this.varBool == true) {
+        Swal.fire("Ya has añadido este objeto anteriormente.", "", "info");
+      } else {
+        this.objetosEscapePeso.push(objeto);
+      }
+    } else {
+      this.objetosEscapePeso.push(objeto);
+    }
+  }
+  cambiarEnigmaBascula() {
+   
+  }
+  configurarPeso(contenido) {
+    this.modal.open(contenido, { centered: true, size: "lg" });
+    this.dataSource = new MatTableDataSource(this.objetosEscapePrimerEscenario);
   }
   verObjetosEscenario(escenario, objetos) {
     this.objetosProfesorModal = true;
@@ -482,20 +526,21 @@ export class JuegoComponent implements OnInit {
     this.modal.open(objetos, { centered: true, size: "lg" });
     this.dataSource = new MatTableDataSource(escenario.objetos);
   }
+  añadirParaPeso(objeto: ObjetoEscape) { }
   modificarObjeto() {
 
     console.log("objetoGlobal: ", this.objetoEnigmaModificarGlobal);
     this.objetosEnigma.forEach(elemento => {
       console.log("elemento: ", elemento);
-      if(elemento[0].objetoId == this.objetoEnigmaModificarGlobal.id){
+      if (elemento[0].objetoId == this.objetoEnigmaModificarGlobal.id) {
         console.log("entra");
-        this.objetoModificadoEnigma = new ObjetoEnigma (elemento[0].nombre, elemento[0].pregunta, elemento[0].respuesta, elemento[0].resuelta, elemento[0].profesorId, elemento[0].principal, elemento[0].objetoId);
+        this.objetoModificadoEnigma = new ObjetoEnigma(elemento[0].nombre, elemento[0].pregunta, elemento[0].respuesta, elemento[0].resuelta, elemento[0].profesorId, elemento[0].principal, elemento[0].objetoId);
       }
     });
-    console.log("objetoEnigma post function",  this.objetoModificadoEnigma );
+    console.log("objetoEnigma post function", this.objetoModificadoEnigma);
     this.objetoModificadoEnigma.pregunta = this.editObject.value.pregunta;
     this.objetoModificadoEnigma.respuesta = this.editObject.value.respuesta;
-    console.log("objetoEnigma post function",  this.objetoModificadoEnigma );
+    console.log("objetoEnigma post function", this.objetoModificadoEnigma);
 
     this.peticionesAPI.DameObjetoEnigmaDelProfesor(this.profesorId, this.objetoEnigmaModificarGlobal.id).subscribe(res => {
 
@@ -505,44 +550,45 @@ export class JuegoComponent implements OnInit {
 
       console.log("objeto a enviar: ", res[0]);
       this.peticionesAPI.EditaObjetoEnigma(res[0])
-      .subscribe((resa) => {
-        if (resa != null) {
-          console.log(resa);
-          Swal.fire("Se ha modificado correctamente el objeto", "", "success");
-        } else {
-          Swal.fire("Fallo en la modificación", "", "info");
-          console.log('Fallo en la modificación');
-        }
-      });
+        .subscribe((resa) => {
+          if (resa != null) {
+            console.log(resa);
+            Swal.fire("Se ha modificado correctamente el objeto", "", "success");
+          } else {
+            Swal.fire("Fallo en la modificación", "", "info");
+            console.log('Fallo en la modificación');
+          }
+        });
     });
 
   }
-  escogerObjetoPrincipalModal(objetosEnigma){
+  escogerObjetoPrincipalModal(objetosEnigma) {
     this.objetosEnigmaModal = true;
     console.log("this.objetosEnigma: ", this.objetosEnigma);
     this.modal.open(objetosEnigma, { centered: true, size: "lg" });
     this.dataSource = new MatTableDataSource(this.objetosEnigma);
   }
-  escogerObjetoPrincipal(objetoEnigma: ObjetoEnigma){
+  escogerObjetoPrincipal(objetoEnigma: ObjetoEnigma) {
 
-    let objetosEnigmaVariable: ObjetoEnigma [] = [];
+    let objetosEnigmaVariable: ObjetoEnigma[] = [];
     let objetoEnigmaVariable: ObjetoEnigma;
 
     console.log("ObjetoEnigma: ", objetoEnigma);
     this.objetosEnigma.forEach(elemento => {
-      if (elemento[0].id == objetoEnigma[0].id){
+      if (elemento[0].id == objetoEnigma[0].id) {
         elemento[0].principal = true;
-        objetoEnigmaVariable = new ObjetoEnigma (elemento[0].nombre, elemento[0].pregunta, elemento[0].respuesta, elemento[0].resuelta, elemento[0].profesorId, elemento[0].principal, elemento[0].objetoId);
+        objetoEnigmaVariable = new ObjetoEnigma(elemento[0].nombre, elemento[0].pregunta, elemento[0].respuesta, elemento[0].profesorId, elemento[0].principal, elemento[0].objetoId, "Principal");
         objetoEnigmaVariable.id = elemento[0].id;
         objetosEnigmaVariable.push(objetoEnigmaVariable);
+        console.log("objeto que envio: ", objetoEnigmaVariable);
         this.peticionesAPI.EditaObjetoEnigma(objetoEnigmaVariable).subscribe(res => {
           console.log("res: ", res);
           Swal.fire("Perfect", "", "success");
         });
       }
-      else{
+      else {
         elemento[0].principal = false;
-        objetoEnigmaVariable = new ObjetoEnigma (elemento[0].nombre, elemento[0].pregunta, elemento[0].respuesta, elemento[0].resuelta, elemento[0].profesorId, elemento[0].principal, elemento[0].objetoId);
+        objetoEnigmaVariable = new ObjetoEnigma(elemento[0].nombre, elemento[0].pregunta, elemento[0].respuesta, elemento[0].profesorId, elemento[0].principal, elemento[0].objetoId, "Principal");
         objetosEnigmaVariable.push(objetoEnigmaVariable);
         objetoEnigmaVariable.id = elemento[0].id;
         this.peticionesAPI.EditaObjetoEnigma(objetoEnigmaVariable).subscribe(res => {
@@ -555,30 +601,30 @@ export class JuegoComponent implements OnInit {
     this.configuradoEscenarioPrincipal = true;
     this.escenariosSecundariosProfesor = true;
   }
-  verObj(objeto: ObjetoGlobalEscape){
-    if(objeto.tipoDeObjeto == "objetoEscape"){
+  verObj(objeto: ObjetoGlobalEscape) {
+    if (objeto.tipo == "objetoEscape") {
       Swal.fire({
         title: objeto.nombre,
-        imageUrl: '../../../assets/'+ objeto.nombre + '.png',
+        imageUrl: '../../../assets/' + objeto.nombre + '.png',
         imageWidth: 400,
         imageHeight: 200,
         confirmButtonText: 'Volver'
-      }).then((result) => {});
+      }).then((result) => { });
     }
-    else{
+    else {
       console.log("emtra");
       this.objetosEnigma.forEach(elemento => {
-        if(elemento[0].objetoId == objeto.id){
+        if (elemento[0].objetoId == objeto.id) {
           Swal.fire({
             title: objeto.nombre,
-            imageUrl: '../../../assets/'+ objeto.nombre + '.png',
+            imageUrl: '../../../assets/' + objeto.nombre + '.png',
             imageWidth: 400,
             imageHeight: 200,
-            html:'Pregunta: ' + elemento[0].pregunta + ' y la respuesta es: ' + elemento[0].respuesta,
+            html: 'Pregunta: ' + elemento[0].pregunta + ' y la respuesta es: ' + elemento[0].respuesta,
             confirmButtonText: 'Volver',
-          }).then((result) => {});
+          }).then((result) => { });
         }
-      })  
+      })
     }
   }
   editarObjetoEnigma(objeto, objetoModal) {
@@ -691,9 +737,23 @@ export class JuegoComponent implements OnInit {
     });
   }
   crearJuegoDeEscapeRoom() {
+    let count = 0;
 
-    this.peticionesAPI.CreaJuegoDeEscapeRoom(new JuegoDeEscapeRoom(this.modoDeJuegoSeleccionado, this.grupo.id,
-      this.nombreDelJuego, this.escenarioEscapeRoom, true, "Juego De Escape Room", this.escenarioEscapeRoom.id,this.escenarioSecundarioEscapeRoom), this.grupo.id)
+    this.objetosEscapePeso.forEach(objeto => {
+      console.log("objeto para count: ", objeto);
+      count = objeto[0].peso + count;
+    });
+
+    this.peticionesAPI.DameBascula(this.profesorId).subscribe(bascula => {
+      console.log("bascula", bascula);
+      bascula[0].respuesta = count.toString();
+      this.peticionesAPI.EditaObjetoEnigma(bascula[0]).subscribe(res => {
+        console.log("res: ", res);
+      });
+    });
+    
+    /*this.peticionesAPI.CreaJuegoDeEscapeRoom(new JuegoDeEscapeRoom(this.modoDeJuegoSeleccionado, this.grupo.id,
+      this.nombreDelJuego,1000,[], this.escenarioEscapeRoom, true, "Juego De Escape Room", this.escenarioEscapeRoom.id, this.escenarioSecundarioEscapeRoom), this.grupo.id)
       .subscribe(juegoCreado => {
         this.juego = juegoCreado;
         console.log('Juego creado correctamente');
@@ -722,7 +782,7 @@ export class JuegoComponent implements OnInit {
         // Regresamos a la lista de equipos (mat-tab con índice 0)
         this.tabGroup.selectedIndex = 0;
 
-      })
+      })*/
   }
   TipoDeEscenarioSeleccionado2(tipo: string) {
     this.tipoDeEscenarioSeleccionado = tipo;
@@ -1288,7 +1348,7 @@ export class JuegoComponent implements OnInit {
 
   escogerEnigma() {
 
-    this.objetoEnigma = new ObjetoEnigma("cajaFuerte", "", "", false);
+    this.objetoEnigma = new ObjetoEnigma("cajaFuerte", "", "");
     Swal.fire({
       title: "Pregunta",
       text: "¿Cual es la pregunta que tiene que responder el alumno para obtener el código?",

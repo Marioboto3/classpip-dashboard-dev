@@ -2,18 +2,17 @@ export class ObjetoGlobalEscape {
 
     nombre: string;
     profesorId: number;
-    tipoDeObjeto: string;
-    posicion: number;
     id: number;
-    
+    imagen: string;
+    tipo: string;
 
-    constructor(nombre?: string, profesorId?: number, tipoDeObjeto?: string, posicion?: number) {
+    constructor(nombre?: string, profesorId?: number, tipo?: string, imagen?: string) {
   
       this.nombre = nombre;
       this.profesorId = profesorId;
-      this.tipoDeObjeto = tipoDeObjeto;
-      this.posicion = posicion;
-  
+      this.tipo = tipo;
+      this.imagen = imagen;
+
     }
   }
   

@@ -559,18 +559,101 @@
                             <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
                           </div>
                         </ng-template>
+
+
                         <div>
                           <button type="button" class="btn EscogerEscenario"
                             (click)="openModal(contenidoSecundario,2)">Escoger
                             escenario secundario</button>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                  <div class="btnCambiarStep">
+                    <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
+                    <button type="button" class="btn Next" [disabled]="!escogidoEscenarioSecundario"
+                      matStepperNext>Siguiente</button>
+                  </div>
+                </mat-step>
+
+                <mat-step>
+                  <div class="row">
+                    <div class="col-sm">
+                      <div class="colorsChips">
+                        <ng-template matStepLabel>
+                          <div>Configurar escenario secundario</div>
+                        </ng-template>
+                        <ng-template #contenidoConfiguracion let-modal>
+                          <div class="modal-header">
+                            <h4 class="modal-title">Escenarios secundarios</h4>
+                            <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                          <div class='enColumna'>
+                            <form style='width: 80%' *ngIf="objetosEscapePrimerEscenarioVar;else Aviso_no_objetosEscapePeso">
+
+                              <div class="filter">
+                                <mat-form-field>
+                                  <input matInput (keyup)="applyFilter($event.target.value,1)"
+                                    placeholder="Filtro para buscar objetos...">
+                                  <i class="material-icons" matSuffix>search</i>
+                                </mat-form-field>
+                              </div>
+
+                              <table align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                                <!-- Titulo Column -->
+                                <ng-container matColumnDef="nombre">
+                                  <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre </th>
+                                  <td mat-cell *matCellDef="let objeto"> {{objeto[0].nombre}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="peso">
+                                  <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Peso </th>
+                                  <td mat-cell *matCellDef="let objeto"> {{objeto[0].peso}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="añadir">
+                                  <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">Añadir</th>
+                                  <td mat-cell *matCellDef="let objeto">
+                                    <button (click)="anadirPeso(objeto)" mat-icon-button
+                                      matTooltip="Añadir el objeto {{objeto}}">
+                                      <i class="material-icons {{colorIcon}} md-36"
+                                        style="text-align: center;">check_circle_outline</i>
+                                    </button>
+                                  </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumnsObjetosEscapePeso"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumnsObjetosEscapePeso;">
+                                </tr>
+                              </table>
+                            </form>
+
+                            <div class="contenedor">
+                              <ng-template #Aviso_no_objetosEscapePeso>
+                                <div class="texto">No tienes objetos</div>
+                              </ng-template>
+                            </div>
+                          </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
+                          </div>
+                        </ng-template>
+
+                        <div>
+                          <button type="button" class="btn EscogerEscenario" (click)="configurarPeso(contenidoConfiguracion)">Elige los pesos</button>
+                        </div>
                       </div>
-                      </div>
-                      <div class="btnCambiarStep">
-                        <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
-                        <button type="button" (click)="crearJuegoDeEscapeRoom()" class="btn Peticion">Crear</button>
-                      </div>
+                    </div>
+                  </div>
+                  <div class="btnCambiarStep">
+                    <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
+                    <button type="button" (click)="crearJuegoDeEscapeRoom()" class="btn Peticion">Crear</button>
+                  </div>
                 </mat-step>
               </div>
               <!-- ////////////////////////////SI ESCOGEMOS EL JUEGO DE TIPO DE PUNTOS ////////////////////////////////-->

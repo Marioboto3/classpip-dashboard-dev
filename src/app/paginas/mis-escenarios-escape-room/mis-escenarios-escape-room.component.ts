@@ -17,6 +17,7 @@ import { SesionService, PeticionesAPIService } from '../../servicios/index';
 import { Escenario, Profesor } from 'src/app/clases';
 import { EscenarioEscapeRoom } from 'src/app/clases/EscenarioEscapeRoom';
 import { ObjetoGlobalEscape } from 'src/app/clases/ObjetoGlobalEscape';
+import { ImagenEscenario } from 'src/app/clases/ImagenEscenario';
 
 
 
@@ -37,8 +38,10 @@ export class MisEscenariosEscapeRoomComponent implements OnInit {
   lista: string [] = [];
   dataSource;
 
+  imagenes: ImagenEscenario [] = [];
+
   varHelp: boolean = false;
-  displayedColumns: string[] = ['mapa', 'descripcion', 'posicion', 'ver', 'delete'];
+  displayedColumns: string[] = ['mapa', 'descripcion', 'ver', 'delete'];
 
   mensaje: string = 'Estás seguro/a de que quieres eliminar el escenario llamado: ';
 
@@ -69,15 +72,24 @@ export class MisEscenariosEscapeRoomComponent implements OnInit {
 
     this.peticionesAPI.DameEscenariosDelProfesorEscapeRoom(this.profesorId)
     .subscribe(escenario => {
+      console.log("Escenarios: ", escenario);
       if (escenario[0] !== undefined) {
         console.log('Voy a dar la lista de escenarios');
         this.escenariosProfesor = escenario;
         this.dataSource = new MatTableDataSource(this.escenariosProfesor);
         console.log(this.escenariosProfesor);
+        this.escenariosProfesor.forEach(esc => {
+            console.log("esc: ", esc);
+            this.peticionesAPI.DameImagenDelEscenario(this.profesorId, esc.imagenId).subscribe(imagen =>{
+              console.log("imagen", imagen);
+              this.imagenes.push(imagen)
+            });
+        })
       } else {
         this.escenariosProfesor = undefined;
       }
     });
+
   }
   GuardarEscenario(escenario: Escenario) {
     this.sesion.TomaEscenario(escenario);
@@ -85,7 +97,7 @@ export class MisEscenariosEscapeRoomComponent implements OnInit {
 
   BorrarEscenario(escenario: Escenario) {
 
-    console.log ('Vamos a eliminar la colección');
+    console.log ('Vamos a eliminar el escenario');
     this.peticionesAPI.BorraEscenarioEscape(escenario.id, escenario.profesorId)
     .subscribe();
 
@@ -115,28 +127,22 @@ export class MisEscenariosEscapeRoomComponent implements OnInit {
 
   verEscenario(escenario: EscenarioEscapeRoom){
 
-    
-    console.log("objetos: ", escenario.objetos);
-
-    escenario.objetos.sort(function (a, b) {
-      // A va primero que B
-      if (a.posicion < b.posicion)
-        return 1;
-      // B va primero que A
-      else if (a.posicion > b.posicion)
-        return -1;
-      // A y B son iguales
-      else
-        return 0;
+    let imagenEsc: ImagenEscenario;
+    this.imagenes.forEach(imagen => {
+      console.log("imagen: ", imagen);
+      if(imagen.id == escenario.imagenId){
+        imagenEsc = imagen;
+      }
     });
 
     Swal.fire({
       title: escenario.mapa,
-      imageUrl: '../../../assets/imagenBase.jpg',
+      text:'La imagen se llama: ' + imagenEsc.nombre,
+      imageUrl: '../../../assets/' + imagenEsc.nombreDelFichero,
       imageWidth: 400,
       imageHeight: 200,
-      html: 'Posicion 1: ' + escenario.objetos[4].nombre + ' - Posicion 2: ' + escenario.objetos[3].nombre + ' - Posicion 3: ' + escenario.objetos[2].nombre +' - Posicion 4: ' + escenario.objetos[1].nombre +' - Posicion 5: ' + escenario.objetos[0].nombre,
       confirmButtonText: 'Volver',
     }).then((result) => { });
   }
+  
 }

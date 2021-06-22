@@ -32,6 +32,8 @@ import { ObjetoEscape } from '../clases/objetoEscape';
 import { MisObjetosEscapeRoomComponent } from '../paginas/mis-objetos-escape-room/mis-objetos-escape-room.component';
 import { ObjetoEnigma } from '../clases/ObjetoEnigma';
 import { ObjetoGlobalEscape } from '../clases/ObjetoGlobalEscape';
+import { ObjetoJuego } from '../clases/ObjetoJuego';
+import { ImagenEscenario } from '../clases/ImagenEscenario';
 
 @Injectable({
   providedIn: 'root'
@@ -126,16 +128,16 @@ export class PeticionesAPIService {
   //OTRAS
 
   // Para cargar y descargar imagenes
-  private APIUrlImagenAlumno = this.host + ':3000/api/imagenes/imagenAlumno';
-  private APIUrlImagenColeccion = this.host + ':3000/api/imagenes/ImagenColeccion';
-  private APIUrlImagenCromo = this.host + ':3000/api/imagenes/ImagenCromo';
-  private APIUrlImagenNivel = this.host + ':3000/api/imagenes/imagenNivel';
-  private APIUrlLogosEquipos = this.host + ':3000/api/imagenes/LogosEquipos';
+  private APIUrlImagenAlumno = this.host + ':3000/api/Imagenes/imagenAlumno';
+  private APIUrlImagenColeccion = this.host + ':3000/api/Imagenes/ImagenColeccion';
+  private APIUrlImagenCromo = this.host + ':3000/api/Imagenes/ImagenCromo';
+  private APIUrlImagenNivel = this.host + ':3000/api/Imagenes/imagenNivel';
+  private APIUrlLogosEquipos = this.host + ':3000/api/Imagenes/LogosEquipos';
 
-  private APIUrlImagenesAvatares = this.host + ':3000/api/imagenes/ImagenesAvatares';
-  private APIUrlAudiosAvatares = this.host + ':3000/api/imagenes/AudiosAvatares';
+  private APIUrlImagenesAvatares = this.host + ':3000/api/Imagenes/ImagenesAvatares';
+  private APIUrlAudiosAvatares = this.host + ':3000/api/Imagenes/AudiosAvatares';
 
-
+  private APIUrlImagenesObjetoEscapeRoom = this.host + ':3000/api/Imagenes/ImagenObjetoGlobalEscape';
 
   private APIURLEquiposJuegoEvaluado = this.host + ':3000/api/equiposJuegoEvaluado';
 
@@ -143,11 +145,11 @@ export class PeticionesAPIService {
 
   private APIUrlFamiliasDeImagenesDePerfil = this.host + ':3000/api/familiasImagenesPerfil';
 
-  private APIUrlImagenesPerfil = this.host + ':3000/api/imagenes/ImagenesPerfil';
+  private APIUrlImagenesPerfil = this.host + ':3000/api/Imagenes/ImagenesPerfil';
 
   private APIUrlCuestionariosSatisfaccion = this.host + ':3000/api/cuestionariosSatisfaccion';
 
-  private APIUrlImagenesPreguntas = this.host + ':3000/api/imagenes/ImagenesPreguntas';
+  private APIUrlImagenesPreguntas = this.host + ':3000/api/Imagenes/ImagenesPreguntas';
 
 
   constructor(
@@ -703,6 +705,9 @@ export class PeticionesAPIService {
   public BorraEscenarioEscape(idescenario: number, profesorId: number): Observable<any> {
     return this.http.delete<any>(this.APIUrlProfesores + '/' + profesorId + '/EscenariosEscapeRoom/' + idescenario);
   }
+  public BorrarObjetoGlobal(idObjeto: number, profesorId: number): Observable<any> {
+    return this.http.delete<any>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosGlobalEscape/' + idObjeto);
+  }
   public ModificaJuegoDeEscapeRoom(juego: JuegoDeEscapeRoom, grupoId: number): Observable<JuegoDeEscapeRoom> {
     return this.http.put<JuegoDeEscapeRoom>(this.APIUrlGrupos + '/' + grupoId + '/JuegosDeEscapeRoom/' + juego.id, juego);
   }
@@ -712,9 +717,46 @@ export class PeticionesAPIService {
   public DameObjetosEnigmaDelProfesorEscapeRoom(profesorId: number): Observable<ObjetoEnigma[]> {
     return this.http.get<ObjetoEnigma[]>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEnigma');
   }
+  public DameObjetosEscapePrincipalesDelProfesorEscapeRoom(profesorId: number): Observable<ObjetoEscape[]> {
+    return this.http.get<ObjetoEscape[]>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEscape'+ '?filter[where][escenario]=Principal');
+  }
+  public DameObjetosGlobalesDelProfesorEscapeRoom(profesorId: number): Observable<ObjetoGlobalEscape[]> {
+    return this.http.get<ObjetoGlobalEscape[]>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosGlobalEscape');
+  }
+  public DameObjetoJuegoDelProfesorEscapeRoom(profesorId: number, objetoId: number): Observable<ObjetoJuego[]> {
+    return this.http.get<ObjetoJuego[]>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEscenario'+ '?filter[where][objetoId]=' + objetoId);
+  }
+  public DameObjetosEnigmaPrincipalesDelProfesorEscapeRoom(profesorId: number): Observable<ObjetoEnigma[]> {
+    return this.http.get<ObjetoEnigma[]>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEnigma'+ '?filter[where][escenario]=Principal');
+  }
   public DameObjetoEnigmaDelProfesor(profesorId: number, idObjetoGlobal: number): Observable<ObjetoEnigma> {
     return this.http.get<ObjetoEnigma>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEnigma' + '?filter[where][objetoId]='
     + idObjetoGlobal);
+  }
+  public DameImagenDelEscenario(profesorId: number, imagenId: number): Observable<ImagenEscenario> {
+    return this.http.get<ImagenEscenario>(this.APIUrlProfesores + '/' + profesorId + '/ImagenesEscenario/' + imagenId);
+  }
+  public DameImagenesEscenarioDelProfesor(profesorId: number): Observable<ImagenEscenario[]> {
+    return this.http.get<ImagenEscenario[]>(this.APIUrlProfesores + '/' + profesorId + '/ImagenesEscenario');
+  }
+  public DameObjetoEscapeDelProfesor(profesorId: number, idObjetoGlobal: number): Observable<ObjetoEscape> {
+    return this.http.get<ObjetoEscape>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEscape' + '?filter[where][objetoId]='
+    + idObjetoGlobal);
+  }
+
+  //PETICIONES IMAGENES ESCAPE ROOM
+  public DameImagenObjetoEscape(imgName: string){
+    return this.http.get(this.APIUrlImagenesObjetoEscapeRoom + '/files/'+imgName);
+  }
+
+  public SubirImagenObjetoEscape(img: FormData){
+    return this.http.post(this.APIUrlImagenesObjetoEscapeRoom + '/upload', img);
+  }
+  //////////////////////////////
+
+  public DameBascula(profesorId: number): Observable<ObjetoEnigma> {
+    return this.http.get<ObjetoEnigma>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosEnigma' + '?filter[where][nombre]='
+    + 'bascula');
   }
   public CreaEscenarioEscapeRoom(escenario: EscenarioEscapeRoom, profesorId: number): Observable<EscenarioEscapeRoom> {
     console.log('Escenario: ' + escenario);
@@ -736,13 +778,16 @@ export class PeticionesAPIService {
     return this.http.post<ObjetoGlobalEscape>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosGlobalEscape', objetoGlobal);
   }
   public DameEscenariosDelProfesorEscapeRoom(profesorId: number): Observable<EscenarioEscapeRoom[]> {
-    return this.http.get<EscenarioEscapeRoom[]>(this.APIUrlProfesores + '/' + profesorId + '/EscenariosEscapeRoom' + '?filter[where][posicion]=Principal');
+    return this.http.get<EscenarioEscapeRoom[]>(this.APIUrlProfesores + '/' + profesorId + '/EscenariosEscapeRoom');
   }
   public DameEscenariosSecundariosDelProfesorEscapeRoom(profesorId: number): Observable<EscenarioEscapeRoom[]> {
     return this.http.get<EscenarioEscapeRoom[]>(this.APIUrlProfesores + '/' + profesorId + '/EscenariosEscapeRoom' + '?filter[where][posicion]=Secundario');
   }
   public DameObjetosDelProfesorEscapeRoom(profesorId: number): Observable<ObjetoGlobalEscape[]> {
     return this.http.get<ObjetoGlobalEscape[]>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosGlobalEscape');
+  }
+  public DameObjetosPrincipalesDelProfesorEscapeRoom(profesorId: number): Observable<ObjetoGlobalEscape[]> {
+    return this.http.get<ObjetoGlobalEscape[]>(this.APIUrlProfesores + '/' + profesorId + '/ObjetosGlobalEscape' + '?filter[where][escenario]=Principal');
   }
   public InscribeAlumnoJuegoEscapeRoom(AlumnoJuegoEscapeRoom: AlumnoJuegoEscapeRoom) {
     return this.http.post<AlumnoJuegoEscapeRoom>(this.APIUrlAlumnoJuegoDeEscapeRoom, AlumnoJuegoEscapeRoom);

@@ -20,7 +20,6 @@ import { TablaAlumnoJuegoDeCuestionario } from '../clases/TablaAlumnoJuegoDeCues
 import { AlumnoJuegoDeGeocaching } from '../clases/AlumnoJuegoDeGeocaching';
 import { TablaAlumnoJuegoDeGeocaching } from '../clases/TablaAlumnoJuegoDeGeocaching';
 import { JuegoDeEscapeRoom } from '../clases/JuegoDeEscapeRoom';
-import { MaloJuegoEscapeRoom } from '../clases/MaloJuegoDeEscapeRoom';
 
 
 
@@ -46,7 +45,6 @@ export class CalculosService {
   AlumnoJuegoDeCompeticionLigaId: number;
   EquipoJuegoDeCompeticionLigaId: number;
   empateAsignado = 0;
-  juego: MaloJuegoEscapeRoom;
 
   constructor(
     private sesion: SesionService,

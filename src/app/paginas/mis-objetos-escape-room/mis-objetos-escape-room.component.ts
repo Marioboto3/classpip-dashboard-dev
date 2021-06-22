@@ -19,6 +19,7 @@ import { EscenarioEscapeRoom } from 'src/app/clases/EscenarioEscapeRoom';
 import { ObjetoEscape } from 'src/app/clases/objetoEscape';
 import { ObjetoEnigma } from 'src/app/clases/ObjetoEnigma';
 import { ElementosComponent } from 'src/app/elementos/elementos.component';
+import { ObjetoGlobalEscape } from 'src/app/clases/ObjetoGlobalEscape';
 
 
 @Component({
@@ -32,16 +33,15 @@ export class MisObjetosEscapeRoomComponent implements OnInit {
   varTitulo: string;
   colorIcon: string;
   profesor: Profesor;
-  objetosEscapeProfesor: ObjetoEscape[];
-  objetosEnigmaProfesor: ObjetoEnigma[];
-  objetos: string[] = [];
   varTituloColumnaTabla: string;
-  nombresObjetos = new Array<string>();
 
+  objetosGlobales: ObjetoGlobalEscape [] = [];
+  objetosGlobalesProfesor: boolean = false;
 
   dataSource;
 
-  displayedColumns: string[] = ['nombre', 'ver'];
+
+  displayedColumns: string[] = ['nombre', 'tipo','ver', 'delete'];
 
   mensaje: string = 'Estás seguro/a de que quieres eliminar el escenario llamado: ';
 
@@ -67,68 +67,73 @@ export class MisObjetosEscapeRoomComponent implements OnInit {
 
   TraeObjetosProfesor() {
 
-
-    this.peticionesAPI.DameObjetosEscapeDelProfesorEscapeRoom(this.profesorId)
-      .subscribe(objetos => {
-
-        objetos.forEach(elemento => {
-          this.nombresObjetos.push(elemento.nombre);
-        })
-
-        console.log("Objetos: ", this.nombresObjetos);
-
-        this.peticionesAPI.DameObjetosEnigmaDelProfesorEscapeRoom(this.profesorId)
-          .subscribe(objetosEnigma => {
-            objetosEnigma.forEach(elemento => {
-              this.nombresObjetos.push(elemento.nombre);
-            })
-          });
-
-        if (this.nombresObjetos[0] != undefined) {
-          console.log('Voy a dar la lista de objetos');
-          this.objetos = this.nombresObjetos;
-          console.log("This.objetos que pasa: ", this.objetos);
-          this.dataSource = new MatTableDataSource(this.objetos);
-          console.log(this.objetos);
-        } else {
-          this.objetos = undefined;
-        }
+    this.peticionesAPI.DameObjetosGlobalesDelProfesorEscapeRoom(this.profesorId).subscribe(objetos => {
+      objetos.forEach(elemento => {
+      
+          this.objetosGlobales.push(elemento);
       });
-  }
-
-  verObjeto(nombre) {
-    this.peticionesAPI.DameObjetosEnigmaDelProfesorEscapeRoom(this.profesorId).subscribe(el => {
-
-      el.forEach(elemento => {
-        if (elemento.nombre == nombre) {
-          Swal.fire({
-            title: elemento.nombre,
-            imageUrl: '../../../assets/' + elemento.nombre + '.png',
-            imageWidth: 400,
-            imageHeight: 200,
-            html: 'Pregunta: ' + elemento.pregunta + ' y la respuesta es: ' + elemento.respuesta,
-            confirmButtonText: 'Volver',
-          }).then((result) => { });
-        }
-      });
+  
+      if (this.objetosGlobales[0] != undefined) {
+        this.objetosGlobalesProfesor = true;
+        this.dataSource = new MatTableDataSource(this.objetosGlobales);
+      } 
     });
-    this.peticionesAPI.DameObjetosEscapeDelProfesorEscapeRoom(this.profesorId).subscribe(el => {
-      el.forEach(elemento => {
-        if (elemento.nombre == nombre) {
-          Swal.fire({
-            title: elemento.nombre,
-            imageUrl: '../../../assets/' + elemento.nombre + '.png',
-            imageWidth: 400,
-            imageHeight: 200,
-            confirmButtonText: 'Volver'
-          }).then((result) => { });
-        }
-      });
+    
+  }
+
+  verObjeto(objeto: ObjetoGlobalEscape) {
+
+    Swal.fire({
+      title: objeto.nombre,
+      imageUrl: '../../../assets/' + objeto.imagen,
+      imageWidth: 400,
+      imageHeight: 200,
+      confirmButtonText: 'Volver',
+    }).then((result) => { });
+   
+  }
+
+  applyFilter(filterValue: string, number: number) {
+
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+
+  }
+
+  BorrarObjetoGlobal(objetoGlobal: ObjetoGlobalEscape) {
+
+    console.log("OBJETO en BORRAR: ", objetoGlobal);
+
+    console.log ('Vamos a eliminar el objeto');
+    this.peticionesAPI.BorrarObjetoGlobal(objetoGlobal.id, objetoGlobal.profesorId)
+    .subscribe(res =>{
+      console.log("res: ", res);
+    });
+
+    console.log ('La saco de la lista: ', this.objetosGlobales);
+    this.objetosGlobales = this.objetosGlobales.filter(res => res.id !== objetoGlobal.id);
+  }
+
+  AbrirDialogoConfirmacionBorrarObjeto(objetoGlobal: ObjetoGlobalEscape): void {
+
+    console.log("OBJETO: ", objetoGlobal);
+
+    const dialogRef = this.dialog.open(DialogoConfirmacionComponent, {
+      height: '150px',
+      data: {
+        mensaje: this.mensaje,
+        nombre: objetoGlobal.nombre,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.BorrarObjetoGlobal(objetoGlobal);
+        Swal.fire('Eliminado', objetoGlobal.nombre + ' eliminado correctamente', 'success');
+        this.objetosGlobales.slice(this.objetosGlobales.indexOf(objetoGlobal), 1);
+        this.dataSource = new MatTableDataSource(this.objetosGlobales);
+      }
     });
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
+ 
 }

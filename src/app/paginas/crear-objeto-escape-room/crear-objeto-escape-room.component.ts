@@ -11,6 +11,7 @@ import { ObjetoEnigma } from 'src/app/clases/ObjetoEnigma';
 import { stringify } from '@angular/core/src/util';
 import { ObjetoGlobalEscape } from 'src/app/clases/ObjetoGlobalEscape';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -25,9 +26,8 @@ export class CrearObjetoEscapeRoomComponent implements OnInit {
 
   nombreObjeto: string;
   tipoObjeto: string;
-
-  tipoObjetoEnigma: boolean = false;
-  tipoObjetoEscape: boolean = false;
+  imagen: FormData;
+  imagenName: string;
 
   objetoGlobalEscape: ObjetoGlobalEscape;
 
@@ -72,69 +72,50 @@ export class CrearObjetoEscapeRoomComponent implements OnInit {
       tipoObjeto: ['', Validators.required]
     });
     this.myForm2 = this.formBuilder.group({
-      pregunta: ['', Validators.required],
-      respuesta: ['', Validators.required],
       imagen: ['', Validators.required]
     });
   }
 
   escogerNombreObjeto() {
-
     this.objetoGlobalEscape = new ObjetoGlobalEscape(this.myForm.value.nombreObjeto, this.profesorId, this.myForm.value.tipoObjeto);
-
-    if (this.objetoGlobalEscape.tipoDeObjeto == "objetoEnigma") {
-      this.tipoObjetoEnigma = true;
-    } else {
-      this.tipoObjetoEscape = true;
-    }
-
   }
 
   finalizar() {
-
-    this.router.navigate(['/inicio']);
-
-  }
+    this.router.navigate(['/inicio/'+ this.profesorId + '/misObjetosEscapeRoom']);  }
 
   atras() {
-    this.tipoObjetoEnigma = false;
-    this.tipoObjetoEscape = false;
   }
 
   crearObjeto() {
-
-    this.peticionesAPI.CreaObjetoGlobal(new ObjetoGlobalEscape(this.objetoGlobalEscape.nombre, this.profesorId, this.objetoGlobalEscape.tipoDeObjeto, 1), this.profesorId)
-      .subscribe((res) => {
-        if (res != null) {
-          console.log(res);
-          this.objetoYaCreado = true;
-          this.objetoCreadoGlobal = res;
-
-          if (this.objetoGlobalEscape.tipoDeObjeto == "objetoEnigma") {
-            this.peticionesAPI.CreaObjetoEnigma(new ObjetoEnigma(this.objetoGlobalEscape.nombre, this.myForm2.value.pregunta,  this.myForm2.value.respuesta, false, this.profesorId, false, this.objetoCreadoGlobal.id), this.profesorId)
-              .subscribe((res) => {
-                if (res != null) {
-                  console.log(res);
-                  this.objetoYaCreado = true;
-                  this.objetoCreadoEnigma = res;
-                } else {
-                  console.log('Fallo en la creación');
-                }
-              });
+    console.log(this.myForm.value.nombreObjeto, this.myForm.value.tipoObjeto, this.imagenName);
+    if (this.myForm.value.nombreObjeto != undefined && this.myForm.value.tipoObjeto != undefined && this.imagenName != undefined) {
+      this.peticionesAPI.CreaObjetoGlobal(new ObjetoGlobalEscape(this.objetoGlobalEscape.nombre, this.profesorId, this.objetoGlobalEscape.tipo, this.imagenName), this.profesorId)
+        .subscribe((res) => {
+          if (res != null) {
+            this.objetoCreadoGlobal = res; 
+            this.peticionesAPI.SubirImagenObjetoEscape(this.imagen).subscribe(() => {
+              this.objetoYaCreado = true;
+            }, (error) => {
+              Swal.fire('Error', 'Error al subir imagen', 'error');
+            })         
           }
-          if (this.objetoGlobalEscape.tipoDeObjeto == "objetoEscape") {
-            this.peticionesAPI.CreaObjetoEscape(new ObjetoEscape(this.objetoGlobalEscape.nombre, true, false, 1, this.objetoCreadoGlobal.id), 1)
-              .subscribe((res) => {
-                if (res != null) {
-                  console.log(res);
-                  this.objetoYaCreado = true;
-                  this.objetoCreadoEscape = res;
-                } else {
-                  console.log('Fallo en la creación');
-                }
-              });
-          }
-        }
-      });
+        });
+    } else {
+      Swal.fire("¡Tienes que rellenar todos los campos de información para poder crear el objeto!", "", "info");
+    }
+  }
+
+  getImagenObjeto($event){
+    let file = $event.target.files[0];
+    console.log('Fichero seleccionado: ', file);
+
+    this.peticionesAPI.DameImagenObjetoEscape(file.name).subscribe(() => {
+      Swal.fire('Error', 'El fichero ' + file.name + ' ya existe. Cambia el nombre al archivo y vuelve a intentarlo');
+    }, (error) => {
+      console.log('Se puede subir ', file.name);
+      this.imagen = new FormData();
+      this.imagen.append(file.name, file);
+      this.imagenName = file.name;
+    });
   }
 }
