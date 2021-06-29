@@ -1,3 +1,4 @@
+import { AuthService } from './../../../servicios/auth.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { Router } from '@angular/router';
@@ -7,6 +8,7 @@ import { EnfrentamientoLiga, Profesor } from '../../../clases/index';
 
 // Servicios
 import {SesionService, ComServerService} from '../../../servicios/index';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -54,7 +56,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(  private sesion: SesionService,
                 private comServer: ComServerService,
-                private router: Router) { }
+                private router: Router,
+                private auth: AuthService) { }
 
   ngOnInit() {
     
@@ -96,10 +99,15 @@ export class NavbarComponent implements OnInit {
 
   CerrarSesion() {
 
-    this.comServer.Desonectar (this.profesor.id);
-
-    console.log ('voy a la portada');
-    this.router.navigate(['portada']);
+    this.auth.logout().subscribe(() => {
+      Swal.fire('Hecho', 'Sesión cerrada con éxito, ¡vuelve pronto!', 'success');
+      this.comServer.Desonectar (this.profesor.id);
+      console.log ('voy a la portada');
+      this.router.navigate(['portada']);
+      this.profesor = undefined;
+    }, (error) => {
+      Swal.fire('Error', 'Error al cerrar sesión, prueba de nuevo más tarde.', 'error');
+    });
   }
 
 }

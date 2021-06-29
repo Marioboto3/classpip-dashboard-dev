@@ -4,7 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
 
 // IMPORTs CONSULTA BASE DE DATOS
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // IMPORTs DE ANGULAR MATERIAL
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -255,6 +255,7 @@ import { MisEscenariosEscapeRoomComponent } from './paginas/mis-escenarios-escap
 import { CrearEscenarioEscapeComponent } from './paginas/crear-escenario-escape/crear-escenario-escape.component';
 import { MisObjetosEscapeRoomComponent } from './paginas/mis-objetos-escape-room/mis-objetos-escape-room.component';
 import { CrearObjetoEscapeRoomComponent } from './paginas/crear-objeto-escape-room/crear-objeto-escape-room.component';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 
 @NgModule({
@@ -469,7 +470,8 @@ import { CrearObjetoEscapeRoomComponent } from './paginas/crear-objeto-escape-ro
   providers: [
     {
         provide: DateAdapter, useClass: CustomDateAdapter
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ]
 
 

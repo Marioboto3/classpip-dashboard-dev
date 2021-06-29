@@ -2,7 +2,7 @@ export class Profesor {
   nombre: string;
   primerApellido: string;
   segundoApellido: string;
-  nombreUsuario: string;
+  username: string;
   email: string;
   password: string;
   imagenPerfil: string;
@@ -11,14 +11,14 @@ export class Profesor {
   id: number;
 
   constructor(  Nombre?: string, PrimerApellido?: string, SegundoApellido?: string,
-                NombreUsuario?: string, Estacion?: string, email?: string, Password?: string, ImagenPerfil?: string,
+                username?: string, Estacion?: string, email?: string, Password?: string, ImagenPerfil?: string,
                 Identificador?: string,
                 id?: number) {
 
     this.nombre = Nombre;
     this.primerApellido = PrimerApellido;
     this.segundoApellido = SegundoApellido;
-    this.nombreUsuario = NombreUsuario;
+    this.username = username;
     this.email = email;
     this.password = Password;
     this.imagenPerfil = ImagenPerfil;

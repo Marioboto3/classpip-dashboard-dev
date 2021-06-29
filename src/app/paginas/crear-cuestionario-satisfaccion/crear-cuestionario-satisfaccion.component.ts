@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { CuestionarioSatisfaccion } from 'src/app/clases';
+import { CuestionarioSatisfaccion, Profesor } from 'src/app/clases';
 import { SesionService, PeticionesAPIService } from 'src/app/servicios';
 import {  Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class CrearCuestionarioSatisfaccionComponent implements OnInit {
   cuestionario: CuestionarioSatisfaccion;
   advertencia = true;
   profesorId: number;
-  profesor: import("c:/Users/mario/Desktop/TFG/classpip-dashboard-dev/src/app/clases/Profesor").Profesor;
+  profesor: Profesor;
   varTitulo: string;
   varTituloColumnaTabla: string;
 

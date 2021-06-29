@@ -194,11 +194,11 @@ export class PeticionesAPIService {
 /////////////////////  GESTION DE PROFESORES Y ALUNNOS ///////////////////////////////
 
   public DameProfesor(nombre: string, pass: string): Observable<Profesor> {
-    return this.http.get<Profesor>(this.APIUrlProfesores + '?filter[where][nombreUsuario]=' + nombre + '&filter[where][password]=' + pass);
+    return this.http.get<Profesor>(this.APIUrlProfesores + '?filter[where][username]=' + nombre + '&filter[where][password]=' + pass);
   }
 
   public BuscaNombreUsuario(username: string): Observable<Profesor> {
-    return this.http.get<Profesor>(this.APIUrlProfesores + '?filter[where][nombreUsuario]=' + username);
+    return this.http.get<Profesor>(this.APIUrlProfesores + '?filter[where][username]=' + username);
   }
 
   public DameProfesores(): Observable<Profesor[]> {
@@ -209,7 +209,7 @@ export class PeticionesAPIService {
   // su nombre de usuario (de momento el nombre)
 
   public DameContrasena(nombre: string): Observable<Profesor> {
-    return this.http.get<Profesor>(this.APIUrlProfesores + '?filter[where][nombreUsuario]=' + nombre );
+    return this.http.get<Profesor>(this.APIUrlProfesores + '?filter[where][username]=' + nombre );
   }
 
 
@@ -218,10 +218,7 @@ export class PeticionesAPIService {
   }
 
   public ModificaProfesor(profesor: Profesor): Observable<Profesor> {
-    const aaa = this.APIUrlProfesores + '/' + profesor.id;
-    console.log ('url');
-    console.log (aaa);
-    return this.http.put<Profesor>(this.APIUrlProfesores + '/' + profesor.id, profesor);
+    return this.http.patch<Profesor>(this.APIUrlProfesores + '/' + profesor.id, profesor);
   }
 
 

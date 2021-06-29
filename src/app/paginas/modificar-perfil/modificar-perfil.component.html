@@ -1,42 +1,84 @@
+<div class="{{ varTitulo }}">Cambiar datos del perfil</div>
+<mat-divider class="lineaDivisoria"></mat-divider>
+<mat-card-content style="
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  ">
+  <br />
+  <h4>El identificador que debes dar a tus alumnos cuando se registren es:</h4>
+  <h3>{{ profesor.identificador }}</h3>
 
-    <div class={{varTitulo}}>Cambiar datos del perfil</div>
-    <mat-divider class="lineaDivisoria"></mat-divider>
-    <mat-card-content style="text-align: center; display: flex; align-items: center; flex-direction: column; ">
-      <br>
-      <h4>El identificador que debes dar a tus alumnos cuando se registren es:</h4>
-      <h3>{{profesor.identificador}}</h3>
+  <br />
+  <br />
 
+  <div style="width: 40%">
+    <form name="userData" *ngIf="!cambioPass">
+      <mat-form-field style="width: 80%">
+        <input matInput type="text" name="nombre" placeholder="Nombre" required [(ngModel)]="nombre"
+          (ngModelChange)="cambio = true" />
+      </mat-form-field>
+      <mat-form-field style="width: 80%">
+        <input matInput type="text" name="primerApellido" placeholder="Primer Apellido" required
+          [(ngModel)]="primerApellido" (ngModelChange)="cambio = true" />
+      </mat-form-field>
+      <mat-form-field style="width: 80%">
+        <input matInput type="text" name="segundoApellido" placeholder="Segundo Apellido" required
+          [(ngModel)]="segundoApellido" (ngModelChange)="cambio = true" />
+      </mat-form-field>
+      <mat-form-field style="width: 80%">
+        <input matInput type="text" name="username" placeholder="nombre de usuario" required [(ngModel)]="username"
+          (ngModelChange)="cambio = true" />
+      </mat-form-field>
+      <mat-form-field style="width: 80%">
+        <input matInput type="text" name="email" placeholder="email" required [(ngModel)]="email"
+          (ngModelChange)="cambio = true" />
+      </mat-form-field>
+    </form>
+    <form name="pswdData" *ngIf="cambioPass">
+      <mat-form-field style="width: 80%">
+        <input matInput type="password" name="contrasena" placeholder="Contraseña" required [(ngModel)]="oldPassword" />
+      </mat-form-field>
+      <mat-form-field style="width: 80%">
+        <input matInput type="password" name="contrasena" placeholder="Contraseña" required [(ngModel)]="newPassword" />
+      </mat-form-field>
+      <mat-form-field style="width: 80%">
+        <input matInput type="password" name="contrasenaRepetida" placeholder="Repite contraseña" required
+          [(ngModel)]="repeatPassword" />
+      </mat-form-field>
+    </form>
+  </div>
 
-      <br>
-      <br> 
+  <mat-card-actions>
+    <button *ngIf="cambio" class="btn InicioSesion" (click)="openModal(contenido)">
+      Registrar cambios
+    </button>
+    <button *ngIf="!cambioPass && !cambio" class="btn Eliminar" (click)="CambiarContrasena()">
+      Cambiar contraseña
+    </button>
+    <button *ngIf="cambioPass" class="btn Eliminar" (click)="cambioPass = false">
+      Cancelar
+    </button>
+    <button *ngIf="cambioPass" class="btn Peticion" (click)="ActualizarContrasena()">
+      Actualizar contraseña
+    </button>
+    <button *ngIf="!cambioPass" class="btn Back" (click)="Volver()">Volver</button>
+  </mat-card-actions>
 
-        <div style= "width: 40%">
-          <mat-form-field style=" width: 80%">
-            <input matInput type="text" name="nombre" placeholder="Nombre" required [(ngModel)]="nombre" (ngModelChange)= "cambio = true">
-          </mat-form-field>
-          <mat-form-field style="width: 80%">
-
-            <input matInput type="text" name="primerApellido" placeholder="Primer Apellido" required [(ngModel)]="primerApellido" (ngModelChange)= "cambio = true">
-          </mat-form-field>
-          <mat-form-field style="width: 80%">
-            <input matInput type="text" name="segundoApellido" placeholder="Segundo Apellido" required [(ngModel)]="segundoApellido" (ngModelChange)= "cambio = true">
-          </mat-form-field>
-          <mat-form-field style=" width: 80%">
-            <input matInput type="text" name="username" placeholder="nombre de usuario" required [(ngModel)]="username" (ngModelChange)= "cambio = true">
-          </mat-form-field>
-          <mat-form-field style="width: 80%">
-            <input matInput type="text" name="email" placeholder="email" required [(ngModel)]="email" (ngModelChange)= "cambio = true">
-          </mat-form-field>
-          <mat-form-field style="width: 80%">
-            <input matInput type="text" name="contrasena" placeholder="Contraseña" required [(ngModel)]="contrasena" (ngModelChange)= "cambio = true; cambioPass = true">
-          </mat-form-field>
-          <mat-form-field  *ngIf = "cambioPass" style="width: 80%">
-            <input matInput type="text" name="contrasenaRepetida" placeholder="Repite contraseña" required [(ngModel)]="contrasenaRepetida">
-          </mat-form-field>
-        </div>
-
-        <mat-card-actions>
-          <button *ngIf = "cambio" class="btn IncioSesion" (click)= Registrar()>Registrar cambios</button>
-          <button class="btn Back" (click)= Volver()>Volver</button>
-        </mat-card-actions>
-   </mat-card-content>
+  <ng-template #contenido let-modal>
+    <div class="modal-header" style="margin-left: auto; margin-right: auto;">
+      <span class="modal-title">Por motivos de seguridad, introduce tu contraseña</span>
+    </div>
+    <div class="modal-body" style="text-align: center;">
+      <form name="secForm">
+        <input matInput type="password" style="width: 120%;" name="password" placeholder="Contraseña"
+          [(ngModel)]="password" required />
+      </form>
+    </div>
+    <div class="modal-footer" style="margin-left: auto; margin-right: auto;">
+      <button type="button" class="btn btn-danger" (click)="modal.close()">Cancelar</button>
+      <button type="button" class="btn btn-success" (click)="Registrar()" (click)="modal.close()">Siguiente</button>
+    </div>
+  </ng-template>
+</mat-card-content>
