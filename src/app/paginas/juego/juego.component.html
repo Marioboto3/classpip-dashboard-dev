@@ -186,8 +186,13 @@
                     <div class="col-sm">
                       <div class="colorsChips">
                         <ng-template matStepLabel>
-                          <div>Escoger escenario principal</div>
+                          <div>Escenas</div>
                         </ng-template>
+
+                        <mat-form-field>
+                          <mat-label>Introduzca el número de escenas</mat-label>
+                          <input matInput placeholder="Escriba el número" requiered formControlName="EscenasDelJuego">
+                        </mat-form-field>
 
                         <ng-template #contenido let-modal>
                           <div class="modal-header">
@@ -468,23 +473,14 @@
                         </ng-template>
 
                         <div>
-                          <button type="button" class="btn EscogerEscenario" (click)="openModal(contenido,1)">Escoger
-                            escenario</button>
+                          <button type="button" class="btn EscogerEscenario" (click)="escogerNumeroEscenas()">Listo!</button>
                         </div>
-                        <div>
-                          <button type="button" class="btn btn Peticion"
-                            (click)="escogerObjetoPrincipalModal(objetosEnigma)">Escoger
-                            objeto Enigma principal</button>
-                        </div>
-
-                        <span style="font-weight: bold;color:green;" color="secundary">Has elegido ...
-                          {{tipoDeJuegoSeleccionado}} </span>
                       </div>
                     </div>
                   </div>
                   <div class="btnCambiarStep">
                     <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
-                    <button type="button" class="btn Next" [disabled]="!configuradoEscenarioPrincipal"
+                    <button type="button" class="btn Next" [disabled]="!escenaYaescogida"
                       matStepperNext>Siguiente</button>
                   </div>
                 </mat-step>
@@ -494,19 +490,18 @@
                     <div class="col-sm">
                       <div class="colorsChips">
                         <ng-template matStepLabel>
-                          <div>Escoger escenario secundario</div>
+                          <div>Configuración de la escena</div>
                         </ng-template>
-                        <ng-template #contenidoSecundario let-modal>
+                        <ng-template #contenidoEscenarios let-modal>
                           <div class="modal-header">
-                            <h4 class="modal-title">Escenarios secundarios</h4>
+                            <h4 class="modal-title">Escena</h4>
                             <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
                             <div class='enColumna'>
-                              <form style='width: 100%'
-                                *ngIf="escenariosSecundariosProfesor;else Aviso_no_escenariosSecundarios">
+                              <form style='width: 100%' *ngIf="escenariosProfesor;else Aviso_no_cuestionarios">
 
                                 <div class="filter">
                                   <mat-form-field>
@@ -532,24 +527,35 @@
 
                                   </ng-container>
 
-                                  <ng-container matColumnDef="añadir">
+                                  <ng-container matColumnDef="imagenes">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">Ver imágen</th>
+                                    <td mat-cell *matCellDef="let escenario">
+                                      <button (click)="verImagen(escenario)" mat-icon-button
+                                        matTooltip="Ver la imagen del escenario {{escenario.mapa}}">
+                                        <i class="material-icons green md-36">check_circle_outline</i>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="escoger">
                                     <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">Escoger</th>
                                     <td mat-cell *matCellDef="let escenario">
-                                      <button (click)="escogerEscenarioEscapeSecundario(escenario)" mat-icon-button
+                                      <button (click)="escogerEscenarioEscape(escenario)" mat-icon-button
                                         matTooltip="Escoger el escenario {{escenario.mapa}}">
                                         <i class="material-icons green md-36">check_circle_outline</i>
                                       </button>
                                     </td>
                                   </ng-container>
 
-                                  <tr mat-header-row *matHeaderRowDef="displayedColumnsEscenarioSecundario"></tr>
-                                  <tr mat-row *matRowDef="let row; columns: displayedColumnsEscenarioSecundario;">
+
+                                  <tr mat-header-row *matHeaderRowDef="displayedColumnsEscenarios"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: displayedColumnsEscenarios;">
                                   </tr>
                                 </table>
                               </form>
 
                               <div class="contenedor">
-                                <ng-template #Aviso_no_escenariosSecundarios>
+                                <ng-template #Aviso_no_cuestionarios>
                                   <div class="texto">No tienes escenarios</div>
                                 </ng-template>
                               </div>
@@ -559,85 +565,411 @@
                             <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
                           </div>
                         </ng-template>
-
-
-                        <div>
-                          <button type="button" class="btn EscogerEscenario"
-                            (click)="openModal(contenidoSecundario,2)">Escoger
-                            escenario secundario</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="btnCambiarStep">
-                    <button type="button" class="btn Back" matStepperPrevious>Atrás</button>
-                    <button type="button" class="btn Next" [disabled]="!escogidoEscenarioSecundario"
-                      matStepperNext>Siguiente</button>
-                  </div>
-                </mat-step>
-
-                <mat-step>
-                  <div class="row">
-                    <div class="col-sm">
-                      <div class="colorsChips">
-                        <ng-template matStepLabel>
-                          <div>Configurar escenario secundario</div>
-                        </ng-template>
-                        <ng-template #contenidoConfiguracion let-modal>
+                        <ng-template #contenidoObjetos let-modal>
                           <div class="modal-header">
-                            <h4 class="modal-title">Escenarios secundarios</h4>
+                            <h4 class="modal-title">Objetos</h4>
                             <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
-                          <div class='enColumna'>
-                            <form style='width: 80%' *ngIf="objetosEscapePrimerEscenarioVar;else Aviso_no_objetosEscapePeso">
+                            <div class='enColumna'>
+                              <form style='width: 100%' *ngIf="objetosProfesorModal;else Aviso_no_objetos">
 
-                              <div class="filter">
-                                <mat-form-field>
-                                  <input matInput (keyup)="applyFilter($event.target.value,1)"
-                                    placeholder="Filtro para buscar objetos...">
-                                  <i class="material-icons" matSuffix>search</i>
-                                </mat-form-field>
+                                <div class="filter">
+                                  <mat-form-field>
+                                    <input matInput (keyup)="applyFilter($event.target.value)"
+                                      placeholder="Filtro para buscar objetos...">
+                                    <i class="material-icons" matSuffix>search</i>
+                                  </mat-form-field>
+                                </div>
+                                <table align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                                  <!-- Titulo Column -->
+                                  <ng-container matColumnDef="nombre">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre
+                                    </th>
+                                    <td mat-cell *matCellDef="let objeto"> {{objeto.nombre}} </td>
+
+                                  </ng-container>
+
+                                  <!-- Pregunta Column -->
+                                  <ng-container matColumnDef="tipoDeObjeto">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Tipo de
+                                      Objeto
+                                    </th>
+                                    <td mat-cell *matCellDef="let objeto"> {{objeto.tipo}} </td>
+
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="añadir">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">Añadir
+                                    </th>
+                                    <td mat-cell *matCellDef="let objeto">
+                                      <button (click)="anadirObjeto(objeto)" mat-icon-button
+                                        matTooltip="Añadir el objeto {{objeto.nombre}}">
+                                        <i class="material-icons green md-36">visibility</i>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+                                  <ng-container matColumnDef="ver">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">Ver
+                                    </th>
+                                    <td mat-cell *matCellDef="let objeto">
+                                      <button (click)="verObj(objeto)" mat-icon-button
+                                        matTooltip="Ver caracteristicas del objeto {{objeto.nombre}}">
+                                        <i class="material-icons green md-36">visibility</i>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+
+                                  <tr mat-header-row *matHeaderRowDef="displayedColumnsObjetos"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: displayedColumnsObjetos;">
+                                  </tr>
+                                </table>
+                              </form>
+
+                              <div class="contenedor">
+                                <ng-template #Aviso_no_objetos>
+                                  <div class="texto">No tiene objetos</div>
+                                </ng-template>
                               </div>
-
-                              <table align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-                                <!-- Titulo Column -->
-                                <ng-container matColumnDef="nombre">
-                                  <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre </th>
-                                  <td mat-cell *matCellDef="let objeto"> {{objeto[0].nombre}} </td>
-                                </ng-container>
-
-                                <ng-container matColumnDef="peso">
-                                  <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Peso </th>
-                                  <td mat-cell *matCellDef="let objeto"> {{objeto[0].peso}} </td>
-                                </ng-container>
-
-                                <ng-container matColumnDef="añadir">
-                                  <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">Añadir</th>
-                                  <td mat-cell *matCellDef="let objeto">
-                                    <button (click)="anadirPeso(objeto)" mat-icon-button
-                                      matTooltip="Añadir el objeto {{objeto}}">
-                                      <i class="material-icons {{colorIcon}} md-36"
-                                        style="text-align: center;">check_circle_outline</i>
-                                    </button>
-                                  </td>
-                                </ng-container>
-
-                                <tr mat-header-row *matHeaderRowDef="displayedColumnsObjetosEscapePeso"></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumnsObjetosEscapePeso;">
-                                </tr>
-                              </table>
-                            </form>
-
-                            <div class="contenedor">
-                              <ng-template #Aviso_no_objetosEscapePeso>
-                                <div class="texto">No tienes objetos</div>
-                              </ng-template>
                             </div>
                           </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
+                          </div>
+                        </ng-template>
+                        <ng-template #contenidoPosicion let-modal>
+                          <div class="modal-header">
+                            <h4 class="modal-title">Objetos escogidos</h4>
+                            <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class='enColumna'>
+                              <form style='width: 100%' *ngIf="objetosEscogidos;else Aviso_no_objetos">
+
+                                <div class="filter">
+                                  <mat-form-field>
+                                    <input matInput (keyup)="applyFilter($event.target.value)"
+                                      placeholder="Filtro para buscar objetos...">
+                                    <i class="material-icons" matSuffix>search</i>
+                                  </mat-form-field>
+                                </div>
+                                <table align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                                  <!-- Titulo Column -->
+                                  <ng-container matColumnDef="nombre">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre
+                                    </th>
+                                    <td mat-cell *matCellDef="let objeto"> {{objeto.nombre}} </td>
+
+                                  </ng-container>
+
+                                  <!-- Pregunta Column -->
+                                  <ng-container matColumnDef="tipoDeObjeto">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Tipo de
+                                      Objeto
+                                    </th>
+                                    <td mat-cell *matCellDef="let objeto"> {{objeto.tipo}} </td>
+
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="escogerPosicion">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">Escoger
+                                      Posicion</th>
+                                    <td mat-cell *matCellDef="let objeto">
+                                      <button (click)="verPosiciones(objeto, posiciones)" mat-icon-button
+                                        matTooltip="Escoger la posicion">
+                                        <i class="material-icons green md-36">visibility</i>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+
+                                  <tr mat-header-row *matHeaderRowDef="displayedColumnsPosiciones"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: displayedColumnsPosiciones;">
+                                  </tr>
+                                </table>
+                              </form>
+
+                              <div class="contenedor">
+                                <ng-template #Aviso_no_objetos>
+                                  <div class="texto">No tiene objetos</div>
+                                </ng-template>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
+                          </div>
+                        </ng-template>
+                        <ng-template #contenidoPrincipal let-modal>
+                          <div class="modal-header">
+                            <h4 class="modal-title">Objetos enigma</h4>
+                            <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class='enColumna'>
+                              <form style='width: 100%' *ngIf="objetosEnigmaEscogidosModal;else Aviso_no_objetos">
+
+                                <div class="filter">
+                                  <mat-form-field>
+                                    <input matInput (keyup)="applyFilter($event.target.value)"
+                                      placeholder="Filtro para buscar objetos...">
+                                    <i class="material-icons" matSuffix>search</i>
+                                  </mat-form-field>
+                                </div>
+                                <table align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                                  <!-- Titulo Column -->
+                                  <ng-container matColumnDef="nombre">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre
+                                    </th>
+                                    <td mat-cell *matCellDef="let objeto"> {{objeto.nombre}} </td>
+
+                                  </ng-container>
+
+                                  <!-- Pregunta Column -->
+
+                                  <ng-container matColumnDef="escogerPrincipal">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">Escoger
+                                      principal</th>
+                                    <td mat-cell *matCellDef="let objeto">
+                                      <button (click)="escogerPrincipal(objeto)" mat-icon-button
+                                        matTooltip="Escoger el principal">
+                                        <i class="material-icons green md-36">visibility</i>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="modificarObjeto">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">Configurar
+                                      Objeto</th>
+                                    <td mat-cell *matCellDef="let objeto">
+                                      <button (click)="editarEnigma(objeto,editarObjetoEnigma)" mat-icon-button
+                                        matTooltip="Editar el objeto">
+                                        <i class="material-icons green md-36">edit</i>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+
+                                  <tr mat-header-row *matHeaderRowDef="displayedColumnsEnigmaPrincipal"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: displayedColumnsEnigmaPrincipal;">
+                                  </tr>
+                                </table>
+                              </form>
+
+                              <div class="contenedor">
+                                <ng-template #Aviso_no_objetos>
+                                  <div class="texto">No tiene objetos</div>
+                                </ng-template>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
+                          </div>
+                        </ng-template>
+                        <ng-template #contenidoRequisitos let-modal>
+                          <div class="modal-header">
+                            <h4 class="modal-title">Escoge objetos que se requisitan</h4>
+                            <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class='enColumna'>
+                              <form style='width: 100%' *ngIf="objetosRequisitadosModal;else Aviso_no_objetos">
+
+                                <div class="filter">
+                                  <mat-form-field>
+                                    <input matInput (keyup)="applyFilter($event.target.value)"
+                                      placeholder="Filtro para buscar objetos...">
+                                    <i class="material-icons" matSuffix>search</i>
+                                  </mat-form-field>
+                                </div>
+                                <table align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                                  <!-- Titulo Column -->
+                                  <ng-container matColumnDef="nombre">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Nombre
+                                    </th>
+                                    <td mat-cell *matCellDef="let objeto"> {{objeto.nombre}} </td>
+
+                                  </ng-container>
+
+                                  <!-- Pregunta Column -->
+
+                                  <ng-container matColumnDef="escoger">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">Escoger
+                                      </th>
+                                    <td mat-cell *matCellDef="let objeto">
+                                      <button (click)="escogerObjetoRequisito(objeto)" mat-icon-button
+                                        matTooltip="Escoger objeto">
+                                        <i class="material-icons green md-36">visibility</i>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+
+                                  <tr mat-header-row *matHeaderRowDef="displayedColumnsRequisitos"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: displayedColumnsRequisitos;">
+                                  </tr>
+                                </table>
+                              </form>
+
+                              <div class="contenedor">
+                                <ng-template #Aviso_no_objetos>
+                                  <div class="texto">No tiene objetos</div>
+                                </ng-template>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
+                          </div>
+                        </ng-template>
+                        <ng-template #editarObjetoEnigma let-modal>
+                          <div class="modal-header">
+                            <h4 class="modal-title">{{tituloObjetoEnigma}}</h4>
+                            <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class='enColumna'>
+
+                              <form style='width: 100%' [formGroup]="editObject"
+                                *ngIf="editarObjetoEnigmaVar;else Aviso_no_editarObjeto">
+
+                                <ng-template>Configuración del objeto</ng-template>
+
+                                <mat-form-field>
+                                  <mat-label>Pregunta</mat-label>
+                                  <input matInput formControlName="pregunta" required>
+                                  <mat-error>Este campo es obligatorio</mat-error>
+                                </mat-form-field>
+
+                                <div>
+                                  <mat-form-field>
+                                    <mat-label>Respuesta</mat-label>
+                                    <input matInput formControlName="respuesta" required>
+                                    <mat-error>Este campo es obligatorio</mat-error>
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="btnCambiarStep" style="margin-top:10px;">
+                                  <button type="button" class="btn Back" matStepperPrevious
+                                    (click)="atras()">Atrás</button>
+                                  <button type="button" class="btn Next" matStepperNext
+                                    (click)="modificarObjeto()">Modificar</button>
+                                </div>
+
+                              </form>
+
+                              <div class="contenedor">
+                                <ng-template #Aviso_no_editarObjeto>
+                                  <div class="texto">No tienes objeto que editar</div>
+                                </ng-template>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
+                          </div>
+                        </ng-template>
+                        <ng-template #contenidoPistas let-modal>
+                          <div class="modal-header">
+                            <h4 class="modal-title">Pista</h4>
+                            <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class='enColumna'>
+
+                              <form style='width: 100%' [formGroup]="editPista"
+                                *ngIf="editarObjetoEnigmaVar;else Aviso_no_Pista">
+
+                                <ng-template>Configuración de la pista</ng-template>
+
+                                <mat-form-field>
+                                  <mat-label>Texto</mat-label>
+                                  <input matInput formControlName="texto" required>
+                                  <mat-error>Este campo es obligatorio</mat-error>
+                                </mat-form-field>
+
+                                <div class="btnCambiarStep" style="margin-top:10px;">
+                                  <button type="button" class="btn Back" matStepperPrevious
+                                    (click)="atras()">Atrás</button>
+                                  <button type="button" class="btn Next" matStepperNext
+                                    (click)="crearPista()">Crear</button>
+                                </div>
+
+                              </form>
+
+                              <div class="contenedor">
+                                <ng-template #Aviso_no_Pista>
+                                  <div class="texto">No tienes pista editar</div>
+                                </ng-template>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
+                          </div>
+                        </ng-template>
+                        <ng-template #posiciones let-modal>
+                          <div class="modal-header">
+                            <h4 class="modal-title">Posiciones</h4>
+                            <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class='enColumna'>
+
+                              <form style='width: 100%' [formGroup]="editObject"
+                                *ngIf="posicionesVar2;else Aviso_no_editarObjeto">
+
+                                <ng-template>Posiciones</ng-template>
+                                <table align="center" mat-table [dataSource]="dataSourcePosicion" class="mat-elevation-z8">
+
+                                  <!-- Titulo Column -->
+                                  <ng-container matColumnDef="posicion">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"> Posicion
+                                    </th>
+                                    <td mat-cell *matCellDef="let posicion"> {{posicion}} </td>
+  
+                                  </ng-container>
+
+                                  <!-- Pregunta Column -->
+                                  <ng-container matColumnDef="escogerPosicion">
+                                    <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}">Escoger</th>
+                                    <td mat-cell *matCellDef="let posicion">
+                                      <button (click)="escogerPosicion(posicion)" mat-icon-button
+                                        matTooltip="Escoger la posicion">
+                                        <i class="material-icons green md-36">visibility</i>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+
+                                  <tr mat-header-row *matHeaderRowDef="displayedColumnsPos"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: displayedColumnsPos;">
+                                  </tr>
+                                </table>
+
+                              </form>
+
+                              <div class="contenedor">
+                                <ng-template #Aviso_no_editarObjeto>
+                                  <div class="texto">No tienes objeto que editar</div>
+                                </ng-template>
+                              </div>
+                            </div>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-success" (click)="modal.close()">Ok!</button>
@@ -645,7 +977,24 @@
                         </ng-template>
 
                         <div>
-                          <button type="button" class="btn EscogerEscenario" (click)="configurarPeso(contenidoConfiguracion)">Elige los pesos</button>
+                          <button type="button" class="btn EscogerEscenario"
+                            (click)="openModal(contenidoEscenarios,1)">Escoger
+                            escenario</button>
+                          <button type="button" class="btn EscogerEscenario"
+                            (click)="openModal(contenidoObjetos,2)">Escoger 
+                            objetos</button>
+                            <button type="button" class="btn EscogerEscenario"
+                            (click)="openModal(contenidoPosicion,3)">Escoger 
+                            posicion</button>
+                            <button type="button" class="btn EscogerEscenario"
+                            (click)="openModal(contenidoPrincipal,4)">Escoger 
+                            objeto principal</button>
+                            <button type="button" class="btn EscogerEscenario"
+                            (click)="openModal(contenidoRequisitos,5)">Escoger 
+                            objetos necesarios</button>
+                            <button type="button" class="btn EscogerEscenario"
+                            (click)="openModal(contenidoPistas,6)">Configurar 
+                            pista</button>
                         </div>
                       </div>
                     </div>
@@ -655,6 +1004,7 @@
                     <button type="button" (click)="crearJuegoDeEscapeRoom()" class="btn Peticion">Crear</button>
                   </div>
                 </mat-step>
+
               </div>
               <!-- ////////////////////////////SI ESCOGEMOS EL JUEGO DE TIPO DE PUNTOS ////////////////////////////////-->
 

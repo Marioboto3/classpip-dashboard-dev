@@ -94,7 +94,8 @@ export class CrearObjetoEscapeRoomComponent implements OnInit {
           if (res != null) {
             this.objetoCreadoGlobal = res; 
             this.peticionesAPI.SubirImagenObjetoEscape(this.imagen).subscribe(() => {
-              this.objetoYaCreado = true;
+            this.objetoYaCreado = true;
+            Swal.fire("Objeto creado correctamente.", "", "success");
             }, (error) => {
               Swal.fire('Error', 'Error al subir imagen', 'error');
             })         

@@ -1,17 +1,18 @@
-import { Mochila } from "./Mochila";
 
 export class AlumnoJuegoEscapeRoom {
 
-    alumnoId: number;
-    personaje: string;
-    juegoDeEscapeRoomId: number;
-    mochila: Mochila = new Mochila([], 0);
+  alumnoId: number;
+  personaje: string;
+  juegoDeEscapeRoomId: number;
+  id: number;
+  escenaActualId: number;
 
-
-    constructor(alumnoId?: number, personaje?:string, juegoEscapeRoomId?: number) {
-      this.alumnoId = alumnoId;
-      this.personaje = personaje;
-      this.juegoDeEscapeRoomId = juegoEscapeRoomId;
-    }
+  constructor(alumnoId?: number, personaje?:string, juegoEscapeRoomId?: number, escenaActualId?: number) {
+    this.alumnoId = alumnoId;
+    this.personaje = personaje;
+    this.juegoDeEscapeRoomId = juegoEscapeRoomId;
+    this.escenaActualId = escenaActualId;
   }
-  
+}
+
+

@@ -2,15 +2,14 @@
 export class EscenaDeJuego {
 
     id: number;
-    juegoDeEscapeRoomId: number;
-    posicion: number;
     escenarioId: number;
+    posicion: number;
 
-    constructor(juegoEscapeRoomId?: number, posicion?: number, escenarioId?: number) {
+
+    constructor(escenarioId?: number, posicion?: number) {
       
-      this.juegoDeEscapeRoomId = juegoEscapeRoomId;
-      this.posicion = posicion;
       this.escenarioId = escenarioId;
+      this.posicion = posicion;
       
     }
   }
