@@ -20,6 +20,7 @@ export class PortadaComponent implements OnInit {
   profesor: Profesor;
   nombre: string;
   pass: string;
+  savePass: boolean;
   universidad: string;
   primerApellido: string;
   segundoApellido: string;
@@ -36,15 +37,38 @@ export class PortadaComponent implements OnInit {
     private authService: AuthService){}
 
   ngOnInit() {
-    this.profesor = undefined;
-    // envio un profesor undefined para que se notifique al componente navbar y desaparezca la barra
-    // de navegación
-    this.sesion.EnviaProfesor(this.profesor);
+    // this.profesor = undefined;
+    // // envio un profesor undefined para que se notifique al componente navbar y desaparezca la barra
+    // // de navegación
+    // this.sesion.EnviaProfesor(this.profesor);
+    if(localStorage.getItem('ACCESS_TOKEN') != null){
+      let token = localStorage.getItem('ACCESS_TOKEN');
+      this.authService.getUserIdByToken(token).subscribe((data: any) => {
+        if(data.userId != null){
+          this.authService.getProfesor(data.userId).subscribe((res) => {
+            this.profesor = res[0];
+            this.sesion.EnviaProfesor(this.profesor);
+            this.comServer.Conectar(this.profesor.id);
+            this.route.navigate (['/inicio/' + this.profesor.id]);
+          }, (error) => {
+            this.profesor = undefined;
+            this.sesion.EnviaProfesor(this.profesor);
+          })
+        }
+      }, (error) => {
+        this.profesor = undefined;
+        this.sesion.EnviaProfesor(this.profesor);
+      })
+    } else {
+      this.profesor = undefined;
+      // envio un profesor undefined para que se notifique al componente navbar y desaparezca la barra
+      // de navegación
+      this.sesion.EnviaProfesor(this.profesor);
+    }
   }
   iniciarSesion(){
      this.varRoute = false;
      console.log (this.nombre + ' ' + this.pass);
-
 
      let credentials = {
       "username": this.nombre,
@@ -52,7 +76,11 @@ export class PortadaComponent implements OnInit {
     }
     this.authService.login(credentials).subscribe((token) => {
       console.log('login response: ', token);
-      this.authService.setAccessToken(token.id);
+      if(this.savePass){
+        localStorage.setItem('ACCESS_TOKEN', token.id);
+      } else {
+        this.authService.setAccessToken(token.id);
+      }
       this.authService.getProfesor(token.userId).subscribe((res) => {
         if (res[0] !== undefined) {
           console.log ('autenticado correctamente');
@@ -116,6 +144,7 @@ export class PortadaComponent implements OnInit {
                   "password": this.contrasena
                 }
                 this.authService.login(credentials).subscribe((token) => {
+                  this.authService.setAccessToken(token.id);
                   this.authService.getProfesor(token.userId).subscribe((res) => {
                     if (res[0] !== undefined) {
                       console.log ('autenticado correctamente');

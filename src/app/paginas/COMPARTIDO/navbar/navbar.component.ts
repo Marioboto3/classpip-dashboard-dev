@@ -105,6 +105,10 @@ export class NavbarComponent implements OnInit {
       console.log ('voy a la portada');
       this.router.navigate(['portada']);
       this.profesor = undefined;
+      this.sesion.EnviaProfesor(this.profesor);
+      if(sessionStorage.getItem('ACCESS_TOKEN') != null){
+        sessionStorage.removeItem('ACCESS_TOKEN');
+      } else localStorage.removeItem('ACCESS_TOKEN');
     }, (error) => {
       Swal.fire('Error', 'Error al cerrar sesión, prueba de nuevo más tarde.', 'error');
     });

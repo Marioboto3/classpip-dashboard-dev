@@ -1,3 +1,4 @@
+import { AuthService } from './servicios/auth.service';
 import { Component } from '@angular/core';
 import { Profesor, Rubrica, Criterio } from './clases';
 import { SesionService} from './servicios/sesion.service';
@@ -43,6 +44,7 @@ export class AppComponent  {
               // private sesion: SesionService,
               // private comServer: ComServerService,
               // private calculos: CalculosService
+              public auth: AuthService
               ) {
                 // esto lo hago para que cuando vuelva a la página de login
                 // que está en este componente, se quite la barra del navbar

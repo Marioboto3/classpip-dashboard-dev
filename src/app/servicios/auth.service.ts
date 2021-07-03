@@ -12,6 +12,7 @@ export class AuthService {
   private host = URL.host;
 
   private APIUrlProfesores = this.host + ':3000/api/Profesores';
+  private APIUrlTokens = this.host + ':3000/api/AccessTokens'
 
   constructor(private http: HttpClient) { }
 
@@ -19,11 +20,18 @@ export class AuthService {
 
   //true si esta, false si no
   public isLoggedIn(){
-    return sessionStorage.getItem('ACCESS_TOKEN') !== null;
+    if(sessionStorage.getItem('ACCESS_TOKEN') !== null || localStorage.getItem('ACCESS_TOKEN') !== null)
+      return true;
+
+    else return false;
   }
 
   public setAccessToken(token: string){
     sessionStorage.setItem('ACCESS_TOKEN', token);
+  }
+
+  public getUserIdByToken(token: string){
+    return this.http.get(this.APIUrlTokens + '/' + token);
   }
 
   ///////////////// PETICIONES PROFESOR ///////////////////
