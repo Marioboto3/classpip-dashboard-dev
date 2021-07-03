@@ -30,6 +30,10 @@ export class AuthService {
     sessionStorage.setItem('ACCESS_TOKEN', token);
   }
 
+  public setLocalAccessToken(token: string){
+    localStorage.setItem('ACCESS_TOKEN', token);
+  }
+
   public getUserIdByToken(token: string){
     return this.http.get(this.APIUrlTokens + '/' + token);
   }
@@ -68,13 +72,6 @@ export class AuthService {
   public checkEmail(email: string): Observable<Profesor> {
     return this.http.get<Profesor>(this.APIUrlProfesores + '?filter[where][email]=' + email);
   }
-  
-  //Faltan peticiones cambiar/forget contraseña
-  
-  // public changeNameOrEmail(body: any, id: number): Observable<any> {
-  //   //En el body pasamos id y nuevo username y/o email
-  //   return this.http.post(this.APIUrlUsers + '/update?[where][id]='+id, body);
-  // }
   
   public changePassword(old: String, newPass: String): Observable<any> {
     return this.http.post(this.APIUrlProfesores + '/change-password', {"oldPassword": old, "newPassword": newPass});

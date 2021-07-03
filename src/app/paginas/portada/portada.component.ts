@@ -77,7 +77,7 @@ export class PortadaComponent implements OnInit {
     this.authService.login(credentials).subscribe((token) => {
       console.log('login response: ', token);
       if(this.savePass){
-        localStorage.setItem('ACCESS_TOKEN', token.id);
+        this.authService.setLocalAccessToken(token.id);
       } else {
         this.authService.setAccessToken(token.id);
       }
