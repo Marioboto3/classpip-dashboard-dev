@@ -1,83 +1,88 @@
-  <body class = "backgroundPortada">
-    <mat-card class="cartaPortada" *ngIf ="mostrarInicioSesion && profesor == undefined" >
-      <mat-card-content style="text-align: center; display: flex; align-items: center; flex-direction: column; ">
-        <h1>CLASSPIP</h1> 
-        <div><h2>¡Bienvenidos a Classpip! <img width="50" src="./assets/Icono Classpip.png"></h2> </div>
-            <mat-card-actions>
-              <div>
-              <button class="btn InicioSesion" (click)= iniciarSesion()>Inicio sesión</button>
-              <button class="btn InicioSesion"(click)= goToRegistro()>Registrar</button>
-            </div>
-            <div>
+<body class="backgroundPortada">
+  <mat-card class="cartaPortada" *ngIf="mostrarInicioSesion && profesor == undefined">
+    <mat-card-content style="text-align: center; display: flex; align-items: center; flex-direction: column; ">
+      <h1>CLASSPIP</h1>
+      <div>
+        <h2>¡Bienvenidos a Classpip! <img width="50" src="./assets/Icono Classpip.png"></h2>
+      </div>
+      <mat-card-actions>
+        <div>
+          <button class="btn InicioSesion" (click)=iniciarSesion()>Inicio sesión</button>
+          <button class="btn InicioSesion" (click)=goToRegistro()>Registrar</button>
+        </div>
+        <!-- <div>
               <button class="btnContraseña" (click)= EnviarContrasena()>¿Olvidaste tu contraseña?</button>
-            </div>
-            <div >
-              <mat-form-field style="margin: 15px; width: 80%">
-                <input matInput type="text" name="nombre" placeholder="Nombre de usuario" required [(ngModel)]="nombre">
-              </mat-form-field>
-              <mat-form-field style="margin: 15px;width: 80%">
-                <input matInput type="password" name="pass" placeholder="Contraseña" required [(ngModel)]="pass">
-              </mat-form-field>
-            </div>
-            </mat-card-actions> 
-       </mat-card-content>
-    </mat-card>
-    <mat-card *ngIf ="mostrarInicioSesion==false && profesor == undefined" class="cartaPortada" >
-      <mat-card-content style="text-align: center; display: flex; align-items: center; flex-direction: column; ">
-          <h2>
-            Registrarse en Classpip
-          </h2>
-          <div>
-            <mat-form-field style=" width: 80%">
-              <input matInput type="text" name="nombre" placeholder="Nombre" required [(ngModel)]="nombre">
-            </mat-form-field>
-            <mat-form-field style="width: 80%">
-              <input matInput type="text" name="primerApellido" placeholder="Primer Apellido" required [(ngModel)]="primerApellido">
-            </mat-form-field>
-            <mat-form-field style="width: 80%">
-              <input matInput type="text" name="segundoApellido" placeholder="Segundo Apellido" required [(ngModel)]="segundoApellido">
-            </mat-form-field>
-            <mat-form-field style=" width: 80%">
-              <input matInput type="text" name="username" placeholder="nombre de usuario" required [(ngModel)]="username">
-            </mat-form-field>
-            <mat-form-field style="width: 80%">
-              <input matInput type="text" name="email" placeholder="email" required [(ngModel)]="email">
-            </mat-form-field>
-            <mat-form-field style="width: 80%">
-              <input matInput type="text" name="contrasena" placeholder="Contraseña" required [(ngModel)]="contrasena">
-            </mat-form-field>
-            <mat-form-field style="width: 80%">
-              <input matInput type="text" name="contrasenaRepetida" placeholder="Repite contraseña" required [(ngModel)]="contrasenaRepetida">
-            </mat-form-field>
-          <mat-card-actions>
-            <button class="btn InicioSesion" (click)= Registrar()>Registrar</button>
-          </mat-card-actions>
-            </div>
-       </mat-card-content>
-    </mat-card>
-  </body>
+            </div> -->
+        <div>
+          <mat-form-field style="margin: 15px; width: 80%">
+            <input matInput type="text" name="nombre" placeholder="Nombre de usuario" required [(ngModel)]="nombre">
+          </mat-form-field>
+          <mat-form-field style="margin: 15px;width: 80%">
+            <input matInput type="password" name="pass" placeholder="Contraseña" required [(ngModel)]="pass">
+          </mat-form-field>
+          <mat-checkbox [(ngModel)]="savePass">Guardar contraseña</mat-checkbox>
+        </div>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="mostrarInicioSesion==false && profesor == undefined" class="cartaPortada">
+    <mat-card-content style="text-align: center; display: flex; align-items: center; flex-direction: column; ">
+      <h2>
+        Registrarse en Classpip
+      </h2>
+      <div>
+        <mat-form-field style=" width: 80%">
+          <input matInput type="text" name="nombre" placeholder="Nombre" required [(ngModel)]="nombre">
+        </mat-form-field>
+        <mat-form-field style="width: 80%">
+          <input matInput type="text" name="primerApellido" placeholder="Primer Apellido" required
+            [(ngModel)]="primerApellido">
+        </mat-form-field>
+        <mat-form-field style="width: 80%">
+          <input matInput type="text" name="segundoApellido" placeholder="Segundo Apellido" required
+            [(ngModel)]="segundoApellido">
+        </mat-form-field>
+        <mat-form-field style=" width: 80%">
+          <input matInput type="text" name="username" placeholder="nombre de usuario" required [(ngModel)]="username">
+        </mat-form-field>
+        <mat-form-field style="width: 80%">
+          <input matInput type="text" name="email" placeholder="email" required [(ngModel)]="email">
+        </mat-form-field>
+        <mat-form-field style="width: 80%">
+          <input matInput type="text" name="contrasena" placeholder="Contraseña" required [(ngModel)]="contrasena">
+        </mat-form-field>
+        <mat-form-field style="width: 80%">
+          <input matInput type="text" name="contrasenaRepetida" placeholder="Repite contraseña" required
+            [(ngModel)]="contrasenaRepetida">
+        </mat-form-field>
+        <mat-card-actions>
+          <button class="btn InicioSesion" (click)=Registrar()>Registrar</button>
+        </mat-card-actions>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</body>
 
+<div>
+  <!-- SI EL PROFESOR ENTRA CORRECTAMENTE, PODRÁ VER EL NAVBAR -->
   <div>
-    <!-- SI EL PROFESOR ENTRA CORRECTAMENTE, PODRÁ VER EL NAVBAR -->
-    <div>
-      <form *ngIf="profesor !== undefined">
-          <app-navbar></app-navbar>
-      </form>
-    </div>
-    <div>
-      <form *ngIf="profesor !== undefined">
-          <app-footer></app-footer>
-      </form>
-    </div>
-  
-    <!-- CONTENIDO PRINCIPAL  -->
-    <!-- style="height: 668px;" -->
-    <div>
-        <form *ngIf="profesor !== undefined">
-          <router-outlet></router-outlet>
-        </form>
-    </div>
-  
-    <!-- FALTA EL FOOTER -->
+    <form *ngIf="profesor !== undefined">
+      <app-navbar></app-navbar>
+    </form>
   </div>
-  
+  <div>
+    <form *ngIf="profesor !== undefined">
+      <app-footer></app-footer>
+    </form>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL  -->
+  <!-- style="height: 668px;" -->
+  <div>
+    <form *ngIf="profesor !== undefined">
+      <router-outlet></router-outlet>
+    </form>
+  </div>
+
+  <!-- FALTA EL FOOTER -->
+</div>

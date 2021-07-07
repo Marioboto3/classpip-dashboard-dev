@@ -1,3 +1,4 @@
+import { AuthGuard } from './guardas/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -172,44 +173,44 @@ const routes: Routes = [
 
 
   // CLASSPIP
-  { path: 'aboutClasspip', component: AboutClasspipComponent },
+  { path: 'aboutClasspip', component: AboutClasspipComponent, canActivate: [AuthGuard] },
 
   // INICIO
-  { path: 'inicio', component: InicioComponent },
-  { path: 'inicio/:id', component: InicioComponent },
+  { path: 'inicio', component: InicioComponent, canActivate: [AuthGuard] },
+  { path: 'inicio/:id', component: InicioComponent, canActivate: [AuthGuard] },
 
-  { path: 'inicio/:id/desarrolladores', component: DesarrolladoresComponent },
-  { path: 'inicio/:id/estilos', component: EstilosComponent },
+  { path: 'inicio/:id/desarrolladores', component: DesarrolladoresComponent, canActivate: [AuthGuard] },
+  { path: 'inicio/:id/estilos', component: EstilosComponent, canActivate: [AuthGuard] },
 
-  { path: 'inicio/:id/recursos', component: MenuRecursosComponent },
+  { path: 'inicio/:id/recursos', component: MenuRecursosComponent, canActivate: [AuthGuard] },
 
 
-  { path: 'inicio/:id/perfil', component: ModificarPerfilComponent },
+  { path: 'inicio/:id/perfil', component: ModificarPerfilComponent, canActivate: [AuthGuard] },
 
   // GRUPOS
   //  La página de crear grupos tiene una guarda para que no pueda abandonarse
   // a menos que el usuario lo confirme
   // Hay que evitar que se abandone a medias el proceso de creación de un grupo
-  { path: 'inicio/:id/crearGrupo', component: CrearGrupoComponent, canDeactivate: [DeactivateGuardCrearGrupo] },
+  { path: 'inicio/:id/crearGrupo', component: CrearGrupoComponent, canActivate: [AuthGuard], canDeactivate: [DeactivateGuardCrearGrupo] },
   // { path: 'inicio/:id/crearGrupo', component: CrearGrupoComponent},
 
-  { path: 'inicio/:id/misGrupos', component: MisGruposComponent },
+  { path: 'inicio/:id/misGrupos', component: MisGruposComponent, canActivate: [AuthGuard] },
 
 
 
 
 
   // COLECCIÓN
-  { path: 'inicio/:id/crearColeccion', component: CrearColeccionComponent, canDeactivate: [DeactivateGuardCrearColeccion] },
-  { path: 'inicio/:id/misColecciones', component: MisColeccionesComponent },
+  { path: 'inicio/:id/crearColeccion', component: CrearColeccionComponent, canActivate: [AuthGuard], canDeactivate: [DeactivateGuardCrearColeccion] },
+  { path: 'inicio/:id/misColecciones', component: MisColeccionesComponent, canActivate: [AuthGuard] },
 
   // PUNTOS INSIGNIAS
-  { path: 'inicio/:id/crearPuntos', component: CrearPuntoComponent },
-  { path: 'inicio/:id/misPuntos', component: MisPuntosComponent },
+  { path: 'inicio/:id/crearPuntos', component: CrearPuntoComponent, canActivate: [AuthGuard] },
+  { path: 'inicio/:id/misPuntos', component: MisPuntosComponent, canActivate: [AuthGuard] },
 
    // ALUMNNOS
-   { path: 'inicio/:id/misAlumnos', component: MisAlumnosComponent },
-   { path: 'inicio/:id/introducirAlumnos', component: IntroducirAlumnosComponent },
+   { path: 'inicio/:id/misAlumnos', component: MisAlumnosComponent, canActivate: [AuthGuard] },
+   { path: 'inicio/:id/introducirAlumnos', component: IntroducirAlumnosComponent, canActivate: [AuthGuard] },
 
 
   //////////////////////////// RUTAS RELACIONADAS CON COMPONENTES PRINCIPALES /////////////////////////////////////////
@@ -217,148 +218,148 @@ const routes: Routes = [
 
 
   // GRUPOS
-  { path: 'grupo/:id', component: GrupoComponent },
-  { path: 'grupo/:id/editarGrupo', component: EditarGrupoComponent },
+  { path: 'grupo/:id', component: GrupoComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/editarGrupo', component: EditarGrupoComponent, canActivate: [AuthGuard] },
 
   // GRUPOS --> SESIONES CLASE
-  { path: 'grupo/:id/sesionesClase', component: SesionesClaseComponent },
+  { path: 'grupo/:id/sesionesClase', component: SesionesClaseComponent, canActivate: [AuthGuard] },
 
   // GRUPOS --> EQUIPOS
-  { path: 'grupo/:id/equiposGrupo', component: EquiposComponent },
-  { path: 'grupo/:id/equiposGrupo/editarEquipo', component: EditarEquipoComponent },
+  { path: 'grupo/:id/equiposGrupo', component: EquiposComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/equiposGrupo/editarEquipo', component: EditarEquipoComponent, canActivate: [AuthGuard] },
 
 
   // GRUPOS --> JUEGOS
-  { path: 'grupo/:id/juegos', component: JuegoComponent, canDeactivate: [DeactivateGuardCrearJuego] },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo', component: JuegoSeleccionadoActivoComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo', component: JuegoSeleccionadoInactivoComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoPreparado', component: JuegoSeleccionadoPreparadoComponent},
+  { path: 'grupo/:id/juegos', component: JuegoComponent, canActivate: [AuthGuard], canDeactivate: [DeactivateGuardCrearJuego] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo', component: JuegoSeleccionadoActivoComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo', component: JuegoSeleccionadoInactivoComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoPreparado', component: JuegoSeleccionadoPreparadoComponent, canActivate: [AuthGuard]},
 
   // GRUPOS --> JUEGOS --> JUEGO DE PUNTOS
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/asignarPuntos', component: AsignarPuntosComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionAlumnoJuego', component: AlumnoSeleccionadoJuegoDePuntosComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionJuego', component: InformacionJuegoPuntosComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionEquipoJuego', component: EquipoSeleccionadoJuegoDePuntosComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionJuego', component: InformacionJuegoPuntosComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionAlumnoJuego', component: AlumnoSeleccionadoJuegoDePuntosComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionEquipoJuego', component: EquipoSeleccionadoJuegoDePuntosComponent },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/asignarPuntos', component: AsignarPuntosComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionAlumnoJuego', component: AlumnoSeleccionadoJuegoDePuntosComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionJuego', component: InformacionJuegoPuntosComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionEquipoJuego', component: EquipoSeleccionadoJuegoDePuntosComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionJuego', component: InformacionJuegoPuntosComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionAlumnoJuego', component: AlumnoSeleccionadoJuegoDePuntosComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionEquipoJuego', component: EquipoSeleccionadoJuegoDePuntosComponent, canActivate: [AuthGuard] },
 
   // GRUPOS --> JUEGOS --> JUEGO DE COLECCIÓN
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/asignarCromos', component: AsignarCromosComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionJuegoColeccion', component: InformacionJuegoColeccionComponent },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/asignarCromos', component: AsignarCromosComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionJuegoColeccion', component: InformacionJuegoColeccionComponent, canActivate: [AuthGuard] },
   // tslint:disable-next-line:max-line-length
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionAlumnoJuegoColeccion', component: AlumnoSeleccionadoJuegoDeColeccionComponent },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionAlumnoJuegoColeccion', component: AlumnoSeleccionadoJuegoDeColeccionComponent, canActivate: [AuthGuard] },
   // tslint:disable-next-line:max-line-length
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionEquipoJuegoColeccion', component: EquipoSeleccionadoJuegoDeColeccionComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionAlumnoJuegoColeccion/Album', component: AlbumDelAlumnoComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionEquipoJuegoColeccion/AlbumEquipo', component: AlbumEquipoComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionJuegoColeccion', component: InformacionJuegoColeccionComponent },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionEquipoJuegoColeccion', component: EquipoSeleccionadoJuegoDeColeccionComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionAlumnoJuegoColeccion/Album', component: AlbumDelAlumnoComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionEquipoJuegoColeccion/AlbumEquipo', component: AlbumEquipoComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionJuegoColeccion', component: InformacionJuegoColeccionComponent, canActivate: [AuthGuard] },
   // tslint:disable-next-line:max-line-length
-  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionAlumnoJuegoColeccion', component: AlumnoSeleccionadoJuegoDeColeccionComponent },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionAlumnoJuegoColeccion', component: AlumnoSeleccionadoJuegoDeColeccionComponent, canActivate: [AuthGuard] },
   // tslint:disable-next-line:max-line-length
-  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionEquipoJuegoColeccion', component: EquipoSeleccionadoJuegoDeColeccionComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionAlumnoJuegoColeccion/Album', component: AlbumDelAlumnoComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionEquipoJuegoColeccion/AlbumEquipo', component: AlbumEquipoComponent },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionEquipoJuegoColeccion', component: EquipoSeleccionadoJuegoDeColeccionComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionAlumnoJuegoColeccion/Album', component: AlbumDelAlumnoComponent, canActivate: [AuthGuard]},
+  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionEquipoJuegoColeccion/AlbumEquipo', component: AlbumEquipoComponent, canActivate: [AuthGuard] },
 
 
   // GRUPOS --> JUEGOS --> JUEGO DE COMPETICIÓN
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionJuegoDeCompeticion', component: InformacionJuegoDeCompeticionComponent },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionJuegoDeCompeticion', component: InformacionJuegoDeCompeticionComponent, canActivate: [AuthGuard] },
   // tslint:disable-next-line:max-line-length
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/editarjornadasJuegoDeCompeticion', component: EditarJornadasJuegoDeCompeticionComponent },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/editarjornadasJuegoDeCompeticion', component: EditarJornadasJuegoDeCompeticionComponent, canActivate: [AuthGuard]},
   // tslint:disable-next-line:max-line-length
-  {path: 'grupo/:id/juegos/juegoSeleccionadoActivo/seleccionarGanadorJuegoDeCompeticionLiga', component: GanadorJuegoDeCompeticionLigaComponent},
+  {path: 'grupo/:id/juegos/juegoSeleccionadoActivo/seleccionarGanadorJuegoDeCompeticionLiga', component: GanadorJuegoDeCompeticionLigaComponent, canActivate: [AuthGuard]},
   // tslint:disable-next-line:max-line-length
-  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionJuegoDeCompeticionInactivo', component: InformacionJuegoDeCompeticionInactivoComponent },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionJuegoDeCompeticionInactivo', component: InformacionJuegoDeCompeticionInactivoComponent, canActivate: [AuthGuard] },
   // tslint:disable-next-line:max-line-length
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionJuegoDeCompeticionFormulaUno', component: InformacionJuegoDeCompeticionFormulaUnoComponent },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionJuegoDeCompeticionFormulaUno', component: InformacionJuegoDeCompeticionFormulaUnoComponent, canActivate: [AuthGuard] },
   // tslint:disable-next-line:max-line-length
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/ganadoresJuegoDeCompeticionFormulaUno', component: GanadoresJuegoDeCompeticionFormulaUnoComponent },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/ganadoresJuegoDeCompeticionFormulaUno', component: GanadoresJuegoDeCompeticionFormulaUnoComponent, canActivate: [AuthGuard] },
   // tslint:disable-next-line:max-line-length
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/editarjornadasJuegoDeCompeticionFormulaUno', component: EditarJornadasJuegoDeCompeticionFormulaUnoComponent },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/editarjornadasJuegoDeCompeticionFormulaUno', component: EditarJornadasJuegoDeCompeticionFormulaUnoComponent, canActivate: [AuthGuard] },
    // tslint:disable-next-line:max-line-length
-   { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/editarpuntosJuegoDeCompeticionFormulaUno', component: EditarPuntosJuegoDeCompeticionFormulaUnoComponent },
+   { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/editarpuntosJuegoDeCompeticionFormulaUno', component: EditarPuntosJuegoDeCompeticionFormulaUnoComponent, canActivate: [AuthGuard] },
   // tslint:disable-next-line:max-line-length
-  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionJuegoDeCompeticionFormulaUnoInactivo', component: InformacionJuegoDeCompeticionFormulaUnoInactivoComponent },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoInactivo/informacionJuegoDeCompeticionFormulaUnoInactivo', component: InformacionJuegoDeCompeticionFormulaUnoInactivoComponent, canActivate: [AuthGuard] },
 
 // GRUPOS --> JUEGOS --> JUEGO DE CUESTIONARIO
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/gestionarPreguntaKahoot', component: GestionPreguntaKahootComponent},
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/gestionarPreguntaKahoot', component: GestionPreguntaKahootComponent, canActivate: [AuthGuard]},
 
   // COLECCIÓN
-  { path: 'inicio/:id/misColecciones/editarColeccion', component: EditarColeccionComponent },
-  { path: 'inicio/:id/misColecciones/guardarColeccion', component: GuardarColeccionComponent },
-  { path: 'inicio/:id/misColecciones/mostrarColeccion', component: MostrarColeccionComponent },
+  { path: 'inicio/:id/misColecciones/editarColeccion', component: EditarColeccionComponent, canActivate: [AuthGuard] },
+  { path: 'inicio/:id/misColecciones/guardarColeccion', component: GuardarColeccionComponent, canActivate: [AuthGuard] },
+  { path: 'inicio/:id/misColecciones/mostrarColeccion', component: MostrarColeccionComponent, canActivate: [AuthGuard] },
 
   // PUNTOS E INSIGNIAS
-  { path: 'inicio/:id/misPuntos/editarPunto', component: EditarPuntoComponent },
-  { path: 'inicio/:id/misPuntos/editarInsignia', component: EditarInsigniaComponent },
+  { path: 'inicio/:id/misPuntos/editarPunto', component: EditarPuntoComponent, canActivate: [AuthGuard] },
+  { path: 'inicio/:id/misPuntos/editarInsignia', component: EditarInsigniaComponent, canActivate: [AuthGuard] },
 
   // CONFIGURACION
-  { path: 'inicio/:id/configuracionProfesor', component: ConfiguracionProfesorComponent },
-  {path: 'inicio/:id/cambiarEstacion', component: CambiarEstacionComponent},
+  { path: 'inicio/:id/configuracionProfesor', component: ConfiguracionProfesorComponent, canActivate: [AuthGuard] },
+  {path: 'inicio/:id/cambiarEstacion', component: CambiarEstacionComponent, canActivate: [AuthGuard]},
 
   // PREGUNTAS
-  { path: 'inicio/:id/crearPregunta', component: PreguntaComponent},
-  { path: 'inicio/:id/misPreguntas', component: MisPreguntasComponent},
+  { path: 'inicio/:id/crearPregunta', component: PreguntaComponent, canActivate: [AuthGuard]},
+  { path: 'inicio/:id/misPreguntas', component: MisPreguntasComponent, canActivate: [AuthGuard]},
 
   // CUESTIONARIOS
-  { path: 'inicio/:id/crearCuestionario', component: CrearCuestionarioComponent, canDeactivate: [DeactivateGuardCrearCuestionario] },
-  { path: 'inicio/:id/misCuestionarios', component: MisCuestionariosComponent},
-  { path: 'inicio/:id/misCuestionarios/mostrarCuestionario', component: PortadaComponent},
-  { path: 'inicio/:id/editarCuestionario', component: EditarCuestionarioComponent},
+  { path: 'inicio/:id/crearCuestionario', component: CrearCuestionarioComponent, canDeactivate: [DeactivateGuardCrearCuestionario], canActivate: [AuthGuard] },
+  { path: 'inicio/:id/misCuestionarios', component: MisCuestionariosComponent, canActivate: [AuthGuard]},
+  { path: 'inicio/:id/misCuestionarios/mostrarCuestionario', component: PortadaComponent, canActivate: [AuthGuard]},
+  { path: 'inicio/:id/editarCuestionario', component: EditarCuestionarioComponent, canActivate: [AuthGuard]},
   
 
   // escenarios
-  { path: 'inicio/:id/crearEscenario', component: CrearEscenarioComponent, canDeactivate: [DeactivateGuardCrearEscenario] },
-  { path: 'inicio/:id/misEscenarios', component: MisEscenariosComponent },
-  { path: 'inicio/:id/misEscenarios/editarEscenario', component: EditarEscenarioComponent },
+  { path: 'inicio/:id/crearEscenario', component: CrearEscenarioComponent, canDeactivate: [DeactivateGuardCrearEscenario], canActivate: [AuthGuard] },
+  { path: 'inicio/:id/misEscenarios', component: MisEscenariosComponent, canActivate: [AuthGuard] },
+  { path: 'inicio/:id/misEscenarios/editarEscenario', component: EditarEscenarioComponent, canActivate: [AuthGuard] },
 
   //escenariosEscapeRoom
-  { path: 'inicio/:id/crearEscenarioEscapeRoom', component: CrearEscenarioEscapeComponent },
-  { path: 'inicio/:id/misEscenariosEscapeRoom', component: MisEscenariosEscapeRoomComponent },
+  { path: 'inicio/:id/crearEscenarioEscapeRoom', component: CrearEscenarioEscapeComponent, canActivate: [AuthGuard] },
+  { path: 'inicio/:id/misEscenariosEscapeRoom', component: MisEscenariosEscapeRoomComponent, canActivate: [AuthGuard] },
 
   //Objetos del escape room
 
-  { path: 'inicio/:id/misObjetosEscapeRoom', component: MisObjetosEscapeRoomComponent},
-  { path: 'inicio/:id/crearObjetoEscapeRoom', component: CrearObjetoEscapeRoomComponent},
+  { path: 'inicio/:id/misObjetosEscapeRoom', component: MisObjetosEscapeRoomComponent, canActivate: [AuthGuard]},
+  { path: 'inicio/:id/crearObjetoEscapeRoom', component: CrearObjetoEscapeRoomComponent, canActivate: [AuthGuard]},
 
   // AVATARES
-  { path: 'inicio/:id/misFamiliasAvatares', component: MisFamiliasAvataresComponent},
-  { path: 'inicio/:id/misFamiliasAvatares/guardarFamilia', component: GuardarFamiliaComponent},
-  { path: 'inicio/:id/misFamiliasAvatares/mostrarFamilia', component: MostrarFamiliaComponent},
-  { path: 'inicio/:id/crearFamiliaAvatares', component: CrearFamiliaAvataresComponent},
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/MostrarAvatarAlumno', component: MostrarAvatarAlumnoComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionJuegoAvatar', component: InformacionJuegoAvatarComponent },
-  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/verTodos', component: VerTodosComponent },
+  { path: 'inicio/:id/misFamiliasAvatares', component: MisFamiliasAvataresComponent, canActivate: [AuthGuard]},
+  { path: 'inicio/:id/misFamiliasAvatares/guardarFamilia', component: GuardarFamiliaComponent, canActivate: [AuthGuard]},
+  { path: 'inicio/:id/misFamiliasAvatares/mostrarFamilia', component: MostrarFamiliaComponent, canActivate: [AuthGuard]},
+  { path: 'inicio/:id/crearFamiliaAvatares', component: CrearFamiliaAvataresComponent, canActivate: [AuthGuard]},
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/MostrarAvatarAlumno', component: MostrarAvatarAlumnoComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/informacionJuegoAvatar', component: InformacionJuegoAvatarComponent, canActivate: [AuthGuard] },
+  { path: 'grupo/:id/juegos/juegoSeleccionadoActivo/verTodos', component: VerTodosComponent, canActivate: [AuthGuard] },
 
 
   // Rubricas
-  { path: 'inicio/:id/crearRubrica', component: CrearRubricaComponent},
-  { path: 'inicio/:id/misRubricas', component: MisRubricasComponent},
+  { path: 'inicio/:id/crearRubrica', component: CrearRubricaComponent, canActivate: [AuthGuard]},
+  { path: 'inicio/:id/misRubricas', component: MisRubricasComponent, canActivate: [AuthGuard]},
 
   // Familias de imagenes de perfil
-  { path: 'inicio/:id/crearFamiliaDeImagenesDePerfil', component: CrearFamiliaImagenesPerfilComponent},
-  { path: 'inicio/:id/misFamiliasDeImagenesDePerfil', component: MisFamiliasImagenesPerfilComponent},
+  { path: 'inicio/:id/crearFamiliaDeImagenesDePerfil', component: CrearFamiliaImagenesPerfilComponent, canActivate: [AuthGuard]},
+  { path: 'inicio/:id/misFamiliasDeImagenesDePerfil', component: MisFamiliasImagenesPerfilComponent, canActivate: [AuthGuard]},
 
   // Cuestionarios de satisfacción
-  { path: 'inicio/:id/crearCuestionarioDeSatisfaccion', component: CrearCuestionarioSatisfaccionComponent},
-  { path: 'inicio/:id/misCuestionariosDeSatisfaccion', component: MisCuestionariosSatisfaccionComponent},
-  { path: 'inicio/:id/editarCuestionarioDeSatisfaccion', component: EditarCuestionarioSatisfaccionComponent},
-  { path: 'inicio/:id/misCuestionariosDeSatisfaccion/mostrarCuestionarioDeSatisfaccion', component: MostrarCuestionarioSatisfaccionComponent},
+  { path: 'inicio/:id/crearCuestionarioDeSatisfaccion', component: CrearCuestionarioSatisfaccionComponent, canActivate: [AuthGuard]},
+  { path: 'inicio/:id/misCuestionariosDeSatisfaccion', component: MisCuestionariosSatisfaccionComponent, canActivate: [AuthGuard]},
+  { path: 'inicio/:id/editarCuestionarioDeSatisfaccion', component: EditarCuestionarioSatisfaccionComponent, canActivate: [AuthGuard]},
+  { path: 'inicio/:id/misCuestionariosDeSatisfaccion/mostrarCuestionarioDeSatisfaccion', component: MostrarCuestionarioSatisfaccionComponent, canActivate: [AuthGuard]},
 
 
 
   // JUEGOS RAPIDOS
 
-  { path: 'inicio/:id/misJuegosRapidos', component: MisJuegosRapidosComponent},
-  { path: 'inicio/:id/crearJuegoRapido', component: CrearJuegoRapidoComponent},
+  { path: 'inicio/:id/misJuegosRapidos', component: MisJuegosRapidosComponent, canActivate: [AuthGuard]},
+  { path: 'inicio/:id/crearJuegoRapido', component: CrearJuegoRapidoComponent, canActivate: [AuthGuard]},
   // tslint:disable-next-line:max-line-length
-  { path: 'inicio/:id/misJuegosRapidos/juegoDeEncuestaRapida', component: JuegoDeEncuestaRapidaComponent, canDeactivate: [DeactivateGuardEncuestaRapida]},
+  { path: 'inicio/:id/misJuegosRapidos/juegoDeEncuestaRapida', component: JuegoDeEncuestaRapidaComponent, canDeactivate: [DeactivateGuardEncuestaRapida], canActivate: [AuthGuard]},
   // tslint:disable-next-line:max-line-length
-  { path: 'inicio/:id/misJuegosRapidos/juegoDeVotacionRapida', component: JuegoDeVotacionRapidaComponent, canDeactivate: [DeactivateGuardVotacionRapida]},
+  { path: 'inicio/:id/misJuegosRapidos/juegoDeVotacionRapida', component: JuegoDeVotacionRapidaComponent, canDeactivate: [DeactivateGuardVotacionRapida], canActivate: [AuthGuard]},
   // tslint:disable-next-line:max-line-length
-  { path: 'inicio/:id/misJuegosRapidos/juegoDeCuestionarioRapido', component: JuegoDeCuestionarioRapidoComponent, canDeactivate: [DeactivateGuardCuestionarioRapido]},
+  { path: 'inicio/:id/misJuegosRapidos/juegoDeCuestionarioRapido', component: JuegoDeCuestionarioRapidoComponent, canDeactivate: [DeactivateGuardCuestionarioRapido], canActivate: [AuthGuard]},
   // tslint:disable-next-line:max-line-length
-  { path: 'inicio/:id/misJuegosRapidos/juegoDeCogerTurnoRapido', component: JuegoDeCogerTurnoRapidoComponent, canDeactivate: [DeactivateGuardCogerTurnoRapido]}
+  { path: 'inicio/:id/misJuegosRapidos/juegoDeCogerTurnoRapido', component: JuegoDeCogerTurnoRapidoComponent, canDeactivate: [DeactivateGuardCogerTurnoRapido], canActivate: [AuthGuard]}
   ,
 ];
 
@@ -367,7 +368,7 @@ const routes: Routes = [
   // tslint:disable-next-line:max-line-length
   providers: [DeactivateGuardCrearGrupo, DeactivateGuardCrearColeccion, DeactivateGuardCrearJuego,
               DeactivateGuardCrearCuestionario, DeactivateGuardCrearEscenario, DeactivateGuardEncuestaRapida,
-              DeactivateGuardCogerTurnoRapido, DeactivateGuardCuestionarioRapido, DeactivateGuardVotacionRapida],
+              DeactivateGuardCogerTurnoRapido, DeactivateGuardCuestionarioRapido, DeactivateGuardVotacionRapida, AuthGuard],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
