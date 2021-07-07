@@ -553,8 +553,18 @@ export class JuegoComponent implements OnInit {
         }
       });
   }
-  escogerEscenarioEscape(escenario) {
-    this.escenarioEscapeRoom = escenario;
+  escogerEscenarioEscape(escenario: EscenarioEscapeRoom) {
+    Swal.fire({
+      title: escenario.mapa,
+      text: '¿Estás seguro que quieres escoger este escenario?',
+      confirmButtonText: 'Sí',
+      showCancelButton: true,
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value == true) {
+        this.escenarioEscapeRoom = escenario;
+      }
+    });
   }
   verObjetos(objetos) {
     this.objetosProfesorModal = true;
@@ -571,9 +581,9 @@ export class JuegoComponent implements OnInit {
   }
   anadirObjeto(objeto: ObjetoGlobalEscape) {
     let bool: boolean = false;
-    this.objetosEscogidos.forEach(obj => {
-      if (obj.id == objeto.id) {
-        Swal.fire("¡Ya está añadido a la lista, no se puede repetir!", "", "error");
+    this.objetosJuegoEscogidos.forEach(obj => {
+      if (obj.objetoId == objeto.id) {
+        Swal.fire("¡Ya has usado este objeto, no se puede repetir!", "", "error");
         bool = true;
       }
     });
@@ -665,10 +675,20 @@ export class JuegoComponent implements OnInit {
   }
   modificarObjeto() {
 
-    this.objetosJuegoEscogidos.forEach(objeto => {
-      if (objeto.objetoId == this.objetoEnigmaModificarGlobal.id) {
-        objeto.pregunta = this.editObject.value.pregunta;
-        objeto.respuesta = this.editObject.value.respuesta;
+    Swal.fire({
+      title: this.objetoEnigmaModificarGlobal.nombre,
+      text: '¿Estás seguro de la configuración del objeto?',
+      confirmButtonText: 'Sí',
+      showCancelButton: true,
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value == true) {
+        this.objetosJuegoEscogidos.forEach(objeto => {
+          if (objeto.objetoId == this.objetoEnigmaModificarGlobal.id) {
+            objeto.pregunta = this.editObject.value.pregunta;
+            objeto.respuesta = this.editObject.value.respuesta;
+          }
+        });
       }
     });
 
@@ -689,225 +709,321 @@ export class JuegoComponent implements OnInit {
     if (!bool) {
       Swal.fire("Este objeto ya esta escogido.", "", "warning");
     } else {
-      this.objetosJuegoEscogidos.forEach(objetoJ => {
-        if (objetoJ.objetoId == objeto.id) {
-          objetoJ.requerido = true;
-          objetoJ.requeridoEscenaId = this.numeroEscena;
+      Swal.fire({
+        title: objeto.nombre,
+        text: '¿Estás seguro de la configuración del objeto?',
+        confirmButtonText: 'Sí',
+        showCancelButton: true,
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.value == true) {
+          this.objetosJuegoEscogidos.forEach(objetoJ => {
+            if (objetoJ.objetoId == objeto.id) {
+              objetoJ.requerido = true;
+              objetoJ.requeridoEscenaId = this.numeroEscena;
+            }
+          });
         }
       });
+
     }
   }
   verPistaParaCrear(objetoModal) {
     this.modal.open(objetoModal, { centered: true, size: "lg" });
   }
   crearPista() {
-    this.pista = new ObjetoJuego(1, 1, this.editObject.value.pregunta, "string", false, false, false, 1, 1, 1, false, true, 1);
+    this.pista = new ObjetoJuego(1, 1, this.editPista.value.texto, "string", false, false, false, 1, 1, 1, false, true, 1);
     Swal.fire("¡Creada!", "", "success");
   }
   crearJuegoDeEscapeRoom() {
 
-    let escenaEscape: EscenaDeJuego;
+    Swal.fire({
+      title: "Escena " + this.numeroEscena,
+      text: '¿Estás seguro de la configuración de la escena?',
+      confirmButtonText: 'Sí',
+      showCancelButton: true,
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value == true) {
 
-    //  console.clear();
-    escenaEscape = new EscenaDeJuego(this.escenarioEscapeRoom.id, this.numeroEscena);
+        let escenaEscape: EscenaDeJuego;
 
-    console.log("Numero de escena: ", this.numeroEscena);
-    console.log("Escena: ", escenaEscape);
-    console.log("ObjetosJuego para esta escena: ", this.objetosJuegoEscogidos);
-    this.listaEscenasEscape.push(escenaEscape);
+        //  console.clear();
+        escenaEscape = new EscenaDeJuego(this.escenarioEscapeRoom.id, this.numeroEscena);
 
-    if (this.numeroEscena <= this.numeroDeEscenasSeleccionadas) {
+        console.log("Numero de escena: ", this.numeroEscena);
+        console.log("Escena: ", escenaEscape);
+        console.log("ObjetosJuego para esta escena: ", this.objetosJuegoEscogidos);
+        this.listaEscenasEscape.push(escenaEscape);
 
-      this.posicionesEscape = [1, 2, 3];
-      this.posicionesEnigma = [4, 5];
+        if (this.numeroEscena < this.numeroDeEscenasSeleccionadas) {
 
-      this.objetosEscogidos = [];
-      this.objetosEnigmaEscogidosGlobal = [];
+          this.posicionesEscape = [1, 2, 3];
+          this.posicionesEnigma = [4, 5];
 
-      this.numeroEscena = this.numeroEscena + 1;
-      Swal.fire("Escena configurada!", "", "success");
-    }
-    else {
+          this.objetosEscogidos = [];
+          this.objetosEnigmaEscogidosGlobal = [];
 
-      //CREAR ESCAPE ROOM
+          this.numeroEscena = this.numeroEscena + 1;
+          Swal.fire("Escena configurada!", "", "success");
+        }
+        else {
 
-      this.peticionesAPI.CreaJuegoDeEscapeRoom(this.juegoEscape, this.grupo.id).subscribe({
+          //CREAR ESCAPE ROOM
 
-        next: data => {
-          this.juegoEscape = data[0];
-          console.log("This.juego: ", this.juegoEscape);
+          this.peticionesAPI.CreaJuegoDeEscapeRoom(this.juegoEscape, this.grupo.id).subscribe({
 
-          // CREAR ALUMNO
-          this.alumnosGrupo.forEach(alumno => {
-            let alumnoEscape: AlumnoJuegoEscapeRoom = new AlumnoJuegoEscapeRoom(alumno.id, "Sin escoger", this.juegoEscape.id, 1);
-            this.peticionesAPI.InscribeAlumnoJuegoEscapeRoom(alumnoEscape).subscribe({
-              next: data => {
-                console.log("Bien!", data);
-              },
-              error: error => {
-                console.log("Error!", error);
-              }
-            });
+            next: data => {
+              this.juegoEscape = data;
+              console.log("This.juego: ", this.juegoEscape);
 
-          });
+              // CREAR ALUMNO
+              this.alumnosGrupo.forEach(alumno => {
+                let alumnoEscape: AlumnoJuegoEscapeRoom = new AlumnoJuegoEscapeRoom(alumno.id, "Sin escoger", this.juegoEscape.id, 1);
+                this.peticionesAPI.InscribeAlumnoJuegoEscapeRoom(alumnoEscape).subscribe({
+                  next: data => {
+                    console.log("Bien!", data);
+                  },
+                  error: error => {
+                    console.log("Error!", error);
+                  }
+                });
 
-          let partidaEscape: PartidaEscape;
+              });
 
-          //CREAR ESCENAS
-          this.listaEscenasEscape.forEach(escena => {
+              let partidaEscape: PartidaEscape;
 
-            //PEDIR SI YA HAY UNA ESCENA CON ESA POSICION Y ESE ESCENARIO
-            this.peticionesAPI.DameEscenasEscapeConEsteEscenario(escena.escenarioId, escena.posicion).subscribe({
+              console.log("Lista escenas: ", this.listaEscenasEscape);
 
-              next: data => {
-                let escenaEscapeDevuelto: EscenaDeJuego = new EscenaDeJuego();
-                escenaEscapeDevuelto = data[0];
+              //CREAR ESCENAS
+              this.listaEscenasEscape.forEach(escena => {
 
-                console.log("Escena devuelta: ", escenaEscapeDevuelto);
+                console.log("Escena: ", escena);
 
-                //CASO AFIRMATIVO
-                if (escenaEscapeDevuelto[0] != undefined && escenaEscapeDevuelto[0] != null) {
+                //PEDIR SI YA HAY UNA ESCENA CON ESA POSICION Y ESE ESCENARIO
+                this.peticionesAPI.DameEscenasEscapeConEsteEscenario(escena.escenarioId, escena.posicion).subscribe({
 
-                  //CREAR PARTIDA POR ESTA ESCENA
-                  partidaEscape = new PartidaEscape(this.juegoEscape.id, escenaEscapeDevuelto[0].id);
-                  this.peticionesAPI.CrearPartidaEscape(partidaEscape).subscribe({
-                    next: data => {
-                      console.log("Partida creada correctamente (Partida): ", data);
-                    },
-                    error: error => {
-                      console.log("Error al crear partida: ", error);
-                      Swal.fire("¡Error al crear la partida!", "", "error");
-                    }
-                  });
+                  next: data => {
+                    let escenaEscapeDevuelto: EscenaDeJuego = new EscenaDeJuego();
+                    escenaEscapeDevuelto = data;
 
-                  //PEDIR OBEJETO GLOBAL LLAVE PARA PODER CREARLA
-                  this.peticionesAPI.DameObjetoLlaveGlobal("llave").subscribe({
-                    next: data => {
-                      let llave: ObjetoJuego = new ObjetoJuego(data[0].id, escenaEscapeDevuelto[0].escenarioId, "string", "string", false, false, false, 1, this.juegoEscape.id, escenaEscapeDevuelto[0].id, false, true, escenaEscapeDevuelto[0].id);
+                    console.log("Escena devuelta: ", escenaEscapeDevuelto);
 
-                      //CREAR LLAVE
-                      console.log("LLAVE: ", llave);
-                      this.peticionesAPI.CrearObjetoJuego(llave).subscribe({
+                    //CASO AFIRMATIVO
+                    if (escenaEscapeDevuelto[0] != undefined && escenaEscapeDevuelto[0] != null) {
+
+                      //CREAR PARTIDA POR ESTA ESCENA
+                      partidaEscape = new PartidaEscape(this.juegoEscape.id, escenaEscapeDevuelto[0].id, escenaEscapeDevuelto[0].posicion);
+                      this.peticionesAPI.CrearPartidaEscape(partidaEscape).subscribe({
                         next: data => {
-                          console.log("Llave creada: ", data[0]);
-                          //DAME PISTA GLOBAL PARA PODER CREARLA
-                          this.peticionesAPI.DameObjetoPistaGlobal("Pista").subscribe({
+                          console.log("Partida creada correctamente (Partida): ", data);
+                        },
+                        error: error => {
+                          console.log("Error al crear partida: ", error);
+                          Swal.fire("¡Error al crear la partida!", "", "error");
+                        }
+                      });
+
+                      //PEDIR OBEJETO GLOBAL LLAVE PARA PODER CREARLA
+                      this.peticionesAPI.DameObjetoLlaveGlobal("Llave").subscribe({
+                        next: data => {
+                          console.log("Llave devuelta 1: ", data);
+                          let llave: ObjetoJuego = new ObjetoJuego(data[0].id, escenaEscapeDevuelto[0].escenarioId, "string", "string", false, false, false,1, this.juegoEscape.id, escenaEscapeDevuelto[0].id, false, true, escenaEscapeDevuelto[0].id);
+
+                          //CREAR LLAVE
+                          console.log("LLAVE: ", llave);
+                          this.peticionesAPI.CrearObjetoJuego(llave).subscribe({
                             next: data => {
-                              let pistaDevueltaGlobal: ObjetoJuego;
-                              pistaDevueltaGlobal = data[0];
-                              console.log("Pista devuelta: ", pistaDevueltaGlobal);
-
-                              let pista: ObjetoJuego = new ObjetoJuego(pistaDevueltaGlobal.id, escenaEscapeDevuelto[0].escenarioId, this.pista.pregunta, "string", false, false, false, 1, this.juegoEscape.id, escenaEscapeDevuelto[0].id, false, true, escenaEscapeDevuelto[0].id);
-
-                              //CREAR PISTA
-                              console.log("PISTA: ", pista);
-                              this.peticionesAPI.CrearObjetoJuego(pista).subscribe({
+                              console.log("Llave creada: ", data);
+                              //DAME PISTA GLOBAL PARA PODER CREARLA
+                              this.peticionesAPI.DameObjetoPistaGlobal("Pista").subscribe({
                                 next: data => {
-                                  console.log("Pista creada: ", data[0]);
-                                  //UNA VEZ CREADA LA PISTA Y LA LLAVE, CREAMOS OBJETOS GLOBALES
-                                  this.objetosJuegoEscogidos.forEach(objeto => {
-                                    if (objeto.escenaId == escenaEscapeDevuelto[0].id) {
-                                      objeto.juegoDeEscapeRoomId = this.juegoEscape.id;
-                                      this.peticionesAPI.CrearObjetoJuego(objeto).subscribe({
-                                        next: data =>{
-                                          console.log("Creado correctamente el objeto: ", data[0]);
+                                  let pistaDevueltaGlobal: ObjetoJuego;
+                                  pistaDevueltaGlobal = data[0];
+                                  console.log("Pista devuelta: ", pistaDevueltaGlobal);
 
-                                        },error: error =>{
-                                          console.log("Erro al crear objeto: ", error);
-                                          Swal.fire("Error al crear objeto.", "", "error");
+                                  let pista: ObjetoJuego = new ObjetoJuego(pistaDevueltaGlobal.id, escenaEscapeDevuelto[0].escenarioId, this.pista.pregunta, "string", false, false, false, 1, this.juegoEscape.id, escenaEscapeDevuelto[0].id, false, true, escenaEscapeDevuelto[0].id);
+
+                                  //CREAR PISTA
+                                  console.log("PISTA: ", pista);
+                                  this.peticionesAPI.CrearObjetoJuego(pista).subscribe({
+                                    next: data => {
+                                      console.log("Pista creada: ", data);
+                                      //UNA VEZ CREADA LA PISTA Y LA LLAVE, CREAMOS OBJETOS GLOBALES
+                                      this.objetosJuegoEscogidos.forEach(objeto => {
+                                        console.log("Objeto dentro de los objetos juego escogidos: ", objeto);
+                                        if (objeto.escenaId == escenaEscapeDevuelto[0].id) {
+                                          objeto.juegoDeEscapeRoomId = this.juegoEscape.id;
+                                          console.log("Objeto con el juego: ", objeto);
+                                          this.peticionesAPI.CrearObjetoJuego(objeto).subscribe({
+                                            next: data => {
+                                              console.log("Creado correctamente el objeto: ", data);
+
+                                            }, error: error => {
+                                              console.log("Error al crear objeto: ", error);
+                                              Swal.fire("Error al crear objeto.", "", "error");
+                                            }
+                                          });
                                         }
                                       });
+                                    },
+                                    error: error => {
+                                      console.log("Error al crear pista: ", error);
+                                      Swal.fire("Error al crear pista.", "", error);
                                     }
+
+
                                   });
                                 },
                                 error: error => {
-                                  console.log("Error al crear pista: ", error);
-                                  Swal.fire("Error al crear pista.", "", error);
+                                  console.log("Error al coger llave: ", error);
+                                  Swal.fire("Error al coger objeto pista.", "", "error");
                                 }
-
-
                               });
                             },
                             error: error => {
-                              console.log("Error al coger llave: ", error);
-                              Swal.fire("Error al coger objeto pista.", "", "error");
+                              console.log("Error al crear lleva: ", error);
+                              Swal.fire("¡Error al crear objeto llave!", "", "error");
                             }
+
                           });
                         },
                         error: error => {
-                          console.log("Error al crear lleva: ", error);
-                          Swal.fire("¡Error al crear objeto llave!", "", "error");
+                          console.log("Error al coger la llave: ", error);
+                          Swal.fire("Error al coger la llave.", "", "error");
+                        }
+                      });
+
+                    }
+                    else {
+
+                      //CREAR ESCENA ESCAPE CUANDO NO HAY UNA IGUAL
+                      this.peticionesAPI.CrearEscenaEscapeRoom(escena).subscribe({
+
+                        next: data => {
+
+                          let escenaDevuelta: EscenaDeJuego;
+
+                          escenaDevuelta = data;
+
+                          console.log("Escena devuelta cuando la creas: ", escenaDevuelta);
+
+                          //CREAR PARTIDA
+                          partidaEscape = new PartidaEscape(this.juegoEscape.id, escenaDevuelta.id, escenaDevuelta.posicion);
+                          this.peticionesAPI.CrearPartidaEscape(partidaEscape).subscribe({
+                            next: data => {
+                              console.log("Data al crear partida: ", data);
+                            },
+                            error: error => {
+                              console.log("Error al crear partida: ", error);
+                              Swal.fire("Error al crear partida.", "", "error");
+                            }
+                          });
+
+                          //PEDIR LLAVE
+                          this.peticionesAPI.DameObjetoLlaveGlobal("Llave").subscribe({
+
+                            next: data => {
+                              console.log("Llave devuelta: ", data[0]);
+                              let llaveDevueltaGlobal: ObjetoGlobalEscape;
+
+                              llaveDevueltaGlobal = data[0];
+                              //CREAR LLAVE
+                              let llave: ObjetoJuego = new ObjetoJuego(llaveDevueltaGlobal.id, escenaDevuelta.escenarioId, "string", "string", false, false, false, 1, this.juegoEscape.id, escenaDevuelta.id, false, true, escenaDevuelta.id);
+                              console.log("Llavee: ", llave);
+
+                              this.peticionesAPI.CrearObjetoJuego(llave).subscribe({
+
+                                next: data => {
+
+                                  console.log("Data: ", data);
+
+                                  //PEDIR PISTA
+                                  this.peticionesAPI.DameObjetoPistaGlobal("Pista").subscribe({
+
+                                  next: data => {
+                                    console.log("Data pista: ", data[0]);
+                                    let pistaDevueltaGlobal: ObjetoGlobalEscape;
+
+                                    pistaDevueltaGlobal = data[0];
+
+                                    let pista: ObjetoJuego = new ObjetoJuego(pistaDevueltaGlobal.id, escenaDevuelta.escenarioId, "Estate atento a todo tu alrededor.", "string", false, false, false, 1, this.juegoEscape.id, escenaDevuelta.id, false, true, escenaDevuelta.id);
+
+                                    //CREAR PISTA
+                                    console.log("Pistaa: ", pista);
+                                    this.peticionesAPI.CrearObjetoJuego(pista).subscribe({
+                                      
+                                      next: data =>{
+
+                                      console.log("Data en crear pista: ", data);
+                                            //CREAR OBJETOS JUEGO
+                                      this.objetosJuegoEscogidos.forEach(objeto => {
+                                        if (objeto.escenaId == escenaDevuelta.id) {
+                                          objeto.juegoDeEscapeRoomId = this.juegoEscape.id;
+                                          this.peticionesAPI.CrearObjetoJuego(objeto).subscribe({
+                                            next: data => {
+                                              console.log("Creado objeto correctamente: ", data);
+                                            }, error: error => {
+                                              console.log("Error al crear objeto: ", error);
+                                              Swal.fire("Error al crear objeto.", "", "error");
+                                            }
+                                          });
+                                        }
+                                      });
+                                      }, error: error => {
+                                        console.log("Error crear pista: ", error),
+                                        Swal.fire("Error al crear pista,","","error");
+                                      }
+                                    });
+                                  }, error: error => {
+                                    console.log("Error al coger pista.", error);
+                                    Swal.fire("Error al coger pista!", "", "error");
+                                  }
+                                  });
+                                },
+                                error: error => {
+                                  console.log("Error al crear objeto llave.", error);
+                                  Swal.fire("Error al crear objeto llave.", "", "error");
+                                }
+
+                              });
+                            }, error: error => {
+                              console.log("Error al coger llave: ", error);
+                              Swal.fire("Error al coger la llave: ", "", "error");
+                            }
+
+
+                          });
+
+
+                        },
+                        error: error => {
+                          console.log("Error al crear escena: ", error);
+                          Swal.fire("Error al crear escena.", "", "error");
                         }
 
                       });
-                    },
-                    error: error => {
-                      console.log("Error al coger la llave: ", error);
-                      Swal.fire("Error al coger la llave.", "", "error");
+                      Swal.fire("Juego creado correctamente!", "", "success");
                     }
-                  });
-
-                }
-                else {
-
-                  //CREAR ESCENA ESCAPE CUANDO NO HAY UNA IGUAL
-                  this.peticionesAPI.CrearEscenaEscapeRoom(escena).subscribe(escenaDevuelta => {
-
-                    console.log("Escena devuelta cuando la creas: ", escenaDevuelta);
-
-                    //CREAR PARTIDA
-                    partidaEscape = new PartidaEscape(this.juegoEscape.id, escenaDevuelta.id);
-                    this.peticionesAPI.CrearPartidaEscape(partidaEscape).subscribe();
-
-                    //PEDIR LLAVE
-                    this.peticionesAPI.DameObjetoLlaveGlobal("Llave").subscribe(llaveDevueltaGlobal => {
-
-                      //CREAR LLAVE
-                      let llave: ObjetoJuego = new ObjetoJuego(llaveDevueltaGlobal.id, escenaDevuelta.escenarioId, "string", "string", false, false, false, 1, this.juegoEscape.id, escenaDevuelta.id, false, true, escenaDevuelta.id);
-                      console.log("Llavee: ", llave);
-
-                      this.peticionesAPI.CrearObjetoJuego(llave).subscribe(llaveReturn => {
-
-                        //PEDIR PISTA
-                        this.peticionesAPI.DameObjetoPistaGlobal("Pista").subscribe(pistaDevueltaGlobal => {
-                          let pista: ObjetoJuego = new ObjetoJuego(pistaDevueltaGlobal.id, escenaDevuelta.escenarioId, "Estate atento a todo tu alrededor.", "string", false, false, false, 1, this.juegoEscape.id, escenaDevuelta.id, false, true, escenaDevuelta.id);
-
-                          //CREAR PISTA
-                          console.log("Pistaa: ", pista);
-                          this.peticionesAPI.CrearObjetoJuego(pista).subscribe(pistaDevuelta => {
-
-                            //CREAR OBJETOS JUEGO
-                            this.objetosJuegoEscogidos.forEach(objeto => {
-                              if (objeto.escenaId == escenaDevuelta.id) {
-                                objeto.juegoDeEscapeRoomId = this.juegoEscape.id;
-                                this.peticionesAPI.CrearObjetoJuego(objeto).subscribe(objeto => {
-                                  console.log("Objeto juego creado: ", objeto);
-                                });
-                              }
-                            });
-                          });
-                        });
-
-
-                      });
-                    });
-                  });
-                  Swal.fire("Juego creado correctamente!", "", "success");
-                }
-              },
-              error: error => {
-                console.log("Error escena: ", error);
-                Swal.fire("Error a la función DameEscena()", "", "error");
-              }
-            });
+                  },
+                  error: error => {
+                    console.log("Error escena: ", error);
+                    Swal.fire("Error a la función DameEscena()", "", "error");
+                  }
+                });
+              });
+            },
+            error: error => {
+              console.log("Error juego: ", error);
+              Swal.fire("Error al crear el juego.", "", "error");
+            }
           });
-        },
-        error: error => {
-          console.log("Error juego: ", error);
-          Swal.fire("Error al crear el juego.", "", "error");
         }
-      });
-    }
+      }
+    });
+
+
+
   }
 
   verImagen(escenario: EscenarioEscapeRoom) {

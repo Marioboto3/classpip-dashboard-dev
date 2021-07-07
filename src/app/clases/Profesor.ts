@@ -1,4 +1,5 @@
 export class Profesor {
+
   nombre: string;
   primerApellido: string;
   segundoApellido: string;
@@ -7,7 +8,7 @@ export class Profesor {
   password: string;
   imagenPerfil: string;
   estacion: string;
-  identificador: string; // lo usan los alumnos para asociarse a este profesor al registrarse
+  identificador: string;
   id: number;
 
   constructor(  Nombre?: string, PrimerApellido?: string, SegundoApellido?: string,
@@ -26,4 +27,9 @@ export class Profesor {
     this.id = id;
     this.estacion = Estacion;
   }
+
 }
+
+
+
+  

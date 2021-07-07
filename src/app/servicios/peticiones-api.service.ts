@@ -129,6 +129,8 @@ export class PeticionesAPIService {
   private APIUrlPartidasEscape = this.host + ':3000/api/PartidasEscape/';
   private APIUrlEscenasDeJuego = this.host + ':3000/api/EscenasDeJuego/';
   private APIUrlObjetosJuego = this.host + ':3000/api/ObjetosJuego/';
+  private APIUrlObjetosGlobal = this.host + ':3000/api/ObjetosGlobalEscape/';
+
 
 
 
@@ -723,10 +725,10 @@ export class PeticionesAPIService {
     return this.http.get<EscenaDeJuego>(this.APIUrlEscenasDeJuego + '?filter[where][escenarioId]='+idEscenario + '&?filter[where][posicion]=' + posicion);
   }
   public DameObjetoLlaveGlobal(llave: string): Observable<ObjetoGlobalEscape> {
-    return this.http.get<ObjetoGlobalEscape>(this.APIUrlObjetosJuego + '?filter[where][nombre]='+llave);
+    return this.http.get<ObjetoGlobalEscape>(this.APIUrlObjetosGlobal + '?filter[where][nombre]='+llave);
   }
   public DameObjetoPistaGlobal(pista: string): Observable<ObjetoGlobalEscape> {
-    return this.http.get<ObjetoGlobalEscape>(this.APIUrlObjetosJuego + '?filter[where][nombre]='+pista);
+    return this.http.get<ObjetoGlobalEscape>(this.APIUrlObjetosGlobal + '?filter[where][nombre]='+pista);
   }
   
   public BorraEscenarioEscape(idescenario: number, profesorId: number): Observable<any> {
