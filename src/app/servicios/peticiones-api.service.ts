@@ -34,6 +34,8 @@ import { ObjetoEnigma } from '../clases/ObjetoEnigma';
 import { ObjetoGlobalEscape } from '../clases/ObjetoGlobalEscape';
 import { ObjetoJuego } from '../clases/ObjetoJuego';
 import { ImagenEscenario } from '../clases/ImagenEscenario';
+import { PartidaEscape } from '../clases/PartidaEscape';
+import { EscenaDeJuego } from '../clases/EscenaDeJuego';
 
 @Injectable({
   providedIn: 'root'
@@ -124,6 +126,14 @@ export class PeticionesAPIService {
   //Rubrica
   private APIUrlSesionesClase = this.host + ':3000/api/SesionesClase';
   private APIUrlObjetosEnigma = this.host + ':3000/api/ObjetosEnigma/';
+  private APIUrlPartidasEscape = this.host + ':3000/api/PartidasEscape/';
+  private APIUrlEscenasDeJuego = this.host + ':3000/api/EscenasDeJuego/';
+  private APIUrlObjetosJuego = this.host + ':3000/api/ObjetosJuego/';
+  private APIUrlObjetosGlobal = this.host + ':3000/api/ObjetosGlobalEscape/';
+
+
+
+
 
   //OTRAS
 
@@ -698,6 +708,25 @@ export class PeticionesAPIService {
   public CreaJuegoDeEscapeRoom(juego: JuegoDeEscapeRoom, grupoId: number): Observable<JuegoDeEscapeRoom> {
     return this.http.post<JuegoDeEscapeRoom>(this.APIUrlGrupos + '/' + grupoId + '/JuegosDeEscapeRoom', juego);
   }
+  public CrearPartidaEscape(partida: PartidaEscape): Observable<PartidaEscape> {
+    return this.http.post<PartidaEscape>(this.APIUrlPartidasEscape, partida);
+  }
+  public CrearObjetoJuego(objetoJuego: ObjetoJuego): Observable<ObjetoJuego> {
+    return this.http.post<ObjetoJuego>(this.APIUrlObjetosJuego, objetoJuego);
+  }
+  public CrearEscenaEscapeRoom(escena: EscenaDeJuego): Observable<EscenaDeJuego> {
+    return this.http.post<EscenaDeJuego>(this.APIUrlEscenasDeJuego, escena);
+  }
+  public DameEscenasEscapeConEsteEscenario(idEscenario: number, posicion: number): Observable<EscenaDeJuego> {
+    return this.http.get<EscenaDeJuego>(this.APIUrlEscenasDeJuego + '?filter[where][escenarioId]='+idEscenario + '&?filter[where][posicion]=' + posicion);
+  }
+  public DameObjetoLlaveGlobal(llave: string): Observable<ObjetoGlobalEscape> {
+    return this.http.get<ObjetoGlobalEscape>(this.APIUrlObjetosGlobal + '?filter[where][nombre]='+llave);
+  }
+  public DameObjetoPistaGlobal(pista: string): Observable<ObjetoGlobalEscape> {
+    return this.http.get<ObjetoGlobalEscape>(this.APIUrlObjetosGlobal + '?filter[where][nombre]='+pista);
+  }
+  
   public BorraEscenarioEscape(idescenario: number, profesorId: number): Observable<any> {
     return this.http.delete<any>(this.APIUrlProfesores + '/' + profesorId + '/EscenariosEscapeRoom/' + idescenario);
   }
