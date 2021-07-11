@@ -315,6 +315,7 @@ export class JuegoComponent implements OnInit {
   juegosPreparados: any[];
 
   varTitulo: string;
+  varTituloColumnaTabla: string;
   varLineaDivisoria: string;
   // tslint:disable-next-line:no-inferrable-types
   opcionSeleccionada: string = 'todosLosJuegos';

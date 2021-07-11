@@ -52,12 +52,13 @@ export class AsignacionPuntoJuegoComponent implements OnInit {
     this.grupoId = this.sesion.DameGrupo().id;
     this.juego = this.sesion.DameJuego();
     this.profesorId = this.sesion.DameProfesor().id;
-    console.log(this.juego);
+    console.log('juego: ',this.juego);
 
     // traigo los tipos de puntos entre los que se puede seleccionar
     this.peticionesAPI.DameTiposDePuntos(this.profesorId)
     .subscribe(puntos => {
 
+      console.log('response get puntos: ', puntos);
       // ME guardo el tipo de punto aleatorio para añadirlo al final
       this.puntoAleatorio = puntos.filter (p => p.nombre === 'Aleatorio')[0];
 

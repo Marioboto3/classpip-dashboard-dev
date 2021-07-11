@@ -46,6 +46,7 @@ export class EquiposComponent implements OnInit {
   alumnosEquipoCreado: Alumno[];
   logo: string;
   equipoCreado: Equipo;
+  redondeoSel: number = 1;
 
   // Al principio grupo no creado y logo no cargado
   // tslint:disable-next-line:ban-types
@@ -412,7 +413,7 @@ export class EquiposComponent implements OnInit {
   }
 
   CrearEquipos() {
-    const equipos = this.calculos.FormarEquiposAleatorios (this.alumnosGrupo, this.tamEquipos);
+    const equipos = this.calculos.FormarEquiposAleatorios (this.alumnosGrupo, this.tamEquipos, this.redondeoSel);
     this.listaEquipos = [];
     for (let i = 0 ; i < equipos.length; i++) {
       this.peticionesAPI.CreaEquipo(new Equipo('Equipo_' + i, undefined), this.grupoId)

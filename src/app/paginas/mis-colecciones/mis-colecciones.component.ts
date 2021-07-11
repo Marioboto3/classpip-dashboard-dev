@@ -1,8 +1,10 @@
+import { saveAs } from 'file-saver';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ResponseContentType, Http, Response } from '@angular/http';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import * as JSZip from 'jszip';
 
 
 // Imports para abrir diálogo confirmar eliminar equipo
@@ -143,11 +145,70 @@ export class MisColeccionesComponent implements OnInit {
 
 
 
- Descargar(coleccion: Coleccion) {
+ Descargar(coleccion) {
 
-  this.sesion.TomaColeccion(coleccion);
-  this.router.navigate(['/inicio/' + this.profesorId + '/misColecciones/guardarColeccion']);
+  // this.sesion.TomaColeccion(coleccion);
+  // this.router.navigate(['/inicio/' + this.profesorId + '/misColecciones/guardarColeccion']);
+  console.log('Colección a descargar: ', coleccion);
+  coleccion.cromos = [];
+  //Prepara el fichero ZIP a descargar
+  let zip = new JSZip();
+  let folder = zip.folder('imagenes');
 
+  //Obtiene los cromos de la coleccion
+  this.peticionesAPI.DameCromosColeccion(coleccion.id).subscribe(cromos => {
+    //Itera los cromos para obtener sus datos
+    cromos.forEach(cromo => {
+      const c = {
+        nombre: cromo.nombre,
+        imagenDelante: cromo.imagenDelante,
+        imagenDetras: cromo.imagenDetras,
+        nivel: cromo.nivel,
+        probabilidad: cromo.probabilidad,
+      };
+      //Guarda los cromos en la coleccion
+      coleccion.cromos.push(c);
+    });
+
+    //Crea el fichero JSON de la coleccion y lo añade al ZIP
+    const theJSON = JSON.stringify(coleccion);
+    zip.file(coleccion.nombre + ".json", theJSON);
+
+    //Descarga la imagen de la coleccion y la añade al ZIP
+    this.peticionesAPI.DameImagenColeccion(coleccion.imagenColeccion).subscribe((data: any) => {
+      folder.file(`${coleccion.imagenColeccion}`, data);
+    });
+
+    console.log(coleccion.cromos);
+    //Obtiene los nombres de las imagenes de los cromos de la colección
+    let imgNames: string[] = [];
+    coleccion.cromos.forEach(cromo => {
+      imgNames.push(cromo.imagenDelante);
+      imgNames.push(cromo.imagenDetras);
+    });
+
+    let count: number = 0;
+
+    //Recorre los nombres para descargar la imagen
+    imgNames.forEach((name: string) => {
+      this.peticionesAPI.DameImagenCromo(name).subscribe((data: any) => {
+        //Añade la imagen a la carpeta
+        folder.file(`${name}`, data);
+
+        count++;
+
+        //Crea el ZIP al haber descargado todas las fotos
+        if (count == imgNames.length) {
+          zip.generateAsync({ type: "blob" }).then(function (blob) {
+            saveAs(blob, "Coleccion_" + coleccion.nombre + ".zip");
+          }, function (err) {
+            console.log(err);
+            Swal.fire('Error', 'Error al descargar:( Inténtalo de nuevo más tarde', 'error')
+          });
+        }
+      });
+    })
+  });
 }
 
 

@@ -50,13 +50,13 @@ export class MisJuegosRapidosComponent implements OnInit {
     console.log ('Juego rapido');
     console.log (juego);
     this.sesion.TomaJuego(juego);
-    if (juego.Tipo === 'Juego De Encuesta Rápida') {
+    if (juego.tipo === 'Juego De Encuesta Rápida') {
       this.router.navigate(['/inicio/' + this.profesor.id + '/misJuegosRapidos/juegoDeEncuestaRapida']);
-    } else  if (juego.Tipo === 'Juego De Votación Rápida') {
+    } else  if (juego.tipo === 'Juego De Votación Rápida') {
       this.router.navigate(['/inicio/' + this.profesor.id + '/misJuegosRapidos/juegoDeVotacionRapida']);
-    } else  if (juego.Tipo === 'Juego De Cuestionario Rápido') {
+    } else  if (juego.tipo === 'Juego De Cuestionario Rápido') {
       this.router.navigate(['/inicio/' + this.profesor.id + '/misJuegosRapidos/juegoDeCuestionarioRapido']);
-    } else  if (juego.Tipo === 'Juego De Coger Turno Rápido') {
+    } else  if (juego.tipo === 'Juego De Coger Turno Rápido') {
       this.router.navigate(['/inicio/' + this.profesor.id + '/misJuegosRapidos/juegoDeCogerTurnoRapido']);
     }
   }

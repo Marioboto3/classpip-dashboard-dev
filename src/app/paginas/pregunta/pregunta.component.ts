@@ -231,7 +231,8 @@ export class PreguntaComponent implements OnInit {
         this.infoPreguntas = JSON.parse(reader.result.toString());
         console.log ('Ya tengo las preguntas');
         console.log (this.infoPreguntas);
-        if (this.infoPreguntas.some (pregunta => pregunta.Imagen)) {
+        if (this.infoPreguntas.some (pregunta => pregunta.imagen)) {
+          console.log('entra1');
         // hay imagenes en alguna de las preguntas
           this.calculos.VerificarFicherosPreguntas (this.infoPreguntas)
           .subscribe (lista => {
@@ -257,6 +258,7 @@ export class PreguntaComponent implements OnInit {
             }
           });
         } else {
+          console.log('entra2');
           this.ficheroCargado = true;
         }
       } catch (e) {
@@ -270,9 +272,9 @@ export class PreguntaComponent implements OnInit {
     console.log ('He cargado ' + this.ficherosPreguntas.length + ' imagenes');
     this.ficherosQueFaltan = [];
     this.infoPreguntas.forEach (pregunta => {
-      if (pregunta.Imagen) {
-        if (!this.ficherosPreguntas.some (fichero => fichero.name === pregunta.Imagen)) {
-          this.ficherosQueFaltan.push (pregunta.Imagen);
+      if (pregunta.imagen) {
+        if (!this.ficherosPreguntas.some (fichero => fichero.name === pregunta.imagen)) {
+          this.ficherosQueFaltan.push (pregunta.imagen);
         }
       }
     });

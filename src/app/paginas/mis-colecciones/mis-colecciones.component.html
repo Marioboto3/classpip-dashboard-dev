@@ -6,16 +6,16 @@
   <mat-tab-group>
     <mat-tab label="Mis colecciones">
       <br>
-      <div class ='enColumna'>
-        <form style = "width: 100%"  *ngIf="coleccionesProfesor;else Aviso_no_colecciones">
+      <div class='enColumna'>
+        <form style="width: 100%" *ngIf="coleccionesProfesor;else Aviso_no_colecciones">
 
-          <div class = "filter">
+          <div class="filter">
             <mat-form-field>
               <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro para buscar colección...">
               <i class="material-icons" matSuffix>search</i>
             </mat-form-field>
           </div>
-          <table style = "width: 80%" align= "center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <table style="width: 80%" align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
 
             <ng-container matColumnDef="nombre">
@@ -28,25 +28,28 @@
 
 
             <ng-container matColumnDef="iconos">
-                <th  mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"></th>
-                <td  mat-cell *matCellDef="let coleccion">
-                  <div  style = "display: flex; align-items: right">
-                    <button  (click) = "EditarColeccion(coleccion)" mat-icon-button matTooltip="Editar la coleccion">
-                      <i class="material-icons green md-36">edit</i>
-                    </button>
-                    <button (click) = "AbrirDialogoConfirmacionBorrarColeccion(coleccion)" mat-icon-button matTooltip="Eliminar la coleccion">
-                      <i class="material-icons red md-36">delete</i>
-                    </button>
-                    <button (click) = "Descargar(coleccion)" mat-icon-button matTooltip="Descargar colección en JSON">
-                      <i class="material-icons blue md-36">get_app</i>
-                    </button>
-                    <button *ngIf = "!coleccion.Publica" (click) = "HazPublica(coleccion)" mat-icon-button matTooltip="Haz pública la colección">
-                      <i class="material-icons grey md-36">public_off</i>
-                    </button>
-                    <button *ngIf = "coleccion.Publica" (click) = "HazPrivada(coleccion)" mat-icon-button matTooltip="Haz privada la colección">
-                      <i class="material-icons green md-36">public</i>
-                    </button>
-                  </div>
+              <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"></th>
+              <td mat-cell *matCellDef="let coleccion">
+                <div style="display: flex; align-items: right">
+                  <button (click)="EditarColeccion(coleccion)" mat-icon-button matTooltip="Editar la coleccion">
+                    <i class="material-icons green md-36">edit</i>
+                  </button>
+                  <button (click)="AbrirDialogoConfirmacionBorrarColeccion(coleccion)" mat-icon-button
+                    matTooltip="Eliminar la coleccion">
+                    <i class="material-icons red md-36">delete</i>
+                  </button>
+                  <button (click)="Descargar(coleccion)" mat-icon-button matTooltip="Descargar colección en JSON">
+                    <i class="material-icons blue md-36">get_app</i>
+                  </button>
+                  <button *ngIf="!coleccion.publica" (click)="HazPublica(coleccion)" mat-icon-button
+                    matTooltip="Haz pública la colección">
+                    <i class="material-icons grey md-36">public_off</i>
+                  </button>
+                  <button *ngIf="coleccion.publica" (click)="HazPrivada(coleccion)" mat-icon-button
+                    matTooltip="Haz privada la colección">
+                    <i class="material-icons green md-36">public</i>
+                  </button>
+                </div>
               </td>
             </ng-container>
 
@@ -57,22 +60,24 @@
         </form>
 
         <div class="contenedor">
-            <ng-template  #Aviso_no_colecciones><div class="texto">No tienes colecciones</div></ng-template>
+          <ng-template #Aviso_no_colecciones>
+            <div class="texto">No tienes colecciones</div>
+          </ng-template>
         </div>
       </div>
     </mat-tab>
-    <mat-tab label= "Colecciones públicas">
+    <mat-tab label="Colecciones públicas">
       <br>
-      <div class ='enColumna'>
-        <form style = "width: 100%" *ngIf="coleccionesPublicas;else Aviso_no_colecciones_publicas">
+      <div class='enColumna'>
+        <form style="width: 100%" *ngIf="coleccionesPublicas;else Aviso_no_colecciones_publicas">
 
-          <div class = "filter">
+          <div class="filter">
             <mat-form-field>
               <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro para buscar colección...">
               <i class="material-icons" matSuffix>search</i>
             </mat-form-field>
           </div>
-          <table style = "width: 80%" align= "center" mat-table [dataSource]="dataSourcePublicas" class="mat-elevation-z8">
+          <table style="width: 80%" align="center" mat-table [dataSource]="dataSourcePublicas" class="mat-elevation-z8">
 
             <!-- Titulo Column -->
             <ng-container matColumnDef="nombre">
@@ -87,10 +92,10 @@
             <ng-container matColumnDef="iconos">
               <th mat-header-cell *matHeaderCellDef class="{{varTituloColumnaTabla}}"></th>
               <td mat-cell *matCellDef="let coleccion">
-                <button (click) = "Mostrar(coleccion)" mat-icon-button matTooltip="Ver la colección">
+                <button (click)="Mostrar(coleccion)" mat-icon-button matTooltip="Ver la colección">
                   <i class="material-icons green md-36">visibility</i>
                 </button>
-                <button (click) = "Descargar(coleccion)" mat-icon-button matTooltip="Descargar colección en JSON">
+                <button (click)="Descargar(coleccion)" mat-icon-button matTooltip="Descargar colección en JSON">
                   <i class="material-icons blue md-36">get_app</i>
                 </button>
               </td>
@@ -103,7 +108,9 @@
         </form>
 
         <div class="contenedor">
-            <ng-template  #Aviso_no_colecciones_publicas><div class="texto">No hay colecciones publicas</div></ng-template>
+          <ng-template #Aviso_no_colecciones_publicas>
+            <div class="texto">No hay colecciones publicas</div>
+          </ng-template>
         </div>
       </div>
     </mat-tab>

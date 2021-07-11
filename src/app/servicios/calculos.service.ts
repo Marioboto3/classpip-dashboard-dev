@@ -1841,25 +1841,54 @@ public CrearJornadasLiga(NumeroDeJornadas, juegoDeCompeticionID): any  {
     return jornadaFinalizada;
   }
 
- public FormarEquiposAleatorios(individuos: any[], tamEquipos: number): any[] {
-    const listaInicial = individuos;
-    const numeroGrupos = Math.ceil(listaInicial.length / tamEquipos);
+  public FormarEquiposAleatorios(individuos: any[], tamEquipos: number, redondeo: number): any[] {
+    let listaInicial = individuos; 
+    const modulo = listaInicial.length % tamEquipos;
+    let numeroGrupos = Math.ceil(listaInicial.length / tamEquipos);
+
     console.log ('Tamaño ' + tamEquipos);
 
     console.log ('Numero de grupos ' + numeroGrupos);
+    console.log ('Residuo ', modulo);
     const equipos: any [] = [];
     for (let i = 0; i < numeroGrupos - 1; i++) {
-      console.log ('grupo ' + i);
       const equipo: any[] = [];
       for (let j = 0; j < tamEquipos; j++) {
         const n = Math.floor(Math.random() * listaInicial.length);
-        console.log (n + ' ' + listaInicial[n]);
+        console.log (listaInicial[n]);
         equipo.push (listaInicial[n]);
         listaInicial.splice (n , 1);
       }
       equipos.push (equipo);
     }
-    equipos.push (listaInicial);
+
+    if(modulo == 0){
+      equipos.push (listaInicial);
+    } else {
+      let i = 0;
+      while(listaInicial.length > 0){
+        if(redondeo == 1){ //Redondeo hacia arriba
+          equipos[i].push(listaInicial[0]);
+          listaInicial.splice(0,1);
+          i++;
+        }
+        else{ //Redondeo hacia abajo
+            let aux;
+            let i = 0;
+            for(i; i < (tamEquipos - modulo); i++){
+              aux = equipos[i];
+              listaInicial.push(aux[0]);
+              aux.splice(0,1);
+              equipos.push(aux);
+            }
+            equipos.splice(0, i);
+            equipos.push(listaInicial);
+            listaInicial=[];
+        }
+      }
+    }
+
+    console.log("Equipos aleatorios: ", equipos);
     return equipos;
   }
 
@@ -3892,16 +3921,16 @@ public VerificarFicherosColeccion(coleccion: any): any {
     const lista: string [] = [];
     let numeroFicheros: number;
     let cont = 0;
-    if (coleccion.DosCaras) {
+    if (coleccion.dosCaras) {
         numeroFicheros = coleccion.cromos.length * 2 + 1;
     } else {
         numeroFicheros = coleccion.cromos.length + 1;
     }
 
-    this.peticionesAPI.DameImagenColeccion (coleccion.ImagenColeccion)
+    this.peticionesAPI.DameImagenColeccion (coleccion.imagenColeccion)
     .subscribe (
         (imagen) => {
-          lista.push (coleccion.ImagenColeccion);
+          lista.push (coleccion.imagenColeccion);
           cont++;
           if (cont === numeroFicheros) {
             obs.next (lista);
@@ -3932,7 +3961,7 @@ public VerificarFicherosColeccion(coleccion: any): any {
             }
         });
 
-        if (coleccion.DosCaras)  {
+        if (coleccion.dosCaras)  {
           this.peticionesAPI.DameImagenCromo (cromo.nombreImagenCromoDetras)
           .subscribe (
             (imagen) => {
@@ -3974,7 +4003,7 @@ public VerificarFicherosPreguntas(preguntas: any): any {
   const listaFicherosObservable = new Observable ( obs => {
     let numeroFicheros = 0;
     preguntas.forEach (pregunta => {
-        if (pregunta.Imagen) {
+        if (pregunta.imagen) {
           numeroFicheros++;
         }
     });
@@ -3982,10 +4011,10 @@ public VerificarFicherosPreguntas(preguntas: any): any {
 
     let cont = 0;
     preguntas.forEach (pregunta => {
-        this.peticionesAPI.DameImagenPregunta (pregunta.Imagen)
+        this.peticionesAPI.DameImagenPregunta (pregunta.imagen)
         .subscribe (
           (imagen) => {
-            lista.push (pregunta.Imagen);
+            lista.push (pregunta.imagen);
             cont++;
             if (cont === numeroFicheros) {
               obs.next (lista);

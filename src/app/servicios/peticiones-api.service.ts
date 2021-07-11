@@ -370,28 +370,28 @@ export class PeticionesAPIService {
 
   public DameAsignacionesEquipoDelGrupo(grupoId: number): Observable<AsignacionEquipo[]> {
     // Da las asignaciones a equipos de todos los alumnos del grupo (sean del equipo que sean)
-    return this.http.get<AsignacionEquipo[]>(this.APIUrlGrupos + '/' + grupoId + '/AsignacionesEquipo');
+    return this.http.get<AsignacionEquipo[]>(this.APIUrlGrupos + '/' + grupoId + '/AsignacionesEquipos');
   }
 
   public DameAsignacionEquipoAlumno(alumnoId: number, equipoId: number, grupoId: number): Observable<AsignacionEquipo> {
     // Da la asignación a un equipo de un alumno concreto
-    return this.http.get<AsignacionEquipo>(this.APIUrlGrupos + '/' + grupoId + '/AsignacionesEquipo?filter[where][equipoId]=' + equipoId +
+    return this.http.get<AsignacionEquipo>(this.APIUrlGrupos + '/' + grupoId + '/AsignacionesEquipos?filter[where][equipoId]=' + equipoId +
       '&filter[where][alumnoId]=' + alumnoId);
   }
 
   public ModificaAsignacionEquipoAlumno(asignacionEquipo: AsignacionEquipo, grupoId: number, asignacionEquipoId: number):
     Observable<AsignacionEquipo> {
-    return this.http.put<AsignacionEquipo>(this.APIUrlGrupos + '/' + grupoId + '/AsignacionesEquipo/' +
+    return this.http.put<AsignacionEquipo>(this.APIUrlGrupos + '/' + grupoId + '/AsignacionesEquipos/' +
       asignacionEquipoId, asignacionEquipo);
   }
 
   public BorraAlumnoEquipo(asignacionEquipo: AsignacionEquipo): Observable<any> {
-    return this.http.delete<any>(this.APIUrlGrupos + '/' + asignacionEquipo.grupoId + '/AsignacionesEquipo/'
+    return this.http.delete<any>(this.APIUrlGrupos + '/' + asignacionEquipo.grupoId + '/AsignacionesEquipos/'
       + asignacionEquipo.id);
   }
 
   public PonAlumnoEquipo(asignacionEquipos: AsignacionEquipo, grupoId: number): Observable<AsignacionEquipo> {
-    return this.http.post<AsignacionEquipo>(this.APIUrlGrupos + '/' + grupoId + '/AsignacionesEquipo', asignacionEquipos);
+    return this.http.post<AsignacionEquipo>(this.APIUrlGrupos + '/' + grupoId + '/AsignacionesEquipos', asignacionEquipos);
   }
 
   ////////////////////////////////// GESTION DE SESIONES DE CLASE //////////////////////
@@ -479,12 +479,11 @@ export class PeticionesAPIService {
   }
 
   public DameImagenColeccion(imagen: string): Observable<any> {
-    return this.httpImagenes.get(this.APIUrlImagenColeccion + '/download/' + imagen,
-      {responseType: ResponseContentType.Blob});
+    return this.http.get(this.APIUrlImagenColeccion + '/download/' + imagen,
+      {responseType: 'blob'});
   }
 
   public BorraColeccion(coleccionId: number, profesorId: number): Observable<any> {
-    // console.log('JODER');
     return this.http.delete<any>(this.APIUrlProfesores + '/' + profesorId + '/Colecciones/' + coleccionId);
   }
 
@@ -497,8 +496,8 @@ export class PeticionesAPIService {
   }
 
   public DameImagenCromo(imagen: string): Observable<any> {
-    return this.httpImagenes.get(this.APIUrlImagenCromo + '/download/' + imagen,
-      {responseType: ResponseContentType.Blob});
+    return this.http.get(this.APIUrlImagenCromo + '/download/' + imagen,
+      {observe: 'body', responseType: 'blob'});
   }
 
   public ModificaCromoColeccion(cromo: Cromo, coleccionId: number, cromoId: number): Observable<Cromo> {
@@ -1380,11 +1379,11 @@ export class PeticionesAPIService {
 
 
   public CreaFamiliaAvatares(familia: FamiliaAvatares, profesorId: number): Observable<FamiliaAvatares> {
-    return this.http.post<FamiliaAvatares>(this.APIUrlProfesores + '/' + profesorId + '/FamiliasAvatares', familia);
+    return this.http.post<FamiliaAvatares>(this.APIUrlProfesores + '/' + profesorId + '/FamiliaAvatares', familia);
   }
 
   public DameFamiliasAvataresProfesor(profesorId: number): Observable<FamiliaAvatares[]> {
-    return this.http.get<FamiliaAvatares[]>(this.APIUrlProfesores + '/' + profesorId + '/FamiliasAvatares');
+    return this.http.get<FamiliaAvatares[]>(this.APIUrlProfesores + '/' + profesorId + '/FamiliaAvatares');
   }
 
 
@@ -1415,7 +1414,10 @@ export class PeticionesAPIService {
       {responseType: ResponseContentType.Blob});
   }
 
-
+  public downloadImgAvatar(imgName: string) {
+    return this.http.get(this.APIUrlImagenesAvatares + '/download/' + imgName, {observe: 'body', responseType: 'blob'});
+  }
+  
   public BorrarImagenAvatar(imagen: string): Observable<any> {
     return this.http.delete<any>(this.APIUrlImagenesAvatares + '/Files/' + imagen);
   }

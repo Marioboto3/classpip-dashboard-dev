@@ -12,7 +12,6 @@ import html2canvas from 'html2canvas';
 import { Observable} from 'rxjs';
 import { of } from 'rxjs';
 import 'rxjs';
-
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 
 
@@ -44,6 +43,7 @@ export class JuegoDeEncuestaRapidaComponent implements OnInit {
   ficheroGenerado = false;
   todoGuardado = true;
   sonido = true;
+  Math = Math;
 
   elementType = NgxQrcodeElementTypes.URL;
   correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
@@ -64,7 +64,8 @@ export class JuegoDeEncuestaRapidaComponent implements OnInit {
     this.profesorId = this.sesion.DameProfesor().id;
     this.juegoSeleccionado = this.sesion.DameJuego();
     // puede haber respuestas ya guardadas en el juego
-    this.respuestas = this.juegoSeleccionado.Respuestas;
+    console.log('juego seleccionado: ', this.juegoSeleccionado);
+    this.respuestas = this.juegoSeleccionado.respuestas;
     if (this.respuestas === undefined) {
       this.respuestas = [];
       this.numeroParticipantes = 0;
@@ -97,7 +98,9 @@ export class JuegoDeEncuestaRapidaComponent implements OnInit {
           sound.volume (0.1);
           sound.play();
         }
-        if (!respuesta.RespuestasAfirmaciones.some (elemento => elemento === null)) {
+        console.log('resp ivi: ', respuesta);
+        console.log('respuestas afirmaciones: ', respuesta.respuestas.respuestasAfirmaciones);
+        if (!respuesta.respuestas.respuestasAfirmaciones.some (elemento => elemento === null)) {
           // tomo nota de que hay respuestas sin guardar en el pdf
           this.todoGuardado = false;
           this.numeroRespuestas++;
@@ -129,16 +132,16 @@ export class JuegoDeEncuestaRapidaComponent implements OnInit {
 
 
     // Eliminamos las respuestas con alguna respuesta a afirmaciones que sea null
-    this.respuestas = this.respuestas.filter (respuesta => !respuesta.RespuestasAfirmaciones.some (elemento => elemento === null));
+    this.respuestas = this.respuestas.filter (respuesta => !respuesta.respuestasAfirmaciones.some (elemento => elemento === null));
     this.numeroRespuestas = this.respuestas.length;
     this.respuestas.forEach (respuesta => {
         for ( i = 0; i < this.respuestasAfirmaciones.length; i++) {
-          this.respuestasAfirmaciones[i] =  this.respuestasAfirmaciones[i]  + respuesta.RespuestasAfirmaciones[i];
+          this.respuestasAfirmaciones[i] =  this.respuestasAfirmaciones[i]  + respuesta.respuestasAfirmaciones[i];
         }
         for ( i = 0; i < this.respuestasPreguntasAbiertas.length; i++) {
-          if (respuesta.RespuestasPreguntasAbiertas[i]) {
+          if (respuesta.respuestasPreguntasAbiertas[i]) {
             // La respuesta podría estsr vacia
-            this.respuestasPreguntasAbiertas[i].push (respuesta.RespuestasPreguntasAbiertas[i]);
+            this.respuestasPreguntasAbiertas[i].push (respuesta.respuestasPreguntasAbiertas[i]);
           }
         }
 
@@ -150,8 +153,8 @@ export class JuegoDeEncuestaRapidaComponent implements OnInit {
     for ( i = 0; i < this.respuestasAfirmaciones.length; i++) {
       const media =  this.respuestasAfirmaciones[i] / this.numeroRespuestas;
       this.afirmaciones.push ({
-        Texto: this.cuestionario.afirmaciones[i],
-        Media: media
+        texto: this.cuestionario.afirmaciones[i],
+        media: media
       });
       this.datosGrafico.push ( [this.cuestionario.afirmaciones[i], media]);
     }

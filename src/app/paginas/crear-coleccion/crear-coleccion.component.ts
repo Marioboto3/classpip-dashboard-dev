@@ -531,7 +531,7 @@ export class CrearColeccionComponent implements OnInit {
     this.ficherosColeccion = Array.from($event.target.files);
     // Ya tenemos todos los ficheros de las imagenes
     // Cogemos la imagen de la colección para que se muestre
-    const fileImagenColeccion = this.ficherosColeccion.filter (f => f.name === this.infoColeccion.ImagenColeccion)[0];
+    const fileImagenColeccion = this.ficherosColeccion.filter (f => f.name === this.infoColeccion.imagenColeccion)[0];
 
     const reader = new FileReader();
     reader.readAsDataURL(fileImagenColeccion);
@@ -544,17 +544,17 @@ export class CrearColeccionComponent implements OnInit {
   RegistrarColeccion() {
 
     // tslint:disable-next-line:max-line-length
-    this.peticionesAPI.CreaColeccion (new Coleccion (this.infoColeccion.Nombre, this.infoColeccion.ImagenColeccion, this.infoColeccion.DosCaras), this.profesorId)
+    this.peticionesAPI.CreaColeccion (new Coleccion (this.infoColeccion.nombre, this.infoColeccion.imagenColeccion, this.infoColeccion.dosCaras), this.profesorId)
     .subscribe((res) => {
       if (res != null) {
         this.coleccion = res;
         // guardamos la imagen de la colección (si la hay)
-        console.log ('miro si registrar imagen colección ' + this.infoColeccion.ImagenColeccion);
-        if (this.infoColeccion.ImagenColeccion !== '') {
+        console.log ('miro si registrar imagen colección ' + this.infoColeccion.imagenColeccion);
+        if (this.infoColeccion.imagenColeccion !== '') {
           console.log ('Si que registro');
-          const imagenColeccion = this.ficherosColeccion.filter (f => f.name === this.coleccion.ImagenColeccion)[0];
+          const imagenColeccion = this.ficherosColeccion.filter (f => f.name === this.coleccion.imagenColeccion)[0];
           const formDataImagen = new FormData();
-          formDataImagen.append(this.coleccion.ImagenColeccion, imagenColeccion);
+          formDataImagen.append(this.coleccion.imagenColeccion, imagenColeccion);
           this.peticionesAPI.PonImagenColeccion (formDataImagen)
           .subscribe(() => console.log('Imagen cargado'));
         }
@@ -563,20 +563,20 @@ export class CrearColeccionComponent implements OnInit {
         this.infoColeccion.cromos.forEach (cromo => {
           this.peticionesAPI.PonCromoColeccion(
             // tslint:disable-next-line:max-line-length
-            new Cromo(cromo.nombreCromo , cromo.probabilidadCromo, cromo.nivelCromo, cromo.nombreImagenCromoDelante, cromo.nombreImagenCromoDetras), this.coleccion.id)
+            new Cromo(cromo.nombre , cromo.probabilidad, cromo.nivel, cromo.imagenDelante, cromo.imagenDetras), this.coleccion.id)
             .subscribe((res2) => {
               if (res2 != null) {
                   // Hacemos el POST de la imagen delantera del cromo
                   const formDataDelante: FormData = new FormData();
-                  const fileCromoDelante = this.ficherosColeccion.filter (f => f.name === cromo.nombreImagenCromoDelante)[0];
-                  formDataDelante.append(cromo.nombreImagenCromoDelante, fileCromoDelante);
+                  const fileCromoDelante = this.ficherosColeccion.filter (f => f.name === cromo.imagenDelante)[0];
+                  formDataDelante.append(cromo.imagenDelante, fileCromoDelante);
                   this.peticionesAPI.PonImagenCromo(formDataDelante)
                   .subscribe(() => console.log('Imagen cargado'));
                  // Hacemos el POST de la imagen trasera del cromo (si la hay)
-                  if (this.coleccion.DosCaras) {
+                  if (this.coleccion.dosCaras) {
                     const formDataDetras = new FormData();
-                    const fileCromoDetras = this.ficherosColeccion.filter (f => f.name === cromo.nombreImagenCromoDetras)[0];
-                    formDataDetras.append(cromo.nombreImagenCromoDetras, fileCromoDetras);
+                    const fileCromoDetras = this.ficherosColeccion.filter (f => f.name === cromo.imagenDetras)[0];
+                    formDataDetras.append(cromo.imagenDetras, fileCromoDetras);
                     this.peticionesAPI.PonImagenCromo(formDataDetras)
                     .subscribe(() => console.log('Imagen cargado'));
                   }

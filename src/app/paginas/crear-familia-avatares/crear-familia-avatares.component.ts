@@ -322,24 +322,40 @@ export class CrearFamiliaAvataresComponent implements OnInit {
         const siluetaData: FormData = new FormData();
         siluetaData.append(this.fileSilueta.name, this.fileSilueta);
         this.peticionesAPI.PonImagenAvatar(siluetaData)
-          .subscribe();
-
-        // ahora guardamos las imagenes de los complementos
-        for (let i = 0; i < 4 ; i++) {
-          // tslint:disable-next-line:prefer-for-of
-          for (let j = 0; j < this.fileComplemento[i].length; j++) {
-            const imagen = this.fileComplemento[i][j];
-            const complementoData: FormData = new FormData();
-            complementoData.append(imagen.name, imagen);
-            this.peticionesAPI.PonImagenAvatar(complementoData)
-              .subscribe();
-          }
-        }
-        this.peticionesAPI.CreaFamiliaAvatares (this.familiaAvatares, this.sesion.DameProfesor().id)
-        .subscribe (() => {
-          Swal.fire('La familia de avatares se ha registrado correctamente');
-          this.location.back();
-        });
+          .subscribe(() => {
+            let numImages = 0;
+            for(let i = 0; i<4; i++){
+              for(let j = 0; j < this.fileComplemento[i].length; j++){
+                numImages++;
+              }
+            }
+            // ahora guardamos las imagenes de los complementos
+            for (let i = 0; i < 4 ; i++) {
+              // tslint:disable-next-line:prefer-for-of
+              for (let j = 0; j < this.fileComplemento[i].length; j++) {
+                const imagen = this.fileComplemento[i][j];
+                const complementoData: FormData = new FormData();
+                complementoData.append(imagen.name, imagen);
+                let uploaded = 0;
+                this.peticionesAPI.PonImagenAvatar(complementoData)
+                  .subscribe(() => {
+                    uploaded++;
+                    if(uploaded == numImages){
+                      this.peticionesAPI.CreaFamiliaAvatares (this.familiaAvatares, this.sesion.DameProfesor().id)
+                      .subscribe (() => {
+                        Swal.fire('La familia de avatares se ha registrado correctamente');
+                        this.location.back();
+                      });
+                    }
+                  }, (error) => {
+                    console.log(error);
+                    Swal.fire('Error', 'Error al subir família', 'error');
+                  });
+              }
+            }
+          }, (error) => {
+            Swal.fire('Error', 'Error al subir família', 'error');
+          });
       }
     });
   }

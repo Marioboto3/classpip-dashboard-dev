@@ -1,3 +1,4 @@
+import { saveAs } from 'file-saver';
 import { Component, OnInit } from '@angular/core';
 import { SesionService, CalculosService, PeticionesAPIService } from '../../servicios';
 import { FamiliaAvatares, Profesor } from 'src/app/clases';
@@ -6,6 +7,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatDialog, MatTableDataSource } from '@angular/material';
 import { AsignarFamiliasJuegoAvataresComponent } from '../juego/asignar-familias-juego-avatares/asignar-familias-juego-avatares.component';
+import * as JSZip from 'jszip';
 
 @Component({
   selector: 'app-mis-familias-avatares',
@@ -385,8 +387,68 @@ export class MisFamiliasAvataresComponent implements OnInit {
   }
 
   Descargar(familia: FamiliaAvatares) {
-    this.sesion.TomaFamilia (familia);
-    this.router.navigate(['inicio/' + this.profesorId + '/misFamiliasAvatares/guardarFamilia']);
+    // this.sesion.TomaFamilia (familia);
+    // this.router.navigate(['inicio/' + this.profesorId + '/misFamiliasAvatares/guardarFamilia']);
+    let zip = new JSZip();
+    
+    let downloadJson = {
+      "nombreFamilia": familia.nombreFamilia,
+      "silueta": familia.silueta,
+      "nombreComplemento1": familia.nombreComplemento1,
+      "nombreComplemento2": familia.nombreComplemento2,
+      "nombreComplemento3": familia.nombreComplemento3,
+      "nombreComplemento4": familia.nombreComplemento4,
+      "complemento1": familia.complemento1,
+      "complemento2": familia.complemento2,
+      "complemento3": familia.complemento3,
+      "complemento4": familia.complemento4
+    }
+    const theJSON = JSON.stringify(downloadJson);
+    let folder = zip.folder('Avatares_' + familia.nombreFamilia);
+    let compFolder = folder.folder('Imagenes');
+    folder.file(familia.nombreFamilia + ".json", theJSON);
+      
+    this.peticionesAPI.downloadImgAvatar(familia.silueta).subscribe((data: any) => {
+      compFolder.file(`${familia.silueta}`, data);
+
+      let complementos = new Array<string>();
+      familia.complemento1.forEach(complemento => {
+        complementos.push(complemento);
+      });
+      familia.complemento2.forEach(complemento => {
+        complementos.push(complemento);
+      });
+      familia.complemento3.forEach(complemento => {
+        complementos.push(complemento);
+      });
+      familia.complemento4.forEach(complemento => {
+        complementos.push(complemento);
+      });
+
+      if (complementos.length != 0) {
+        let cont = 0;
+        complementos.forEach(c => {
+          this.peticionesAPI.downloadImgAvatar(c).subscribe((data) => {
+            compFolder.file(c, data);
+            cont++;
+            if (cont == complementos.length) {
+              zip.generateAsync({ type: "blob" }).then(function (blob) {
+                saveAs(blob, 'Avatares_' + familia.nombreFamilia + ".zip");
+              }, function (err) {
+                console.log(err);
+                Swal.fire('Error', 'Error al descargar:( Inténtalo de nuevo más tarde', 'error')
+              });
+            }
+          }, (error) => {
+            console.log(error);
+            Swal.fire('Error', 'Error al descargar imagen ' + c, 'error');
+          });
+        });
+      }
+    }, (error) => {
+      console.log(error);
+      Swal.fire('Error', 'Error al descargar imágenes', 'error');
+    });
   }
 
   Mostrar(familia: FamiliaAvatares) {

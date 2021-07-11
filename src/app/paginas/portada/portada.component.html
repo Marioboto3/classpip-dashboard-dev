@@ -70,11 +70,6 @@
       <app-navbar></app-navbar>
     </form>
   </div>
-  <div>
-    <form *ngIf="profesor !== undefined">
-      <app-footer></app-footer>
-    </form>
-  </div>
 
   <!-- CONTENIDO PRINCIPAL  -->
   <!-- style="height: 668px;" -->
@@ -85,4 +80,9 @@
   </div>
 
   <!-- FALTA EL FOOTER -->
+  <div>
+    <form *ngIf="profesor !== undefined">
+      <app-footer></app-footer>
+    </form>
+  </div>
 </div>
